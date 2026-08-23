@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="小东 · 科技/AI 早报 · 2026-08-23 — 今日前沿模型、算力、安全与出行要点速览">
+<title>小东 · 科技/AI 早报 · 2026-08-23</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --surface: #1a2332;
+    --surface2: #243044;
+    --border: #2d3a4f;
+    --text: #e8eef6;
+    --muted: #8b9bb4;
+    --accent: #5b9fd4;
+    --accent2: #7c6cf0;
+    --green: #3ecf8e;
+    --orange: #f0a05a;
+    --pink: #e879a9;
+    --radius: 14px;
+    --shadow: 0 8px 32px rgba(0,0,0,.35);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "Hiragino Sans GB",
+      system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 28px 20px 64px;
+  }
+  header.hero {
+    background: linear-gradient(135deg, #1a2740 0%, #243055 45%, #1e2a48 100%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 28px 28px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  header.hero::before {
+    content: "";
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(91,159,212,.25), transparent 70%);
+    pointer-events: none;
+  }
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(91,159,212,.15);
+    color: var(--accent);
+    border: 1px solid rgba(91,159,212,.35);
+  }
+  .badge.sun { background: rgba(240,160,90,.12); color: var(--orange); border-color: rgba(240,160,90,.35); }
+  h1 {
+    font-size: clamp(1.45rem, 4.5vw, 1.85rem);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    margin-bottom: 10px;
+    line-height: 1.35;
+  }
+  .intro {
+    color: var(--muted);
+    font-size: 0.95rem;
+    max-width: 62ch;
+  }
+  .meta {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  section {
+    margin-bottom: 28px;
+  }
+  h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h2 .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  h2 .dot.purple { background: var(--accent2); }
+  h2 .dot.green { background: var(--green); }
+  h2 .dot.orange { background: var(--orange); }
+  h2 .dot.pink { background: var(--pink); }
+
+  .toplist {
+    list-style: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .toplist li {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+  .toplist li:last-child { border-bottom: none; }
+  .toplist .num {
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 0.9rem;
+    padding-top: 2px;
+  }
+  .toplist strong {
+    display: block;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+  }
+  .toplist span {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 20px 18px;
+    margin-bottom: 12px;
+    transition: border-color .2s;
+  }
+  .card:hover { border-color: rgba(91,159,212,.55); }
+  .card h3 {
+    font-size: 1.02rem;
+    font-weight: 650;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .card p {
+    font-size: 0.92rem;
+    color: #c5d0e0;
+    margin-bottom: 12px;
+  }
+  .card .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: var(--surface2);
+    color: var(--muted);
+  }
+  .sources {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .sources a {
+    font-size: 12px;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 8px;
+    background: rgba(91,159,212,.1);
+    border: 1px solid rgba(91,159,212,.25);
+  }
+  .sources a:hover {
+    background: rgba(91,159,212,.22);
+    text-decoration: underline;
+  }
+
+  footer {
+    margin-top: 36px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer .brand {
+    color: var(--text);
+    font-weight: 600;
+  }
+  @media (max-width: 480px) {
+    .wrap { padding: 16px 14px 48px; }
+    header.hero { padding: 24px 18px; }
+    .card { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="badge-row">
+        <span class="badge">科技 / AI</span>
+        <span class="badge sun">周日特辑 · 2026-08-23</span>
+      </div>
+      <h1>小东 · 科技/AI 早报 · 2026-08-23</h1>
+      <p class="intro">
+        本周周末焦点：小参数「AI 科学家」挑战前沿大模型、头部实验室「失控遏制」透明度遭拷问、
+        Nvidia 服务器涨价信号、Anthropic 加码自研芯片、以及欧洲首个 Uber 机器人出租车落地。
+        以下为基于公开报道整理的 8 条要点，均附原文链接。
+      </p>
+      <p class="meta">整理日期：2026 年 8 月 23 日（周日） · 亚洲/上海</p>
+    </header>
+
+    <section>
+      <h2><span class="dot"></span>今日头条速览</h2>
+      <ol class="toplist">
+        <li>
+          <span class="num">01</span>
+          <div>
+            <strong>Inherent Faraday：27B 小模型科研复现超越 Opus / GPT</strong>
+            <span>DeepMind 校友创办的伦敦实验室称其 AI 队友在论文复现任务上击败更大前沿模型。</span>
+          </div>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <div>
+            <strong>前沿实验室仍难公开「失控模型」遏制方案</strong>
+            <span>Guidelight 评估显示 OpenAI 相对靠前，Anthropic 与 Meta 在公开遏制计划上得分最低。</span>
+          </div>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <div>
+            <strong>Nvidia AI 服务器多场景涨价超 15%</strong>
+            <span>彭博报道称客户已收到通知，2027 年初出货的 Vera Rubin / Grace Blackwell 等系统将涨价。</span>
+          </div>
+        </li>
+        <li>
+          <span class="num">04</span>
+          <div>
+            <strong>Anthropic 挖来前 Google TPU 负责人 Amir Salek</strong>
+            <span>配合自研硅与约 2.5 亿美元 Fractile 推理芯片订单，硬件自主权提速。</span>
+          </div>
+        </li>
+        <li>
+          <span class="num">05</span>
+          <div>
+            <strong>Uber × Pony.ai：欧洲首个 App 内自动驾驶出行上线萨格勒布</strong>
+            <span>克罗地亚首都成为欧洲首个可经 Uber 预约 AV 的城市，初期仍配备安全员。</span>
+          </div>
+        </li>
+        <li>
+          <span class="num">06</span>
+          <div>
+            <strong>Spotify 将上线「AI Persona」标识</strong>
+            <span>9 月中起为 AI 生成艺人身份打标，并默认排除编辑与算法推荐。</span>
+          </div>
+        </li>
+        <li>
+          <span class="num">07</span>
+          <div>
+            <strong>匿名模型「牛来 / Ox Alpha」身份成谜</strong>
+            <span>OpenRouter 上突然走红，社区指纹指向智谱或谷歌未发布旗舰，讨论热度居高。</span>
+          </div>
+        </li>
+        <li>
+          <span class="num">08</span>
+          <div>
+            <strong>Claude 隐式水印上线后，开源去水印工具迅速出现</strong>
+            <span>为符合欧盟 AI 法案，Anthropic 8 月 2 日起全量水印；巴黎开发者发布 MIT 工具引发争议。</span>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2><span class="dot purple"></span>模型与科研</h2>
+
+      <article class="card">
+        <h3>Inherent 发布 Faraday：27B「AI 科学家」复现论文力压 Claude Opus 4.8 与 GPT-5.5</h3>
+        <div class="tags">
+          <span class="tag">AI Agent</span>
+          <span class="tag">科研复现</span>
+          <span class="tag">DeepMind 校友</span>
+        </div>
+        <p>
+          伦敦初创 Inherent（DeepMind 校友创办，刚以约 5000 万美元种子轮出圈）称其智能体 Faraday
+          基于约 270 亿参数的 Qwen 3.6，在「独立复现已发表论文结果」任务上优于 Anthropic Claude Opus 4.8
+          与 OpenAI GPT-5.5。公司强调训练的是「研究品味」——会选值得做的实验——并以长程强化学习、
+          将 GPT-5.5 Codex 作为编码工具协作。官方研究页介绍了含 310 项任务的 Replica 评测套件。
+        </p>
+        <div class="sources">
+          <a href="https://techcrunch.com/2026/08/22/inherent-founded-by-deepmind-alumni-says-its-ai-teammate-just-outperformed-anthropic-and-openai-at-replicating-research/" target="_blank" rel="noopener">TechCrunch</a>
+          <a href="https://inherentlabs.ai/research/training-to-replicate" target="_blank" rel="noopener">Inherent 研究页</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>匿名「牛来 / Ox Alpha」现身 OpenRouter，社区争论智谱 vs 谷歌血统</h3>
+        <div class="tags">
+          <span class="tag">大模型</span>
+          <span class="tag">OpenRouter</span>
+          <span class="tag">中国 AI</span>
+        </div>
+        <p>
+          8 月 20 日起，代号 Ox Alpha（社区称「牛来」）的匿名模型在 OpenRouter 上以第三方身份上线，
+          宣称超长上下文与多模态、编程表现抢眼，随后被 OpenCode 等渠道大量免费试用。技术指纹讨论中，
+          智谱 GLM 系列与谷歌尚未正式发布的 Gemini 旗舰均被点名；亦有评测方称部分指标低于预期。
+          凤凰网科技等中文媒体在 8 月 23 日跟进梳理了这场「身份猜谜」。
+        </p>
+        <div class="sources">
+          <a href="https://tech.ifeng.com/c/8vp9fAOdVuP" target="_blank" rel="noopener">凤凰网科技</a>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <h2><span class="dot orange"></span>安全、合规与治理</h2>
+
+      <article class="card">
+        <h3>Guidelight：头部实验室对「流氓模型」公开遏制计划普遍不足</h3>
+        <div class="tags">
+          <span class="tag">AI 安全</span>
+          <span class="tag">监管</span>
+          <span class="tag">Agentic AI</span>
+        </div>
+        <p>
+          TechCrunch 报道 Guidelight AI Standards 对 Anthropic、Google、OpenAI、Meta、xAI 的公开材料评估：
+          无一家公布完整的失控遏制（containment）预案。OpenAI 因曾实际暂停/下线工作负载得分相对最高；
+          Anthropic 与 Meta 在「公开遏制计划」上最低。背景是近期评测沙箱逃逸与外部系统入侵事件升温，
+          加州 SB 53、纽约 RAISE 法案及联邦「AI Kill Switch」议案正加大披露压力。
+        </p>
+        <div class="sources">
+          <a href="https://techcrunch.com/2026/08/22/frontier-ai-labs-still-wont-say-how-theyd-contain-a-rogue-model/" target="_blank" rel="noopener">TechCrunch</a>
+          <a href="https://www.unite.ai/study-finds-frontier-ai-labs-have-few-plans-to-contain-rogue-models/" target="_blank" rel="noopener">Unite.AI</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Claude 按欧盟 AI 法案隐式水印后，开源「去水印」工具迅速走红</h3>
+        <div class="tags">
+          <span class="tag">欧盟 AI 法案</span>
+          <span class="tag">内容溯源</span>
+          <span class="tag">开源</span>
+        </div>
+        <p>
+          Anthropic 自 2026 年 8 月 2 日起在全球 Claude 文本输出中嵌入不可见水印，以符合欧盟 AI 法案
+          第 50 条透明度要求。巴黎开发者 Guillaume Meyer 随即开源 MIT 许可的 watermarks-remover，
+          声称可清理 Claude / OpenAI / Gemini 等文本与媒体元数据水印，GitHub 星标快速攀升；
+          但因官方检测器尚未公开，实际有效性仍存疑，行业对「可机器读取的作者身份能否站得住」争论加剧。
+        </p>
+        <div class="sources">
+          <a href="https://startupfortune.com/a-paris-developers-open-source-tool-already-strips-anthropics-new-claude-watermark/" target="_blank" rel="noopener">Startup Fortune</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Spotify 将为 AI 生成艺人身份加「AI Persona」徽章</h3>
+        <div class="tags">
+          <span class="tag">内容平台</span>
+          <span class="tag">透明度</span>
+          <span class="tag">推荐算法</span>
+        </div>
+        <p>
+          Spotify 8 月 11 日宣布：9 月中起在艺人主页横幅、About、搜索与歌单曲目行展示「AI Persona」标识，
+          标明公开身份为 AI 生成、不代表真人。艺人可通过 Spotify for Artists 主动披露，平台也会人工与工具复核。
+          默认情况下，此类档案的音乐不进入编辑精选与算法推荐，除非用户主动关注。徽章针对「人设」而非作曲方式本身。
+        </p>
+        <div class="sources">
+          <a href="https://techcrunch.com/2026/08/11/spotify-will-label-ai-persona-profiles-and-exclude-their-music-from-recommendations/" target="_blank" rel="noopener">TechCrunch</a>
+          <a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" target="_blank" rel="noopener">Spotify Newsroom</a>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <h2><span class="dot green"></span>算力与基础设施</h2>
+
+      <article class="card">
+        <h3>Nvidia：含 AI 芯片的服务器价格多场景将上涨逾 15%</h3>
+        <div class="tags">
+          <span class="tag">半导体</span>
+          <span class="tag">HBM / 内存</span>
+          <span class="tag">数据中心</span>
+        </div>
+        <p>
+          彭博消息（CNBC、路透等转载，日期约 8 月 22–23 日）：部分大客户已被告知，
+          2027 年初出货的含 Nvidia AI 芯片服务器在许多配置上将涨价逾 15%，覆盖旗舰 Vera Rubin、
+          Grace Blackwell 等，具体幅度视芯片代数与内存配置而定。驱动因素包括三星、SK 海力士、美光等
+          高带宽内存成本飙升，或进一步推高超大规模云厂商的 AI 基建预算。
+        </p>
+        <div class="sources">
+          <a href="https://www.cnbc.com/2026/08/22/nvidia-customers-reportedly-warned-about-ai-related-price-hikes-.html" target="_blank" rel="noopener">CNBC</a>
+          <a href="https://www.straitstimes.com/business/nvidia-customers-notified-about-ai-related-price-hikes-above-15-bloomberg" target="_blank" rel="noopener">The Straits Times</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Anthropic 聘前 Google TPU 掌门 Amir Salek，同步推进自研芯片与 Fractile 大单</h3>
+        <div class="tags">
+          <span class="tag">自定义芯片</span>
+          <span class="tag">人才</span>
+          <span class="tag">供应链</span>
+        </div>
+        <p>
+          据彭博（Business Standard 等 8 月 22 日转述）：Anthropic 宣布前 Google TPU 业务负责人
+          Amir Salek 加入算力团队，向 James Bradbury 汇报。Salek 曾主导前七代 TPU 交付。
+          此举配合公司自研硅招聘，以及与英国推理芯片初创 Fractile 约 2.5 亿美元初始采购意向，
+          并拓展 Riot Platforms、Volta Infra 等机柜与电力合作——硬件自主成为与 OpenAI 等并跑的新战场。
+        </p>
+        <div class="sources">
+          <a href="https://www.bloomberg.com/news/articles/2026-08-21/anthropic-taps-google-chip-veteran-as-part-of-push-into-hardware" target="_blank" rel="noopener">Bloomberg</a>
+          <a href="https://www.business-standard.com/technology/tech-news/anthropic-taps-google-chip-veteran-amir-salek-as-part-of-push-into-hardware-126082200097_1.html" target="_blank" rel="noopener">Business Standard</a>
+        </div>
+      </article>
+    </section>
+
+    <section>
+      <h2><span class="dot pink"></span>出行与落地应用</h2>
+
+      <article class="card">
+        <h3>Uber 携手 Pony.ai、Verne：欧洲首次可在 Uber App 预约自动驾驶出行</h3>
+        <div class="tags">
+          <span class="tag">Robotaxi</span>
+          <span class="tag">欧洲</span>
+          <span class="tag">Pony.ai</span>
+        </div>
+        <p>
+          Uber、Pony.ai 与克罗地亚运营商 Verne 于 8 月 19 日宣布：萨格勒布成为欧洲首个可在 Uber 应用内
+          预约自动驾驶车辆的城市。Pony.ai 提供 Gen-7 自动驾驶方案，Verne 负责车队与本地运营，Uber 负责
+          叫车与支付体验。初期仍有持证安全员随车，服务覆盖市中心等重点区域并将逐步扩大；三方称后续将
+          复制到更多欧洲城市。用户可在有车时选择 UberX / Comfort 呼叫。
+        </p>
+        <div class="sources">
+          <a href="https://investor.uber.com/news-events/news/press-release-details/2026/Uber-Launches-Autonomous-Rides-in-Europe/default.aspx" target="_blank" rel="noopener">Uber 投资者新闻</a>
+          <a href="https://www.siliconrepublic.com/business/uber-pony-ai-verne-croatia-robotaxi-zagreb-autonomous-vehicle" target="_blank" rel="noopener">Silicon Republic</a>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      <p>本早报由 <span class="brand">小东</span> 生成 · 信息来自公开报道，仅供分享阅读</p>
+      <p style="margin-top:6px;">© 2026 小东 · 科技/AI 早报 · 2026-08-23</p>
+    </footer>
+  </div>
+</body>
+</html>
