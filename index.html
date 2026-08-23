@@ -45,6 +45,7 @@
         <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #a09a8e; text-transform: uppercase;">Daily Brief</span>
       </div>
       <nav style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin-left: 4px;">
+        <a href="#essay" class="nav-pill">综述</a>
         <a href="#brief" class="nav-pill active">要点</a>
         <a href="#ai" class="nav-pill">AI 与前沿</a>
         <a href="#heat" class="nav-pill">今日热度</a>
@@ -63,6 +64,17 @@
     <p id="emptyState" style="display: none; margin: clamp(48px, 8vw, 96px) 0; text-align: center; font-size: 15px; color: #a09a8e;">还没有标记的条目 · 点任意一条右侧的「标记」留到晚上深读</p>
 
     <!-- ========== 今日要点 ========== -->
+    
+    <section id="essay" style="padding: clamp(28px, 5vw, 48px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(14px, 2vw, 20px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">今日综述</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">AI 摘要 · 593 字</span>
+      </div>
+      <article style="background: #fffefb; border-radius: clamp(18px, 2.6vw, 26px); padding: clamp(22px, 3.2vw, 36px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 14px 32px -18px rgba(28,26,22,0.16); border: 1px solid rgba(255,255,255,0.9);">
+        <p style="margin: 0; font-size: clamp(15px, 1.7vw, 17px); line-height: 1.85; color: #3a3630;">今天整份简报串起来看，主线很清楚：模型与 agent 的能力还在加速，可安全约束、算力供给和商业定价，都还没完全跟上。安全侧，Guidelight 的评估几乎给不出「公开且可执行」的失控模型遏制样板，OpenAI 相对靠前，Anthropic、Meta 等公开度更低；社区随之把「Kill Switch」从口号推向流程与问责。能力侧却很热闹——Inherent 由 DeepMind 背景团队创办，27B 的 Faraday 在科研论文复现任务上挑战更大参数模型，说明「小模型 + 强任务设计」仍能打穿榜单叙事。价格战同步升温：OpenAI 下调 GPT-5.6 Sol API 单价，开发者调用更便宜，订阅档未动，利润压力转嫁到用量增长；另一头 Nvidia AI 服务器报价上调逾一成，HBM 与供应链把 2027 年扩产预期压得更紧，超大规模厂商的资本开支故事开始被市场重新计价。Anthropic 引入前 Google TPU 负责人并推进芯片合作，是在补算力自主的短板；开源社区则以 DeepSeek Harness 等项目，把 agent 编排、工具调用和长期任务跑通，变成可复用工程件。版图之外，北极航线试运营、Zagreb 接入 Uber 自动驾驶、Jackson Hole 前的利率沟通，提醒 AI 叙事仍嵌在物流、出行与宏观利率里。若只留三句话：安全预案要与能力同速；便宜推理会重塑谁能做产品；算力与开源脚手架，将决定下一轮真正能落地的 agent。</p>
+      </article>
+    </section>
+
     <section id="brief" style="padding: clamp(40px, 7vw, 76px) 0 clamp(24px, 4vw, 40px);">
       <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: clamp(20px, 3vw, 30px);">
         <h1 style="margin: 0; font-size: clamp(34px, 6vw, 56px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02;">今日要点</h1>
