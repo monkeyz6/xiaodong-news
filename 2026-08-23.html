@@ -1,468 +1,643 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="小东 · 科技/AI 早报 · 2026-08-23 — 今日前沿模型、算力、安全与出行要点速览">
-<title>小东 · 科技/AI 早报 · 2026-08-23</title>
+<meta name="description" content="小东 · 每日简报 · 2026-08-23 — 要点 / AI与前沿 / 热度 / 世界与财经 / 行情">
+<title>每日简报 · 2026-08-23 · 小东</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0f1419;
-    --surface: #1a2332;
-    --surface2: #243044;
-    --border: #2d3a4f;
-    --text: #e8eef6;
-    --muted: #8b9bb4;
-    --accent: #5b9fd4;
-    --accent2: #7c6cf0;
-    --green: #3ecf8e;
-    --orange: #f0a05a;
-    --pink: #e879a9;
-    --radius: 14px;
-    --shadow: 0 8px 32px rgba(0,0,0,.35);
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei", "Hiragino Sans GB",
-      system-ui, -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
-    min-height: 100vh;
-  }
-  .wrap {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 28px 20px 64px;
-  }
-  header.hero {
-    background: linear-gradient(135deg, #1a2740 0%, #243055 45%, #1e2a48 100%);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 32px 28px 28px;
-    margin-bottom: 28px;
-    box-shadow: var(--shadow);
-    position: relative;
-    overflow: hidden;
-  }
-  header.hero::before {
-    content: "";
-    position: absolute;
-    top: -40%;
-    right: -20%;
-    width: 280px;
-    height: 280px;
-    background: radial-gradient(circle, rgba(91,159,212,.25), transparent 70%);
-    pointer-events: none;
-  }
-  .badge-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 14px;
-  }
-  .badge {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .04em;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: rgba(91,159,212,.15);
-    color: var(--accent);
-    border: 1px solid rgba(91,159,212,.35);
-  }
-  .badge.sun { background: rgba(240,160,90,.12); color: var(--orange); border-color: rgba(240,160,90,.35); }
-  h1 {
-    font-size: clamp(1.45rem, 4.5vw, 1.85rem);
-    font-weight: 700;
-    letter-spacing: -.02em;
-    margin-bottom: 10px;
-    line-height: 1.35;
-  }
-  .intro {
-    color: var(--muted);
-    font-size: 0.95rem;
-    max-width: 62ch;
-  }
-  .meta {
-    margin-top: 16px;
-    font-size: 13px;
-    color: var(--muted);
-  }
-  section {
-    margin-bottom: 28px;
-  }
-  h2 {
-    font-size: 1.05rem;
-    font-weight: 700;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  h2 .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex-shrink: 0;
-  }
-  h2 .dot.purple { background: var(--accent2); }
-  h2 .dot.green { background: var(--green); }
-  h2 .dot.orange { background: var(--orange); }
-  h2 .dot.pink { background: var(--pink); }
-
-  .toplist {
-    list-style: none;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-  .toplist li {
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--border);
-    display: grid;
-    grid-template-columns: 28px 1fr;
-    gap: 10px;
-    align-items: start;
-  }
-  .toplist li:last-child { border-bottom: none; }
-  .toplist .num {
-    font-weight: 700;
-    color: var(--accent);
-    font-size: 0.9rem;
-    padding-top: 2px;
-  }
-  .toplist strong {
-    display: block;
-    font-size: 0.95rem;
-    margin-bottom: 2px;
-  }
-  .toplist span {
-    font-size: 0.85rem;
-    color: var(--muted);
-  }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 20px 18px;
-    margin-bottom: 12px;
-    transition: border-color .2s;
-  }
-  .card:hover { border-color: rgba(91,159,212,.55); }
-  .card h3 {
-    font-size: 1.02rem;
-    font-weight: 650;
-    margin-bottom: 8px;
-    line-height: 1.4;
-  }
-  .card p {
-    font-size: 0.92rem;
-    color: #c5d0e0;
-    margin-bottom: 12px;
-  }
-  .card .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 12px;
-  }
-  .tag {
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 6px;
-    background: var(--surface2);
-    color: var(--muted);
-  }
-  .sources {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .sources a {
-    font-size: 12px;
-    color: var(--accent);
-    text-decoration: none;
-    padding: 4px 10px;
-    border-radius: 8px;
-    background: rgba(91,159,212,.1);
-    border: 1px solid rgba(91,159,212,.25);
-  }
-  .sources a:hover {
-    background: rgba(91,159,212,.22);
-    text-decoration: underline;
-  }
-
-  footer {
-    margin-top: 36px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    text-align: center;
-    color: var(--muted);
-    font-size: 13px;
-  }
-  footer .brand {
-    color: var(--text);
-    font-weight: 600;
-  }
-  @media (max-width: 480px) {
-    .wrap { padding: 16px 14px 48px; }
-    header.hero { padding: 24px 18px; }
-    .card { padding: 16px; }
-  }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 92px; scroll-behavior: smooth; }
+  body { margin: 0; background: #f5f2ec; color: #1c1a16; font-family: 'Instrument Sans', 'Noto Sans SC', system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+  a { color: #8a5a2b; text-decoration: none; }
+  a:hover { color: #6d4520; text-decoration: underline; text-underline-offset: 3px; }
+  button { font: inherit; color: inherit; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .nav-pill { padding: 6px 11px; border-radius: 999px; font-size: 13px; font-weight: 500; color: #6b665c; }
+  .nav-pill:hover { background: #ece7dc; color: #1c1a16; text-decoration: none; }
+  .nav-pill.active { color: #1c1a16; background: #ece7dc; }
+  .mark-btn { padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(28,26,22,0.12); background: transparent; cursor: pointer; font-size: 12px; color: #6b665c; }
+  .mark-btn:hover { border-color: rgba(138,90,43,0.5); color: #8a5a2b; }
+  .mark-btn.on { background: #f0e2d2; border-color: rgba(138,90,43,0.45); color: #8a5a2b; }
+  .filter-btn { margin-left: auto; display: flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(28,26,22,0.12); background: #fffefb; cursor: pointer; font-size: 13px; font-weight: 500; box-shadow: 0 1px 2px rgba(28,26,22,0.04); }
+  .filter-btn:hover, .filter-btn.on { border-color: rgba(138,90,43,0.45); }
+  .filter-btn.on { background: #f0e2d2; }
+  [data-item].hidden-by-filter { display: none !important; }
+  section.hidden-by-filter { display: none !important; }
+  .up { color: #2f6b4f; }
+  .down { color: #a8422f; }
+  .flat { color: #6b665c; }
+  .heatbar { display: block; height: 3px; border-radius: 999px; background: #ece7dc; overflow: hidden; }
+  .heatbar > i { display: block; height: 100%; border-radius: 999px; background: #8a5a2b; }
+  .badge { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 7px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; }
+  .badge.sm { width: 20px; height: 20px; border-radius: 6px; font-size: 9px; }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header class="hero">
-      <div class="badge-row">
-        <span class="badge">科技 / AI</span>
-        <span class="badge sun">周日特辑 · 2026-08-23</span>
+<div id="root" style="min-height: 100vh; background: #f5f2ec; padding-bottom: 80px;">
+
+  <header style="position: sticky; top: 0; z-index: 20; background: rgba(245,242,236,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(28,26,22,0.07);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 14px clamp(16px, 4vw, 40px); display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <span style="font-size: 17px; font-weight: 700; letter-spacing: -0.01em;">每日简报</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #a09a8e; text-transform: uppercase;">Daily Brief</span>
       </div>
-      <h1>小东 · 科技/AI 早报 · 2026-08-23</h1>
-      <p class="intro">
-        本周周末焦点：小参数「AI 科学家」挑战前沿大模型、头部实验室「失控遏制」透明度遭拷问、
-        Nvidia 服务器涨价信号、Anthropic 加码自研芯片、以及欧洲首个 Uber 机器人出租车落地。
-        以下为基于公开报道整理的 8 条要点，均附原文链接。
-      </p>
-      <p class="meta">整理日期：2026 年 8 月 23 日（周日） · 亚洲/上海</p>
-    </header>
+      <nav style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin-left: 4px;">
+        <a href="#brief" class="nav-pill active">要点</a>
+        <a href="#ai" class="nav-pill">AI 与前沿</a>
+        <a href="#heat" class="nav-pill">今日热度</a>
+        <a href="#world" class="nav-pill">世界与财经</a>
+        <a href="#market" class="nav-pill">行情</a>
+      </nav>
+      <button type="button" class="filter-btn" id="filterBtn" aria-pressed="false">
+        <span>只看已标记</span>
+        <span id="markCount" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; min-width: 18px; padding: 1px 6px; border-radius: 999px; background: #ece7dc; color: #6b665c; text-align: center;">0</span>
+      </button>
+    </div>
+  </header>
 
-    <section>
-      <h2><span class="dot"></span>今日头条速览</h2>
-      <ol class="toplist">
-        <li>
-          <span class="num">01</span>
-          <div>
-            <strong>Inherent Faraday：27B 小模型科研复现超越 Opus / GPT</strong>
-            <span>DeepMind 校友创办的伦敦实验室称其 AI 队友在论文复现任务上击败更大前沿模型。</span>
-          </div>
-        </li>
-        <li>
-          <span class="num">02</span>
-          <div>
-            <strong>前沿实验室仍难公开「失控模型」遏制方案</strong>
-            <span>Guidelight 评估显示 OpenAI 相对靠前，Anthropic 与 Meta 在公开遏制计划上得分最低。</span>
-          </div>
-        </li>
-        <li>
-          <span class="num">03</span>
-          <div>
-            <strong>Nvidia AI 服务器多场景涨价超 15%</strong>
-            <span>彭博报道称客户已收到通知，2027 年初出货的 Vera Rubin / Grace Blackwell 等系统将涨价。</span>
-          </div>
-        </li>
-        <li>
-          <span class="num">04</span>
-          <div>
-            <strong>Anthropic 挖来前 Google TPU 负责人 Amir Salek</strong>
-            <span>配合自研硅与约 2.5 亿美元 Fractile 推理芯片订单，硬件自主权提速。</span>
-          </div>
-        </li>
-        <li>
-          <span class="num">05</span>
-          <div>
-            <strong>Uber × Pony.ai：欧洲首个 App 内自动驾驶出行上线萨格勒布</strong>
-            <span>克罗地亚首都成为欧洲首个可经 Uber 预约 AV 的城市，初期仍配备安全员。</span>
-          </div>
-        </li>
-        <li>
-          <span class="num">06</span>
-          <div>
-            <strong>Spotify 将上线「AI Persona」标识</strong>
-            <span>9 月中起为 AI 生成艺人身份打标，并默认排除编辑与算法推荐。</span>
-          </div>
-        </li>
-        <li>
-          <span class="num">07</span>
-          <div>
-            <strong>匿名模型「牛来 / Ox Alpha」身份成谜</strong>
-            <span>OpenRouter 上突然走红，社区指纹指向智谱或谷歌未发布旗舰，讨论热度居高。</span>
-          </div>
-        </li>
-        <li>
-          <span class="num">08</span>
-          <div>
-            <strong>Claude 隐式水印上线后，开源去水印工具迅速出现</strong>
-            <span>为符合欧盟 AI 法案，Anthropic 8 月 2 日起全量水印；巴黎开发者发布 MIT 工具引发争议。</span>
-          </div>
-        </li>
-      </ol>
+  <main style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px);">
+
+    <p id="emptyState" style="display: none; margin: clamp(48px, 8vw, 96px) 0; text-align: center; font-size: 15px; color: #a09a8e;">还没有标记的条目 · 点任意一条右侧的「标记」留到晚上深读</p>
+
+    <!-- ========== 今日要点 ========== -->
+    <section id="brief" style="padding: clamp(40px, 7vw, 76px) 0 clamp(24px, 4vw, 40px);">
+      <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: clamp(20px, 3vw, 30px);">
+        <h1 style="margin: 0; font-size: clamp(34px, 6vw, 56px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02;">今日要点</h1>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; letter-spacing: 0.02em;">2026-08-23 · 周日</span>
+      </div>
+
+      <div style="animation: rise 0.5s ease both; background: linear-gradient(180deg, #fffefb, #fffdf7); border-radius: clamp(20px, 3vw, 30px); padding: clamp(22px, 3.4vw, 40px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 20px 44px -22px rgba(28,26,22,0.18); border: 1px solid rgba(255,255,255,0.9);">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: clamp(18px, 2.6vw, 26px); flex-wrap: wrap;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e;">小东摘选 · 6 条</span>
+          <span style="flex: 1; height: 1px; background: rgba(28,26,22,0.08); min-width: 20px;"></span>
+          <span style="font-size: 12px; color: #a09a8e;">公开源 · 2026-08-22/23</span>
+        </div>
+
+        <ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 20px;">
+
+          <li data-item="b1" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">01</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">Guidelight 首份控制力成绩单：前沿实验室对「失控模型」公开遏制计划普遍不足</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #ece2df; color: #a8422f;">TC</span>
+                <span style="font-size: 13px; color: #6b665c;">TechCrunch</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">08-22</span>
+                <button type="button" class="mark-btn" data-mark="b1" style="margin-left: auto;">标记</button>
+              </div>
+              <p data-summary style="display: none; margin: 4px 0 0; font-size: 15px; line-height: 1.72; color: #6b665c;">非营利组织 Guidelight 按六项控制实践给五家前沿实验室打分：Anthropic 与 OpenAI 并列 C+，Google D+，xAI D−，Meta F。报告称没有一家公布完整的失控/流氓模型遏制预案；加州 SB 53 与纽约 RAISE 已要求披露，联邦「AI Kill Switch」法案亦在推进。<a href="https://techcrunch.com/2026/08/22/frontier-ai-labs-still-wont-say-how-theyd-contain-a-rogue-model/" target="_blank" rel="noreferrer">原文 ↗</a></p>
+            </div>
+          </li>
+
+          <li data-item="b2" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">02</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">OpenAI 下调 GPT-5.6 Sol API 价格逾 20%，三个月促销价 $4 / $20 每百万 token</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #e4e9ec; color: #1f5f8b;">RE</span>
+                <span style="font-size: 13px; color: #6b665c;">Reuters</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">08-21/22</span>
+                <button type="button" class="mark-btn" data-mark="b2" style="margin-left: auto;">标记</button>
+              </div>
+              <p data-summary style="display: none; margin: 4px 0 0; font-size: 15px; line-height: 1.72; color: #6b665c;">输入从 $5→$4、输出从 $30→$20（降幅约 33%），适用于 API 与 ChatGPT Work / Codex 积分方案，Pro/Plus/Business 订阅不变；促销至少至 2026-11-21。这是 GPT-5.6 系列第三轮降价，面向 Anthropic 与中国模型的价格战。<a href="https://www.reuters.com/technology/openai-cuts-developer-pricing-frontier-gpt-56-sol-model-by-more-than-20-2026-08-21/" target="_blank" rel="noreferrer">原文 ↗</a></p>
+            </div>
+          </li>
+
+          <li data-item="b3" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">03</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">Nvidia 据报通知大客户：AI 服务器 2027 年初出货涨价逾 15%，内存成本主导</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #f0e2d2; color: #8a5a2b;">BB</span>
+                <span style="font-size: 13px; color: #6b665c;">Bloomberg / TNW</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">08-22/23</span>
+                <button type="button" class="mark-btn" data-mark="b3" style="margin-left: auto;">标记</button>
+              </div>
+              <p data-summary style="display: none; margin: 4px 0 0; font-size: 15px; line-height: 1.72; color: #6b665c;">涨价覆盖 Vera Rubin 与 Grace Blackwell 平台；HBM / LPDDR5X 在 Vera Rubin 物料成本中占比约 62%。公司尚未官方确认，下周财报将成焦点；NVDA 周五收于 214.72，当日约跌 0.98%。<a href="https://thenextweb.com/news/nvidia-ai-server-price-increase-memory-costs" target="_blank" rel="noreferrer">原文 ↗</a></p>
+            </div>
+          </li>
+
+          <li data-item="b4" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">04</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">DeepMind 校友创业公司 Inherent：27B Faraday 在科研复现任务上超越 Opus 4.8 / GPT-5.5</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #dfe7e4; color: #2f6b4f;">TC</span>
+                <span style="font-size: 13px; color: #6b665c;">TechCrunch</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">08-22</span>
+                <button type="button" class="mark-btn" data-mark="b4" style="margin-left: auto;">标记</button>
+              </div>
+              <p data-summary style="display: none; margin: 4px 0 0; font-size: 15px; line-height: 1.72; color: #6b665c;">伦敦实验室刚以约 5000 万美元种子轮出山，Faraday 基于 Qwen 3.6（27B），强调「研究品味」而非纯刷分；编码侧调用 GPT-5.5 Codex。Replica 评测上，同分布 ML 任务对 Claude 胜率约 73%，跨领域 held-out 约 60%。<a href="https://techcrunch.com/2026/08/22/inherent-founded-by-deepmind-alumni-says-its-ai-teammate-just-outperformed-anthropic-and-openai-at-replicating-research/" target="_blank" rel="noreferrer">原文 ↗</a></p>
+            </div>
+          </li>
+
+          <li data-item="b5" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">05</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">Anthropic 挖角前 Google TPU 负责人 Amir Salek，加码自研算力与芯片路线</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #f0e2d2; color: #8a5a2b;">AN</span>
+                <span style="font-size: 13px; color: #6b665c;">NewsBytes / Bloomberg</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">08-21/23</span>
+                <button type="button" class="mark-btn" data-mark="b5" style="margin-left: auto;">标记</button>
+              </div>
+              <p data-summary style="display: none; margin: 4px 0 0; font-size: 15px; line-height: 1.72; color: #6b665c;">Salek 将加入 Anthropic 算力团队并向 James Bradbury 汇报。公司同时推进与英国芯片初创 Fractile 约 2.5 亿美元起步合作，路径类似 OpenAI 自研芯片：缓解供应瓶颈、按自身工作负载定制。<a href="https://www.newsbytesapp.com/news/science/ex-google-tpu-head-amir-salek-joins-anthropic-compute-team/tldr" target="_blank" rel="noreferrer">原文 ↗</a></p>
+            </div>
+          </li>
+
+          <li data-item="b6" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">06</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">DeepSeek Harness 开源 agent 框架本月狂揽超 10 万星，八月 GitHub 增星榜第一</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #e6e0d4; color: #4a453c;">GH</span>
+                <span style="font-size: 13px; color: #6b665c;">GitStarClub</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">截至 08-23</span>
+                <button type="button" class="mark-btn" data-mark="b6" style="margin-left: auto;">标记</button>
+              </div>
+              <p data-summary style="display: none; margin: 4px 0 0; font-size: 15px; line-height: 1.72; color: #6b665c;">deepseek-ai/deepseek-harness 八月增星约 +103.2k（总星约 11.98 万），远超 mattpocock/skills、OmniRoute 等。社区称其为可替换模型/工具/沙箱/调度的完整 agent 框架，上线后曾出现小时级暴涨。<a href="https://gitstarclub.com/rankings/2026/8" target="_blank" rel="noreferrer">原文 ↗</a></p>
+            </div>
+          </li>
+
+        </ol>
+        <p style="margin: clamp(20px, 3vw, 28px) 0 0; padding-top: 18px; border-top: 1px solid rgba(28,26,22,0.08); font-size: 13px; color: #a09a8e;">点任意一条展开中文摘要 · 「标记」留到晚上深读 · 助手小东</p>
+      </div>
     </section>
 
-    <section>
-      <h2><span class="dot purple"></span>模型与科研</h2>
+    <!-- ========== AI 与前沿 ========== -->
+    <section id="ai" style="padding: clamp(28px, 5vw, 56px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">AI 与前沿科技</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">1 头条 · 5 卡片</span>
+      </div>
 
-      <article class="card">
-        <h3>Inherent 发布 Faraday：27B「AI 科学家」复现论文力压 Claude Opus 4.8 与 GPT-5.5</h3>
-        <div class="tags">
-          <span class="tag">AI Agent</span>
-          <span class="tag">科研复现</span>
-          <span class="tag">DeepMind 校友</span>
+      <article data-item="a0" style="cursor: pointer; background: #fffefb; border-radius: clamp(18px, 2.6vw, 26px); padding: clamp(22px, 3.2vw, 36px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 14px 32px -18px rgba(28,26,22,0.16); display: grid; gap: 14px; margin-bottom: clamp(14px, 2vw, 20px);">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="padding: 3px 9px; border-radius: 999px; background: #f0e2d2; color: #8a5a2b; font-size: 11px; font-weight: 600; letter-spacing: 0.02em;">今日头条</span>
+          <span class="badge" style="background: #dfe7e4; color: #2f6b4f;">IN</span>
+          <span style="font-size: 13px; color: #6b665c;">TechCrunch · Inherent</span>
+          <button type="button" class="mark-btn" data-mark="a0" style="margin-left: auto; padding: 5px 12px;">标记</button>
         </div>
-        <p>
-          伦敦初创 Inherent（DeepMind 校友创办，刚以约 5000 万美元种子轮出圈）称其智能体 Faraday
-          基于约 270 亿参数的 Qwen 3.6，在「独立复现已发表论文结果」任务上优于 Anthropic Claude Opus 4.8
-          与 OpenAI GPT-5.5。公司强调训练的是「研究品味」——会选值得做的实验——并以长程强化学习、
-          将 GPT-5.5 Codex 作为编码工具协作。官方研究页介绍了含 310 项任务的 Replica 评测套件。
-        </p>
-        <div class="sources">
-          <a href="https://techcrunch.com/2026/08/22/inherent-founded-by-deepmind-alumni-says-its-ai-teammate-just-outperformed-anthropic-and-openai-at-replicating-research/" target="_blank" rel="noopener">TechCrunch</a>
-          <a href="https://inherentlabs.ai/research/training-to-replicate" target="_blank" rel="noopener">Inherent 研究页</a>
+        <h3 style="margin: 0; font-size: clamp(21px, 3vw, 30px); font-weight: 700; line-height: 1.28; letter-spacing: -0.022em;">小模型也能当「科研队友」：Faraday 用 27B 复现论文，胜过更大的前沿系统</h3>
+        <p style="margin: 0; font-size: clamp(15px, 1.7vw, 17px); line-height: 1.7; color: #6b665c;">Inherent 由 DeepMind 校友创立，主张先培养实验设计「品味」，再把编码交给 Codex 一类工具。评测强调盲复现而非已知答案刷分；同分布任务对 Claude Opus 4.8 约 73% 胜率。对「参数量=能力」叙事是一次有力反例。</p>
+        <div style="display: flex; align-items: center; gap: 12px; padding-top: 4px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: #a09a8e; text-transform: uppercase;">热度</span>
+          <span class="heatbar" style="flex: 1;"><i style="width: 92%;"></i></span>
         </div>
+        <p data-summary style="display: none; margin: 0; font-size: 14px; line-height: 1.7; color: #6b665c;">公司种子轮约 5000 万美元；论文任务套件 Replica 含自动 rubric judge。持仓含义：垂类 agent + 中小基座模型组合可能改写算力采购结构。<a href="https://techcrunch.com/2026/08/22/inherent-founded-by-deepmind-alumni-says-its-ai-teammate-just-outperformed-anthropic-and-openai-at-replicating-research/" target="_blank" rel="noreferrer">深读原文 ↗</a></p>
       </article>
 
-      <article class="card">
-        <h3>匿名「牛来 / Ox Alpha」现身 OpenRouter，社区争论智谱 vs 谷歌血统</h3>
-        <div class="tags">
-          <span class="tag">大模型</span>
-          <span class="tag">OpenRouter</span>
-          <span class="tag">中国 AI</span>
-        </div>
-        <p>
-          8 月 20 日起，代号 Ox Alpha（社区称「牛来」）的匿名模型在 OpenRouter 上以第三方身份上线，
-          宣称超长上下文与多模态、编程表现抢眼，随后被 OpenCode 等渠道大量免费试用。技术指纹讨论中，
-          智谱 GLM 系列与谷歌尚未正式发布的 Gemini 旗舰均被点名；亦有评测方称部分指标低于预期。
-          凤凰网科技等中文媒体在 8 月 23 日跟进梳理了这场「身份猜谜」。
-        </p>
-        <div class="sources">
-          <a href="https://tech.ifeng.com/c/8vp9fAOdVuP" target="_blank" rel="noopener">凤凰网科技</a>
-        </div>
-      </article>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(12px, 1.8vw, 18px);">
+
+        <article data-item="a1" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #ece2df; color: #a8422f;">GL</span>
+            <span style="font-size: 12px; color: #6b665c;">Guidelight / TechCrunch</span>
+            <button type="button" class="mark-btn" data-mark="a1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.42; letter-spacing: -0.01em;">控制力评分最高也只有 C+：遏制预案成公开短板</h4>
+          <span class="heatbar"><i style="width: 84%;"></i></span>
+          <p data-summary style="display: none; margin: 2px 0 0; font-size: 14px; line-height: 1.7; color: #6b665c;">六项实践均无满分；OpenAI 因多次暂停负载得分相对靠前，Anthropic/Meta 在公开遏制计划上最弱。监管正把披露从可选变成强制。<a href="https://guidelight.ai/blog/control-assessment-august-2026" target="_blank" rel="noreferrer">原文 ↗</a></p>
+        </article>
+
+        <article data-item="a2" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #e4e9ec; color: #1f5f8b;">OA</span>
+            <span style="font-size: 12px; color: #6b665c;">OpenAI / Reuters</span>
+            <button type="button" class="mark-btn" data-mark="a2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.42; letter-spacing: -0.01em;">前沿模型定价变成促销杠杆：Sol 三个月限时降价</h4>
+          <span class="heatbar"><i style="width: 78%;"></i></span>
+          <p data-summary style="display: none; margin: 2px 0 0; font-size: 14px; line-height: 1.7; color: #6b665c;">官方表述为效率提升后的临时降价，而非永久价目表。开发者仍吐槽速率限制；价格战已从中端蔓延到旗舰。<a href="https://developers.openai.com/api/docs/models/gpt-5.6-sol" target="_blank" rel="noreferrer">原文 ↗</a></p>
+        </article>
+
+        <article data-item="a3" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #f0e2d2; color: #8a5a2b;">AN</span>
+            <span style="font-size: 12px; color: #6b665c;">Anthropic</span>
+            <button type="button" class="mark-btn" data-mark="a3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.42; letter-spacing: -0.01em;">自研芯片信号加码：TPU 老将加盟 + Fractile 合作</h4>
+          <span class="heatbar"><i style="width: 70%;"></i></span>
+          <p data-summary style="display: none; margin: 2px 0 0; font-size: 14px; line-height: 1.7; color: #6b665c;">算力供应链正从「租 GPU」走向「定制硅」。对云厂商议价与交付周期都会有二阶影响。<a href="https://www.newsbytesapp.com/news/science/ex-google-tpu-head-amir-salek-joins-anthropic-compute-team/tldr" target="_blank" rel="noreferrer">原文 ↗</a></p>
+        </article>
+
+        <article data-item="a4" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #f2e6cf; color: #8a6a2b;">NV</span>
+            <span style="font-size: 12px; color: #6b665c;">Nvidia / Bloomberg</span>
+            <button type="button" class="mark-btn" data-mark="a4" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.42; letter-spacing: -0.01em;">HBM 吃掉 BOM：服务器涨价把内存短缺写进 2027 预算</h4>
+          <span class="heatbar"><i style="width: 66%;"></i></span>
+          <p data-summary style="display: none; margin: 2px 0 0; font-size: 14px; line-height: 1.72; color: #6b665c;">超大规模厂的 CapEx 不只是买卡，还要为内存与先进封装买单。涨价若落地，单位推理成本下行曲线会变缓。<a href="https://thenextweb.com/news/nvidia-ai-server-price-increase-memory-costs" target="_blank" rel="noreferrer">原文 ↗</a></p>
+        </article>
+
+        <article data-item="a5" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #e6e0d4; color: #4a453c;">DS</span>
+            <span style="font-size: 12px; color: #6b665c;">DeepSeek / GitHub</span>
+            <button type="button" class="mark-btn" data-mark="a5" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.42; letter-spacing: -0.01em;">开源 harness 爆火：社区在赌「编排层」才是下一护城河</h4>
+          <span class="heatbar"><i style="width: 88%;"></i></span>
+          <p data-summary style="display: none; margin: 2px 0 0; font-size: 14px; line-height: 1.7; color: #6b665c;">模型能力趋同后，可观测的工具调用、沙箱与调度成为差异点。DeepSeek Harness 的星数暴涨，正是这一叙事的行情温度计。<a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noreferrer">仓库 ↗</a></p>
+        </article>
+
+      </div>
     </section>
 
-    <section>
-      <h2><span class="dot orange"></span>安全、合规与治理</h2>
+    <!-- ========== 今日热度 ========== -->
+    <section id="heat" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">今日热度</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">GitHub · 社区</span>
+      </div>
 
-      <article class="card">
-        <h3>Guidelight：头部实验室对「流氓模型」公开遏制计划普遍不足</h3>
-        <div class="tags">
-          <span class="tag">AI 安全</span>
-          <span class="tag">监管</span>
-          <span class="tag">Agentic AI</span>
-        </div>
-        <p>
-          TechCrunch 报道 Guidelight AI Standards 对 Anthropic、Google、OpenAI、Meta、xAI 的公开材料评估：
-          无一家公布完整的失控遏制（containment）预案。OpenAI 因曾实际暂停/下线工作负载得分相对最高；
-          Anthropic 与 Meta 在「公开遏制计划」上最低。背景是近期评测沙箱逃逸与外部系统入侵事件升温，
-          加州 SB 53、纽约 RAISE 法案及联邦「AI Kill Switch」议案正加大披露压力。
-        </p>
-        <div class="sources">
-          <a href="https://techcrunch.com/2026/08/22/frontier-ai-labs-still-wont-say-how-theyd-contain-a-rogue-model/" target="_blank" rel="noopener">TechCrunch</a>
-          <a href="https://www.unite.ai/study-finds-frontier-ai-labs-have-few-plans-to-contain-rogue-models/" target="_blank" rel="noopener">Unite.AI</a>
-        </div>
-      </article>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(12px, 1.8vw, 18px);">
 
-      <article class="card">
-        <h3>Claude 按欧盟 AI 法案隐式水印后，开源「去水印」工具迅速走红</h3>
-        <div class="tags">
-          <span class="tag">欧盟 AI 法案</span>
-          <span class="tag">内容溯源</span>
-          <span class="tag">开源</span>
+        <div style="background: #fffefb; border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14);">
+          <div style="display: flex; align-items: center; gap: 9px; margin-bottom: 18px;">
+            <span class="badge" style="background: #e6e0d4; color: #4a453c;">GH</span>
+            <span style="font-size: 14px; font-weight: 600;">GitHub 八月增星</span>
+            <span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">截至 08-23</span>
+          </div>
+          <ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 16px;">
+            <li data-item="g1" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">deepseek-harness</span>
+                <span style="font-size: 11px; color: #a09a8e;">TypeScript · +103.2k</span>
+                <button type="button" class="mark-btn" data-mark="g1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 100%;"></i></span>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">DeepSeek 开源完整 agent 框架，模型/工具/沙箱可替换。数据：GitStarClub 2026-08。<a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noreferrer">仓库 ↗</a></p>
+            </li>
+            <li data-item="g2" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">mattpocock/skills</span>
+                <span style="font-size: 11px; color: #a09a8e;">Shell · +35.8k</span>
+                <button type="button" class="mark-btn" data-mark="g2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 76%;"></i></span>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">技能/脚本合集，八月增星第二。数据：GitStarClub。<a href="https://github.com/mattpocock/skills" target="_blank" rel="noreferrer">仓库 ↗</a></p>
+            </li>
+            <li data-item="g3" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">OmniRoute</span>
+                <span style="font-size: 11px; color: #a09a8e;">TypeScript · +18.0k</span>
+                <button type="button" class="mark-btn" data-mark="g3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 58%;"></i></span>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">多后端路由类项目继续吃「降本」叙事。数据：GitStarClub。<a href="https://github.com/diegosouzapw/OmniRoute" target="_blank" rel="noreferrer">仓库 ↗</a></p>
+            </li>
+            <li data-item="g4" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">stablyai/orca</span>
+                <span style="font-size: 11px; color: #a09a8e;">TypeScript · +17.3k</span>
+                <button type="button" class="mark-btn" data-mark="g4" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 52%;"></i></span>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">八月增星第四。数据：GitStarClub。<a href="https://github.com/stablyai/orca" target="_blank" rel="noreferrer">仓库 ↗</a></p>
+            </li>
+          </ol>
         </div>
-        <p>
-          Anthropic 自 2026 年 8 月 2 日起在全球 Claude 文本输出中嵌入不可见水印，以符合欧盟 AI 法案
-          第 50 条透明度要求。巴黎开发者 Guillaume Meyer 随即开源 MIT 许可的 watermarks-remover，
-          声称可清理 Claude / OpenAI / Gemini 等文本与媒体元数据水印，GitHub 星标快速攀升；
-          但因官方检测器尚未公开，实际有效性仍存疑，行业对「可机器读取的作者身份能否站得住」争论加剧。
-        </p>
-        <div class="sources">
-          <a href="https://startupfortune.com/a-paris-developers-open-source-tool-already-strips-anthropics-new-claude-watermark/" target="_blank" rel="noopener">Startup Fortune</a>
-        </div>
-      </article>
 
-      <article class="card">
-        <h3>Spotify 将为 AI 生成艺人身份加「AI Persona」徽章</h3>
-        <div class="tags">
-          <span class="tag">内容平台</span>
-          <span class="tag">透明度</span>
-          <span class="tag">推荐算法</span>
+        <div style="background: #fffefb; border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14);">
+          <div style="display: flex; align-items: center; gap: 9px; margin-bottom: 18px;">
+            <span class="badge" style="background: #e0dcd4; color: #1c1a16;">AI</span>
+            <span style="font-size: 14px; font-weight: 600;">圈内话题</span>
+            <span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">本周</span>
+          </div>
+          <ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 18px;">
+            <li data-item="x1" style="cursor: pointer; display: grid; gap: 7px;">
+              <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">「遏制计划」从安全博客走进立法：Kill Switch 讨论升温</p>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">政策 / 安全</span>
+                <button type="button" class="mark-btn" data-mark="x1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 86%;"></i></span>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">Guidelight 报告与 TechCrunch 报道后，联邦 AI Kill Switch 法案被再次引用；核心争议是公开披露 vs 法律责任。<a href="https://techcrunch.com/2026/08/22/frontier-ai-labs-still-wont-say-how-theyd-contain-a-rogue-model/" target="_blank" rel="noreferrer">相关 ↗</a></p>
+            </li>
+            <li data-item="x2" style="cursor: pointer; display: grid; gap: 7px;">
+              <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">小参数「科研 agent」是否证明 harness &gt; 纯模型规模？</p>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">评测 / agent</span>
+                <button type="button" class="mark-btn" data-mark="x2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 72%;"></i></span>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">Faraday 叙事与 DeepSeek Harness 星数同周共振：编排层、工具调用与任务设计被重新定价。<a href="https://www.alphaxiv.org/abs/2608.13331" target="_blank" rel="noreferrer">相关 ↗</a></p>
+            </li>
+            <li data-item="x3" style="cursor: pointer; display: grid; gap: 7px;">
+              <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">旗舰 API 开始「限时促销」：开发者账单模型变复杂</p>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">定价</span>
+                <button type="button" class="mark-btn" data-mark="x3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 61%;"></i></span>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">Sol 三个月促销意味着路由与预算系统要处理「到期涨价」；长期合同谈判空间增大。<a href="https://www.reuters.com/technology/openai-cuts-developer-pricing-frontier-gpt-56-sol-model-by-more-than-20-2026-08-21/" target="_blank" rel="noreferrer">相关 ↗</a></p>
+            </li>
+          </ol>
         </div>
-        <p>
-          Spotify 8 月 11 日宣布：9 月中起在艺人主页横幅、About、搜索与歌单曲目行展示「AI Persona」标识，
-          标明公开身份为 AI 生成、不代表真人。艺人可通过 Spotify for Artists 主动披露，平台也会人工与工具复核。
-          默认情况下，此类档案的音乐不进入编辑精选与算法推荐，除非用户主动关注。徽章针对「人设」而非作曲方式本身。
-        </p>
-        <div class="sources">
-          <a href="https://techcrunch.com/2026/08/11/spotify-will-label-ai-persona-profiles-and-exclude-their-music-from-recommendations/" target="_blank" rel="noopener">TechCrunch</a>
-          <a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" target="_blank" rel="noopener">Spotify Newsroom</a>
+
+        <div style="background: #fffefb; border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14);">
+          <div style="display: flex; align-items: center; gap: 9px; margin-bottom: 18px;">
+            <span class="badge" style="background: #dfe7e4; color: #2f6b4f;">CN</span>
+            <span style="font-size: 14px; font-weight: 600;">开源观察</span>
+            <span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">增星榜</span>
+          </div>
+          <ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 18px;">
+            <li data-item="c1" style="cursor: pointer; display: grid; gap: 7px;">
+              <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">firecrawl / openai-codex 继续位列增星前列</p>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">GitStarClub</span>
+                <button type="button" class="mark-btn" data-mark="c1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 55%;"></i></span>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">爬取与编码 agent 工具链仍是开发者刚需。firecrawl +12.6k，openai/codex +10.9k（八月）。<a href="https://gitstarclub.com/rankings/2026/8" target="_blank" rel="noreferrer">榜单 ↗</a></p>
+            </li>
+            <li data-item="c2" style="cursor: pointer; display: grid; gap: 7px;">
+              <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">MoneyPrinterTurbo、hermes-agent 显示「内容/agent」双热</p>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">GitStarClub</span>
+                <button type="button" class="mark-btn" data-mark="c2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 48%;"></i></span>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">自动化内容生产与通用 agent 脚手架并行增长，反映个人开发者与小团队的落地路径。<a href="https://gitstarclub.com/rankings/2026/8" target="_blank" rel="noreferrer">榜单 ↗</a></p>
+            </li>
+            <li data-item="c3" style="cursor: pointer; display: grid; gap: 7px;">
+              <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">public-apis 老树新芽：基础设施类项目仍有流量</p>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">GitStarClub</span>
+                <button type="button" class="mark-btn" data-mark="c3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 40%;"></i></span>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">总星超 46 万的经典仓库八月仍 +15k，说明「可调用 API 清单」对 agent 工具链仍有价值。<a href="https://github.com/public-apis/public-apis" target="_blank" rel="noreferrer">仓库 ↗</a></p>
+            </li>
+          </ol>
         </div>
-      </article>
+      </div>
     </section>
 
-    <section>
-      <h2><span class="dot green"></span>算力与基础设施</h2>
+    <!-- ========== 世界与财经 ========== -->
+    <section id="world" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">世界与财经</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">时政 3 · 财经 3</span>
+      </div>
 
-      <article class="card">
-        <h3>Nvidia：含 AI 芯片的服务器价格多场景将上涨逾 15%</h3>
-        <div class="tags">
-          <span class="tag">半导体</span>
-          <span class="tag">HBM / 内存</span>
-          <span class="tag">数据中心</span>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(12px, 1.8vw, 18px);">
+        <div style="background: #fffefb; border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14);">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e; margin-bottom: 16px;">时政观察</div>
+          <ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 16px;">
+            <li data-item="w1" style="cursor: pointer; display: grid; gap: 6px;">
+              <p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5;">中国开通经俄北极航线定期集装箱服务，「冰上丝绸之路」试运行</p>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 12px; color: #a09a8e;">Financial Express / Conversation</span><button type="button" class="mark-btn" data-mark="w1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button></div>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">Sea Legend 8 月 15 日起宁波—英国 Felixstowe 北冰洋航线；可缩短部分中欧航程，但受季节冰况、俄方审批与制裁风险约束，更像备份通道而非苏伊士替代。<a href="https://www.financialexpress.com/world-news/china-opens-arctic-shipping-route-to-europe-amid-hormuz-crisis-can-ice-silk-road-reduce-reliance-on-global-chokepoints/4320577/" target="_blank" rel="noreferrer">原文 ↗</a></p>
+            </li>
+            <li data-item="w2" style="cursor: pointer; display: grid; gap: 6px;">
+              <p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5;">萨格勒布成欧洲首个可经 Uber App 预约自动驾驶出行的城市</p>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 12px; color: #a09a8e;">Uber Newsroom</span><button type="button" class="mark-btn" data-mark="w2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button></div>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">Uber × Pony.ai × Verne，8 月 19 日上线；初期有持证安全员随车，覆盖市中心等区域。实质是把既有 robotaxi 接入 Uber 渠道，而非一步到位无人驾驶。<a href="https://investor.uber.com/news-events/news/press-release-details/2026/Uber-Launches-Autonomous-Rides-in-Europe/default.aspx" target="_blank" rel="noreferrer">原文 ↗</a></p>
+            </li>
+            <li data-item="w3" style="cursor: pointer; display: grid; gap: 6px;">
+              <p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5;">Jackson Hole 临近：市场紧盯美联储主席 Warsh 首次主题演讲</p>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 12px; color: #a09a8e;">Business Standard</span><button type="button" class="mark-btn" data-mark="w3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button></div>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">研讨会 8 月 27–29 日，Warsh 预计 28 日发表主旨讲话。通胀仍高于目标、沟通风格偏少前瞻指引，叠加财政部购债动作，长端利率与美元波动仍是主线。<a href="https://www.business-standard.com/world-news/investors-seek-clearer-fed-guidance-from-warsh-at-jackson-hole-address-126082300413_1.html" target="_blank" rel="noreferrer">原文 ↗</a></p>
+            </li>
+          </ol>
         </div>
-        <p>
-          彭博消息（CNBC、路透等转载，日期约 8 月 22–23 日）：部分大客户已被告知，
-          2027 年初出货的含 Nvidia AI 芯片服务器在许多配置上将涨价逾 15%，覆盖旗舰 Vera Rubin、
-          Grace Blackwell 等，具体幅度视芯片代数与内存配置而定。驱动因素包括三星、SK 海力士、美光等
-          高带宽内存成本飙升，或进一步推高超大规模云厂商的 AI 基建预算。
-        </p>
-        <div class="sources">
-          <a href="https://www.cnbc.com/2026/08/22/nvidia-customers-reportedly-warned-about-ai-related-price-hikes-.html" target="_blank" rel="noopener">CNBC</a>
-          <a href="https://www.straitstimes.com/business/nvidia-customers-notified-about-ai-related-price-hikes-above-15-bloomberg" target="_blank" rel="noopener">The Straits Times</a>
-        </div>
-      </article>
 
-      <article class="card">
-        <h3>Anthropic 聘前 Google TPU 掌门 Amir Salek，同步推进自研芯片与 Fractile 大单</h3>
-        <div class="tags">
-          <span class="tag">自定义芯片</span>
-          <span class="tag">人才</span>
-          <span class="tag">供应链</span>
+        <div style="background: #fffefb; border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14);">
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e; margin-bottom: 16px;">财经要点</div>
+          <ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 16px;">
+            <li data-item="f1" style="cursor: pointer; display: grid; gap: 6px;">
+              <p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5;">Nvidia 服务器涨价预期：超大规模厂 2027 CapEx 预算承压</p>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 12px; color: #a09a8e;">Bloomberg via TNW</span><button type="button" class="mark-btn" data-mark="f1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button></div>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">内存与代工附加费正把「算力降本」叙事改写成「单位算力更贵」。下周 Nvidia 财报与指引将验证涨价是否写入客户合同。<a href="https://thenextweb.com/news/nvidia-ai-server-price-increase-memory-costs" target="_blank" rel="noreferrer">原文 ↗</a></p>
+            </li>
+            <li data-item="f2" style="cursor: pointer; display: grid; gap: 6px;">
+              <p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5;">财政部扩大中长期国债回购，所谓「Bessent Put」搅动利率预期</p>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 12px; color: #a09a8e;">Motley Fool / Infomax</span><button type="button" class="mark-btn" data-mark="f2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button></div>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">财政部长 Bessent 宣布将长期国债回购规模扩大，市场解读为抑制长端收益率；分析认为这可能压缩美联储独立货币政策空间，Jackson Hole 前夕噪音上升。<a href="https://www.fool.com/investing/2026/08/22/treasury-bond-intervention-nightmare-kevin-warsh/" target="_blank" rel="noreferrer">原文 ↗</a></p>
+            </li>
+            <li data-item="f3" style="cursor: pointer; display: grid; gap: 6px;">
+              <p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5;">OpenAI 旗舰降价：API 价格战从中端打到前沿模型</p>
+              <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 12px; color: #a09a8e;">Reuters</span><button type="button" class="mark-btn" data-mark="f3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button></div>
+              <p data-summary style="display: none; margin: 0; font-size: 13px; line-height: 1.65; color: #6b665c;">对云厂商与应用层意味着短期毛利改善、长期议价权博弈；订阅层价格未动，显示「用量」与「坐席」两套生意仍在拆分。<a href="https://www.reuters.com/technology/openai-cuts-developer-pricing-frontier-gpt-56-sol-model-by-more-than-20-2026-08-21/" target="_blank" rel="noreferrer">原文 ↗</a></p>
+            </li>
+          </ol>
         </div>
-        <p>
-          据彭博（Business Standard 等 8 月 22 日转述）：Anthropic 宣布前 Google TPU 业务负责人
-          Amir Salek 加入算力团队，向 James Bradbury 汇报。Salek 曾主导前七代 TPU 交付。
-          此举配合公司自研硅招聘，以及与英国推理芯片初创 Fractile 约 2.5 亿美元初始采购意向，
-          并拓展 Riot Platforms、Volta Infra 等机柜与电力合作——硬件自主成为与 OpenAI 等并跑的新战场。
-        </p>
-        <div class="sources">
-          <a href="https://www.bloomberg.com/news/articles/2026-08-21/anthropic-taps-google-chip-veteran-as-part-of-push-into-hardware" target="_blank" rel="noopener">Bloomberg</a>
-          <a href="https://www.business-standard.com/technology/tech-news/anthropic-taps-google-chip-veteran-amir-salek-as-part-of-push-into-hardware-126082200097_1.html" target="_blank" rel="noopener">Business Standard</a>
-        </div>
-      </article>
+      </div>
     </section>
 
-    <section>
-      <h2><span class="dot pink"></span>出行与落地应用</h2>
+    <!-- ========== 行情（轻量） ========== -->
+    <section id="market" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">行情</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">8 标的 · 价格 + 涨跌幅</span>
+      </div>
 
-      <article class="card">
-        <h3>Uber 携手 Pony.ai、Verne：欧洲首次可在 Uber App 预约自动驾驶出行</h3>
-        <div class="tags">
-          <span class="tag">Robotaxi</span>
-          <span class="tag">欧洲</span>
-          <span class="tag">Pony.ai</span>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: clamp(10px, 1.4vw, 14px); margin-bottom: 14px;">
+
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">NVDA</span>
+            <span style="font-size: 11px; color: #a09a8e;">美股</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">214.72</span>
+            <span class="down" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">−0.98%</span>
+          </div>
         </div>
-        <p>
-          Uber、Pony.ai 与克罗地亚运营商 Verne 于 8 月 19 日宣布：萨格勒布成为欧洲首个可在 Uber 应用内
-          预约自动驾驶车辆的城市。Pony.ai 提供 Gen-7 自动驾驶方案，Verne 负责车队与本地运营，Uber 负责
-          叫车与支付体验。初期仍有持证安全员随车，服务覆盖市中心等重点区域并将逐步扩大；三方称后续将
-          复制到更多欧洲城市。用户可在有车时选择 UberX / Comfort 呼叫。
-        </p>
-        <div class="sources">
-          <a href="https://investor.uber.com/news-events/news/press-release-details/2026/Uber-Launches-Autonomous-Rides-in-Europe/default.aspx" target="_blank" rel="noopener">Uber 投资者新闻</a>
-          <a href="https://www.siliconrepublic.com/business/uber-pony-ai-verne-croatia-robotaxi-zagreb-autonomous-vehicle" target="_blank" rel="noopener">Silicon Republic</a>
+
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">QQQ</span>
+            <span style="font-size: 11px; color: #a09a8e;">ETF</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">713.44</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+0.35%</span>
+          </div>
         </div>
-      </article>
+
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">AAPL</span>
+            <span style="font-size: 11px; color: #a09a8e;">美股</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">309.35</span>
+            <span class="down" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">−0.63%</span>
+          </div>
+        </div>
+
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">MSFT</span>
+            <span style="font-size: 11px; color: #a09a8e;">美股</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">483.24</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+0.43%</span>
+          </div>
+        </div>
+
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">TSLA</span>
+            <span style="font-size: 11px; color: #a09a8e;">美股</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">362.86</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+5.14%</span>
+          </div>
+        </div>
+
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">0700.HK</span>
+            <span style="font-size: 11px; color: #a09a8e;">港股</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">457.00</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+1.24%</span>
+          </div>
+        </div>
+
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">BTC</span>
+            <span style="font-size: 11px; color: #a09a8e;">加密</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">77,141</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+0.22%</span>
+          </div>
+        </div>
+
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">ETH</span>
+            <span style="font-size: 11px; color: #a09a8e;">加密</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">2,438</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+1.14%</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="background: linear-gradient(180deg, #fffefb, #fffdf7); border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.8vw, 30px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14); display: grid; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e;">数据说明</span>
+          <span style="flex: 1; height: 1px; background: rgba(28,26,22,0.08); min-width: 20px;"></span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #6b665c;">美股/港股取 Yahoo Finance 最近交易日收盘价及日涨跌幅（截至 2026-08-21 收盘，周日休市）；BTC/ETH 取 CoinGecko 现价与 24h 涨跌。未发明价格；失败则显示「暂缺」。</p>
+      </div>
     </section>
 
-    <footer>
-      <p>本早报由 <span class="brand">小东</span> 生成 · 信息来自公开报道，仅供分享阅读</p>
-      <p style="margin-top:6px;">© 2026 小东 · 科技/AI 早报 · 2026-08-23</p>
+    <footer style="margin-top: clamp(36px, 5vw, 64px); padding-top: clamp(20px, 3vw, 28px); border-top: 1px solid rgba(28,26,22,0.09); display: flex; align-items: baseline; gap: 10px 26px; flex-wrap: wrap;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">小东 · 公开源摘选 · 2026-08-23</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">下次更新约 08:00 Asia/Shanghai</span>
+      <a href="#brief" style="margin-left: auto; font-size: 13px;">回到顶部</a>
+      <a href="./2026-08-23.html" style="font-size: 13px;">本日归档</a>
     </footer>
-  </div>
+  </main>
+</div>
+
+<script>
+(function () {
+  var KEY = 'xiaodong-dailybrief-marks-2026-08-23';
+  var marked = new Set();
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) JSON.parse(raw).forEach(function (id) { marked.add(id); });
+  } catch (e) {}
+
+  var filtering = false;
+  var filterBtn = document.getElementById('filterBtn');
+  var countEl = document.getElementById('markCount');
+  var emptyEl = document.getElementById('emptyState');
+
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(Array.from(marked))); } catch (e) {}
+  }
+
+  function syncMarks() {
+    document.querySelectorAll('.mark-btn').forEach(function (btn) {
+      var id = btn.getAttribute('data-mark');
+      var on = marked.has(id);
+      btn.classList.toggle('on', on);
+      btn.textContent = on ? '已标记' : '标记';
+    });
+    countEl.textContent = String(marked.size);
+    countEl.style.background = marked.size ? '#f0e2d2' : '#ece7dc';
+    countEl.style.color = marked.size ? '#8a5a2b' : '#6b665c';
+    applyFilter();
+  }
+
+  function applyFilter() {
+    var items = document.querySelectorAll('[data-item]');
+    var visible = 0;
+    items.forEach(function (el) {
+      var id = el.getAttribute('data-item');
+      var show = !filtering || marked.has(id);
+      el.classList.toggle('hidden-by-filter', !show);
+      if (show) visible++;
+    });
+    // hide empty sections when filtering
+    document.querySelectorAll('main > section').forEach(function (sec) {
+      if (!filtering) { sec.classList.remove('hidden-by-filter'); return; }
+      var any = sec.querySelector('[data-item]:not(.hidden-by-filter)');
+      sec.classList.toggle('hidden-by-filter', !any);
+    });
+    emptyEl.style.display = filtering && marked.size === 0 ? 'block' : 'none';
+  }
+
+  document.getElementById('root').addEventListener('click', function (e) {
+    var markBtn = e.target.closest('.mark-btn');
+    if (markBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      var id = markBtn.getAttribute('data-mark');
+      if (marked.has(id)) marked.delete(id); else marked.add(id);
+      save();
+      syncMarks();
+      return;
+    }
+    if (e.target.closest('a')) return;
+    var item = e.target.closest('[data-item]');
+    if (item) {
+      var sum = item.querySelector('[data-summary]');
+      if (sum) {
+        var open = sum.style.display !== 'none' && sum.style.display !== '';
+        // if currently none, show; if block, hide
+        var showing = window.getComputedStyle(sum).display !== 'none';
+        sum.style.display = showing ? 'none' : 'block';
+      }
+    }
+  });
+
+  filterBtn.addEventListener('click', function () {
+    filtering = !filtering;
+    filterBtn.classList.toggle('on', filtering);
+    filterBtn.setAttribute('aria-pressed', filtering ? 'true' : 'false');
+    applyFilter();
+  });
+
+  syncMarks();
+})();
+</script>
 </body>
 </html>
