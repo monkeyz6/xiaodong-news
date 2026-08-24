@@ -46,6 +46,17 @@
   .detail-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e; }
   .detail-title { margin: 8px 0 0; font-size: clamp(18px, 2.4vw, 24px); font-weight: 700; line-height: 1.35; letter-spacing: -0.02em; color: #1c1a16; }
   .detail-body { margin: 16px 0 0; font-size: 15px; line-height: 1.85; color: #3a3630; }
+
+  .detail-body p { margin: 0 0 0.9em; line-height: 1.85; }
+  .detail-body p:last-child { margin-bottom: 0; }
+  .detail-body h2 { margin: 1.1em 0 0.55em; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: #1c1a16; font-family: 'Instrument Sans', 'Noto Sans SC', system-ui, sans-serif; }
+  .detail-body h2:first-child { margin-top: 0; }
+  .detail-body ul, .detail-body ol { margin: 0 0 0.9em; padding-left: 1.35em; line-height: 1.85; }
+  .detail-body li { margin: 0.2em 0; }
+  .detail-body li > p { margin: 0; }
+  .detail-body strong { font-weight: 700; color: #1c1a16; }
+  .detail-body em { font-style: italic; }
+  .detail-body a { color: #8a5a2b; text-decoration: underline; text-underline-offset: 3px; }
   .detail-meta { margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(28,26,22,0.08); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
   .detail-source { font-size: 14px; font-weight: 500; color: #8a5a2b; }
   .detail-chars { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e; }
@@ -76,7 +87,7 @@
 
   <main style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px);">
 
-    <p id="emptyState" style="display: none; margin: clamp(48px, 8vw, 96px) 0; text-align: center; font-size: 15px; color: #a09a8e;">还没有标记的条目 · 点任意一条右侧的「标记」留到晚上深读</p>
+    <p id="emptyState" style="display: none; margin: clamp(48px, 8vw, 96px) 0; text-align: center; font-size: 15px; color: #a09a8e;">还没有标记的条目 · 点任意一条右侧的“标记”留到晚上深读</p>
     <!-- ========== 今日要点 ========== -->
 
     <section id="brief" style="padding: clamp(28px, 5vw, 56px) 0 clamp(24px, 4vw, 40px);">
@@ -97,7 +108,7 @@
           <li data-item="b1" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
             <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">01</span>
             <div style="display: grid; gap: 8px;">
-              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">Guidelight 首份控制力成绩单：前沿实验室对「失控模型」公开遏制计划普遍不足</p>
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">Guidelight 首份控制力成绩单：前沿实验室对“失控模型”公开遏制计划普遍不足</p>
               <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                 <span class="badge" style="background: #ece2df; color: #a8422f;">TC</span>
                 <span style="font-size: 13px; color: #6b665c;">TechCrunch</span>
@@ -105,7 +116,13 @@
                 <span style="font-size: 13px; color: #a09a8e;">08-22</span>
                 <button type="button" class="mark-btn" data-mark="b1" style="margin-left: auto;">标记</button>
               </div>
-              <p data-detail data-source="https://techcrunch.com/2026/08/22/frontier-ai-labs-still-wont-say-how-theyd-contain-a-rogue-model/" style="display:none">非营利组织 Guidelight 发布首份面向前沿实验室的「控制力」成绩单，按六项控制实践给五家头部机构打分：Anthropic 与 OpenAI 并列 C+，Google D+，xAI D−，Meta 垫底为 F。报告核心结论刺眼：没有一家公布完整、可公开核验的失控或流氓模型遏制预案；多数材料停留在原则表述，缺少可执行的熔断、权限回收与外部问责路径。TechCrunch 跟进指出，OpenAI 因多次暂停高风险负载等实践，在公开度上相对靠前，但距离「样板级」仍远；Anthropic、Meta 等在公开遏制计划上更弱。与此同时，加州 SB 53、纽约 RAISE 等州级立法已把相关披露推向强制，联邦层面「AI Kill Switch」讨论也被再次点燃。对读者而言，这条新闻的意义不只是打分八卦：当模型能力与 agent 编排加速落地，安全侧若继续「说不清怎么停」，监管与客户合同都会把披露写进硬条款。今日简报把 Guidelight 放在要点首位，正是提醒：安全预案要与能力同速，公开可执行的遏制流程，将比口号更能决定下一轮信任。</p>
+              <script type="text/markdown" data-detail data-source="https://techcrunch.com/2026/08/22/frontier-ai-labs-still-wont-say-how-theyd-contain-a-rogue-model/" hidden>
+非营利组织 Guidelight 发布首份面向前沿实验室的“控制力”成绩单，按六项控制实践给五家头部机构打分：Anthropic 与 OpenAI 并列 C+，Google D+，xAI D−，Meta 垫底为 F。报告核心结论刺眼：没有一家公布完整、可公开核验的失控或流氓模型遏制预案；多数材料停留在原则表述，缺少可执行的熔断、权限回收与外部问责路径。
+
+TechCrunch 跟进指出，OpenAI 因多次暂停高风险负载等实践，在公开度上相对靠前，但距离“样板级”仍远；Anthropic、Meta 等在公开遏制计划上更弱。与此同时，加州 SB 53、纽约 RAISE 等州级立法已把相关披露推向强制，联邦层面“AI Kill Switch”讨论也被再次点燃。对读者而言，这条新闻的意义不只是打分八卦：当模型能力与 agent 编排加速落地，安全侧若继续“说不清怎么停”，监管与客户合同都会把披露写进硬条款。
+
+今日简报把 Guidelight 放在要点首位，正是提醒：安全预案要与能力同速，公开可执行的遏制流程，将比口号更能决定下一轮信任。
+</script>
             </div>
           </li>
 
@@ -120,7 +137,13 @@
                 <span style="font-size: 13px; color: #a09a8e;">08-21/22</span>
                 <button type="button" class="mark-btn" data-mark="b2" style="margin-left: auto;">标记</button>
               </div>
-              <p data-detail data-source="https://www.reuters.com/technology/openai-cuts-developer-pricing-frontier-gpt-56-sol-model-by-more-than-20-2026-08-21/" style="display:none">据 Reuters，OpenAI 下调旗舰 GPT-5.6 Sol 的开发者 API 价格逾两成：输入从每百万 token 约 5 美元降至 4 美元，输出从约 30 美元降至 20 美元（输出降幅约三成），并适用于 API 以及 ChatGPT Work、Codex 等积分方案；Pro、Plus、Business 等订阅档价格未动。官方把本轮调整表述为效率提升后的三个月促销，至少持续至 2026 年 11 月 21 日，而非永久改写价目表——这意味着路由与预算系统必须处理「到期回涨」。这是 GPT-5.6 系列第三轮降价，矛头直指 Anthropic 与中国模型的价格竞争；价格战已从中端蔓延到旗舰。对应用层，短期调用成本下降、实验门槛降低；对平台侧，利润压力更多转嫁到用量增长与速率限制博弈。订阅层不动、用量层打折，也说明「坐席」与「token」两套生意仍在拆分。开发者吐槽速率限制的声音仍在，便宜并不等于随时能打满。结合同日 Nvidia 服务器涨价传闻，一边是推理更便宜，一边是训练与托管更贵，产业链上下游的定价逻辑正在错位重排。</p>
+              <script type="text/markdown" data-detail data-source="https://www.reuters.com/technology/openai-cuts-developer-pricing-frontier-gpt-56-sol-model-by-more-than-20-2026-08-21/" hidden>
+据 Reuters，OpenAI 下调旗舰 GPT-5.6 Sol 的开发者 API 价格逾两成：输入从每百万 token 约 5 美元降至 4 美元，输出从约 30 美元降至 20 美元（输出降幅约三成），并适用于 API 以及 ChatGPT Work、Codex 等积分方案；Pro、Plus、Business 等订阅档价格未动。官方把本轮调整表述为效率提升后的三个月促销，至少持续至 2026 年 11 月 21 日，而非永久改写价目表——这意味着路由与预算系统必须处理“到期回涨”。
+
+这是 GPT-5.6 系列第三轮降价，矛头直指 Anthropic 与中国模型的价格竞争；价格战已从中端蔓延到旗舰。对应用层，短期调用成本下降、实验门槛降低；对平台侧，利润压力更多转嫁到用量增长与速率限制博弈。订阅层不动、用量层打折，也说明“坐席”与“token”两套生意仍在拆分。
+
+开发者吐槽速率限制的声音仍在，便宜并不等于随时能打满。结合同日 Nvidia 服务器涨价传闻，一边是推理更便宜，一边是训练与托管更贵，产业链上下游的定价逻辑正在错位重排。
+</script>
             </div>
           </li>
 
@@ -135,7 +158,11 @@
                 <span style="font-size: 13px; color: #a09a8e;">08-22/23</span>
                 <button type="button" class="mark-btn" data-mark="b3" style="margin-left: auto;">标记</button>
               </div>
-              <p data-detail data-source="https://thenextweb.com/news/nvidia-ai-server-price-increase-memory-costs" style="display:none">Bloomberg 消息经 TNW 等转述称，Nvidia 已口头通知部分大客户：面向 2027 年初出货的 AI 服务器将涨价逾 15%，内存成本是主导因素。覆盖范围据报包括 Vera Rubin 与 Grace Blackwell 等平台；在 Vera Rubin 物料成本中，HBM 与 LPDDR5X 占比约六成，先进封装与供应链瓶颈叠加，把「算力降本」叙事改写成「单位算力更贵」。公司尚未正式官宣，下周财报与指引将成为验证涨价是否写入客户合同的关键窗口；NVDA 周五收于 214.72 美元，当日约跌 0.98%。对超大规模云厂商与训练集群买家，这意味着 2027 CapEx 预算要为内存与代工附加费预留弹性，单位推理成本下行曲线可能放缓。对二级市场，涨价若落地，短期利好 Nvidia 毛利叙事，但也会抬高下游资本开支敏感度，并强化客户对替代加速器与自研芯片的兴趣。简报将此条与 OpenAI 降价并列，是为了突出同一天的「剪刀差」：模型调用在促销，硬件托管在涨价。</p>
+              <script type="text/markdown" data-detail data-source="https://thenextweb.com/news/nvidia-ai-server-price-increase-memory-costs" hidden>
+Bloomberg 消息经 TNW 等转述称，Nvidia 已口头通知部分大客户：面向 2027 年初出货的 AI 服务器将涨价逾 15%，内存成本是主导因素。覆盖范围据报包括 Vera Rubin 与 Grace Blackwell 等平台；在 Vera Rubin 物料成本中，HBM 与 LPDDR5X 占比约六成，先进封装与供应链瓶颈叠加，把“算力降本”叙事改写成“单位算力更贵”。公司尚未正式官宣，下周财报与指引将成为验证涨价是否写入客户合同的关键窗口；NVDA 周五收于 214.72 美元，当日约跌 0.98%。
+
+对超大规模云厂商与训练集群买家，这意味着 2027 CapEx 预算要为内存与代工附加费预留弹性，单位推理成本下行曲线可能放缓。对二级市场，涨价若落地，短期利好 Nvidia 毛利叙事，但也会抬高下游资本开支敏感度，并强化客户对替代加速器与自研芯片的兴趣。简报将此条与 OpenAI 降价并列，是为了突出同一天的“剪刀差”：模型调用在促销，硬件托管在涨价。
+</script>
             </div>
           </li>
 
@@ -150,7 +177,13 @@
                 <span style="font-size: 13px; color: #a09a8e;">08-22</span>
                 <button type="button" class="mark-btn" data-mark="b4" style="margin-left: auto;">标记</button>
               </div>
-              <p data-detail data-source="https://techcrunch.com/2026/08/22/inherent-founded-by-deepmind-alumni-says-its-ai-teammate-just-outperformed-anthropic-and-openai-at-replicating-research/" style="display:none">TechCrunch 报道，由 DeepMind 校友在伦敦创办的 Inherent，以约 5000 万美元种子轮出山，并放出 27B 参数模型 Faraday 的科研复现成绩：在 Replica 等强调盲复现、而非已知答案刷分的任务上，据称超越更大的 Claude Opus 4.8 与 GPT-5.5 一类前沿系统。Faraday 基于 Qwen 3.6（27B），公司主张先培养实验设计「研究品味」，编码侧再调用 GPT-5.5 Codex；同分布机器学习任务对 Claude 胜率约 73%，跨领域 held-out 约 60%。叙事重点不在「又一个更大模型」，而在「小基座 + 强任务设计 + 工具链」能否打穿参数量迷信。对投资与采购方，这意味着垂类科研 agent 可能改写算力结构：并非所有工作负载都需要最大旗舰。对开源与评测社区，Replica 自动 rubric judge 也把「可复现实验」推回台前。同周 DeepSeek Harness 星数暴涨，与这条「小模型队友」故事形成共振：编排与任务设计正在被重新定价。</p>
+              <script type="text/markdown" data-detail data-source="https://techcrunch.com/2026/08/22/inherent-founded-by-deepmind-alumni-says-its-ai-teammate-just-outperformed-anthropic-and-openai-at-replicating-research/" hidden>
+TechCrunch 报道，由 DeepMind 校友在伦敦创办的 Inherent，以约 5000 万美元种子轮出山，并放出 27B 参数模型 Faraday 的科研复现成绩：在 Replica 等强调盲复现、而非已知答案刷分的任务上，据称超越更大的 Claude Opus 4.8 与 GPT-5.5 一类前沿系统。Faraday 基于 Qwen 3.6（27B），公司主张先培养实验设计“研究品味”，编码侧再调用 GPT-5.5 Codex；同分布机器学习任务对 Claude 胜率约 73%，跨领域 held-out 约 60%。
+
+叙事重点不在“又一个更大模型”，而在“小基座 + 强任务设计 + 工具链”能否打穿参数量迷信。对投资与采购方，这意味着垂类科研 agent 可能改写算力结构：并非所有工作负载都需要最大旗舰。对开源与评测社区，Replica 自动 rubric judge 也把“可复现实验”推回台前。
+
+同周 DeepSeek Harness 星数暴涨，与这条“小模型队友”故事形成共振：编排与任务设计正在被重新定价。
+</script>
             </div>
           </li>
 
@@ -165,7 +198,13 @@
                 <span style="font-size: 13px; color: #a09a8e;">08-21/23</span>
                 <button type="button" class="mark-btn" data-mark="b5" style="margin-left: auto;">标记</button>
               </div>
-              <p data-detail data-source="https://www.newsbytesapp.com/news/science/ex-google-tpu-head-amir-salek-joins-anthropic-compute-team/tldr" style="display:none">据 NewsBytes、Bloomberg 等消息，前 Google TPU 负责人 Amir Salek 将加入 Anthropic 算力团队，并向 James Bradbury 汇报。人事信号之外，公司还在推进与英国芯片初创 Fractile 约 2.5 亿美元起步量级的合作，路径类似 OpenAI 自研芯片：缓解外部 GPU 供应瓶颈，并按自身训练与推理负载定制硅。行业语境很清楚——算力供应链正从「租 GPU」走向「定制加速器」；对云厂商的议价、交付周期与锁定效应都会有二阶影响。Anthropic 此前更以模型安全与 Claude 产品线闻名，此番加码芯片与算力人才，说明旗舰实验室已把「能否稳定拿到算力」视作与模型能力同等的战略短板。对读者，这条新闻的看点不是挖角八卦本身，而是头部实验室在价格战与服务器涨价夹击下，用组织与资本双线补供应链自主。结合 Guidelight 控制力报告，能力、安全与算力三条线同周出现，构成今日 AI 产业的完整压力测试。</p>
+              <script type="text/markdown" data-detail data-source="https://www.newsbytesapp.com/news/science/ex-google-tpu-head-amir-salek-joins-anthropic-compute-team/tldr" hidden>
+据 NewsBytes、Bloomberg 等消息，前 Google TPU 负责人 Amir Salek 将加入 Anthropic 算力团队，并向 James Bradbury 汇报。人事信号之外，公司还在推进与英国芯片初创 Fractile 约 2.5 亿美元起步量级的合作，路径类似 OpenAI 自研芯片：缓解外部 GPU 供应瓶颈，并按自身训练与推理负载定制硅。行业语境很清楚——算力供应链正从“租 GPU”走向“定制加速器”；对云厂商的议价、交付周期与锁定效应都会有二阶影响。
+
+Anthropic 此前更以模型安全与 Claude 产品线闻名，此番加码芯片与算力人才，说明旗舰实验室已把“能否稳定拿到算力”视作与模型能力同等的战略短板。对读者，这条新闻的看点不是挖角八卦本身，而是头部实验室在价格战与服务器涨价夹击下，用组织与资本双线补供应链自主。
+
+结合 Guidelight 控制力报告，能力、安全与算力三条线同周出现，构成今日 AI 产业的完整压力测试。
+</script>
             </div>
           </li>
 
@@ -180,12 +219,16 @@
                 <span style="font-size: 13px; color: #a09a8e;">截至 08-23</span>
                 <button type="button" class="mark-btn" data-mark="b6" style="margin-left: auto;">标记</button>
               </div>
-              <p data-detail data-source="https://gitstarclub.com/rankings/2026/8" style="display:none">GitStarClub 八月增星榜显示，deepseek-ai/deepseek-harness 本月狂揽约 +103.2k 星，总星约 11.98 万，稳居榜首，远超 mattpocock/skills、OmniRoute、stablyai/orca 等。社区将其描述为可替换模型、工具、沙箱与调度的完整 agent 框架；上线后曾出现小时级星数暴涨，成为开源「编排层」行情的温度计。背景是：当基座模型能力趋于接近，可观测的工具调用、权限边界、长期任务跑通与工程脚手架，反而成为差异点。DeepSeek Harness 的爆火，与 Inherent Faraday「小模型科研队友」叙事同周出现，共同指向一点——下一护城河可能不在更大参数，而在 harness。对个人开发者与小团队，这意味着可以更快拼装可落地的 agent；对企业采购，则要重新评估「只买最大模型」是否仍最优。简报把其列入要点第六条，是因为它不只是 GitHub 热闹，更是产品形态与工程栈迁移的领先指标。</p>
+              <script type="text/markdown" data-detail data-source="https://gitstarclub.com/rankings/2026/8" hidden>
+GitStarClub 八月增星榜显示，deepseek-ai/deepseek-harness 本月狂揽约 +103.2k 星，总星约 11.98 万，稳居榜首，远超 mattpocock/skills、OmniRoute、stablyai/orca 等。社区将其描述为可替换模型、工具、沙箱与调度的完整 agent 框架；上线后曾出现小时级星数暴涨，成为开源“编排层”行情的温度计。背景是：当基座模型能力趋于接近，可观测的工具调用、权限边界、长期任务跑通与工程脚手架，反而成为差异点。
+
+DeepSeek Harness 的爆火，与 Inherent Faraday“小模型科研队友”叙事同周出现，共同指向一点——下一护城河可能不在更大参数，而在 harness。对个人开发者与小团队，这意味着可以更快拼装可落地的 agent；对企业采购，则要重新评估“只买最大模型”是否仍最优。简报把其列入要点第六条，是因为它不只是 GitHub 热闹，更是产品形态与工程栈迁移的领先指标。
+</script>
             </div>
           </li>
 
         </ol>
-        <p style="margin: clamp(20px, 3vw, 28px) 0 0; padding-top: 18px; border-top: 1px solid rgba(28,26,22,0.08); font-size: 13px; color: #a09a8e;">点任意一条打开「详情」长摘要 · 「标记」留到晚上深读 · 助手小东</p>
+        <p style="margin: clamp(20px, 3vw, 28px) 0 0; padding-top: 18px; border-top: 1px solid rgba(28,26,22,0.08); font-size: 13px; color: #a09a8e;">点任意一条打开“详情”长摘要 · “标记”留到晚上深读 · 助手小东</p>
       </div>
     </section>
 
@@ -203,13 +246,19 @@
           <span style="font-size: 13px; color: #6b665c;">TechCrunch · Inherent</span>
           <button type="button" class="mark-btn" data-mark="a0" style="margin-left: auto; padding: 5px 12px;">标记</button>
         </div>
-        <h3 style="margin: 0; font-size: clamp(21px, 3vw, 30px); font-weight: 700; line-height: 1.28; letter-spacing: -0.022em;">小模型也能当「科研队友」：Faraday 用 27B 复现论文，胜过更大的前沿系统</h3>
-        <p style="margin: 0; font-size: clamp(15px, 1.7vw, 17px); line-height: 1.7; color: #6b665c;">Inherent 由 DeepMind 校友创立，主张先培养实验设计「品味」，再把编码交给 Codex 一类工具。评测强调盲复现而非已知答案刷分；同分布任务对 Claude Opus 4.8 约 73% 胜率。对「参数量=能力」叙事是一次有力反例。</p>
+        <h3 style="margin: 0; font-size: clamp(21px, 3vw, 30px); font-weight: 700; line-height: 1.28; letter-spacing: -0.022em;">小模型也能当“科研队友”：Faraday 用 27B 复现论文，胜过更大的前沿系统</h3>
+        <p style="margin: 0; font-size: clamp(15px, 1.7vw, 17px); line-height: 1.7; color: #6b665c;">Inherent 由 DeepMind 校友创立，主张先培养实验设计“品味”，再把编码交给 Codex 一类工具。评测强调盲复现而非已知答案刷分；同分布任务对 Claude Opus 4.8 约 73% 胜率。对“参数量=能力”叙事是一次有力反例。</p>
         <div style="display: flex; align-items: center; gap: 12px; padding-top: 4px;">
           <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: #a09a8e; text-transform: uppercase;">热度</span>
           <span class="heatbar" style="flex: 1;"><i style="width: 92%;"></i></span>
         </div>
-        <p data-detail data-source="https://techcrunch.com/2026/08/22/inherent-founded-by-deepmind-alumni-says-its-ai-teammate-just-outperformed-anthropic-and-openai-at-replicating-research/" style="display:none">Inherent 头条把「小模型也能当科研队友」写进今日叙事：Faraday 以 27B 体量，在强调盲复现的论文任务上挑战更大前沿系统，公司种子轮约 5000 万美元，基座来自 Qwen 3.6。其主张分两步：先训练实验设计「研究品味」，再把编码交给 GPT-5.5 Codex 一类工具；评测套件 Replica 含自动 rubric judge，刻意避开「已知答案刷分」。同分布机器学习任务对 Claude Opus 4.8 约 73% 胜率，跨领域 held-out 约 60%——数字未必成为行业标准，但足以动摇「参数量等于能力」的简单线性想象。对实验室与创业公司，这意味着垂类 agent + 中小基座的组合可能改写算力采购：把钱花在任务数据、工具链与评测，而不是一律堆旗舰。对资本市场，这类故事也在给「应用层溢价」提供新证据；热度条接近满格，说明社区把它当作本周 AI 叙事的核心样本。深读时请对照 TechCrunch 原文方法卡与评测协议，避免把单一榜单胜率外推成通用智能结论，并与同周 harness 热潮对照阅读。</p>
+        <script type="text/markdown" data-detail data-source="https://techcrunch.com/2026/08/22/inherent-founded-by-deepmind-alumni-says-its-ai-teammate-just-outperformed-anthropic-and-openai-at-replicating-research/" hidden>
+Inherent 头条把“小模型也能当科研队友”写进今日叙事：Faraday 以 27B 体量，在强调盲复现的论文任务上挑战更大前沿系统，公司种子轮约 5000 万美元，基座来自 Qwen 3.6。其主张分两步：先训练实验设计“研究品味”，再把编码交给 GPT-5.5 Codex 一类工具；评测套件 Replica 含自动 rubric judge，刻意避开“已知答案刷分”。
+
+同分布机器学习任务对 Claude Opus 4.8 约 73% 胜率，跨领域 held-out 约 60%——数字未必成为行业标准，但足以动摇“参数量等于能力”的简单线性想象。对实验室与创业公司，这意味着垂类 agent + 中小基座的组合可能改写算力采购：把钱花在任务数据、工具链与评测，而不是一律堆旗舰。
+
+对资本市场，这类故事也在给“应用层溢价”提供新证据；热度条接近满格，说明社区把它当作本周 AI 叙事的核心样本。深读时请对照 TechCrunch 原文方法卡与评测协议，避免把单一榜单胜率外推成通用智能结论，并与同周 harness 热潮对照阅读。
+</script>
       </article>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(12px, 1.8vw, 18px);">
@@ -222,7 +271,13 @@
           </div>
           <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.42; letter-spacing: -0.01em;">控制力评分最高也只有 C+：遏制预案成公开短板</h4>
           <span class="heatbar"><i style="width: 84%;"></i></span>
-          <p data-detail data-source="https://guidelight.ai/blog/control-assessment-august-2026" style="display:none">Guidelight 控制力评估在 AI 分区以卡片形式再次出现，强调一个刺眼事实：即便最高分也只有 C+，六项实践均未拿满分。OpenAI 因多次暂停高风险负载等公开动作相对靠前，Anthropic、Meta 在「公开且可执行的遏制计划」上被指更弱；整体上，实验室更擅长谈原则，而非公布熔断、权限回收与外部审计路径。监管侧，加州 SB 53 与纽约 RAISE 等已把披露从可选推向强制，联邦层面 AI Kill Switch 讨论升温，核心争议是公开透明度与法律责任、攻击面暴露如何平衡。对安全团队与合规官，这份成绩单正在变成客户尽职调查的新附件；对产品经理，则是提醒——能力发布节奏若甩开安全披露，品牌与合同风险会同步放大。卡片热度偏高，说明「控制力」已从安全博客话题，变成主流科技媒体与立法议程的交叉点。与要点栏 Guidelight 头条相互印证：公开可执行的遏制流程，比安全口号更能决定下一轮信任；读者可对照 Guidelight 博客原文查看六项实践细则。</p>
+          <script type="text/markdown" data-detail data-source="https://guidelight.ai/blog/control-assessment-august-2026" hidden>
+Guidelight 控制力评估在 AI 分区以卡片形式再次出现，强调一个刺眼事实：即便最高分也只有 C+，六项实践均未拿满分。OpenAI 因多次暂停高风险负载等公开动作相对靠前，Anthropic、Meta 在“公开且可执行的遏制计划”上被指更弱；整体上，实验室更擅长谈原则，而非公布熔断、权限回收与外部审计路径。
+
+监管侧，加州 SB 53 与纽约 RAISE 等已把披露从可选推向强制，联邦层面 AI Kill Switch 讨论升温，核心争议是公开透明度与法律责任、攻击面暴露如何平衡。对安全团队与合规官，这份成绩单正在变成客户尽职调查的新附件；对产品经理，则是提醒——能力发布节奏若甩开安全披露，品牌与合同风险会同步放大。
+
+卡片热度偏高，说明“控制力”已从安全博客话题，变成主流科技媒体与立法议程的交叉点。与要点栏 Guidelight 头条相互印证：公开可执行的遏制流程，比安全口号更能决定下一轮信任；读者可对照 Guidelight 博客原文查看六项实践细则。
+</script>
         </article>
 
         <article data-item="a2" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
@@ -233,7 +288,13 @@
           </div>
           <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.42; letter-spacing: -0.01em;">前沿模型定价变成促销杠杆：Sol 三个月限时降价</h4>
           <span class="heatbar"><i style="width: 78%;"></i></span>
-          <p data-detail data-source="https://developers.openai.com/api/docs/models/gpt-5.6-sol" style="display:none">OpenAI 将 GPT-5.6 Sol 做成三个月限时降价，官方口径是效率提升后的临时促销，而非永久价目表改写。输入输出单价显著下调，适用于 API 与部分积分方案，订阅档不动；开发者仍抱怨速率限制——便宜与「随时打满」不是一回事。价格战已从中端模型蔓延到旗舰，意味着应用层要重建路由：促销窗口内尽量吃折扣，同时为到期回涨准备预算开关与多模型回退。对 Anthropic、谷歌与中国模型阵营，这是明确的抢份额信号；对云市场，则是「用量生意」继续内卷，标价与有效单价开始长期分叉。卡片提醒读者：看降价新闻时，要同时看期限、适用范围与限速条款，否则容易误判真实 TCO。结合同日 Nvidia 服务器涨价传闻，一边是推理促销、一边是托管承压，FinOps 与采购合同都需要重新建模。文档入口见 OpenAI 模型页。促销至少延续到二零二六年十一月下旬的公开表述，也要求财务日历把「回涨日」标红；若竞品跟进降价，路由权重还要按周重估，避免锁死单一供应商。</p>
+          <script type="text/markdown" data-detail data-source="https://developers.openai.com/api/docs/models/gpt-5.6-sol" hidden>
+OpenAI 将 GPT-5.6 Sol 做成三个月限时降价，官方口径是效率提升后的临时促销，而非永久价目表改写。输入输出单价显著下调，适用于 API 与部分积分方案，订阅档不动；开发者仍抱怨速率限制——便宜与“随时打满”不是一回事。价格战已从中端模型蔓延到旗舰，意味着应用层要重建路由：促销窗口内尽量吃折扣，同时为到期回涨准备预算开关与多模型回退。
+
+对 Anthropic、谷歌与中国模型阵营，这是明确的抢份额信号；对云市场，则是“用量生意”继续内卷，标价与有效单价开始长期分叉。卡片提醒读者：看降价新闻时，要同时看期限、适用范围与限速条款，否则容易误判真实 TCO。结合同日 Nvidia 服务器涨价传闻，一边是推理促销、一边是托管承压，FinOps 与采购合同都需要重新建模。
+
+文档入口见 OpenAI 模型页。促销至少延续到二零二六年十一月下旬的公开表述，也要求财务日历把“回涨日”标红；若竞品跟进降价，路由权重还要按周重估，避免锁死单一供应商。
+</script>
         </article>
 
         <article data-item="a3" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
@@ -244,7 +305,13 @@
           </div>
           <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.42; letter-spacing: -0.01em;">自研芯片信号加码：TPU 老将加盟 + Fractile 合作</h4>
           <span class="heatbar"><i style="width: 70%;"></i></span>
-          <p data-detail data-source="https://www.newsbytesapp.com/news/science/ex-google-tpu-head-amir-salek-joins-anthropic-compute-team/tldr" style="display:none">Anthropic 加码自研算力的信号，由「挖角前 Google TPU 负责人 Amir Salek」与「推进英国芯片初创 Fractile 合作」两件事叠成，合作起步量级据报约 2.5 亿美元。路径类似 OpenAI：不完全依赖外部 GPU 配额，而是按自身训练与推理负载定制硅，以缓解供应与议价压力。算力供应链正从租卡走向定制，对云厂商交付周期、锁定效应与二阶定价都会产生影响；Salek 将向 James Bradbury 汇报，显示组织上把算力提升到核心编制。在 Nvidia 服务器涨价传闻与旗舰 API 促销并行的一周，实验室自研芯片不再是远期故事，而是对冲供应链风险的当下动作。对观察者，关注点应放在合作金额、流片时间表与是否改变短期 CapEx，而非仅停留在人事新闻标题。这条与控制力、价格战同周出现，勾勒出 Anthropic 在安全品牌之外，必须同时打赢算力自主战。来源见 NewsBytes 等公开报道。对云与芯片观察者，这相当于把「模型公司」部分改写成「系统公司」：人才、流片、封装与软件栈必须齐头并进，才能在供应紧张时保住训练节奏。</p>
+          <script type="text/markdown" data-detail data-source="https://www.newsbytesapp.com/news/science/ex-google-tpu-head-amir-salek-joins-anthropic-compute-team/tldr" hidden>
+Anthropic 加码自研算力的信号，由“挖角前 Google TPU 负责人 Amir Salek”与“推进英国芯片初创 Fractile 合作”两件事叠成，合作起步量级据报约 2.5 亿美元。路径类似 OpenAI：不完全依赖外部 GPU 配额，而是按自身训练与推理负载定制硅，以缓解供应与议价压力。算力供应链正从租卡走向定制，对云厂商交付周期、锁定效应与二阶定价都会产生影响；Salek 将向 James Bradbury 汇报，显示组织上把算力提升到核心编制。
+
+在 Nvidia 服务器涨价传闻与旗舰 API 促销并行的一周，实验室自研芯片不再是远期故事，而是对冲供应链风险的当下动作。对观察者，关注点应放在合作金额、流片时间表与是否改变短期 CapEx，而非仅停留在人事新闻标题。这条与控制力、价格战同周出现，勾勒出 Anthropic 在安全品牌之外，必须同时打赢算力自主战。
+
+来源见 NewsBytes 等公开报道。对云与芯片观察者，这相当于把“模型公司”部分改写成“系统公司”：人才、流片、封装与软件栈必须齐头并进，才能在供应紧张时保住训练节奏。
+</script>
         </article>
 
         <article data-item="a4" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
@@ -255,7 +322,13 @@
           </div>
           <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.42; letter-spacing: -0.01em;">HBM 吃掉 BOM：服务器涨价把内存短缺写进 2027 预算</h4>
           <span class="heatbar"><i style="width: 66%;"></i></span>
-          <p data-detail data-source="https://thenextweb.com/news/nvidia-ai-server-price-increase-memory-costs" style="display:none">Nvidia AI 服务器涨价传闻的关键机制写在物料清单里：HBM 与相关内存吃掉 BOM 大头，先进封装与供应链短缺把成本压力传导到 2027 年出货；据报涨幅逾 15%，覆盖 Vera Rubin、Grace Blackwell 等平台。超大规模厂的资本开支不只是「买更多卡」，还要为内存、封装与附加费买单；若涨价落地，单位推理成本下行曲线会变缓，「算力越用越便宜」的线性故事需要打折。市场将紧盯下周财报是否把涨价写入客户指引，以及大客户是否接受改价条款。对二级市场，这是毛利与需求弹性的双重测试；对买家，则是预算重做与替代加速器、自研芯片评估的起点。把这条与 OpenAI API 降价对照阅读，更能理解为何「模型更便宜、托管更贵」会同时出现：价值链上下游的定价权正在错位重排。官方确认前宜保留不确定性，但采购与财务模型应开始做情景分析。报道经 Bloomberg / TNW 传播。采购侧可做三情景：涨价落地、部分转嫁、官方否认；每种情景对应不同的集群排期与模型迭代预算，避免只按旧单价外推二零二七年产能。</p>
+          <script type="text/markdown" data-detail data-source="https://thenextweb.com/news/nvidia-ai-server-price-increase-memory-costs" hidden>
+Nvidia AI 服务器涨价传闻的关键机制写在物料清单里：HBM 与相关内存吃掉 BOM 大头，先进封装与供应链短缺把成本压力传导到 2027 年出货；据报涨幅逾 15%，覆盖 Vera Rubin、Grace Blackwell 等平台。超大规模厂的资本开支不只是“买更多卡”，还要为内存、封装与附加费买单；若涨价落地，单位推理成本下行曲线会变缓，“算力越用越便宜”的线性故事需要打折。
+
+市场将紧盯下周财报是否把涨价写入客户指引，以及大客户是否接受改价条款。对二级市场，这是毛利与需求弹性的双重测试；对买家，则是预算重做与替代加速器、自研芯片评估的起点。把这条与 OpenAI API 降价对照阅读，更能理解为何“模型更便宜、托管更贵”会同时出现：价值链上下游的定价权正在错位重排。
+
+官方确认前宜保留不确定性，但采购与财务模型应开始做情景分析。报道经 Bloomberg / TNW 传播。采购侧可做三情景：涨价落地、部分转嫁、官方否认；每种情景对应不同的集群排期与模型迭代预算，避免只按旧单价外推二零二七年产能。
+</script>
         </article>
 
         <article data-item="a5" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
@@ -264,9 +337,17 @@
             <span style="font-size: 12px; color: #6b665c;">DeepSeek / GitHub</span>
             <button type="button" class="mark-btn" data-mark="a5" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
           </div>
-          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.42; letter-spacing: -0.01em;">开源 harness 爆火：社区在赌「编排层」才是下一护城河</h4>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.42; letter-spacing: -0.01em;">开源 harness 爆火：社区在赌“编排层”才是下一护城河</h4>
           <span class="heatbar"><i style="width: 88%;"></i></span>
-          <p data-detail data-source="https://github.com/deepseek-ai/deepseek-harness" style="display:none">DeepSeek Harness 星数暴涨，被社区解读为：模型能力趋同之后，编排层才是下一护城河。可替换的模型接口、工具调用、沙箱隔离与调度策略，让 agent 从演示变成可维护工程；小时级涨星说明开发者用脚投票，而不只是看参数榜。它与 Faraday「小模型队友」、OmniRoute 等多后端路由项目同周走热，共同描绘一张图：降本、可观测、可替换，正在取代单纯追参数。对企业，选型清单应增加 harness 成熟度、权限模型与审计能力；对个人开发者，则是低成本拼装复杂工作流的窗口期。仓库链接见卡片，建议结合文档核对默认沙箱、工具协议与许可证，再决定是否引入生产——星数是温度计，不是合格证。八月 GitStarClub 榜上其增星远超同侪，正是本周开源注意力的核心坐标。若只把 harness 当明星仓库追星，容易忽略权限模型与审计日志；真正能进生产的团队，会先跑通最小权限与可回放轨迹，再谈替换模型的灵活性。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。</p>
+          <script type="text/markdown" data-detail data-source="https://github.com/deepseek-ai/deepseek-harness" hidden>
+DeepSeek Harness 星数暴涨，被社区解读为：模型能力趋同之后，编排层才是下一护城河。可替换的模型接口、工具调用、沙箱隔离与调度策略，让 agent 从演示变成可维护工程；小时级涨星说明开发者用脚投票，而不只是看参数榜。它与 Faraday“小模型队友”、OmniRoute 等多后端路由项目同周走热，共同描绘一张图：降本、可观测、可替换，正在取代单纯追参数。
+
+## 对企业
+
+对企业，选型清单应增加 harness 成熟度、权限模型与审计能力；对个人开发者，则是低成本拼装复杂工作流的窗口期。仓库链接见卡片，建议结合文档核对默认沙箱、工具协议与许可证，再决定是否引入生产——星数是温度计，不是合格证。八月 GitStarClub 榜上其增星远超同侪，正是本周开源注意力的核心坐标。
+
+若只把 harness 当明星仓库追星，容易忽略权限模型与审计日志；真正能进生产的团队，会先跑通最小权限与可回放轨迹，再谈替换模型的灵活性。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。
+</script>
         </article>
 
       </div>
@@ -295,7 +376,13 @@
                 <button type="button" class="mark-btn" data-mark="g1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
               </div>
               <span class="heatbar"><i style="width: 100%;"></i></span>
-              <p data-detail data-source="https://github.com/deepseek-ai/deepseek-harness" style="display:none">GitHub 八月增星榜第一：deepseek-harness（TypeScript）约 +103.2k 星，总星逼近十二万，数据来自 GitStarClub 截至 2026-08-23 的统计。定位是完整 agent 框架，强调模型、工具、沙箱、调度可替换，契合「编排层差异化」叙事；上线后曾出现小时级暴涨，既有产品吸引力，也有传播与镜像效应。背景是基座模型能力趋于接近，可观测的工具调用、权限边界与长期任务跑通，反而成为工程差异点。将其放在热度栏首位，是为了量化开源社区本月真正的注意力中心：不是又一个聊天模型，而是能跑通复杂工作流的工程骨架。对企业采购与个人开发者，这都是信号——选型要从「哪家模型最大」扩展到「哪套 harness 更可维护」。使用前建议核对许可证、默认安全策略与自有工具链集成成本，星数不等于生产就绪。仓库见 GitHub deepseek-ai/deepseek-harness。对教研与创业团队，也可把它当作对照样本：拆开默认工具协议与沙箱边界，看清哪些能力是框架提供的，哪些仍要自建，以免高估开箱即用程度。</p>
+              <script type="text/markdown" data-detail data-source="https://github.com/deepseek-ai/deepseek-harness" hidden>
+GitHub 八月增星榜第一：deepseek-harness（TypeScript）约 +103.2k 星，总星逼近十二万，数据来自 GitStarClub 截至 2026-08-23 的统计。定位是完整 agent 框架，强调模型、工具、沙箱、调度可替换，契合“编排层差异化”叙事；上线后曾出现小时级暴涨，既有产品吸引力，也有传播与镜像效应。背景是基座模型能力趋于接近，可观测的工具调用、权限边界与长期任务跑通，反而成为工程差异点。
+
+将其放在热度栏首位，是为了量化开源社区本月真正的注意力中心：不是又一个聊天模型，而是能跑通复杂工作流的工程骨架。对企业采购与个人开发者，这都是信号——选型要从“哪家模型最大”扩展到“哪套 harness 更可维护”。使用前建议核对许可证、默认安全策略与自有工具链集成成本，星数不等于生产就绪。
+
+仓库见 GitHub deepseek-ai/deepseek-harness。对教研与创业团队，也可把它当作对照样本：拆开默认工具协议与沙箱边界，看清哪些能力是框架提供的，哪些仍要自建，以免高估开箱即用程度。
+</script>
             </li>
             <li data-item="g2" style="cursor: pointer; display: grid; gap: 7px;">
               <div style="display: flex; align-items: baseline; gap: 8px;">
@@ -304,7 +391,15 @@
                 <button type="button" class="mark-btn" data-mark="g2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
               </div>
               <span class="heatbar"><i style="width: 76%;"></i></span>
-              <p data-detail data-source="https://github.com/mattpocock/skills" style="display:none">mattpocock/skills 以 Shell 技能与脚本合集位列八月增星第二，约 +35.8k，数据来自 GitStarClub。它代表另一类热度：把可复用「技能」打包，让 agent 或开发者快速获得操作能力，而不是从零写胶水代码。在 DeepSeek Harness 爆火的同一月份，skills 类仓库走强，说明社区同时在补「框架」与「能力插件」两层——有编排还要有可插拔动作库。对读者，可作为工具箱索引与学习样本；引入自动化时须注意脚本权限、密钥泄漏与供应链风险，避免对高星仓库默认信任。与 OmniRoute、orca 等一同出现在增星前列，勾勒出 agent 工程化工具链的集体升温，而不是单一爆款。建议结合 README 与近期提交判断维护活跃度，再决定是否纳入内部技能目录。若用于 agent，建议把高风险命令（删库、批量发送、支付）默认禁用，并以人工确认门控；技能仓库的价值在加速，安全基线仍要本地化。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。</p>
+              <script type="text/markdown" data-detail data-source="https://github.com/mattpocock/skills" hidden>
+mattpocock/skills 以 Shell 技能与脚本合集位列八月增星第二，约 +35.8k，数据来自 GitStarClub。它代表另一类热度：把可复用“技能”打包，让 agent 或开发者快速获得操作能力，而不是从零写胶水代码。在 DeepSeek Harness 爆火的同一月份，skills 类仓库走强，说明社区同时在补“框架”与“能力插件”两层——有编排还要有可插拔动作库。
+
+## 对读者
+
+对读者，可作为工具箱索引与学习样本；引入自动化时须注意脚本权限、密钥泄漏与供应链风险，避免对高星仓库默认信任。与 OmniRoute、orca 等一同出现在增星前列，勾勒出 agent 工程化工具链的集体升温，而不是单一爆款。建议结合 README 与近期提交判断维护活跃度，再决定是否纳入内部技能目录。
+
+若用于 agent，建议把高风险命令（删库、批量发送、支付）默认禁用，并以人工确认门控；技能仓库的价值在加速，安全基线仍要本地化。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。
+</script>
             </li>
             <li data-item="g3" style="cursor: pointer; display: grid; gap: 7px;">
               <div style="display: flex; align-items: baseline; gap: 8px;">
@@ -313,7 +408,13 @@
                 <button type="button" class="mark-btn" data-mark="g3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
               </div>
               <span class="heatbar"><i style="width: 58%;"></i></span>
-              <p data-detail data-source="https://github.com/diegosouzapw/OmniRoute" style="display:none">OmniRoute（TypeScript）八月约 +18.0k 星，位列增星前列，属多后端路由方向，数据来自 GitStarClub。叙事关键词是降本与韧性：在多个模型与提供商之间做智能路由，把促销价、限速、质量差异与故障切换变成可配置策略。恰逢 OpenAI 旗舰 GPT-5.6 Sol 限时降价，这类项目的产品价值被行情放大——预算系统必须处理到期涨价、多 Key 调度与回退。适合已有多厂商接入的团队做中间层试验；仍需自建用量观测、成本告警与失败兜底，否则路由层会变成新的单点风险。它与 harness、skills 同周走热，说明开源注意力正从「单一模型客户端」转向「可运营的模型网络」。仓库见 GitHub，引入前评估配置复杂度与供应商条款兼容性。落地时优先打通成本看板：按模型、按路由规则、按业务线拆分 token 账单，才能证明路由层省下的钱大于其维护成本。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。</p>
+              <script type="text/markdown" data-detail data-source="https://github.com/diegosouzapw/OmniRoute" hidden>
+OmniRoute（TypeScript）八月约 +18.0k 星，位列增星前列，属多后端路由方向，数据来自 GitStarClub。叙事关键词是降本与韧性：在多个模型与提供商之间做智能路由，把促销价、限速、质量差异与故障切换变成可配置策略。恰逢 OpenAI 旗舰 GPT-5.6 Sol 限时降价，这类项目的产品价值被行情放大——预算系统必须处理到期涨价、多 Key 调度与回退。
+
+适合已有多厂商接入的团队做中间层试验；仍需自建用量观测、成本告警与失败兜底，否则路由层会变成新的单点风险。它与 harness、skills 同周走热，说明开源注意力正从“单一模型客户端”转向“可运营的模型网络”。仓库见 GitHub，引入前评估配置复杂度与供应商条款兼容性。
+
+落地时优先打通成本看板：按模型、按路由规则、按业务线拆分 token 账单，才能证明路由层省下的钱大于其维护成本。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。
+</script>
             </li>
             <li data-item="g4" style="cursor: pointer; display: grid; gap: 7px;">
               <div style="display: flex; align-items: baseline; gap: 8px;">
@@ -322,7 +423,15 @@
                 <button type="button" class="mark-btn" data-mark="g4" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
               </div>
               <span class="heatbar"><i style="width: 52%;"></i></span>
-              <p data-detail data-source="https://github.com/stablyai/orca" style="display:none">stablyai/orca 八月增星约 +17.3k，排在增星榜第四档，同属 TypeScript 生态热度，统计口径为 GitStarClub 截至 08-23。具体产品定位需以仓库 README 为准；在本月榜单结构里，它与 deepseek-harness、mattpocock/skills、OmniRoute 一起，勾勒出「agent 工程化工具链」集体升温。对观察开源风向的读者，第四名的意义在于：热度并不只集中在第一名，第二梯队同样在吸收开发者注意力与贡献带宽。建议点进仓库查看文档、示例与近期提交，判断是否与自身自动化测试、浏览器代理或 agent 场景相关，再决定是否试用。把第四名与榜首对照看，更能理解本月开源行情是「整条工具链」在涨，而不只是某一个明星仓库的偶然爆火。简报不把它写成「必装」，而是当作增星梯队的观察锚点：当第四名也在快速吸星，说明 agent 工具需求是广度扩张，而非单点泡沫。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。</p>
+              <script type="text/markdown" data-detail data-source="https://github.com/stablyai/orca" hidden>
+stablyai/orca 八月增星约 +17.3k，排在增星榜第四档，同属 TypeScript 生态热度，统计口径为 GitStarClub 截至 08-23。具体产品定位需以仓库 README 为准；在本月榜单结构里，它与 deepseek-harness、mattpocock/skills、OmniRoute 一起，勾勒出“agent 工程化工具链”集体升温。对观察开源风向的读者，第四名的意义在于：热度并不只集中在第一名，第二梯队同样在吸收开发者注意力与贡献带宽。
+
+## 建议
+
+建议点进仓库查看文档、示例与近期提交，判断是否与自身自动化测试、浏览器代理或 agent 场景相关，再决定是否试用。把第四名与榜首对照看，更能理解本月开源行情是“整条工具链”在涨，而不只是某一个明星仓库的偶然爆火。简报不把它写成“必装”，而是当作增星梯队的观察锚点：当第四名也在快速吸星，说明 agent 工具需求是广度扩张，而非单点泡沫。
+
+以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。
+</script>
             </li>
           </ol>
         </div>
@@ -335,31 +444,51 @@
           </div>
           <ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 18px;">
             <li data-item="x1" style="cursor: pointer; display: grid; gap: 7px;">
-              <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">「遏制计划」从安全博客走进立法：Kill Switch 讨论升温</p>
+              <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">“遏制计划”从安全博客走进立法：Kill Switch 讨论升温</p>
               <div style="display: flex; align-items: center; gap: 8px;">
                 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">政策 / 安全</span>
                 <button type="button" class="mark-btn" data-mark="x1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
               </div>
               <span class="heatbar"><i style="width: 86%;"></i></span>
-              <p data-detail data-source="https://techcrunch.com/2026/08/22/frontier-ai-labs-still-wont-say-how-theyd-contain-a-rogue-model/" style="display:none">圈内话题第一条：「遏制计划」从安全博客走进立法。Guidelight 报告与 TechCrunch 报道后，联邦 AI Kill Switch 相关讨论被再次引用。核心争议并不抽象：实验室是否应公开可执行的失控模型遏制流程，以及公开披露如何与法律责任、攻击面暴露之间权衡。州级立法（如加州、纽约相关披露要求）已在先行，联邦讨论升温意味着合规日历可能被压缩，客户合同与保险条款也会跟进。对公司治理，这是董事会级风险议题；对研究者与工程负责人，则是把「能够关机、能够限权、能够审计」写成流程与系统，而不只是博客承诺。热度条偏高，显示政策与安全叙事本周显著抬升，并与要点栏 Guidelight 成绩单相互呼应。读者可从 TechCrunch 相关报道进入，再对照 Guidelight 评估方法，区分「公开不足」与「能力不足」两类问题。对跨国企业，还要准备多法域披露差异：州法、联邦讨论与海外客户合同可能提出不同粒度的遏制说明，合规话术需要可映射到工程控件。</p>
+              <script type="text/markdown" data-detail data-source="https://techcrunch.com/2026/08/22/frontier-ai-labs-still-wont-say-how-theyd-contain-a-rogue-model/" hidden>
+圈内话题第一条：“遏制计划”从安全博客走进立法。Guidelight 报告与 TechCrunch 报道后，联邦 AI Kill Switch 相关讨论被再次引用。核心争议并不抽象：实验室是否应公开可执行的失控模型遏制流程，以及公开披露如何与法律责任、攻击面暴露之间权衡。
+
+州级立法（如加州、纽约相关披露要求）已在先行，联邦讨论升温意味着合规日历可能被压缩，客户合同与保险条款也会跟进。对公司治理，这是董事会级风险议题；对研究者与工程负责人，则是把“能够关机、能够限权、能够审计”写成流程与系统，而不只是博客承诺。热度条偏高，显示政策与安全叙事本周显著抬升，并与要点栏 Guidelight 成绩单相互呼应。
+
+读者可从 TechCrunch 相关报道进入，再对照 Guidelight 评估方法，区分“公开不足”与“能力不足”两类问题。对跨国企业，还要准备多法域披露差异：州法、联邦讨论与海外客户合同可能提出不同粒度的遏制说明，合规话术需要可映射到工程控件。
+</script>
             </li>
             <li data-item="x2" style="cursor: pointer; display: grid; gap: 7px;">
-              <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">小参数「科研 agent」是否证明 harness &gt; 纯模型规模？</p>
+              <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">小参数“科研 agent”是否证明 harness &gt; 纯模型规模？</p>
               <div style="display: flex; align-items: center; gap: 8px;">
                 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">评测 / agent</span>
                 <button type="button" class="mark-btn" data-mark="x2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
               </div>
               <span class="heatbar"><i style="width: 72%;"></i></span>
-              <p data-detail data-source="https://www.alphaxiv.org/abs/2608.13331" style="display:none">第二条圈内辩题：小参数「科研 agent」是否证明 harness 大于纯模型规模？Inherent 的 Faraday（约 27B）在科研复现任务上挑战更大前沿系统，与 DeepSeek Harness 星数同周共振，把编排、工具调用与任务设计重新定价。若 Replica 等评测协议站得住，行业可能从「唯旗舰」转向「基座够用 + 任务栈更强」；若评测过窄或分布偏斜，则热度只是叙事泡沫。建议对照 alphaXiv 等相关材料与评测说明，区分「特定科研复现胜率」与「通用能力跃迁」，避免标题党外推。这条话题的价值在于提出正确问题：下一轮差距会更多来自数据飞轮、工具协议与可观测性，还是继续来自稠密参数？简报将其放入热度栏，是为了让读者带着问题去看 Faraday 与 harness 两条新闻，而不是分开消费。一个务实态度是：把 Faraday 当作「任务设计溢价」的案例研究，把 harness 当作「工程溢价」的案例研究，再用自己的评测集验证，而不是直接改采购标准。</p>
+              <script type="text/markdown" data-detail data-source="https://www.alphaxiv.org/abs/2608.13331" hidden>
+第二条圈内辩题：小参数“科研 agent”是否证明 harness 大于纯模型规模？Inherent 的 Faraday（约 27B）在科研复现任务上挑战更大前沿系统，与 DeepSeek Harness 星数同周共振，把编排、工具调用与任务设计重新定价。若 Replica 等评测协议站得住，行业可能从“唯旗舰”转向“基座够用 + 任务栈更强”；若评测过窄或分布偏斜，则热度只是叙事泡沫。
+
+## 建议
+
+建议对照 alphaXiv 等相关材料与评测说明，区分“特定科研复现胜率”与“通用能力跃迁”，避免标题党外推。这条话题的价值在于提出正确问题：下一轮差距会更多来自数据飞轮、工具协议与可观测性，还是继续来自稠密参数？简报将其放入热度栏，是为了让读者带着问题去看 Faraday 与 harness 两条新闻，而不是分开消费。
+
+一个务实态度是：把 Faraday 当作“任务设计溢价”的案例研究，把 harness 当作“工程溢价”的案例研究，再用自己的评测集验证，而不是直接改采购标准。
+</script>
             </li>
             <li data-item="x3" style="cursor: pointer; display: grid; gap: 7px;">
-              <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">旗舰 API 开始「限时促销」：开发者账单模型变复杂</p>
+              <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">旗舰 API 开始“限时促销”：开发者账单模型变复杂</p>
               <div style="display: flex; align-items: center; gap: 8px;">
                 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">定价</span>
                 <button type="button" class="mark-btn" data-mark="x3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
               </div>
               <span class="heatbar"><i style="width: 61%;"></i></span>
-              <p data-detail data-source="https://www.reuters.com/technology/openai-cuts-developer-pricing-frontier-gpt-56-sol-model-by-more-than-20-2026-08-21/" style="display:none">第三条：旗舰 API 开始限时促销，开发者账单模型变复杂。OpenAI 对 GPT-5.6 Sol 给出约三个月折扣窗口，意味着财务与工程都要处理促销期、到期回涨、速率限制与多模型路由；长期合同的谈判空间反而增大。价格战打到前沿模型后，「标价」不再等于「有效单价」，观测与告警要覆盖用量突增、供应商策略变更与隐藏的限速成本。对创业公司，这是降低实验与原型成本的窗口；对成熟团队，则是 FinOps、路由层与供应商管理升级的信号。订阅档未动、用量档打折，也强化了「坐席生意」与「token 生意」分拆的行业趋势。相关事实锚点见 Reuters 报道；落地时请把促销结束日写进预算日历，避免窗口关闭后的账单惊吓。也建议在账单系统里增加「促销标签」字段，便于事后归因：哪些用量增长来自折扣刺激，哪些来自真实产品渗透，以免窗口关闭后误判需求韧性。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。</p>
+              <script type="text/markdown" data-detail data-source="https://www.reuters.com/technology/openai-cuts-developer-pricing-frontier-gpt-56-sol-model-by-more-than-20-2026-08-21/" hidden>
+第三条：旗舰 API 开始限时促销，开发者账单模型变复杂。OpenAI 对 GPT-5.6 Sol 给出约三个月折扣窗口，意味着财务与工程都要处理促销期、到期回涨、速率限制与多模型路由；长期合同的谈判空间反而增大。价格战打到前沿模型后，“标价”不再等于“有效单价”，观测与告警要覆盖用量突增、供应商策略变更与隐藏的限速成本。
+
+对创业公司，这是降低实验与原型成本的窗口；对成熟团队，则是 FinOps、路由层与供应商管理升级的信号。订阅档未动、用量档打折，也强化了“坐席生意”与“token 生意”分拆的行业趋势。相关事实锚点见 Reuters 报道；落地时请把促销结束日写进预算日历，避免窗口关闭后的账单惊吓。
+
+也建议在账单系统里增加“促销标签”字段，便于事后归因：哪些用量增长来自折扣刺激，哪些来自真实产品渗透，以免窗口关闭后误判需求韧性。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。
+</script>
             </li>
           </ol>
         </div>
@@ -378,16 +507,28 @@
                 <button type="button" class="mark-btn" data-mark="c1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
               </div>
               <span class="heatbar"><i style="width: 55%;"></i></span>
-              <p data-detail data-source="https://gitstarclub.com/rankings/2026/8" style="display:none">开源观察：firecrawl 与 openai/codex 继续位列增星前列，八月分别约 +12.6k 与 +10.9k（GitStarClub）。前者服务网页爬取与内容抽取，后者贴近编码 agent 工作流——合在一起，说明「给 agent 眼睛和手」仍是刚需，而不仅是聊天补全。在 DeepSeek Harness 等框架爆火的背景下，垂直工具链并未被替代，而是被组装进更大编排：爬取、编码、调度分层清晰。选型时关注反爬合规、速率、数据留存与密钥安全；编码 agent 则要限制仓库写入范围与密钥注入，防止自动化误操作。榜单链接便于核对名次与口径。对团队而言，可把这类高增星工具当作「agent 外设」候选，再以内部安全基线筛一遍。它们提醒我们：开源热度同时流向平台框架与专用器官，缺一不可。若你们正在搭建内部 agent，不妨把「爬取+编码」当成最小外设组合，先打通只读权限与沙箱，再逐步放开写入，匹配本月开源热度所指向的工程顺序。</p>
+              <script type="text/markdown" data-detail data-source="https://gitstarclub.com/rankings/2026/8" hidden>
+开源观察：firecrawl 与 openai/codex 继续位列增星前列，八月分别约 +12.6k 与 +10.9k（GitStarClub）。前者服务网页爬取与内容抽取，后者贴近编码 agent 工作流——合在一起，说明“给 agent 眼睛和手”仍是刚需，而不仅是聊天补全。在 DeepSeek Harness 等框架爆火的背景下，垂直工具链并未被替代，而是被组装进更大编排：爬取、编码、调度分层清晰。
+
+选型时关注反爬合规、速率、数据留存与密钥安全；编码 agent 则要限制仓库写入范围与密钥注入，防止自动化误操作。榜单链接便于核对名次与口径。对团队而言，可把这类高增星工具当作“agent 外设”候选，再以内部安全基线筛一遍。
+
+它们提醒我们：开源热度同时流向平台框架与专用器官，缺一不可。若你们正在搭建内部 agent，不妨把“爬取+编码”当成最小外设组合，先打通只读权限与沙箱，再逐步放开写入，匹配本月开源热度所指向的工程顺序。
+</script>
             </li>
             <li data-item="c2" style="cursor: pointer; display: grid; gap: 7px;">
-              <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">MoneyPrinterTurbo、hermes-agent 显示「内容/agent」双热</p>
+              <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">MoneyPrinterTurbo、hermes-agent 显示“内容/agent”双热</p>
               <div style="display: flex; align-items: center; gap: 8px;">
                 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">GitStarClub</span>
                 <button type="button" class="mark-btn" data-mark="c2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
               </div>
               <span class="heatbar"><i style="width: 48%;"></i></span>
-              <p data-detail data-source="https://gitstarclub.com/rankings/2026/8" style="display:none">MoneyPrinterTurbo、hermes-agent 等仓库显示「内容自动化」与「通用 agent」双热。一边是短视频/内容生产流水线，一边是可拼装的 agent 脚手架，反映个人开发者与小团队的两条落地路径：直接变现内容，或搭建可复用助手。双热并存说明开源注意力并未单一押注大模型本身，而是押在能跑通业务闭环的中间件——从素材到分发，从任务到工具调用。引入前应评估版权、平台规则、隐私与自动化滥用风险，避免只看星数就上生产；内容类工具尤其容易踩平台政策红线。将其与 firecrawl、codex、harness 并列观察，可以看出本月开源行情覆盖「采集—生成—编排」全链路。数据来源为 GitStarClub 八月增星观察，具体名次以榜单页为准。对内容自动化尤其要加人工抽检与来源标注，避免批量生成触发平台限流；对通用 agent，则优先选择可审计的工具调用链，便于事故回溯。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。</p>
+              <script type="text/markdown" data-detail data-source="https://gitstarclub.com/rankings/2026/8" hidden>
+MoneyPrinterTurbo、hermes-agent 等仓库显示“内容自动化”与“通用 agent”双热。一边是短视频/内容生产流水线，一边是可拼装的 agent 脚手架，反映个人开发者与小团队的两条落地路径：直接变现内容，或搭建可复用助手。双热并存说明开源注意力并未单一押注大模型本身，而是押在能跑通业务闭环的中间件——从素材到分发，从任务到工具调用。
+
+引入前应评估版权、平台规则、隐私与自动化滥用风险，避免只看星数就上生产；内容类工具尤其容易踩平台政策红线。将其与 firecrawl、codex、harness 并列观察，可以看出本月开源行情覆盖“采集—生成—编排”全链路。数据来源为 GitStarClub 八月增星观察，具体名次以榜单页为准。
+
+对内容自动化尤其要加人工抽检与来源标注，避免批量生成触发平台限流；对通用 agent，则优先选择可审计的工具调用链，便于事故回溯。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。
+</script>
             </li>
             <li data-item="c3" style="cursor: pointer; display: grid; gap: 7px;">
               <p style="margin: 0; font-size: 15px; line-height: 1.6; font-weight: 500;">public-apis 老树新芽：基础设施类项目仍有流量</p>
@@ -396,7 +537,13 @@
                 <button type="button" class="mark-btn" data-mark="c3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
               </div>
               <span class="heatbar"><i style="width: 40%;"></i></span>
-              <p data-detail data-source="https://github.com/public-apis/public-apis" style="display:none">经典仓库 public-apis 总星超 46 万，八月仍录得约 +15k，被称作「老树新芽」。对 agent 工具链而言，可调用的公共 API 清单降低了「接外部世界」的搜寻成本；星数回暖说明基础设施类、目录型内容在 AI 浪潮里仍有流量。使用时务必逐条核对接口可用性、鉴权方式、配额与服务条款，清单不等于稳定 SLA，更不等于可商用授权。它提醒读者：热门不全是新框架，目录与基础数据项目同样服务 agent 生态，尤其在需要快速拼装演示或内部工具时。与本月 harness、skills 热潮对照，可见社区既追新编排，也回补「有哪些接口能接」的老问题。仓库见 GitHub public-apis/public-apis，建议以星标变化作风向标，以文档与探针脚本作可用性验证。在 agent 场景里，可把 public-apis 当「发现层」，再以自建探针与缓存当「可靠层」；发现与可靠分离，才能既吃目录红利又控故障面。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。</p>
+              <script type="text/markdown" data-detail data-source="https://github.com/public-apis/public-apis" hidden>
+经典仓库 public-apis 总星超 46 万，八月仍录得约 +15k，被称作“老树新芽”。对 agent 工具链而言，可调用的公共 API 清单降低了“接外部世界”的搜寻成本；星数回暖说明基础设施类、目录型内容在 AI 浪潮里仍有流量。使用时务必逐条核对接口可用性、鉴权方式、配额与服务条款，清单不等于稳定 SLA，更不等于可商用授权。
+
+它提醒读者：热门不全是新框架，目录与基础数据项目同样服务 agent 生态，尤其在需要快速拼装演示或内部工具时。与本月 harness、skills 热潮对照，可见社区既追新编排，也回补“有哪些接口能接”的老问题。仓库见 GitHub public-apis/public-apis，建议以星标变化作风向标，以文档与探针脚本作可用性验证。
+
+在 agent 场景里，可把 public-apis 当“发现层”，再以自建探针与缓存当“可靠层”；发现与可靠分离，才能既吃目录红利又控故障面。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。
+</script>
             </li>
           </ol>
         </div>
@@ -415,19 +562,39 @@
           <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e; margin-bottom: 16px;">时政观察</div>
           <ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 16px;">
             <li data-item="w1" style="cursor: pointer; display: grid; gap: 6px;">
-              <p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5;">中国开通经俄北极航线定期集装箱服务，「冰上丝绸之路」试运行</p>
+              <p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5;">中国开通经俄北极航线定期集装箱服务，“冰上丝绸之路”试运行</p>
               <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 12px; color: #a09a8e;">Financial Express / Conversation</span><button type="button" class="mark-btn" data-mark="w1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button></div>
-              <p data-detail data-source="https://www.financialexpress.com/world-news/china-opens-arctic-shipping-route-to-europe-amid-hormuz-crisis-can-ice-silk-road-reduce-reliance-on-global-chokepoints/4320577/" style="display:none">中国开通经俄罗斯的北极航线定期集装箱服务，媒体称之为「冰上丝绸之路」试运行。报道称 Sea Legend 自 8 月 15 日起经营宁波至英国 Felixstowe 等北冰洋航线，理论上可缩短部分中欧航程，在霍尔木兹等传统咽喉承压时提供备份想象。但现实约束同样明确：季节性冰况、破冰与护航成本、俄方审批、制裁合规与保险定价，决定它更像弹性通道与地缘对冲，而非苏伊士的即时替代。对贸易与航运观察者，价值在于路径多元化与风险情景规划；对宏观叙事，则是物流、能源与制裁交织下的运力再配置。今日简报把它放入世界栏，是为了提醒 AI 产业新闻之外，实体供应链仍在改写地图。来源包括 Financial Express、The Conversation 等公开报道，班期与口岸细节以承运方与海关公告为准。对依赖中欧供应链的制造与电商企业，值得把北极航线写入应急预案附录：不是主路径，而是在传统水道受阻时的运力选项与保费测算输入。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。</p>
+              <script type="text/markdown" data-detail data-source="https://www.financialexpress.com/world-news/china-opens-arctic-shipping-route-to-europe-amid-hormuz-crisis-can-ice-silk-road-reduce-reliance-on-global-chokepoints/4320577/" hidden>
+中国开通经俄罗斯的北极航线定期集装箱服务，媒体称之为“冰上丝绸之路”试运行。报道称 Sea Legend 自 8 月 15 日起经营宁波至英国 Felixstowe 等北冰洋航线，理论上可缩短部分中欧航程，在霍尔木兹等传统咽喉承压时提供备份想象。
+
+但现实约束同样明确：季节性冰况、破冰与护航成本、俄方审批、制裁合规与保险定价，决定它更像弹性通道与地缘对冲，而非苏伊士的即时替代。对贸易与航运观察者，价值在于路径多元化与风险情景规划；对宏观叙事，则是物流、能源与制裁交织下的运力再配置。今日简报把它放入世界栏，是为了提醒 AI 产业新闻之外，实体供应链仍在改写地图。
+
+来源包括 Financial Express、The Conversation 等公开报道，班期与口岸细节以承运方与海关公告为准。对依赖中欧供应链的制造与电商企业，值得把北极航线写入应急预案附录：不是主路径，而是在传统水道受阻时的运力选项与保费测算输入。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。
+</script>
             </li>
             <li data-item="w2" style="cursor: pointer; display: grid; gap: 6px;">
               <p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5;">萨格勒布成欧洲首个可经 Uber App 预约自动驾驶出行的城市</p>
               <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 12px; color: #a09a8e;">Uber Newsroom</span><button type="button" class="mark-btn" data-mark="w2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button></div>
-              <p data-detail data-source="https://investor.uber.com/news-events/news/press-release-details/2026/Uber-Launches-Autonomous-Rides-in-Europe/default.aspx" style="display:none">克罗地亚首都萨格勒布成为欧洲首个可在 Uber 应用内预约自动驾驶出行的城市。Uber 与 Pony.ai、Verne 合作，服务自 8 月 19 日上线；初期仍有持证安全员随车，覆盖市中心等区域，本质是把既有 robotaxi 运力接入 Uber 渠道与品牌。这降低了用户教育成本，但并不等于一步跳到完全无人；监管、保险与公众接受度仍决定扩城节奏。对欧洲出行市场，这是「渐进商业化」样本：先渠道、再扩区、再谈去安全员；对自动驾驶供应链，则是跨城运营数据与本地化适配的新试验场。与 AI agent 热潮对照，物理世界的 agent（车）同样走「有人值守的自动化」过渡路径，而非一夜无人。官方说明见 Uber 投资人新闻稿，观察后续是否复制到其他欧洲城市。对政策观察者，萨格勒布样本还提供监管对照：应用内入口、安全员配置与运营区域如何组合，往往比「是否自动驾驶」二元标签更能预测扩城速度。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。</p>
+              <script type="text/markdown" data-detail data-source="https://investor.uber.com/news-events/news/press-release-details/2026/Uber-Launches-Autonomous-Rides-in-Europe/default.aspx" hidden>
+克罗地亚首都萨格勒布成为欧洲首个可在 Uber 应用内预约自动驾驶出行的城市。Uber 与 Pony.ai、Verne 合作，服务自 8 月 19 日上线；初期仍有持证安全员随车，覆盖市中心等区域，本质是把既有 robotaxi 运力接入 Uber 渠道与品牌。这降低了用户教育成本，但并不等于一步跳到完全无人；监管、保险与公众接受度仍决定扩城节奏。
+
+对欧洲出行市场，这是“渐进商业化”样本：先渠道、再扩区、再谈去安全员；对自动驾驶供应链，则是跨城运营数据与本地化适配的新试验场。与 AI agent 热潮对照，物理世界的 agent（车）同样走“有人值守的自动化”过渡路径，而非一夜无人。官方说明见 Uber 投资人新闻稿，观察后续是否复制到其他欧洲城市。
+
+对政策观察者，萨格勒布样本还提供监管对照：应用内入口、安全员配置与运营区域如何组合，往往比“是否自动驾驶”二元标签更能预测扩城速度。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。
+</script>
             </li>
             <li data-item="w3" style="cursor: pointer; display: grid; gap: 6px;">
               <p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5;">Jackson Hole 临近：市场紧盯美联储主席 Warsh 首次主题演讲</p>
               <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 12px; color: #a09a8e;">Business Standard</span><button type="button" class="mark-btn" data-mark="w3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button></div>
-              <p data-detail data-source="https://www.business-standard.com/world-news/investors-seek-clearer-fed-guidance-from-warsh-at-jackson-hole-address-126082300413_1.html" style="display:none">Jackson Hole 全球央行研讨会临近（8 月 27–29 日），市场聚焦美联储主席 Warsh 预计于 28 日发表的主旨讲话。背景是通胀仍高于目标、沟通风格被指前瞻指引偏少，叠加美国财政部扩大中长期国债回购等动作，长端利率与美元波动成为交易主线。投资者希望获得更清晰的政策反应函数，但该会议传统上偏框架与研究讨论，未必给出点阵式或日期式承诺。对风险资产，讲话前后波动率可能抬升；对美债与美元，关键词在于通胀路径、中性利率想象，以及财政—货币边界是否被市场重新定价。简报将其与「Bessent Put」同栏呈现，方便读者把央行沟通与财政部购债放在同一周叙事里理解。报道参考 Business Standard 等公开稿，具体日程与讲稿以主办方与美联储发布为准。交易台常见做法是讲话前降低久期敞口、讲话后按措辞调整；对长线配置者，更应关注其是否改变通胀容忍度与财政协作边界的表述框架。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。</p>
+              <script type="text/markdown" data-detail data-source="https://www.business-standard.com/world-news/investors-seek-clearer-fed-guidance-from-warsh-at-jackson-hole-address-126082300413_1.html" hidden>
+Jackson Hole 全球央行研讨会临近（8 月 27–29 日），市场聚焦美联储主席 Warsh 预计于 28 日发表的主旨讲话。背景是通胀仍高于目标、沟通风格被指前瞻指引偏少，叠加美国财政部扩大中长期国债回购等动作，长端利率与美元波动成为交易主线。投资者希望获得更清晰的政策反应函数，但该会议传统上偏框架与研究讨论，未必给出点阵式或日期式承诺。
+
+## 对风险资产
+
+对风险资产，讲话前后波动率可能抬升；对美债与美元，关键词在于通胀路径、中性利率想象，以及财政—货币边界是否被市场重新定价。简报将其与“Bessent Put”同栏呈现，方便读者把央行沟通与财政部购债放在同一周叙事里理解。报道参考 Business Standard 等公开稿，具体日程与讲稿以主办方与美联储发布为准。
+
+交易台常见做法是讲话前降低久期敞口、讲话后按措辞调整；对长线配置者，更应关注其是否改变通胀容忍度与财政协作边界的表述框架。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。
+</script>
             </li>
           </ol>
         </div>
@@ -438,17 +605,37 @@
             <li data-item="f1" style="cursor: pointer; display: grid; gap: 6px;">
               <p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5;">Nvidia 服务器涨价预期：超大规模厂 2027 CapEx 预算承压</p>
               <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 12px; color: #a09a8e;">Bloomberg via TNW</span><button type="button" class="mark-btn" data-mark="f1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button></div>
-              <p data-detail data-source="https://thenextweb.com/news/nvidia-ai-server-price-increase-memory-costs" style="display:none">财经侧回看 Nvidia 服务器涨价预期：超大规模云与 AI 工厂的 2027 CapEx 面临内存与代工成本重估，据报涨幅逾一成半，HBM 等是成本主角。若涨价写入合同，「算力越用越便宜」的线性故事需要打折；单位训练与推理成本的下行斜率可能放缓，从而影响模型厂商毛利与应用层定价空间。下周财报是验证窗口：看指引是否确认涨价、客户是否接受、毛利与交付如何表述，以及是否强化自研/多供应商叙事。对持仓与供应链金融，这是把硬件通胀从传闻翻译成预算科目与敏感度分析的时刻；对云厂商，则是与 Nvidia 重新谈判附加费与锁量条款。来源转述自 Bloomberg，经 TNW 等媒体传播，官方确认前宜保留不确定性，但情景规划可以开始。若你在做算力预算，建议把内存与封装单独列示，而不是只盯 GPU 目录价；本次传闻的核心，正是 BOM 结构变化，而非单纯「卡变贵」。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。</p>
+              <script type="text/markdown" data-detail data-source="https://thenextweb.com/news/nvidia-ai-server-price-increase-memory-costs" hidden>
+财经侧回看 Nvidia 服务器涨价预期：超大规模云与 AI 工厂的 2027 CapEx 面临内存与代工成本重估，据报涨幅逾一成半，HBM 等是成本主角。若涨价写入合同，“算力越用越便宜”的线性故事需要打折；单位训练与推理成本的下行斜率可能放缓，从而影响模型厂商毛利与应用层定价空间。
+
+下周财报是验证窗口：看指引是否确认涨价、客户是否接受、毛利与交付如何表述，以及是否强化自研/多供应商叙事。对持仓与供应链金融，这是把硬件通胀从传闻翻译成预算科目与敏感度分析的时刻；对云厂商，则是与 Nvidia 重新谈判附加费与锁量条款。来源转述自 Bloomberg，经 TNW 等媒体传播，官方确认前宜保留不确定性，但情景规划可以开始。
+
+若你在做算力预算，建议把内存与封装单独列示，而不是只盯 GPU 目录价；本次传闻的核心，正是 BOM 结构变化，而非单纯“卡变贵”。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。
+</script>
             </li>
             <li data-item="f2" style="cursor: pointer; display: grid; gap: 6px;">
-              <p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5;">财政部扩大中长期国债回购，所谓「Bessent Put」搅动利率预期</p>
+              <p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5;">财政部扩大中长期国债回购，所谓“Bessent Put”搅动利率预期</p>
               <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 12px; color: #a09a8e;">Motley Fool / Infomax</span><button type="button" class="mark-btn" data-mark="f2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button></div>
-              <p data-detail data-source="https://www.fool.com/investing/2026/08/22/treasury-bond-intervention-nightmare-kevin-warsh/" style="display:none">美国财政部长 Bessent 宣布扩大中长期国债回购，市场将其戏称为「Bessent Put」，解读为抑制长端收益率的财政侧干预。分析担忧这可能压缩美联储独立货币政策的空间，并在 Jackson Hole 前夕抬高沟通噪音，使「谁在主导利率」的问题重新摆上台面。对债市，回购规模、券种与操作节奏影响期限溢价与流动性；对股市，则关乎成长股、地产链等利率敏感板块的风险偏好。是否构成系统性托底仍有争议，但「财政与货币边界」已重回交易桌面，与 Warsh 讲话预期形成共振。公开讨论见 Motley Fool、Infomax 等，政策文本与操作细则以财政部声明为准；投资者应区分短期波动交易与中期制度含义。对全球资产配置，这意味着美债收益率可能同时受央行沟通与财政部操作牵引，模型里需要两个因子，而不是把利率波动全部归因于点阵图。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。</p>
+              <script type="text/markdown" data-detail data-source="https://www.fool.com/investing/2026/08/22/treasury-bond-intervention-nightmare-kevin-warsh/" hidden>
+美国财政部长 Bessent 宣布扩大中长期国债回购，市场将其戏称为“Bessent Put”，解读为抑制长端收益率的财政侧干预。分析担忧这可能压缩美联储独立货币政策的空间，并在 Jackson Hole 前夕抬高沟通噪音，使“谁在主导利率”的问题重新摆上台面。对债市，回购规模、券种与操作节奏影响期限溢价与流动性；对股市，则关乎成长股、地产链等利率敏感板块的风险偏好。
+
+是否构成系统性托底仍有争议，但“财政与货币边界”已重回交易桌面，与 Warsh 讲话预期形成共振。公开讨论见 Motley Fool、Infomax 等，政策文本与操作细则以财政部声明为准；投资者应区分短期波动交易与中期制度含义。对全球资产配置，这意味着美债收益率可能同时受央行沟通与财政部操作牵引，模型里需要两个因子，而不是把利率波动全部归因于点阵图。
+
+以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。
+</script>
             </li>
             <li data-item="f3" style="cursor: pointer; display: grid; gap: 6px;">
               <p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5;">OpenAI 旗舰降价：API 价格战从中端打到前沿模型</p>
               <div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 12px; color: #a09a8e;">Reuters</span><button type="button" class="mark-btn" data-mark="f3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button></div>
-              <p data-detail data-source="https://www.reuters.com/technology/openai-cuts-developer-pricing-frontier-gpt-56-sol-model-by-more-than-20-2026-08-21/" style="display:none">OpenAI 旗舰 API 降价被财经栏单列：价格战从中端打到前沿，短期改善应用层与部分云转售的毛利预期，长期则是议价权、用量与行业 ARPU 的博弈。订阅价格不动、token 价格促销，显示「坐席」与「用量」两套商业模式继续分拆运营；促销期约三个月，到期机制会迫使客户重新谈判。对投资者，关注点在折扣是否转化为粘性用量与份额，以及竞品是否跟进导致价格中枢下移；对 CFO 与采购，则是锁定窗口价、准备回涨条款与多模型路由。将其与 Nvidia 涨价预期对照，可见 AI 产业链出现「软件推理打折、硬件资本开支承压」的剪刀差，利润池位置可能漂移。事实锚点来自 Reuters 对 GPT-5.6 Sol 调价报道，决策时请核对官方价目与限速说明。应用层公司可将节省的 API 成本部分再投入评测与安全护栏，避免「更便宜」变成「更粗放」；价格战时期，质量与合规往往才是份额过滤器。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。</p>
+              <script type="text/markdown" data-detail data-source="https://www.reuters.com/technology/openai-cuts-developer-pricing-frontier-gpt-56-sol-model-by-more-than-20-2026-08-21/" hidden>
+OpenAI 旗舰 API 降价被财经栏单列：价格战从中端打到前沿，短期改善应用层与部分云转售的毛利预期，长期则是议价权、用量与行业 ARPU 的博弈。订阅价格不动、token 价格促销，显示“坐席”与“用量”两套商业模式继续分拆运营；促销期约三个月，到期机制会迫使客户重新谈判。
+
+## 对投资者
+
+对投资者，关注点在折扣是否转化为粘性用量与份额，以及竞品是否跟进导致价格中枢下移；对 CFO 与采购，则是锁定窗口价、准备回涨条款与多模型路由。将其与 Nvidia 涨价预期对照，可见 AI 产业链出现“软件推理打折、硬件资本开支承压”的剪刀差，利润池位置可能漂移。事实锚点来自 Reuters 对 GPT-5.6 Sol 调价报道，决策时请核对官方价目与限速说明。
+
+应用层公司可将节省的 API 成本部分再投入评测与安全护栏，避免“更便宜”变成“更粗放”；价格战时期，质量与合规往往才是份额过滤器。以上梳理仅基于页面既有标题与来源作延伸说明，不另增未披露事实，细节以原文为准。
+</script>
             </li>
           </ol>
         </div>
@@ -559,7 +746,7 @@
           <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e;">数据说明</span>
           <span style="flex: 1; height: 1px; background: rgba(28,26,22,0.08); min-width: 20px;"></span>
         </div>
-        <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #6b665c;">美股/港股取 Yahoo Finance 最近交易日收盘价及日涨跌幅（截至 2026-08-21 收盘，周日休市）；BTC/ETH 取 CoinGecko 现价与 24h 涨跌。未发明价格；失败则显示「暂缺」。</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #6b665c;">美股/港股取 Yahoo Finance 最近交易日收盘价及日涨跌幅（截至 2026-08-21 收盘，周日休市）；BTC/ETH 取 CoinGecko 现价与 24h 涨跌。未发明价格；失败则显示“暂缺”。</p>
       </div>
     </section>
 
@@ -580,7 +767,7 @@
       <button type="button" class="detail-close" id="detailClose" style="margin-left:auto;">关闭</button>
     </div>
     <h3 class="detail-title" id="detailTitle"></h3>
-    <p class="detail-body" id="detailBody"></p>
+    <div class="detail-body" id="detailBody"></div>
     <div class="detail-meta">
       <a class="detail-source" id="detailSource" href="#" target="_blank" rel="noreferrer">原文 ↗</a>
       <span class="detail-chars" id="detailChars"></span>
@@ -648,6 +835,71 @@
     return (s || '').replace(/\s+/g, '').length;
   }
 
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function inlineMd(s) {
+    var out = escapeHtml(s);
+    out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1<\/a>');
+    out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1<\/strong>');
+    out = out.replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, '$1<em>$2<\/em>');
+    return out;
+  }
+  function renderMarkdown(src) {
+    var lines = String(src || '').replace(/\r\n/g, '\n').split('\n');
+    var html = [];
+    var i = 0;
+    function flushPara(buf) {
+      var t = buf.join(' ').trim();
+      if (t) html.push('<p>' + inlineMd(t) + '<\/p>');
+    }
+    while (i < lines.length) {
+      var line = lines[i];
+      if (/^\s*$/.test(line)) { i++; continue; }
+      var hm = line.match(/^\s*##\s+(.+)$/);
+      if (hm) { html.push('<h2>' + inlineMd(hm[1].trim()) + '<\/h2>'); i++; continue; }
+      if (/^\s*[-*]\s+/.test(line)) {
+        var items = [];
+        while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) {
+          items.push('<li>' + inlineMd(lines[i].replace(/^\s*[-*]\s+/, '')) + '<\/li>');
+          i++;
+        }
+        html.push('<ul>' + items.join('') + '<\/ul>');
+        continue;
+      }
+      if (/^\s*\d+\.\s+/.test(line)) {
+        var oitems = [];
+        while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+          oitems.push('<li>' + inlineMd(lines[i].replace(/^\s*\d+\.\s+/, '')) + '<\/li>');
+          i++;
+        }
+        html.push('<ol>' + oitems.join('') + '<\/ol>');
+        continue;
+      }
+      var buf = [];
+      while (i < lines.length && !/^\s*$/.test(lines[i]) && !/^\s*##\s+/.test(lines[i]) && !/^\s*[-*]\s+/.test(lines[i]) && !/^\s*\d+\.\s+/.test(lines[i])) {
+        buf.push(lines[i].trim());
+        i++;
+      }
+      flushPara(buf);
+    }
+    return html.join('') || '<p><\/p>';
+  }
+  function cnLen(s) {
+    // CJK chars only; exclude md markers and whitespace
+    return (String(s || '').replace(/[#*_`\[\]()>\-]/g, '').replace(/\s+/g, '').match(/[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/g) || []).length;
+  }
+  function detailSourceText(d) {
+    var raw = '';
+    if (d.tagName === 'SCRIPT') {
+      raw = d.textContent || '';
+    } else {
+      raw = d.textContent || '';
+    }
+    return raw.replace(/^\uFEFF/, '').trim();
+  }
+
   function titleOf(item) {
     var el = item.querySelector('h3, h4, p[style*="font-weight: 600"], p[style*="font-weight: 500"]');
     if (el) return el.textContent.trim();
@@ -658,9 +910,9 @@
   function openDetail(item) {
     var d = item.querySelector('[data-detail]');
     if (!d) return;
-    var body = d.textContent.trim();
+    var body = detailSourceText(d);
     detailTitle.textContent = titleOf(item);
-    detailBody.textContent = body;
+    detailBody.innerHTML = renderMarkdown(body);
     detailChars.textContent = cnLen(body) + ' 字';
     var href = d.getAttribute('data-source') || '';
     if (href) {
@@ -670,7 +922,6 @@
     } else {
       detailSource.style.display = 'none';
     }
-    overlay.hidden = false;
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
