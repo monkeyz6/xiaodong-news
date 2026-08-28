@@ -34,6 +34,14 @@ h1 span{background:linear-gradient(120deg,#67E8F9,#C4B5FD,#F9A8D4);-webkit-backg
 .meta h2{font-size:17px;line-height:1.35;font-weight:800}
 .sum{font-size:13px;color:var(--tx2);line-height:1.55}
 .flag{font-size:12px;color:#FFD166;background:rgba(255,209,102,.10);border:1px solid rgba(255,209,102,.32);padding:6px 8px;border-radius:8px}
+
+.lbbar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.lbcounter{margin-left:auto;font-size:13px;font-weight:800;color:var(--tx2)}
+.navfab{position:fixed;top:46%;z-index:60;width:48px;height:64px;border:2px solid var(--btn-bd);background:var(--btn-bg);color:var(--tx);border-radius:var(--btn-r);font-size:28px;font-weight:800;cursor:pointer;font-family:inherit}
+.navfab:disabled{opacity:.25;cursor:default}
+.navfab.prev{left:10px}
+.navfab.next{right:10px}
+@media(max-width:720px){.navfab{width:40px;height:52px;font-size:24px}.navfab.prev{left:4px}.navfab.next{right:4px}}
 footer{margin-top:40px;color:var(--tx3);font-size:13px;line-height:1.7}
 .lb{position:fixed;inset:0;z-index:50;background:rgba(3,4,10,.88);display:none;overflow:auto;padding:24px 16px 48px}
 .lb.open{display:block}
@@ -94,7 +102,7 @@ footer{margin-top:40px;color:var(--tx3);font-size:13px;line-height:1.7}
   <h2>千问 3.8 闪速版开源 稀疏激活打性价比</h2><p class="sum">核心卖点是总参数很大、激活很小，权重同步开源到抱抱脸与魔搭。</p></div></article></div>
 <footer>专区与每日简报并列，给自己读。海报先出深色。黄标是单一信源或未公告。<br>检索窗口约 2026-08-26 至 2026-08-28。助手小墨。</footer>
 </div>
-<div class="lb" id="lb"><div class="lbinner"><button class="btn" id="lbClose" type="button">关闭</button><div id="lbSlot"></div></div></div>
+<div class="lb" id="lb"><div class="lbinner"><div class="lbbar"><button class="btn" id="lbClose" type="button">关闭</button><span class="lbcounter" id="lbCount"></span></div><div id="lbSlot"></div></div><button class="navfab prev" id="nbPrev" type="button" aria-label="上一张">‹</button><button class="navfab next" id="nbNext" type="button" aria-label="下一张">›</button></div>
 <div hidden id="store"><div class="detail" data-detail="00" hidden>
   <img class="dposter" src="img/00.jpg" alt="">
   <div class="dbody"><div class="dtag t-cover">封面</div>
@@ -196,14 +204,43 @@ document.getElementById('filters').onclick=e=>{
   document.querySelectorAll('.card').forEach(c=>{c.classList.toggle('hide', !(f==='all'||c.dataset.theme===f||c.dataset.no==='00'));});
 };
 const lb=document.getElementById('lb'), slot=document.getElementById('lbSlot');
+
+const NOS=[...document.querySelectorAll('.card')].map(c=>c.dataset.no);
+let cur=-1;
+function openNo(no){
+  const src=document.querySelector('[data-detail="'+no+'"]');
+  if(!src) return;
+  cur=NOS.indexOf(no);
+  slot.innerHTML=src.innerHTML;
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+  lb.scrollTop=0;
+  document.getElementById('lbCount').textContent=(cur+1)+' / '+NOS.length;
+  document.getElementById('nbPrev').disabled=cur<=0;
+  document.getElementById('nbNext').disabled=cur>=NOS.length-1;
+}
 document.getElementById('grid').onclick=e=>{
   const card=e.target.closest('.card'); if(!card) return;
-  const src=document.querySelector('[data-detail="'+card.dataset.no+'"]');
-  if(!src) return;
-  slot.innerHTML=src.innerHTML; lb.classList.add('open'); document.body.style.overflow='hidden'; lb.scrollTop=0;
+  openNo(card.dataset.no);
 };
-function closeLb(){lb.classList.remove('open'); document.body.style.overflow='';}
+function closeLb(){ lb.classList.remove('open'); document.body.style.overflow=''; cur=-1; }
 document.getElementById('lbClose').onclick=closeLb;
-lb.addEventListener('click',e=>{if(e.target===lb) closeLb();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape') closeLb();});
+lb.addEventListener('click',e=>{ if(e.target===lb) closeLb(); });
+document.getElementById('nbPrev').onclick=()=>{ if(cur>0) openNo(NOS[cur-1]); };
+document.getElementById('nbNext').onclick=()=>{ if(cur<NOS.length-1) openNo(NOS[cur+1]); };
+document.addEventListener('keydown',e=>{
+  if(!lb.classList.contains('open')) return;
+  if(e.key==='Escape') closeLb();
+  if(e.key==='ArrowLeft') document.getElementById('nbPrev').click();
+  if(e.key==='ArrowRight') document.getElementById('nbNext').click();
+});
+let tx=null;
+lb.addEventListener('touchstart',e=>{ tx=e.changedTouches[0].clientX; },{passive:true});
+lb.addEventListener('touchend',e=>{
+  if(tx==null) return;
+  const dx=e.changedTouches[0].clientX-tx; tx=null;
+  if(dx>50) document.getElementById('nbPrev').click();
+  if(dx<-50) document.getElementById('nbNext').click();
+},{passive:true});
+
 </script></body></html>
