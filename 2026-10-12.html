@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="小墨 · 每日简报 · 2026-10-12 — 要点 / AI与前沿 / 热度 / 世界与财经 / 行情">
+<title>每日简报 · 2026-10-12 · 小墨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 92px; scroll-behavior: smooth; }
+  body { margin: 0; background: #f5f2ec; color: #1c1a16; font-family: 'Instrument Sans', 'Noto Sans SC', system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+  a { color: #8a5a2b; text-decoration: none; }
+  a:hover { color: #6d4520; text-decoration: underline; text-underline-offset: 3px; }
+  button { font: inherit; color: inherit; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .nav-pill { padding: 6px 11px; border-radius: 999px; font-size: 13px; font-weight: 500; color: #6b665c; }
+  .nav-pill:hover { background: #ece7dc; color: #1c1a16; text-decoration: none; }
+  .nav-pill.active { color: #1c1a16; background: #ece7dc; }
+  .mark-btn { padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(28,26,22,0.12); background: transparent; cursor: pointer; font-size: 12px; color: #6b665c; }
+  .mark-btn:hover { border-color: rgba(138,90,43,0.5); color: #8a5a2b; }
+  .mark-btn.on { background: #f0e2d2; border-color: rgba(138,90,43,0.45); color: #8a5a2b; }
+  .filter-btn { margin-left: auto; display: flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(28,26,22,0.12); background: #fffefb; cursor: pointer; font-size: 13px; font-weight: 500; box-shadow: 0 1px 2px rgba(28,26,22,0.04); }
+  .filter-btn:hover, .filter-btn.on { border-color: rgba(138,90,43,0.45); }
+  .filter-btn.on { background: #f0e2d2; }
+  [data-item].hidden-by-filter { display: none !important; }
+  section.hidden-by-filter { display: none !important; }
+  .up { color: #2f6b4f; }
+  .down { color: #a8422f; }
+  .flat { color: #6b665c; }
+  .heatbar { display: block; height: 3px; border-radius: 999px; background: #ece7dc; overflow: hidden; }
+  .heatbar > i { display: block; height: 100%; border-radius: 999px; background: #8a5a2b; }
+  .badge { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; padding: 0 6px; white-space: nowrap; box-sizing: border-box; height: 22px; border-radius: 7px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; }
+  .badge.sm { min-width: 20px; padding: 0 5px; height: 20px; border-radius: 6px; font-size: 9px; }
+  .detail-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(28,26,22,0.38); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: none; align-items: flex-end; justify-content: center; padding: 16px; }
+  .detail-overlay.open { display: flex; }
+  .detail-panel { width: min(640px, 100%); max-height: min(88vh, 820px); overflow: auto; background: #fffefb; border-radius: 22px 22px 18px 18px; box-shadow: 0 24px 60px -20px rgba(28,26,22,0.35); border: 1px solid rgba(255,255,255,0.95); padding: clamp(20px, 3vw, 32px); animation: rise 0.28s ease both; }
+  @media (min-width: 720px) {
+    .detail-overlay { align-items: center; }
+    .detail-panel { border-radius: 24px; }
+  }
+  .detail-close { appearance: none; border: 1px solid rgba(28,26,22,0.12); background: #f5f2ec; color: #6b665c; border-radius: 999px; padding: 6px 14px; cursor: pointer; font-size: 13px; }
+  .detail-close:hover { border-color: rgba(138,90,43,0.45); color: #8a5a2b; }
+  .detail-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e; }
+  .detail-title { margin: 8px 0 0; font-size: clamp(18px, 2.4vw, 24px); font-weight: 700; line-height: 1.35; letter-spacing: -0.02em; color: #1c1a16; }
+  .detail-body { margin: 16px 0 0; font-size: 15px; line-height: 1.85; color: #3a3630; }
+  .detail-body p { margin: 0 0 0.9em; line-height: 1.85; }
+  .detail-body p:last-child { margin-bottom: 0; }
+  .detail-body h2 { margin: 1.1em 0 0.55em; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: #1c1a16; font-family: 'Instrument Sans', 'Noto Sans SC', system-ui, sans-serif; }
+  .detail-body h2:first-child { margin-top: 0; }
+  .detail-body ul, .detail-body ol { margin: 0 0 0.9em; padding-left: 1.35em; line-height: 1.85; }
+  .detail-body li { margin: 0.2em 0; }
+  .detail-body li > p { margin: 0; }
+  .detail-body strong { font-weight: 700; color: #1c1a16; }
+  .detail-body em { font-style: italic; }
+  .detail-body a { color: #8a5a2b; text-decoration: underline; text-underline-offset: 3px; }
+  .detail-meta { margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(28,26,22,0.08); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .detail-source { font-size: 14px; font-weight: 500; color: #8a5a2b; }
+  .detail-chars { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e; }
+
+
+</style></head><body>
+<div id="root" style="min-height: 100vh; background: #f5f2ec; padding-bottom: 80px;">
+  <header style="position: sticky; top: 0; z-index: 20; background: rgba(245,242,236,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(28,26,22,0.07);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 14px clamp(16px, 4vw, 40px); display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <span style="font-size: 17px; font-weight: 700; letter-spacing: -0.01em;">每日简报</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #a09a8e; text-transform: uppercase;">Daily Brief</span>
+      </div>
+      <nav style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin-left: 4px;">
+        <a href="#brief" class="nav-pill active">要点</a>
+        <a href="#ai" class="nav-pill">AI 与前沿</a>
+        <a href="#heat" class="nav-pill">今日热度</a>
+        <a href="#world" class="nav-pill">世界与财经</a>
+        <a href="#market" class="nav-pill">行情</a>
+        <a href="intel.html" class="nav-pill">情报专区</a>
+      </nav>
+      <button type="button" class="filter-btn" id="filterBtn" aria-pressed="false">
+        <span>只看已标记</span>
+        <span id="markCount" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; min-width: 18px; padding: 1px 6px; border-radius: 999px; background: #ece7dc; color: #6b665c; text-align: center;">0</span>
+      </button>
+    </div>
+  </header>
+<main style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px);">
+<p id="emptyState" style="display: none; margin: clamp(48px, 8vw, 96px) 0; text-align: center; font-size: 15px; color: #a09a8e;">还没有标记的条目 · 点任意一条右侧的“标记”留到晚上深读</p>
+    <section id="brief" style="padding: clamp(28px, 5vw, 56px) 0 clamp(24px, 4vw, 40px);">
+      <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: clamp(20px, 3vw, 30px);">
+        <h1 style="margin: 0; font-size: clamp(34px, 6vw, 56px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02;">今日要点</h1>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; letter-spacing: 0.02em;">2026-10-12 · 周一</span>
+      </div>
+      <div style="animation: rise 0.5s ease both; background: linear-gradient(180deg, #fffefb, #fffdf7); border-radius: clamp(20px, 3vw, 30px); padding: clamp(22px, 3.4vw, 40px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 20px 44px -22px rgba(28,26,22,0.18); border: 1px solid rgba(255,255,255,0.9);">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: clamp(18px, 2.6vw, 26px); flex-wrap: wrap;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e;">小墨摘选 · 5 条</span>
+          <span style="flex: 1; height: 1px; background: rgba(28,26,22,0.08); min-width: 20px;"></span>
+          <span style="font-size: 12px; color: #a09a8e;">公开源 · 2026-10-09/10-11</span>
+        </div>
+        <ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 20px;">
+          <li data-item="b1" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">01</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">亚马逊洽谈以约70亿美元收购跨芯片AI软件公司Decart；Anthropic九月刚放弃约60亿美元的同一笔收购</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #f2e6cf; color: #8a6a2b;">资本</span>
+                <span style="font-size: 13px; color: #6b665c;">华尔街日报 / Bloomberg Law / IT之家</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/11</span>
+                <button type="button" class="mark-btn" data-mark="b1" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://www.wsj.com/business/deals/amazon-in-talks-to-buy-ai-startup-decart-for-around-7-billion-9433abad" hidden>
+华尔街日报10月11日（美东周日）援引知情人士报道，亚马逊正在洽谈收购人工智能初创公司Decart，交易估值可能在70亿美元左右；Bloomberg Law转述称，如果谈判不破裂，交易可能很快敲定。路透表示暂未能独立核实，亚马逊和Decart均未公开回应。
+
+Decart总部在旧金山，2023年由三名以色列工程师创立。按IT之家和多家媒体的转述，它的核心产品是一套优化软件，帮助开发者把AI模型在不同厂商的芯片之间迁移和调优，而不必为每种硬件重写一遍代码。PitchBook数据显示，Decart此前已从红杉资本、Benchmark、Radical Ventures等机构累计融资超过4亿美元，今年5月那一轮的估值接近40亿美元。
+
+这家公司并不是第一次被大厂看上。彭博8月报道，Anthropic曾洽谈以约60亿美元收购Decart并做过尽职调查，但在9月决定放弃。亚马逊这次传出的价格比Anthropic当时高出约10亿美元，比5月估值高出七成以上。亚马逊一边是英伟达芯片的大买家，一边在推自研的Trainium芯片，跨芯片适配软件恰好卡在两者之间：既能降低客户换芯片的成本，也可能让自研芯片更容易接住原本只为英伟达写代码的团队。
+
+为什么重要：算力紧张时，“模型能在哪些芯片上高效跑”本身就是议价筹码。云厂商愿意为一个软件层出70亿美元，说明芯片之争正在从硬件延伸到迁移工具；一旦这类独立工具被某家云收入囊中，其他芯片厂和云厂商就得自己补上这一块。目前仍是谈判阶段，价格和条款都可能变化。
+</script>
+            </div>
+          </li>
+          <li data-item="b2" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">02</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">乌克兰无人机四天内第三次击中Yandex数据中心：弗拉基米尔机房全面停运，Yandex Cloud与YandexGPT接口等80多项服务中断</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #f5e8e8; color: #6d2f2f;">算力安全</span>
+                <span style="font-size: 13px; color: #6b665c;">半岛电视台/路透 / 基辅邮报 / 美联社</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/11</span>
+                <button type="button" class="mark-btn" data-mark="b2" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://www.aljazeera.com/news/2026/10/11/russias-yandex-says-data-centre-in-vladimir-shut-down-after-drone-attack" hidden>
+俄罗斯科技公司Yandex 10月11日（周日）确认，位于莫斯科以东弗拉基米尔市的数据中心遭无人机袭击后“运营已完全暂停”，没有人员伤亡。Yandex在Telegram上的服务通告建议客户立即启动灾备方案，称平台正处于应急模式，“剩余资源配置不稳定”，技术支持的沟通也可能受影响。
+
+据基辅邮报汇总，这座数据中心功率约40到50兆瓦，设计可容纳约2880个机柜。停运波及80多项服务：消费端有Alice语音助手、Yandex音乐、Telemost视频会议和智能家居；企业端有Yandex Cloud的计算、对象存储、托管Kubernetes、PostgreSQL和ClickHouse数据库，以及YandexGPT接口、SpeechKit语音和Vision文字识别等AI服务。用户还报告俄罗斯部分银行应用、打车平台和连锁零售出现故障。
+
+这是四天内Yandex机房第三次遇袭：10月8日梁赞州萨索沃数据中心起火停运，半岛电视台援引路透称，那里放着Yandex训练自家AI模型所用三台超级计算机中的两台；10月9日卡卢加州机房部分设备被毁。泽连斯基此前把这类打击称为对俄方袭击乌克兰数据中心的“镜像回应”。Yandex Cloud的故障公告在Hacker News上引来六百多条评论，讨论集中在灾备该如何设计。
+
+为什么重要：数据中心正在成为持续、点名式的军事打击目标。常规的云灾备按断电、断网或火灾来设计，很少假设几个区域在几天内接连被物理摧毁。对把训练和推理集中在少数园区的公司来说，地理分散和跨区切换正在从成本选项变成安全底线。
+</script>
+            </div>
+          </li>
+          <li data-item="b3" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">03</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">The Information：Anthropic另有一份未公开的IREN多年期云合同；分析师估算一个245兆瓦园区早一个月通电就能多出13亿美元收入</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #e8eef5; color: #2f4a6d;">算力</span>
+                <span style="font-size: 13px; color: #6b665c;">The Information / AI Weekly</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/11</span>
+                <button type="button" class="mark-btn" data-mark="b3" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://www.theinformation.com/articles/attractive-economics-behind-anthropic-data-center-sprint" hidden>
+The Information 10月11日刊发文章，专门算了一笔Anthropic数据中心租约的经济账，并援引知情人士说，Anthropic还与在澳大利亚上市、由比特币矿企转型的算力商IREN签了一份尚未公开的多年期云合同。报道没有披露合同金额、期限和技术条款，Anthropic和IREN也没有公开确认。
+
+文章想回答的问题是：Anthropic为什么一再催促合作方加快施工？按分析师的估算，一个可用容量245兆瓦的园区如果能提前一个月上线，就能多带来超过13亿美元的收入。报道称，Anthropic已签下的数据中心租赁合同总额约5300亿美元，此前披露的伙伴包括亚马逊云、谷歌以及十多家算力供应商；它的扩张越来越依赖Hut 8、TeraWulf、IREN、Nscale这类现在或曾经的比特币矿企，因为它们手里握着前冶炼厂、制氢厂等地点稀缺的电网接入。
+
+同一周，华尔街日报还复盘了Anthropic联合创始人汤姆·布朗如何促成每月12.5亿美元的SpaceX算力合同。把这些放在一起看，Anthropic的算力版图已经横跨三大云、马斯克的公司和一批矿企，交付节奏成了比合同规模更要紧的指标。
+
+为什么重要：“早通电一个月等于十几亿美元”的算法，解释了AI公司为什么愿意为电力和工期付溢价，也解释了矿企为何集体转型。算力扩张的瓶颈正在从芯片转向电网接入和施工速度，谁先通电谁就握有议价权。需要提醒的是，13亿美元是分析师估算，IREN合同仍是匿名信源口径。
+</script>
+            </div>
+          </li>
+          <li data-item="b4" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">04</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">日本宣布进入“网络空间紧急状态”：数周内二十多家大企业遭攻击，JR东日本约167万个客户邮箱可能外泄</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #f5e8e8; color: #6d2f2f;">网络安全</span>
+                <span style="font-size: 13px; color: #6b665c;">金融时报 / PCMag / 彭博</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/10</span>
+                <button type="button" class="mark-btn" data-mark="b4" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://www.ft.com/content/2d4333d1-8119-44a4-a5a5-2ee9ef2544fa" hidden>
+金融时报报道，日本执政的自民党上周五召开网络安全战略本部紧急会议，起因是最近几周有二十多家知名企业相继披露遭到网络攻击。该本部负责人平将明（Masaaki Taira）称，日本正处于“网络空间的紧急状态”；网络安全担当大臣古川（Toshiharu Furukawa）形容局势“极其严峻”。
+
+受害者从汽车租赁公司Times Car、便利店罗森，到医院和政府设施都有，相关企业警告可能有数千万条客户数据外泄。JR东日本表示，订票系统中约167万个客户邮箱地址可能已泄露；金融时报把JR东日本、多地政府和数百家企业的泄露，与软银旗下IDC Frontier此前披露的勒索软件事件联系在一起。Times Car泄露了存档的驾照图像后，日本金融厅敦促银行尽快改为读取护照、个人编号卡等带芯片证件的身份信息。据读卖新闻和趋势科技的数据，日本今年已报告超过500起网络安全事件，有望超过2025年的473起和2024年的503起。
+
+这一轮攻击目前并没有被明确归因于AI。Blackpanda东北亚负责人平冈（Masaki Hiraoka）对金融时报说，AI正在缩短攻击者摸排目标所需的时间和专业门槛，少数人就能扫描多得多的系统，过去“不值得打”的小服务也会变成目标。彭博此前也报道，日本官方因九月的一波攻击呼吁企业做安全复查。
+
+为什么重要：一个高度数字化的发达经济体，由执政党出面把网络攻击定性为“紧急状态”，接下来很可能带来强制安全审查和身份验证方式的改变。对在日本有业务的公司来说，供应商和托管服务商的安全状况会被重新审视。
+</script>
+            </div>
+          </li>
+          <li data-item="b5" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">05</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">长鑫科技：4F² DRAM架构取得关键进展，年底推出融合4F²与混合键合的新一代DDR5服务器内存</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #e8f3ef; color: #2f5a4a;">芯片</span>
+                <span style="font-size: 13px; color: #6b665c;">科创板日报 / 每日经济新闻</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/10</span>
+                <button type="button" class="mark-btn" data-mark="b5" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://www.cls.cn/detail/2501333" hidden>
+长鑫科技总裁曹堪宇10月10日在上海举行的第四届集成芯片和芯粒大会上介绍了公司在DRAM器件、4F²架构和混合键合方向的进展，并宣布预计今年年底推出融合这些技术的新一代DDR5 RDIMM产品。
+
+科创板日报解释，目前DRAM行业的主流是6F²架构，F指光刻能做到的最小特征尺寸，一个存储单元通常由一个晶体管和一个电容组成。4F²意味着单元面积进一步缩小、单位面积能放下更多单元。长鑫方案的核心是自研的VSG垂直包围沟道晶体管：晶体管从水平改为竖立，栅极把沟道包起来，栅控更强，能缓解漏电和短沟道效应，同时帮助面积微缩。由于沟道方向改变，过去的设计和工艺流程无法完全复用，字线金属化、位线成型和结激活等关键工序都要重新打通。长鑫称从成立起就布局4F²研究，公开专利族超过300件，2021年发表了大陆首篇相关论文。
+
+报道指出，长鑫把首代4F²产品定为服务器用的DDR5 RDIMM，难度不小：要支持全天候不间断运行、经受带电热插拔的电压冲击，还要和不同厂商、不同代际的处理器和主板完成数百项兼容性测试。此前长鑫9月宣布第五代工艺平台量产，8月宣布LPDDR6量产，9月底又公布合计349亿元的研发和扩产项目。
+
+为什么重要：内存正是这一轮AI硬件涨价最狠的环节之一。如果4F²服务器内存按期交付并通过客户验证，国产DRAM就从消费级向利润最高的数据中心市场迈进一步，全球内存供给的议价格局也会随之松动。目前只是官宣时间表，量产良率和客户认证还要看年底。
+</script>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+    <section id="ai" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">AI 与前沿</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">6 条 · 点击看详情</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(12px, 1.8vw, 18px);">
+        <article data-item="a1" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #eee8f5; color: #4a2f6d;">AI研究</span>
+            <span style="font-size: 12px; color: #6b665c;">Terence Tao 讲稿 / 量子位 / Hacker News</span>
+            <button type="button" class="mark-btn" data-mark="a1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">陶哲轩“数学2.0”讲稿：AI让证明从稀缺变成过剩，再一味追求解题会伤害数学的长期健康</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">讲稿提出“证明过剩”时代：AI能力极不均衡，媒体只报成功不报失败，需要公开算力消耗和失败案例的透明评估。</p>
+          <span class="heatbar"><i style="width: 88%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://teorth.github.io/tao-web/slides/math-2-0-caltech-2026.pdf" hidden>
+陶哲轩在加州理工的演讲稿《数学2.0》10月11日登上Hacker News首页，量子位当天也做了长篇解读。据量子位转述，这个演讲原定题目是“机器辅助证明”，因为近期AI频频冲击数学界，他把主题改成了“数学2.0”。
+
+讲稿的主线是：传统数学（他称为“数学1.0”）建立在“证明稀缺”的前提上，解决一个公开问题又难又少见，整套评价体系、学术传统和激励都围绕这一点组织。而数学证明恰好具备三个特点：可以客观验证（甚至可以用Lean这类证明助手机器检查）、高度数字化、有大量高质量数据，所以成了前沿实验室优先攻克的方向。结果是数学正在进入“证明过剩”时代：只要有足够算力和前沿模型，很多此前被认为困难的问题可以在短时间内解决，而且越来越不需要提问者本身懂行。
+
+但他强调AI能力极不均衡，在主观判断、依赖现实交互或数据稀缺的任务上依然不足；与新闻稿和社交媒体给人的印象相反，前沿上大多数问题即使投入巨量算力仍未解决，失败尝试很少被报告。他呼吁做更透明、更科学的能力评估，完整公开资源消耗和负面结果。他还提出，解题只是数学更长远目标的代理指标，在证明过剩时代继续盲目优化解题，反而会损害数学的长期健康；未来的数学既要扩展研究前沿，也要弱化“解题”的传统中心地位，比如用AI生成过去不可能的大规模数据集，做“普查式”的实验数学。
+
+为什么重要：数学是AI实验室最爱拿来展示能力的领域。最有分量的数学家公开要求“报失败、报算力”，等于给AI数学成果的发布立了新的举证标准，后续各家的宣传口径会被拿来对照。
+</script>
+        </article>
+        <article data-item="a2" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #f2e6cf; color: #8a6a2b;">资本</span>
+            <span style="font-size: 12px; color: #6b665c;">金融时报 / PitchBook / AI Weekly</span>
+            <button type="button" class="mark-btn" data-mark="a2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">PitchBook：机器人与物理AI公司今年已融资近480亿美元，越来越多的钱流向“拍人干活”的训练数据</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">Physical Intelligence、Skild AI、NEURA等在“机器人健身房”和家庭、办公室、工厂里录制人类动作，补齐真实世界数据。</p>
+          <span class="heatbar"><i style="width: 76%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.ft.com/content/e5fd2655-f95f-4183-9dd9-b3c1ebe67a6b" hidden>
+金融时报援引PitchBook数据报道，2026年以来机器人和物理AI公司累计融资接近480亿美元，其中越来越大的份额投向这个赛道最缺的东西：普通人干普通活的真实视频和动作数据。
+
+报道点名的实验室包括Physical Intelligence、Skild AI、NEURA Robotics和Generalist，它们一边向外部数据供应商采购，一边自建数据团队。常见做法有两种：一是在所谓“机器人健身房”里让工人操作机械臂完成任务、记录全过程；二是把录制设备送进家庭、办公室和工厂，拍下人们日常干活的样子，目的是捕捉动作、接触和力度这些机器人将来必须自己处理的信息。
+
+和文本、图片不同，这类操作视频从来不能从公开网络上直接抓取，只能专门委托拍摄、逐帧标注。NEURA把高质量真实世界训练数据称为“物理AI最稀缺的资源”，正与亚琛工业大学、慕尼黑工业大学等伙伴建设一批数据采集场馆，计划年底前在欧洲、美国和中国开出五处。金融时报的判断是，制约这个行业的已经不是硬件或模型，而是数据缺口。同一周还有多笔相关融资：仓储机器人公司Ultra拿到合计6200万美元，制药自动化公司Multiply Labs完成7500万美元B轮。
+
+为什么重要：大语言模型靠互联网存量数据起飞，物理AI没有这样的存量，只能花钱一帧一帧地造。谁能以更低成本、更合规地采集真实场景数据，谁就握有护城河；随之而来的隐私和劳工问题，也会比文本数据时代更直接。
+</script>
+        </article>
+        <article data-item="a3" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #f5e8e8; color: #6d2f2f;">AI政策</span>
+            <span style="font-size: 12px; color: #6b665c;">The Verge / 白宫行政令</span>
+            <button type="button" class="mark-btn" data-mark="a3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">“超级智能”改名运动：马斯克、贝尼奥夫、黄仁勋之后，纳德拉也开始用特朗普要求的新说法</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">9月29日行政令要求联邦机构以“超级智能”取代“人工智能”；硅谷大公司在命名和措辞上陆续跟进。</p>
+          <span class="heatbar"><i style="width: 70%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.theverge.com/ai-artificial-intelligence/1009406/silicon-valley-is-falling-in-line-with-trumps-attempt-to-ren" hidden>
+The Verge周末编辑10月11日撰文，梳理硅谷大佬如何陆续向特朗普的“超级智能”改名运动靠拢。背景是特朗普9月29日签署的14434号行政令《开启超级智能时代》：要求联邦行政机构在公文、对外沟通、网站和政策文件中，用“超级智能”和“SI”取代“人工智能”和“AI”，并且“不承认”旧说法；新词在法律上仍沿用现行美国法典对人工智能的定义，白宫科技助理需在60天内提出立法定义的建议。
+
+文章列举的跟进者包括：马斯克承诺把SpaceXAI改名为SpaceXSI；在特朗普称使用“人工智能”一词的人是“敌人”之后数小时，贝尼奥夫宣布把Salesforce的AIForce改名为SIForce；英伟达本周宣布五年投入10亿美元支持美国科研时，用的是“超级智能研发能力”的说法；纳德拉10月10日呼吁给AI装“紧急刹车”的长文里，也反复使用“超级智能”。文章提到，黄仁勋、纳德拉、扎克伯格、皮查伊、贝索斯、阿莫代和马斯克都出席了宣布行政令的那场白宫活动。CNBC当时报道，与会高管签署的是一份名为《白宫超级智能协议》的两页文件，文件本身并未宣布改名。
+
+为什么重要：名词之争看似表面，但它决定了联邦采购文件、合同和监管条文里写什么。企业主动换说法，是在为政府订单和政策待遇表态；对读者来说，今后看到“超级智能”字样，要分清是能力描述还是政治措辞，不能当成技术里程碑。
+</script>
+        </article>
+        <article data-item="a4" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #e8f3ef; color: #2f5a4a;">政策</span>
+            <span style="font-size: 12px; color: #6b665c;">新华社 / 中国政府网 / 财联社</span>
+            <button type="button" class="mark-btn" data-mark="a4" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">中共中央、国务院印发《关于发展新质生产力的意见》：全面实施“人工智能+”，布局国家人工智能行业应用中试基地</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">意见第十条要求推进AI改造传统产业，强化算力、算法、数据供给，并构建AI技术监测、风险预警和应急响应体系。</p>
+          <span class="heatbar"><i style="width: 80%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.news.cn/politics/20261009/37bc898ce93f4c0899e926039f842891/c.html" hidden>
+新华社10月9日受权发布《中共中央 国务院关于发展新质生产力的意见》，财联社把它列为本周末影响市场的头号消息。意见以科技创新为引领、以全要素生产率大幅提升为核心标志，从科技创新、产业创新、发展方式创新、体制机制创新和人才工作机制创新几方面提出部署。
+
+与AI直接相关的是第十条“全面实施‘人工智能+’行动”：推进人工智能对传统产业的改造，加快推进智能网联新能源汽车、人工智能手机和电脑、人形机器人等新一代智能终端的场景应用；加快人工智能等数智技术创新，突破基础理论和核心技术，强化算力、算法、数据等高效供给；因地制宜、分业施策布局国家人工智能行业应用中试基地和高价值应用场景；同时构建技术监测、风险预警、应急响应体系，确保人工智能安全、可靠、可控。
+
+前后几条也与AI产业链相关：第九条要求健全数据产权、交易和收益分配制度，实施“东数西算”、智能制造、工业互联网等工程，建设全国一体化算力网；未来产业部分点名了具身智能、脑机接口、第六代移动通信、氢能和核聚变等方向，并要求建立未来产业投入增长和风险分担机制。同一时期，国家发改委10日召开的民营企业座谈会上也有人工智能应用领域企业参加。
+
+为什么重要：这是中央层面把“人工智能+”写进新质生产力总纲的文件，“中试基地”“高价值应用场景”和“一体化算力网”会成为地方政府招商和财政资金的抓手。对AI企业来说，接下来值得关注的是各部委配套细则和地方中试基地的落地名单。
+</script>
+        </article>
+        <article data-item="a5" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #e8eef5; color: #2f4a6d;">就业</span>
+            <span style="font-size: 12px; color: #6b665c;">国新办发布会 / 财联社</span>
+            <button type="button" class="mark-btn" data-mark="a5" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">人社部：将开展“适应人工智能发展促就业行动”；今年前9个月城镇新增就业1052万人</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">国新办10月10日发布会上，人社部提出五项行动，其中专门针对AI对就业的影响；前8个月城镇调查失业率均值5.2%。</p>
+          <span class="heatbar"><i style="width: 58%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.cls.cn/detail/2501472" hidden>
+国务院新闻办公室10月10日上午举行“开局起步‘十五五’”系列主题新闻发布会，人力资源社会保障部负责人介绍就业和社会保障工作。数据显示，今年1到9月城镇新增就业1052万人，完成全年目标任务的87.7%；前8个月城镇调查失业率均值为5.2%，官方的判断是就业形势总体稳定。
+
+接下来人社部将实施高校毕业生等青年就业支持计划，以及灵活就业和新就业形态劳动者就业质量提升计划；同时开展五项行动：适应人工智能发展促就业行动、“技能照亮前程”培训行动、农民工就业促进行动、高品质就业公共服务供给行动，以及“人力资源服务+”融合发展行动。发布会上没有公布AI促就业行动的具体指标和资金安排，相关细则仍有待出台。
+
+把这项行动放在当下看：一方面，国家层面刚刚发布的新质生产力意见要求全面实施“人工智能+”，推动AI改造传统产业；另一方面，客服、文字处理、基础编程等岗位正在被AI工具快速改写，青年就业压力也一直是政策重点。人社部把“适应人工智能发展”单列成一项就业行动，说明官方开始把AI对岗位的冲击当作需要专门应对的问题，而不只是笼统的技能升级。
+
+为什么重要：就业主管部门把“适应人工智能发展”写进一项全国性促就业行动的名称，政策信号很明确。后续如果配套培训补贴、岗位转换支持或企业用工指导，会直接影响企业引入AI工具时的节奏和职工培训安排，也值得做职业教育和招聘平台的公司关注。
+</script>
+        </article>
+        <article data-item="a6" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #eee8f5; color: #4a2f6d;">终端AI</span>
+            <span style="font-size: 12px; color: #6b665c;">彭博 Gurman / IT之家 / MacRumors</span>
+            <button type="button" class="mark-btn" data-mark="a6" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">苹果10月13日“欢迎回家”发布：首款智能家居中枢HomeView以新版Siri为核心，搭载A18芯片，11月出货</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">悬浮式方形屏幕加扬声器底座，另有壁挂版；主打语音交互和多用户识别，运行苹果自家应用但不开放应用商店。</p>
+          <span class="heatbar"><i style="width: 64%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.ithome.com/1/011/709.htm" hidden>
+彭博记者古尔曼在10月11日的Power On通讯中透露，苹果首款智能家居中枢定名HomeView，预计在10月13日（美东周二）的“欢迎回家”活动上发布，11月出货。据IT之家转述，它的外观类似当年的iMac G4“台灯电脑”，悬浮式屏幕下方是扬声器底座，搭载A18芯片，有四种配色，另有壁挂安装版本。
+
+这款产品主要靠语音交互，以新版AI Siri为核心，用户在房间另一头也能看清屏幕内容。它运行苹果自家应用，但不支持应用商店，用户或许可以用iPhone把第三方应用的小组件投到设备上。MacRumors汇总的爆料称，它有一块约6英寸的方形屏幕，系统可能叫homeOS，支持表盘和小组件；用户靠近或走远时界面元素会自动缩放；支持家庭多用户，适合放在厨房、卧室和客厅，用来控制家居配件、看安防画面、展示照片、看日程、放音乐和打FaceTime。发布形式预计是美东周二上午9点前后在官网发新闻稿，同时在纽约办媒体体验活动，而不是传统的直播发布会。
+
+同场预计还会更新Apple TV 4K和HomePod mini。TechCrunch周日的评论文章则提出疑问：苹果此前在智能家居上屡屡落后，这次能否成为它的第一款成功产品，关键在Siri能不能真正好用。
+
+为什么重要：这是苹果把新版AI Siri放到一块“常驻家中”的屏幕上的第一次尝试，直接对标亚马逊和谷歌的智能屏。它卖得好不好，是检验苹果端侧AI助手能否追上对手的直观指标。以上信息均为发布前爆料，以周二官方公布为准。
+</script>
+        </article>
+      </div></section>
+    <section id="heat" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">今日热度</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">Hacker News 48h 最佳榜</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(12px, 1.8vw, 18px);">
+        <div style="background: #fffefb; border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14);">
+          <div style="display: flex; align-items: center; gap: 9px; margin-bottom: 18px;">
+            <span class="badge" style="background: #e6e0d4; color: #4a453c;">GH</span>
+            <span style="font-size: 14px; font-weight: 600;">Hacker News 48h</span>
+            <span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">截至 10-11</span>
+          </div>
+          <ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 16px;">
+            <li data-item="h1" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">Lightbulb Computer：把投影仪装进灯泡的环境计算原型</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN 574 · 设计</span>
+                <button type="button" class="mark-btn" data-mark="h1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 100%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://lightbulbcomputer.com/" hidden>
+10月10日登上Hacker News前列的Lightbulb Computer，是一个设计研究项目，而不是可以买到的产品。作者认为，眼下对人机交互未来的想象过度集中在智能眼镜和头显上，这类设备受限又让人尴尬，于是提出另一条路：把现代投影仪和计算机视觉装进一个大灯泡形状的设备里，让信息直接投射到现实环境中，而不是困在小小的矩形屏幕里，或者戴在脸上。
+
+灯泡造型的好处是部署简单：可以装在一个便携的台灯底座上在家里移动，也可以直接拧进墙上或天花板的螺口灯座，做成整间房的固定装置。它能听语音指令、看到你指向哪里、分析看到的东西，再把内容投射或高亮到真实物体上。作者给了几个场景：在厨房把菜谱和计时器“钉”在台面上，手上沾着面粉也不用解锁手机；读书时直接问书上的内容；两个人规划旅行时，把一张大地图投在桌上，用简单手势平移缩放，切换交通图层；把手机里的照片投到任意墙面上一起看，甚至玩投影版桌游。
+
+作者在评论区说明，演示跑在一台Mac上，用的是自己写的投影映射和渲染软件，手部追踪调用苹果自带的框架，硬件只是一台消费级4K激光投影仪加一个普通摄像头，本质上是研究和设计原型。有评论者指出，这与宜家和IDEO在2015年提出的“未来厨房”构想很像。
+
+为什么上榜：在AI助手纷纷往眼镜和耳机里塞的时候，它展示了另一种不用戴、多人共享的交互形态，而且用的全是现成硬件。对做端侧多模态和智能家居的团队来说，这是一份可以直接参考的交互设计样本。
+</script>
+            </li>
+            <li data-item="h2" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">Build your own decision model：用小模型自己做“决策模型”</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN 451 · 教程</span>
+                <button type="button" class="mark-btn" data-mark="h2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 79%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://nishtahir.com/build-your-own-decision-model/" hidden>
+开发者Nish Tahir 10月10日发布的这篇教程，在Hacker News上拿到四百多分，正好赶上这周“决策模型”成为新赛道：九月中旬Jev开了头，微软和Cloudflare本周相继推出各自的决策模型。文章用一个能跑的例子讲清楚这类模型到底在做什么。
+
+作者的出发点是：普通语言模型要输出一个结构化答案，哪怕用了结构化输出约束，也要一个词元一个词元地生成，示例里需要跑11次前向计算才拿到完整结果。决策模型的前提是选项固定，于是可以只跑一次：把词表中除了A到E以外的词元全部屏蔽，模型只能在这几个选项里挑，取概率最高的那个就是答案。作者用Qwen3-1.7B加一小段Python演示了这个过程，读入题目和选项，取每个选项首个词元的概率。
+
+文章也讲清楚了局限：输出被限定在选项范围内，并不保证答案正确；很多人直接把这些概率当置信度，但未经额外训练，它们反映的是模型对“下一个词元是什么”的把握，而不是“这个答案正确”的真实概率。商用决策模型的价值，很大程度上就在于后训练出来的概率校准。
+
+为什么上榜：它把一个刚被大厂包装成新产品的概念，拆成了任何人都能在笔记本上复现的几十行代码，也让开发者能判断，什么时候值得付费用校准过的决策模型，什么时候自己屏蔽词表就够用了。
+</script>
+            </li>
+            <li data-item="h3" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">Nitter作者公开求助：X两度发出停止侵权函，此前承诺的法律代理落空</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN 410 · 开源</span>
+                <button type="button" class="mark-btn" data-mark="h3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 72%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://nitter.net" hidden>
+Nitter是一个开源的X（原推特）替代前端，不登录、不加载跟踪脚本就能浏览公开推文。10月10日，项目作者在nitter.net首页发布更新，随后登上Hacker News前列。
+
+更新说，X公司在8月24日发出停止侵权函，要求永久下线所有Nitter实例和项目代码仓库；9月8日又发了一封，要求和法律威胁相同。作者9月7日曾表示项目会在律师代理下继续，但现在承认，当时依据的承诺“后来证明并不属实”，并为此前的误导性信息道歉。他正在公开寻求资金和法律帮助，希望律师、组织或任何能帮忙的人联系他；捐款会优先用于可能的法律费用，用不完的部分支持Nitter或其后继项目的开发。
+
+Hacker News评论区争论很激烈：一派认为这是大公司利用法律程序骚扰做合理事情的个人，寒蝉效应才是目的；另一派指出，“公开可见”不等于“允许任意使用”，抓取接口很可能违反服务条款，合法性并不清楚；还有人认为法院应当更多地认定这类格式条款显失公平而不予执行。
+
+为什么上榜：Nitter是第三方客户端和抓取工具生存空间的风向标。如果一个靠捐款维持的个人项目因为律师函而关停，其他依赖公开网页数据的开源工具也会更谨慎；这场争议也与当下AI公司抓取网页数据的合规问题高度相关。
+</script>
+            </li>
+            <li data-item="h4" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">LineageOS 24.0：基于Android 17，新增浏览器一键刷机工具</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN 397 · 开源</span>
+                <button type="button" class="mark-btn" data-mark="h4" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 70%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://lineageos.org/Changelog-32/" hidden>
+开源安卓发行版LineageOS 10月11日发布第32期更新日志，正式推出基于Android 17的24.0版本。团队说，得益于前几个版本适配谷歌大规模代码重构积累的经验，这次从6月Android 17发布到完成移植比预期快，“今年我们来早了”。项目将在12月24日迎来十周年。
+
+这一版的亮点之一是新的浏览器刷机工具：借助WebUSB，直接在浏览器里和兼容设备通信，覆盖几种常见的安装方式，用户不必再去找、装、运行单独的桌面刷机程序。团队强调它不取代原有安装指南，维基上的既有方法仍是默认和受支持的路径，刷机前仍需备份、确认设备型号和文件。自带应用方面，多款应用已更新到Material 3 Expressive设计；工程上，持续集成会对大多数应用仓库自动投票，每次合并都会通过GitHub Actions推送构建产物。项目还完成了一次由无障碍组织免费提供的全流程无障碍审计，恢复模式的导航和界面已据此改版。
+
+一个对老设备用户不太友好的决定是：即便有些使用4.4和4.9旧内核的设备已经移植到23.2和24.0，项目也只接受这些设备提交22.2版本，因为旧内核需要大量难以持续维护的平台补丁。22.2会持续获得每月安全补丁，直到谷歌停止发布Android 15的官方安全公告。从官方构建升级一般不需要清除数据。
+
+为什么上榜：主流第三方发行版仍能在Android新版本发布后几个月内跟上，说明社区维护能力还在；浏览器刷机则把门槛又降了一截。
+</script>
+            </li>
+            <li data-item="h5" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">我花钱请人照着我的README装软件：一小时25欧元，换来一份真能用的文档</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN 359 · 文档</span>
+                <button type="button" class="mark-btn" data-mark="h5" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 64%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://shkspr.mobi/blog/2026/10/i-paid-people-to-try-and-follow-my-readme/" hidden>
+英国开发者Terence Eden 10月11日的这篇博客，讲的是一个朴素但很少有人真做的实验。他在为开源项目ActivityBot申请NLnet资助时承诺，要找真实用户测试安装体验，并愿意为每人一小时付25欧元。他在Mastodon上招募了几个人，通过视频通话进行测试。
+
+测试方法很简单：他告诉志愿者自己知道安装流程不完美、就是想听批评；请对方共享屏幕，并且一边操作一边把想法说出来，在做什么、哪里看不懂、哪里困惑、哪里高兴、哪里恼火。他手写笔记，花了好几个小时听别人指出自己的种种错误假设，比如哪些命令其实需要管理员权限、写成单横线的参数本该是双横线、装完还得重启等等。每场结束后，他根据对方卡住的地方改README，再拿新版本去测下一个人。前后一共花了大约150欧元。
+
+他预料到会有人问：为什么不让大模型模拟各种用户？他的回答是想和真人交流，真人会带来独特视角，而且能从语气里听出挫败感，这正是判断哪个错误必须改的信号。他回忆在英国政府数字服务部门写技术文档时，每篇都要经过另一个人审读，那些人能抓出拼写检查发现不了的问题。他不认为现在的README已经完美，但它确实更容易照着做了。
+
+为什么上榜：开发者普遍知道“文档要测试”，却很少有人真去做。这篇文章给出了一个成本极低、可以直接照抄的方法，也在AI生成文档泛滥的时候提醒大家，真实用户的现场反馈仍然替代不了。
+</script>
+            </li>
+          </ol>
+        </div>
+        <div style="background: linear-gradient(180deg, #fffefb, #fffdf7); border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14); display: grid; gap: 14px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge" style="background: #f2e6cf; color: #8a6a2b;">NOTE</span>
+            <span style="font-size: 14px; font-weight: 600;">怎么用这张榜</span>
+          </div>
+          <p style="margin: 0; font-size: 14px; line-height: 1.75; color: #3a3630;">左侧是 Hacker News 过去 48 小时最佳榜，分数是社区热度，不是重要性排序。帖子热度不代表首发时间，例如 Telegram 桌面版漏洞文章发布于 10 月 3 日、漏洞已于 9 月 16 日修复。生产引入新工具前先做最小权限和依赖锁定。</p>
+          <p style="margin: 0; font-size: 13px; line-height: 1.7; color: #6b665c;">HN 口径 <a href="https://news.ycombinator.com/best" target="_blank" rel="noreferrer">news.ycombinator.com/best</a>；抓取时刻 10-11 07:02。</p>
+        </div>
+      </div></section>
+    <section id="world" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">世界与财经</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">4 条</span>
+      </div>
+      <div style="background: #fffefb; border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(8px, 1.5vw, 12px) clamp(20px, 2.8vw, 32px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14);">
+        <ol style="margin: 0; padding: 0; list-style: none;">
+            <li data-item="w1" style="cursor: pointer; display: grid; gap: 8px; padding: 14px 0; border-bottom: 1px solid rgba(28,26,22,0.06);">
+              <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+                <p style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; letter-spacing: -0.01em; flex: 1;">利雅得哈立德国王国际机场遭导弹袭击致12死、约300人受伤，次日航站楼再遭击中；胡塞武装宣称负责，美方考虑介入</p>
+                <button type="button" class="mark-btn" data-mark="w1" style="padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span style="font-size: 12px; color: #a09a8e;">10/10–11 · 国际</span>
+              <script type="text/markdown" data-detail data-source="https://www.npr.org/2026/10/10/g-s1-147682/attack-on-riyadh-airport-killed-12-people-and-wounded-over-300-more-saudi-authorities-say" hidden>
+沙特民航总局11日凌晨发表声明说，首都利雅得的哈立德国王国际机场10日遭袭，造成12人死亡、309人受伤，部分伤者伤势严重。死者包括4名沙特人、2名孟加拉国人，另有6人分别来自美国、埃及、约旦、叙利亚、巴勒斯坦和苏丹。机场随即暂停运行，评估损毁和安全状况。
+
+据美国全国公共电台援引美联社报道，11日（周日）又有一枚飞行物击中同一机场负责国内航班的3号和4号航站楼综合体，沙特方面称造成人员受伤，机场当天仍处于关闭状态。打击胡塞武装的沙特领导的联军表示，这两次袭击都来自也门的胡塞武装，胡塞方面宣称对这些袭击负责。报道称，10日的导弹袭击是伊朗战争爆发以来海湾阿拉伯国家遭受的最致命一次袭击。沙特方面威胁作出“决定性”回应，特朗普表示正在考虑是否加入打击胡塞武装的行动。
+
+财联社把这起事件列为周末影响市场的要闻之一。利雅得是海湾地区的航空和商务枢纽，机场连续两天遇袭、运行中断，直接冲击地区航班和商务往来；如果美国军事介入，也门方向的冲突可能进一步升级。
+
+为什么重要：海湾国家的首都机场成为反复打击的目标，意味着地区冲突正在向民用基础设施扩散。对市场而言，后续要看油价、航运保险和中东航线的反应，以及美国是否正式出兵；对在海湾有业务和人员的企业来说，出行安全评估要随之调整。
+</script>
+            </li>
+            <li data-item="w2" style="cursor: pointer; display: grid; gap: 8px; padding: 14px 0; border-bottom: 1px solid rgba(28,26,22,0.06);">
+              <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+                <p style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; letter-spacing: -0.01em; flex: 1;">证监会主席吴清召开座谈会听取稳市建议；公募基金运作办法时隔12年修订，拟取消发起式基金“3年不满2亿元即清盘”</p>
+                <button type="button" class="mark-btn" data-mark="w2" style="padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span style="font-size: 12px; color: #a09a8e;">10/9–10 · 中国金融</span>
+              <script type="text/markdown" data-detail data-source="https://www.cls.cn/detail/2501472" hidden>
+10月10日（国庆调休后的工作日），中国证监会主席吴清在北京召开座谈会，与部分上市公司负责人和证券基金机构专家交流，听取对资本市场和金融形势的意见。据财联社报道，与会者认为宏观经济稳中向好、资本市场运行总体稳健，并提出多项建议：持续加强稳市机制建设，进一步拓宽中长期资金的来源、渠道和入市方式，发展壮大耐心资本；推动有条件的上市公司加大分红回购，完善投资者回报和权益保护；优化发行上市制度；强化交易监管，加强跨境风险监测应对；研究储备更多增量政策工具。吴清表示希望大家积极建言献策，更好回报投资者。
+
+前一天（10月9日），证监会发布《公开募集证券投资基金运作管理办法（征求意见稿）》等三份文件公开征求意见，这是公募基金运作办法时隔12年的系统性修订。财联社梳理的一个变化是：删除发起式基金成立满3年、规模不到2亿元就强制清盘的特殊规定，让发起式基金的退出门槛与普通基金拉平，对养老目标基金、偏股型产品等需要长期培育的产品是利好。监管部门近日还发布通报，把新模式浮动费率产品的参与范围扩大到中型基金管理人，头部机构这类产品发行数量原则上不低于其主动权益基金发行量的60%，新纳入的中型机构不低于30%。
+
+为什么重要：稳市机制被放在建议首位，加上公募规则向长期产品倾斜，释放的信号是监管继续引导中长期资金入市、维护市场稳定。对基金公司来说，发起式基金清盘压力减轻，产品布局可以更偏长期；投资者则要留意浮动费率产品的收费规则差异。
+</script>
+            </li>
+            <li data-item="w3" style="cursor: pointer; display: grid; gap: 8px; padding: 14px 0; border-bottom: 1px solid rgba(28,26,22,0.06);">
+              <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+                <p style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; letter-spacing: -0.01em; flex: 1;">财政部下达5500亿元地方政府债务结存限额：3000亿元全部给县区“保基本”，2500亿元专项债向经济大省和“六张网”倾斜</p>
+                <button type="button" class="mark-btn" data-mark="w3" style="padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span style="font-size: 12px; color: #a09a8e;">10/10–11 · 中国经济</span>
+              <script type="text/markdown" data-detail data-source="https://finance.sina.com.cn/jjxw/2026-10-11/doc-iniuvtkm7376975.shtml" hidden>
+据财联社和新浪财经周末汇总，财政部近日安排使用地方政府债务结存限额5500亿元，用于提高县区一般公共预算保障能力，并支持地方扩大有效投资。结存限额一般指以往年度债务限额中尚未使用的空间，动用它不必另行扩大当年新增债务规模。
+
+具体分配是：一般债务结存限额3000亿元，全部分配给县区使用，专门用于提高县区一般公共预算保障能力，也就是保工资、保运转、保基本民生这类刚性支出；专项债务结存限额2500亿元，分配给今年四季度有实际项目资金需求的地区，向经济大省倾斜，优先保障在建项目资金，新建项目聚焦“六张网”建设等重点领域。财政部表示将指导各地衔接项目储备和债券发行，加快发行节奏，尽快形成实物工作量。
+
+同期财政部发布的上半年财政政策执行情况报告说，将根据宏观经济运行情况及时谋划出台务实管用的增量政策，加大逆周期调节力度。国家发改委主任郑栅洁10日主持召开民营企业座谈会，表示将推动“十五五”规划和“六张网”建设方案中明确的重大工程项目尽早开工。
+
+为什么重要：四季度是全年经济收官的关键窗口，动用结存限额是在不扩大赤字的前提下给基层财政和投资“补血”。3000亿元专门给县区，说明基层财政压力仍是重点；2500亿元专项债和“六张网”项目的开工节奏，会影响建材、电网、算力基础设施等行业四季度的订单。
+</script>
+            </li>
+            <li data-item="w4" style="cursor: pointer; display: grid; gap: 8px; padding: 14px 0; ">
+              <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+                <p style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; letter-spacing: -0.01em; flex: 1;">中欧贸易投资磋商机制第二次例会形成成果共识清单，明年3月开第三次例会；商务部回应美国联合14个经济体的“产能过剩”声明</p>
+                <button type="button" class="mark-btn" data-mark="w4" style="padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span style="font-size: 12px; color: #a09a8e;">10/8–11 · 中国外贸</span>
+              <script type="text/markdown" data-detail data-source="https://finance.sina.com.cn/jjxw/2026-10-11/doc-iniuvtkm7376975.shtml" hidden>
+商务部部长王文涛与欧盟委员会贸易和经济安全委员谢夫乔维奇10月8日至9日在北京共同主持中欧贸易投资磋商机制第二次例会。双方围绕贸易和投资平衡、出口管制、知识产权、世贸组织改革等议题会谈，盘点了机制首次会议以来的进展，并形成成果共识清单，新浪财经的周末汇总称达成16项成果共识。双方重申，作为关键贸易伙伴，将在世贸组织规则框架下妥善处理分歧，继续稳定双边经贸关系并使其更加平衡；双方商定2027年3月召开第三次例会，此前保持密切沟通，包括1月举行部长级视频会议。
+
+同期，商务部新闻发言人回应了美国贸易代表办公室美东时间10月7日的公告：美方召集14个经济体高级官员，签署了应对所谓“结构性产能和生产过剩”问题的部长级联合声明。商务部表示，中方今年7月已专门发布立场文件，反对以“产能过剩”为名行贸易保护主义之实，认为这会扰乱全球经贸秩序和产供链稳定；如果有关经济体以此为借口采取损害中方利益的措施，中方将作出必要回应。
+
+一边是中欧磋商机制按期推进并约定下一次会期，一边是美国拉拢盟友在产能问题上统一口径，中国对外经贸关系呈现明显的分化。
+
+为什么重要：电动车、光伏、钢铁等行业的出口前景，很大程度上取决于欧盟会站在“磋商”还是“联合施压”一边。中欧约定明年3月再谈，说明双方都想把分歧留在谈判桌上；美方声明若转化为具体关税或调查措施，中方的“必要回应”将成为下一阶段的关注点。
+</script>
+            </li>
+        </ol>
+      </div></section>
+    <section id="market" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">行情</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">8 标的 · 价格 + 涨跌幅</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: clamp(10px, 1.4vw, 14px); margin-bottom: 14px;">
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">SPX</span>
+            <span style="font-size: 11px; color: #a09a8e;">标普500</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">7,811.54</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+0.59%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">IXIC</span>
+            <span style="font-size: 11px; color: #a09a8e;">纳斯达克</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">27,366.17</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+0.64%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">NVDA</span>
+            <span style="font-size: 11px; color: #a09a8e;">英伟达</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">$229.28</span>
+            <span class="down" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">-0.52%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">AMZN</span>
+            <span style="font-size: 11px; color: #a09a8e;">亚马逊</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">$262.43</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+3.29%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">MSFT</span>
+            <span style="font-size: 11px; color: #a09a8e;">微软</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">$535.07</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+2.38%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">GOOGL</span>
+            <span style="font-size: 11px; color: #a09a8e;">谷歌</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">$351.66</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+0.97%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">AMD</span>
+            <span style="font-size: 11px; color: #a09a8e;">AMD</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">$608.10</span>
+            <span class="down" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">-2.03%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">BTC</span>
+            <span style="font-size: 11px; color: #a09a8e;">比特币</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">~$83,620</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+0.9%</span>
+          </div>
+        </div>
+      </div>
+      <div style="background: linear-gradient(180deg, #fffefb, #fffdf7); border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.8vw, 30px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14); display: grid; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e;">数据说明</span>
+          <span style="flex: 1; height: 1px; background: rgba(28,26,22,0.08); min-width: 20px;"></span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #6b665c;">今天周一早上，美股尚未开盘，取2026-10-09（上周五）常规收盘，涨跌幅相对10/8周四收盘计算；数据来自雅虎财经日线（10/12早约07:10重新拉取），与上两期记录一致。BTC取Coinbase现货约83,622美元（上海10/12约07:11），较24小时开盘价约82,911美元变动+0.9%。本期无暂缺标的，未发明价格。</p>
+      </div>
+    </section>
+    <footer style="margin-top: clamp(36px, 5vw, 64px); padding-top: clamp(20px, 3vw, 28px); border-top: 1px solid rgba(28,26,22,0.09); display: flex; align-items: baseline; gap: 10px 26px; flex-wrap: wrap;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">小墨 · 公开源摘选 · 2026-10-12</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">下次更新约 07:00 Asia/Shanghai</span>
+      <a href="#brief" style="margin-left: auto; font-size: 13px;">回到顶部</a>
+      <a href="./2026-10-12.html" style="font-size: 13px;">本日归档</a>
+      <a href="./2026-10-11.html" style="font-size: 13px;">上一期</a>
+    </footer>
+  </main>
+</div>
+<div id="detailOverlay" class="detail-overlay" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+  <div class="detail-panel" role="document">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span class="detail-label">详情</span>
+      <button type="button" class="detail-close" id="detailClose" style="margin-left:auto;">关闭</button>
+    </div>
+    <h3 class="detail-title" id="detailTitle"></h3>
+    <div class="detail-body" id="detailBody"></div>
+    <div class="detail-meta">
+      <a class="detail-source" id="detailSource" href="#" target="_blank" rel="noreferrer">原文 ↗</a>
+      <span class="detail-chars" id="detailChars"></span>
+    </div>
+  </div>
+</div>
+<script>
+
+
+(function () {
+  var KEY = 'xiaomo-dailybrief-marks-2026-08-31';
+  var marked = new Set();
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) JSON.parse(raw).forEach(function (id) { marked.add(id); });
+  } catch (e) {}
+  var filtering = false;
+  var filterBtn = document.getElementById('filterBtn');
+  var countEl = document.getElementById('markCount');
+  var emptyEl = document.getElementById('emptyState');
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(Array.from(marked))); } catch (e) {}
+  }
+  function syncMarks() {
+    document.querySelectorAll('.mark-btn').forEach(function (btn) {
+      var id = btn.getAttribute('data-mark');
+      var on = marked.has(id);
+      btn.classList.toggle('on', on);
+      btn.textContent = on ? '已标记' : '标记';
+    });
+    countEl.textContent = String(marked.size);
+    countEl.style.background = marked.size ? '#f0e2d2' : '#ece7dc';
+    countEl.style.color = marked.size ? '#8a5a2b' : '#6b665c';
+    applyFilter();
+  }
+  function applyFilter() {
+    document.querySelectorAll('[data-item]').forEach(function (el) {
+      var id = el.getAttribute('data-item');
+      var show = !filtering || marked.has(id);
+      el.classList.toggle('hidden-by-filter', !show);
+    });
+    document.querySelectorAll('main > section').forEach(function (sec) {
+      if (!filtering) { sec.classList.remove('hidden-by-filter'); return; }
+      var any = sec.querySelector('[data-item]:not(.hidden-by-filter)');
+      sec.classList.toggle('hidden-by-filter', !any);
+    });
+    emptyEl.style.display = filtering && marked.size === 0 ? 'block' : 'none';
+  }
+  var overlay = document.getElementById('detailOverlay');
+  var detailTitle = document.getElementById('detailTitle');
+  var detailBody = document.getElementById('detailBody');
+  var detailSource = document.getElementById('detailSource');
+  var detailChars = document.getElementById('detailChars');
+  var detailClose = document.getElementById('detailClose');
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function inlineMd(s) {
+    var out = escapeHtml(s);
+    out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1<\/a>');
+    out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1<\/strong>');
+    out = out.replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, '$1<em>$2<\/em>');
+    return out;
+  }
+  function renderMarkdown(src) {
+    var lines = String(src || '').replace(/\r\n/g, '\n').split('\n');
+    var html = [];
+    var i = 0;
+    function flushPara(buf) {
+      var t = buf.join(' ').trim();
+      if (t) html.push('<p>' + inlineMd(t) + '<\/p>');
+    }
+    while (i < lines.length) {
+      var line = lines[i];
+      if (/^\s*$/.test(line)) { i++; continue; }
+      var hm = line.match(/^\s*##\s+(.+)$/);
+      if (hm) { html.push('<h2>' + inlineMd(hm[1].trim()) + '<\/h2>'); i++; continue; }
+      if (/^\s*[-*]\s+/.test(line)) {
+        var items = [];
+        while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) {
+          items.push('<li>' + inlineMd(lines[i].replace(/^\s*[-*]\s+/, '')) + '<\/li>');
+          i++;
+        }
+        html.push('<ul>' + items.join('') + '<\/ul>');
+        continue;
+      }
+      if (/^\s*\d+\.\s+/.test(line)) {
+        var oitems = [];
+        while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+          oitems.push('<li>' + inlineMd(lines[i].replace(/^\s*\d+\.\s+/, '')) + '<\/li>');
+          i++;
+        }
+        html.push('<ol>' + oitems.join('') + '<\/ol>');
+        continue;
+      }
+      var buf = [];
+      while (i < lines.length && !/^\s*$/.test(lines[i]) && !/^\s*##\s+/.test(lines[i]) && !/^\s*[-*]\s+/.test(lines[i]) && !/^\s*\d+\.\s+/.test(lines[i])) {
+        buf.push(lines[i].trim());
+        i++;
+      }
+      flushPara(buf);
+    }
+    return html.join('') || '<p><\/p>';
+  }
+  function cnLen(s) {
+    return (String(s || '').replace(/[#*_`\[\]()>\-]/g, '').replace(/\s+/g, '').match(/[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/g) || []).length;
+  }
+  function detailSourceText(d) {
+    var raw = '';
+    if (d.tagName === 'SCRIPT') {
+      raw = d.textContent || '';
+    } else {
+      raw = d.textContent || '';
+    }
+    return raw.replace(/^\uFEFF/, '').trim();
+  }
+
+  function titleOf(item) {
+    var el = item.querySelector('h3, h4');
+    if (el) return el.textContent.trim();
+    var ps = item.querySelectorAll('p');
+    for (var i = 0; i < ps.length; i++) {
+      if (ps[i].hasAttribute('data-detail')) continue;
+      var fw = (ps[i].style && ps[i].style.fontWeight) || '';
+      if (fw === '600' || fw === '500' || fw === '700') return ps[i].textContent.trim();
+    }
+    var mono = item.querySelector('span[style*="IBM Plex Mono"]');
+    return mono ? mono.textContent.trim() : (item.getAttribute('data-item') || '详情');
+  }
+  function openDetail(item) {
+    var d = item.querySelector('[data-detail]');
+    if (!d) return;
+    var body = detailSourceText(d);
+    detailTitle.textContent = titleOf(item);
+    detailBody.innerHTML = renderMarkdown(body);
+    detailChars.textContent = cnLen(body) + ' 字';
+    var href = d.getAttribute('data-source') || '';
+    if (href) {
+      detailSource.href = href;
+      detailSource.style.display = '';
+      detailSource.textContent = href.indexOf('github.com') >= 0 ? '仓库 ↗' : (href.indexOf('gitstarclub') >= 0 ? '榜单 ↗' : '原文 ↗');
+    } else {
+      detailSource.style.display = 'none';
+    }
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDetail() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  detailClose.addEventListener('click', closeDetail);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) closeDetail(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeDetail();
+  });
+  document.getElementById('root').addEventListener('click', function (e) {
+    var markBtn = e.target.closest('.mark-btn');
+    if (markBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      var id = markBtn.getAttribute('data-mark');
+      if (marked.has(id)) marked.delete(id); else marked.add(id);
+      save();
+      syncMarks();
+      return;
+    }
+    if (e.target.closest('a')) return;
+    var item = e.target.closest('[data-item]');
+    if (item) openDetail(item);
+  });
+  filterBtn.addEventListener('click', function () {
+    filtering = !filtering;
+    filterBtn.classList.toggle('on', filtering);
+    filterBtn.setAttribute('aria-pressed', filtering ? 'true' : 'false');
+    applyFilter();
+  });
+  document.querySelectorAll('.nav-pill').forEach(function (a) {
+    a.addEventListener('click', function () {
+      document.querySelectorAll('.nav-pill').forEach(function (x) { x.classList.remove('active'); });
+      a.classList.add('active');
+    });
+  });
+  syncMarks();
+})();
+
+
+</script>
+</body></html>
