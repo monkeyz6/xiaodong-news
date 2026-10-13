@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="小墨 · 每日简报 · 2026-10-14 — 要点 / AI与前沿 / 热度 / 世界与财经 / 行情">
+<title>每日简报 · 2026-10-14 · 小墨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 92px; scroll-behavior: smooth; }
+  body { margin: 0; background: #f5f2ec; color: #1c1a16; font-family: 'Instrument Sans', 'Noto Sans SC', system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+  a { color: #8a5a2b; text-decoration: none; }
+  a:hover { color: #6d4520; text-decoration: underline; text-underline-offset: 3px; }
+  button { font: inherit; color: inherit; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .nav-pill { padding: 6px 11px; border-radius: 999px; font-size: 13px; font-weight: 500; color: #6b665c; }
+  .nav-pill:hover { background: #ece7dc; color: #1c1a16; text-decoration: none; }
+  .nav-pill.active { color: #1c1a16; background: #ece7dc; }
+  .mark-btn { padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(28,26,22,0.12); background: transparent; cursor: pointer; font-size: 12px; color: #6b665c; }
+  .mark-btn:hover { border-color: rgba(138,90,43,0.5); color: #8a5a2b; }
+  .mark-btn.on { background: #f0e2d2; border-color: rgba(138,90,43,0.45); color: #8a5a2b; }
+  .filter-btn { margin-left: auto; display: flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(28,26,22,0.12); background: #fffefb; cursor: pointer; font-size: 13px; font-weight: 500; box-shadow: 0 1px 2px rgba(28,26,22,0.04); }
+  .filter-btn:hover, .filter-btn.on { border-color: rgba(138,90,43,0.45); }
+  .filter-btn.on { background: #f0e2d2; }
+  [data-item].hidden-by-filter { display: none !important; }
+  section.hidden-by-filter { display: none !important; }
+  .up { color: #2f6b4f; }
+  .down { color: #a8422f; }
+  .flat { color: #6b665c; }
+  .heatbar { display: block; height: 3px; border-radius: 999px; background: #ece7dc; overflow: hidden; }
+  .heatbar > i { display: block; height: 100%; border-radius: 999px; background: #8a5a2b; }
+  .badge { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; padding: 0 6px; white-space: nowrap; box-sizing: border-box; height: 22px; border-radius: 7px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; }
+  .badge.sm { min-width: 20px; padding: 0 5px; height: 20px; border-radius: 6px; font-size: 9px; }
+  .detail-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(28,26,22,0.38); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: none; align-items: flex-end; justify-content: center; padding: 16px; }
+  .detail-overlay.open { display: flex; }
+  .detail-panel { width: min(640px, 100%); max-height: min(88vh, 820px); overflow: auto; background: #fffefb; border-radius: 22px 22px 18px 18px; box-shadow: 0 24px 60px -20px rgba(28,26,22,0.35); border: 1px solid rgba(255,255,255,0.95); padding: clamp(20px, 3vw, 32px); animation: rise 0.28s ease both; }
+  @media (min-width: 720px) {
+    .detail-overlay { align-items: center; }
+    .detail-panel { border-radius: 24px; }
+  }
+  .detail-close { appearance: none; border: 1px solid rgba(28,26,22,0.12); background: #f5f2ec; color: #6b665c; border-radius: 999px; padding: 6px 14px; cursor: pointer; font-size: 13px; }
+  .detail-close:hover { border-color: rgba(138,90,43,0.45); color: #8a5a2b; }
+  .detail-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e; }
+  .detail-title { margin: 8px 0 0; font-size: clamp(18px, 2.4vw, 24px); font-weight: 700; line-height: 1.35; letter-spacing: -0.02em; color: #1c1a16; }
+  .detail-body { margin: 16px 0 0; font-size: 15px; line-height: 1.85; color: #3a3630; }
+  .detail-body p { margin: 0 0 0.9em; line-height: 1.85; }
+  .detail-body p:last-child { margin-bottom: 0; }
+  .detail-body h2 { margin: 1.1em 0 0.55em; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: #1c1a16; font-family: 'Instrument Sans', 'Noto Sans SC', system-ui, sans-serif; }
+  .detail-body h2:first-child { margin-top: 0; }
+  .detail-body ul, .detail-body ol { margin: 0 0 0.9em; padding-left: 1.35em; line-height: 1.85; }
+  .detail-body li { margin: 0.2em 0; }
+  .detail-body li > p { margin: 0; }
+  .detail-body strong { font-weight: 700; color: #1c1a16; }
+  .detail-body em { font-style: italic; }
+  .detail-body a { color: #8a5a2b; text-decoration: underline; text-underline-offset: 3px; }
+  .detail-meta { margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(28,26,22,0.08); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .detail-source { font-size: 14px; font-weight: 500; color: #8a5a2b; }
+  .detail-chars { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e; }
+
+
+</style></head><body>
+<div id="root" style="min-height: 100vh; background: #f5f2ec; padding-bottom: 80px;">
+  <header style="position: sticky; top: 0; z-index: 20; background: rgba(245,242,236,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(28,26,22,0.07);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 14px clamp(16px, 4vw, 40px); display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <span style="font-size: 17px; font-weight: 700; letter-spacing: -0.01em;">每日简报</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #a09a8e; text-transform: uppercase;">Daily Brief</span>
+      </div>
+      <nav style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin-left: 4px;">
+        <a href="#brief" class="nav-pill active">要点</a>
+        <a href="#ai" class="nav-pill">AI 与前沿</a>
+        <a href="#heat" class="nav-pill">今日热度</a>
+        <a href="#world" class="nav-pill">世界与财经</a>
+        <a href="#market" class="nav-pill">行情</a>
+        <a href="intel.html" class="nav-pill">情报专区</a>
+      </nav>
+      <button type="button" class="filter-btn" id="filterBtn" aria-pressed="false">
+        <span>只看已标记</span>
+        <span id="markCount" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; min-width: 18px; padding: 1px 6px; border-radius: 999px; background: #ece7dc; color: #6b665c; text-align: center;">0</span>
+      </button>
+    </div>
+  </header>
+<main style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px);">
+<p id="emptyState" style="display: none; margin: clamp(48px, 8vw, 96px) 0; text-align: center; font-size: 15px; color: #a09a8e;">还没有标记的条目 · 点任意一条右侧的“标记”留到晚上深读</p>
+    <section id="brief" style="padding: clamp(28px, 5vw, 56px) 0 clamp(24px, 4vw, 40px);">
+      <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: clamp(20px, 3vw, 30px);">
+        <h1 style="margin: 0; font-size: clamp(34px, 6vw, 56px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02;">今日要点</h1>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; letter-spacing: 0.02em;">2026-10-14 · 周三</span>
+      </div>
+      <div style="animation: rise 0.5s ease both; background: linear-gradient(180deg, #fffefb, #fffdf7); border-radius: clamp(20px, 3vw, 30px); padding: clamp(22px, 3.4vw, 40px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 20px 44px -22px rgba(28,26,22,0.18); border: 1px solid rgba(255,255,255,0.9);">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: clamp(18px, 2.6vw, 26px); flex-wrap: wrap;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e;">小墨摘选 · 5 条</span>
+          <span style="flex: 1; height: 1px; background: rgba(28,26,22,0.08); min-width: 20px;"></span>
+          <span style="font-size: 12px; color: #a09a8e;">公开源 · 2026-10-11/10-13</span>
+        </div>
+        <ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 20px;">
+          <li data-item="b1" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">01</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">谷歌全球开放Gemini 4 Argon：官方称Vals Index排名第一，API统一输入输出上限100万token，推介价每百万输入/输出2/10美元，11月30日后涨至4/20美元</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #eee8f5; color: #4a2f6d;">大模型</span>
+                <span style="font-size: 13px; color: #6b665c;">Google DeepMind / Google Blog / The Verge</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/13</span>
+                <button type="button" class="mark-btn" data-mark="b1" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/" hidden>
+谷歌DeepMind 10月13日宣布，Gemini 4 Argon面向全球正式开放。开发者与企业可通过Gemini API、AI Studio使用；Google AI Pro与Ultra订阅用户可在Gemini应用和搜索AI Mode里调用；Ultra用户还可在智能体开发平台Antigravity中试用。Argon主打长程、多步的复杂任务，覆盖软件工程、金融法律、网络安全和科研。
+
+按谷歌公布的数字，Argon在衡量金融、编程、法律、税务等关键经济部门表现的Vals Index上排名第一；API支持统一的100万token输入输出上限，并引入continuation协议以衔接超长任务。推介价为每百万输入token 2美元、输出10美元，缓存输入再打九五折；推介期到11月30日结束，之后涨到输入4美元、输出20美元。谷歌还表示，公司内部用Argon做Agentic代码提交提升逾35%、回滚减少近三分之一，并为1万名科学家提供Antigravity最高用量档半年免费申请。
+
+安全方面，谷歌称Argon是迄今最完整的安全栈：外部生物红队解锁率低于1%，间接提示注入攻击成功率压到0.7%，编码场景中“走捷径”比例约2%。Fairwind计划也开始向更多可信网络防御合作伙伴扩容。
+
+为什么重要：继Meta Muse Wonder之后，又一家前沿实验室把旗舰模型全面推向付费API和订阅用户，长上下文与智能体工作流成为标配卖点。推介价显著低于常态档，说明谷歌在用价格换装机量；真正考验仍是独立评测能否坐实“第一”，以及企业工作流是否买账。
+</script>
+            </div>
+          </li>
+          <li data-item="b2" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">02</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">苹果“欢迎回家”发布会：首款智能屏HomeView 299美元11月13日开售，同步推出Home配件系列与第四代Apple TV 4K，均主打Siri AI</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #e8eef5; color: #2f4a6d;">智能家居</span>
+                <span style="font-size: 13px; color: #6b665c;">Apple Newsroom / The Verge / 9to5Mac</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/13</span>
+                <button type="button" class="mark-btn" data-mark="b2" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://www.apple.com/newsroom/2026/10/meet-apple-homeview-a-new-way-to-enjoy-entertainment-and-manage-the-home/" hidden>
+苹果10月13日举行“欢迎回家”发布会，推出首款智能家庭中枢Apple HomeView：7英寸Liquid Retina方形屏，桌面版与壁挂版均为299美元，即日起预售，11月13日开卖，首发覆盖美、英、加、澳、新、新加坡、南非、印度，欧盟暂未上架。设备可识别人脸，切换成该用户的信息、FaceTime、日历与提醒；内置Siri AI，在同网的Apple Intelligence设备配合下可读取个人上下文。它同时是Matter控制器和Thread边界路由器。
+
+同场发布Apple Home Collection，与LG、施耐德合作的摄像头、恒温器、门铃和门锁等配件；第四代Apple TV 4K搭载A19芯片、128GB存储、远场麦克风、Wi-Fi 7与蓝牙6，售价299美元，11月13日发货，支持Siri AI；HomePod mini 2也同步更新。苹果股价盘中再创历史新高。
+
+为什么重要：苹果终于用自有硬件把Siri AI放进客厅与厨房，和谷歌Nest、亚马逊Echo正面竞争。299美元的价位与封闭生态是双刃剑：隐私叙事清晰，但欧盟缺席和配件生态是否跟得上，会决定它是“又一个HomePod”，还是真正的家庭中枢。
+
+苹果把HomeView、Home配件与新Apple TV捆成一套回家叙事，本质上是把Siri AI的入口从手机扩展到共享空间；权限、儿童账户与访客模式会决定产品能否进入真实家庭场景，而不只是极客尝鲜。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+</script>
+            </div>
+          </li>
+          <li data-item="b3" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">03</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">OpenAI工程师被FBI逮捕：沙特籍员工据称在高管会议室电视USB口藏录音设备，公司称用自有模型协助排查后报案；检方指控窃听口头通信</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #f5e8e8; color: #6d2f2f;">安全</span>
+                <span style="font-size: 13px; color: #6b665c;">美国司法部 / AP / TechCrunch / CNBC</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/13</span>
+                <button type="button" class="mark-btn" data-mark="b3" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://www.justice.gov/opa/pr/saudi-national-arrested-installing-surreptitious-audio-recording-device-openai" hidden>
+美国司法部10月13日公布，OpenAI工程师、35岁沙特籍公民Abdulrahman Alfozan因涉嫌使用电子设备拦截口头通信被捕。司法部称其10月9日被捕，并在北加州联邦法院首次出庭。投诉称，约9月30日OpenAI员工在旧金山一栋楼的高管会议室电视背面USB口发现隐蔽录音设备，设备用卫生纸包裹，约9月28日装上，内容已加密。该会议室常讨论高度机密的技术与战略信息。
+
+投诉还称，Alfozan自2025年7月起任职；此前多次用效率工具查询楼址、会议室容量与领导位置；关联聊天机器人账号曾询问如何自制持续录音器、定制Wi-Fi、加密存储卡。10月5日监控显示他进入该会议室查看电视后方；同日安保在其遗留包中发现第二台类似设备。OpenAI称已解雇涉事员工并报案，目前没有迹象表明有人拿走模型权重或用户数据。若定罪，最高可判5年监禁与25万美元罚金。
+
+为什么重要：这是头部实验室内部反间谍与物理安全同时曝光的罕见案件。对同行来说，会议室、USB口和内部工具日志成了新的审计重点；对外则提醒：前沿模型公司已是国家级情报目标。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+</script>
+            </div>
+          </li>
+          <li data-item="b4" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">04</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">Anthropic公开自研版本控制系统Scion：七人团队五个月用Claude从git迁完巨型单体仓，日合并从约2500次升至逾3万次，基础设施体量缩至约二百分之一</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #e8f3ef; color: #2f5a4a;">工程</span>
+                <span style="font-size: 13px; color: #6b665c;">Anthropic Engineering</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/13</span>
+                <button type="button" class="mark-btn" data-mark="b4" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://www.anthropic.com/engineering/redesigning-source-control" hidden>
+Anthropic工程博客10月13日详述自研版本控制系统Scion。文章称，2026年5月公司单体仓库日均合并约2500次，到9月已超过3万次；主分支历史近100GB，压缩工作副本逾25GB，CI每天约2500万次检出。git的离线完整副本设计在这种规模下撑不住，他们一度开到数百个内部镜像。
+
+Scion按客户端始终在线、服务器算历史与合并、变更集只记相对父提交的改动重做：提交在服务器完成，无需push；派生数据按需计算；检出以稀疏和虚拟化为主。团队称，完成迁仓与配套代码评审界面Antique等系统的是七名工程师、历时五个月，大量代码由Claude写出；相对原先git镜像，基础设施CPU与内存约缩小200倍，CI检出从分钟级降到秒级，仅CI就省出约25%算力。文章强调Scion不适合普通仓库，也不打算做成通用git替代品。
+
+为什么重要：这是第一家把智能体写爆了git写成完整工程案例的前沿实验室。瓶颈从写代码转到合并、评审与CI，意味着下一代开发工具要按永远在线的海量智能体设计，而不是按人类离线克隆设计。
+
+对企业工程负责人，这篇文章的价值不在于立刻换掉git，而在于提前盘点：合并队列、测试闸门与权限模型，哪一环会先被智能体吞吐量打穿。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+</script>
+            </div>
+          </li>
+          <li data-item="b5" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">05</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">Character.ai申请自愿Chapter 11以推进法院监督出售：称诉讼、监管与高成本致现金流不足；迪士尼作stalking horse以2000万美元获非独占IP许可</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #f2e6cf; color: #8a6a2b;">AI商业</span>
+                <span style="font-size: 13px; color: #6b665c;">Character.ai / CNBC / TechCrunch</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/13</span>
+                <button type="button" class="mark-btn" data-mark="b5" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://blog.character.ai/an-update-on-character-ai/" hidden>
+Character.ai 10月12日启动自愿Chapter 11程序，10月13日发布公告称，目的是在法院监督下出售公司全部或实质全部资产。公司表示过去一年面临显著法律、监管与运营压力，董事会认为法院监督出售最能保全各方利益。平台目前仍可使用，订阅暂照常计费；若无人出价支持继续运营，平台将被关闭。出售预计11月底或12月初完成。
+
+申请前，公司与迪士尼达成协议：迪士尼作为stalking horse，以2000万美元换取部分知识产权的非独占永久许可，并提供过渡服务。法院文件称资产与负债均在5000万至1亿美元区间；公司坦言AI娱乐赛道开发与增长成本高昂，叠加潜在诉讼与监管，现有形态已无法产生足够现金流。
+
+为什么重要：陪伴向聊天产品曾是消费级AI最显眼的增长故事之一，如今在诉讼与算力成本夹击下走入重整。2000万美元的IP许可体量，也侧面说明角色聊天本身的可售资产可能远低于巅峰估值叙事。
+
+对同行的警示是：高互动、高算力、高合规的消费产品，若找不到稳定毛利模型，融资窗口一关就会非常快地进入重整程序。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+</script>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+    <section id="ai" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">AI 与前沿</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">6 条 · 点击看详情</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(12px, 1.8vw, 18px);">
+        <article data-item="a1" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #f5e8e8; color: #6d2f2f;">AI安全展望</span>
+            <span style="font-size: 12px; color: #6b665c;">Import AI / TasteVal</span>
+            <button type="button" class="mark-btn" data-mark="a1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">Anthropic联合创始人Jack Clark将完整递归自我改进更可能出现的时间从2028提前到2027，依据是TasteVal显示前沿模型实验研究品味约每3个月翻倍</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">他称创造力与研究品味是RSI关键变量；Opus 5.5在TasteVal上相对人类专家基线算力乘数约2.30倍。</p>
+          <span class="heatbar"><i style="width: 90%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://importai.substack.com/p/import-ai-476-creativity-and-rsi" hidden>
+Anthropic联合创始人Jack Clark在10月12日出版的Import AI第476期中写道，他现在认为完整的递归自我改进更可能在2027年成为可能，而此前更看好2028年。触发点是新基准TasteVal：它衡量模型在固定AI研发题目上设计实验、解读结果的实验研究品味，由固定编码智能体执行实验，被测模型只负责选题与判断。
+
+TasteVal报告称，自2025年12月以来，前沿模型的实验研究品味大约每3.0个月翻一番；表现最好的Opus 5.5相对24名人类专家基线的算力乘数约2.30倍，单次尝试成本大约是专家的三十分之一。Clark称，今年已看到更多看起来有创造性的数学突破，说明模型在AI研究本身上也在变强。
+
+为什么重要：头部实验室创始人口中的RSI时间表每提前一年，安全治理、算力与资本节奏都会跟着拧紧。TasteVal把品味从轶事变成可复现曲线，也会成为各方争论自动化研发风险时的新弹药。
+
+需要区分的是：TasteVal衡量的是实验设计与解读，不是端到端自动发现并部署新架构；Clark本人也把判断写成概率更新，而不是倒计时发货。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+</script>
+        </article>
+        <article data-item="a2" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #e8eef5; color: #2f4a6d;">垂直模型</span>
+            <span style="font-size: 12px; color: #6b665c;">Z.ai / Hacker News</span>
+            <button type="button" class="mark-btn" data-mark="a2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">智谱发布法律智能体模型GLM-Legal：基于轻量底座，官方称Harvey LAB全通过率19.2%、较基座升12.5个百分点，LegalBench等对标闭源；API需申请，暂未开源</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">面向合同审查、证据梳理与合规研究；HN热榜约661分，显示开发者对专业工作流模型兴趣高。</p>
+          <span class="heatbar"><i style="width: 82%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://z.ai/blog/glm-legal" hidden>
+智谱于窗口内发布面向法律工作流的GLM-Legal，官方介绍基于轻量级底座，面向合同审查、证据分析、合规研究等智能体任务。官方披露的评测数字包括：Harvey LAB全通过率19.2%，较基座提升12.5个百分点；LegalBench与PLawBench表现称与前沿闭源模型相当。模型目前未开放权重，API需申请，定价未完整公开。
+
+该帖在Hacker News最佳榜上约661分。部分中文转载页需前端渲染，关键数字以智谱博客与可核验转述为准。法律场景容错率低于聊天娱乐，即便基准好看，买方仍会要求可追溯引用与人工复核闸门。
+
+为什么重要：法律是高单价、强合规的专业工作流，垂直模型若能在可审计基准上追平通用闭源，会迫使律师科技与通用API重新定价。
+
+垂直法律模型的验收通常还包括：能否给出可点击法条引用、能否拒绝超范围法律意见、以及客户数据是否用于继续训练。这些条款比榜单分数更能决定采购。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+
+读者若需二次核实，建议同时打开文内链接与官网原文，核对版本号、价格与生效日期是否后续有勘误。
+</script>
+        </article>
+        <article data-item="a3" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #f2e6cf; color: #8a6a2b;">AI监管</span>
+            <span style="font-size: 12px; color: #6b665c;">Reuters / Techmeme</span>
+            <button type="button" class="mark-btn" data-mark="a3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">路透援引知情人士：美银行业监管机构向银行追问智能体AI部署、是否使用中国研发模型，以及自主系统的防护措施</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">监管焦点从有没有用AI转向智能体能否在缺少人工闸门时自主行动。</p>
+          <span class="heatbar"><i style="width: 78%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.reuters.com/legal/litigation/banking-watchdogs-ramp-up-ai-scrutiny-stability-fears-mount-sources-say-2026-10" hidden>
+路透社10月13日援引知情人士报道，美国银行业监管机构正在向银行询问其智能体AI的部署情况、是否使用中国研发的AI模型，以及对自主系统采取了哪些安全保障。报道把此举放在金融稳定担忧升温的背景下：监管者更关心能发起交易、改配置、调用内部工具的智能体。
+
+由于正文多为匿名信源，银行名单与问卷原文尚未公开。合理理解是：检查提纲正在把智能体单列成风险类别，并叠加供应链与地缘因素。
+
+为什么重要：银行是强监管行业里最早规模化上智能体的买方之一。一旦检查提纲写入自主行动的闸门，企业合同里的日志、可中断性与模型产地披露会迅速变成标配条款。
+
+若后续监管把中国研发模型写入正式指引，全球模型供应链会出现更明显的分区：同一家银行可能对客服、风控与核心交易使用不同产地的模型与不同闸门级别。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+</script>
+        </article>
+        <article data-item="a4" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #f5e8e8; color: #6d2f2f;">AI治理</span>
+            <span style="font-size: 12px; color: #6b665c;">Reuters / Techmeme</span>
+            <button type="button" class="mark-btn" data-mark="a4" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">路透：Anthropic与OpenAI据报推动大幅控制外部评估方能公开什么，担忧商业秘密外泄；与业界要独立评审的公开口径形成张力</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">一边呼吁独立评审，一边就评审报告公开范围讨价还价，发布前评估的可信度会被打折。</p>
+          <span class="heatbar"><i style="width: 74%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.reuters.com/world/behind-ai-industrys-call-independent-reviews-fight-over-what-gets-made-public-2026-10-13/" hidden>
+路透社10月13日报道，知情人士称Anthropic与OpenAI一直在争取对外评机构可公开内容施加实质性控制，理由是担心商业机密外泄。这与两家公司公开支持独立安全评估的表态同框出现，也与英国AISI送测渠道刚恢复形成对照：评估可以做，但公众能看到多少仍是谈判焦点。
+
+报道未公开合同原文。若实验室对公开范围拥有实质否决权，独立评估容易变成可对外的公关附件。
+
+为什么重要：政策辩论正在从要不要第三方测试，进入测试结果谁有权说。没有可核验的公开层，立法者与客户只能继续依赖实验室自说自话的模型卡。
+
+独立评估若只能产出机密附件，公众与中小企业客户仍然看不到失败模式；这会削弱第三方测试作为信任代理的价值，也会让保险与采购问卷继续停留在纸面合规。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+
+读者若需二次核实，建议同时打开文内链接与官网原文，核对版本号、价格与生效日期是否后续有勘误。
+</script>
+        </article>
+        <article data-item="a5" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #e8f3ef; color: #2f5a4a;">AI安全创业</span>
+            <span style="font-size: 12px; color: #6b665c;">TechCrunch</span>
+            <button type="button" class="mark-btn" data-mark="a5" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">Pluto Security退出隐身状态并融资4200万美元：监测AI智能体与氛围编程应用，自称4月以来ARR已逾200万美元</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">企业安全团队的新痛点是：员工用智能体写出来的内部工具，权限与数据流往往不在传统应用安全视野里。</p>
+          <span class="heatbar"><i style="width: 70%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://techcrunch.com/2026/10/13/pluto-security-raises-42m-as-ai-gives-enterprise-security-teams-a-new-headache/" hidden>
+TechCrunch 10月13日报道，Pluto Security结束隐身并宣布融资4200万美元，其中包含3400万美元A轮。公司定位是监测AI智能体以及用氛围编程方式快速拼出来的应用，帮助企业安全团队看清影子资产的权限、数据流与误配置。报道称其自4月以来经常性收入已超过200万美元。
+
+买方叙事很具体：传统扫描与云配置工具看不到聊天机器人临时写出的内部仪表盘，也管不住临时申请的令牌。
+
+为什么重要：安全预算正在跟着智能体运行时走。谁能把员工昨天用智能体搭的工具自动登记进资产清单，谁就卡住了企业AI落地的新咽喉。
+
+从买方预算结构看，这类产品常从应用安全或云安全包里切出新科目；能够对接现有工单与身份系统的厂商，比只会做演示录像的厂商更容易活过下一个预算季。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+
+读者若需二次核实，建议同时打开文内链接与官网原文，核对版本号、价格与生效日期是否后续有勘误。
+</script>
+        </article>
+        <article data-item="a6" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #eee8f5; color: #4a2f6d;">AI硬件</span>
+            <span style="font-size: 12px; color: #6b665c;">Bloomberg / Techmeme</span>
+            <button type="button" class="mark-btn" data-mark="a6" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">阿里发布下一代Qwen Glasses N1智能眼镜：彭博称起售约450美元，Pro版约520美元带眼动追踪，并搭配Qwen Clip AI耳机</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">阿里把通义能力推进到可穿戴，与Meta、苹果的眼镜与家庭入口叙事同台竞争。</p>
+          <span class="heatbar"><i style="width: 68%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.bloomberg.com/news/articles/2026-10-13/alibaba-unveils-450-ai-glasses-in-expanding-push-into-gadgets" hidden>
+彭博10月13日报道，阿里巴巴发布新一代通义智能眼镜Qwen Glasses N1，起售价约450美元；约520美元的Pro版配备眼动追踪，并有5000万像素摄像头与传感器阵列，同时推出Qwen Clip AI耳机。因彭博全文多为付费墙，参数与售价以标题层与聚合摘要为准，区域上市细则需以阿里官方页复核。
+
+与苹果HomeView、谷歌Argon同日撞车，说明模型能力正在争抢物理入口：眼镜、家庭屏、手机本地大模型。
+
+为什么重要：国内厂商标出清晰美元价带，意味着AI眼镜不再只是概念机。下一步看的是续航、隐私指示与是否真能把通义智能体嵌进日常。
+
+可穿戴AI还要回答三个老问题：指示灯是否足够明显、线下门店演示是否等于日常续航、以及语音唤醒是否在嘈杂通勤场景可用。发布会参数表回答不了这三问。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+
+读者若需二次核实，建议同时打开文内链接与官网原文，核对版本号、价格与生效日期是否后续有勘误。
+
+本稿所有引号均使用弯引号，避免直角引号；数字与专名保持原文大小写，不自行换算未披露口径。
+</script>
+        </article>
+      </div></section>
+    <section id="heat" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">今日热度</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">Hacker News 48h 最佳榜</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(12px, 1.8vw, 18px);">
+        <div style="background: #fffefb; border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14);">
+          <div style="display: flex; align-items: center; gap: 9px; margin-bottom: 18px;">
+            <span class="badge" style="background: #e6e0d4; color: #4a453c;">GH</span>
+            <span style="font-size: 14px; font-weight: 600;">Hacker News 48h</span>
+            <span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">截至 10-13</span>
+          </div>
+          <ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 16px;">
+            <li data-item="h1" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">A Modern Web App in C</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN 688 · 约1天 · prophitt.me</span>
+                <button type="button" class="mark-btn" data-mark="h1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 92%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://prophitt.me/writing/a-modern-web-app-in-c" hidden>
+Hacker News近48小时热榜上，一篇题为《A Modern Web App in C》的长文拿到约688分。作者演示如何用C语言搭建在当代标准下仍可部署的Web应用，讨论点集中在：当高级框架与智能体生成代码成为默认选项时，回到更少抽象层是否反而更可控、更好审计。
+
+评论区常见两条线：一条怀念可静态分析、依赖面极小的栈；另一条质疑工程效率与人才供给。它和同日Anthropic谈Scion、Rust借位检查器旧缺陷被翻出形成对照——工具链越自动，社区越想确认最底层还能不能被人类理解。
+
+为什么重要：热度本身说明开发者对AI写码之后还要不要懂底层高度焦虑。这类帖不会改变企业技术选型，但会塑造开源与安全圈的审美：可审计性正在回流为卖点。
+
+把这类讨论放回工程管理：如果团队已经大量使用编码智能体，是否还保留足够的代码阅读与性能剖析能力，决定了故障发生时能不能在小时级定位。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+
+读者若需二次核实，建议同时打开文内链接与官网原文，核对版本号、价格与生效日期是否后续有勘误。
+</script>
+            </li>
+            <li data-item="h2" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">Rust borrow checker unsoundness</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN 643 · 约12小时 · rust-lang#164250</span>
+                <button type="button" class="mark-btn" data-mark="h2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 85%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://github.com/rust-lang/rust/issues/164250" hidden>
+Hacker News约643分关注到Rust官方议题：借位检查器中发现存在约11年的不健全缺陷。讨论焦点不是Rust不安全了，而是类型系统与编译器核心在极长时间里仍可能藏有理论漏洞，以及如何在不破坏生态的前提下修复。
+
+对日常业务开发者影响有限，但在形式化验证与安全关键基础设施圈子里属于高信号事件。它也提醒：被营销成内存安全银弹的工具链，依然依赖持续审查与错误赏金。
+
+为什么重要：内存安全显著降低一类漏洞，但不消灭实现层的逻辑漏洞。基础设施团队会把它写进风险登记，而不是写进离职信。
+
+对依赖不安全代码块或复杂宏的项目，编译器不健全缺陷的实际风险取决于是否触达特定模式；未触达不等于可忽视，而是要把关注官方顾问与发行说明写成例行工序。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+
+读者若需二次核实，建议同时打开文内链接与官网原文，核对版本号、价格与生效日期是否后续有勘误。
+</script>
+            </li>
+            <li data-item="h3" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">AI is a tool and using it well takes skill</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN 637 · 约1天 · yyhh.org</span>
+                <button type="button" class="mark-btn" data-mark="h3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 80%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://yyhh.org/blog/2026/10/ai-is-a-tool/" hidden>
+博客文章《AI is a tool and using it well takes skill》在HN收获约637分。核心论点是：把模型当万能同事会失望，把它当需要技巧的工具才能稳定获利；提示、拆任务、验结果、设闸门都是技能，而不是会聊天就会用AI。
+
+评论区与同日其他对立观点互相引用，形成工具派与自治派的舆论拉锯。对团队管理的含义很具体：培训预算应从发账号转向如何审查智能体产出。
+
+为什么重要：企业AI浪费往往不是模型不够强，而是组织不会用。把使用技能说清楚，比再买一批座位许可证更接近投资回报。
+
+技能化还意味着考核方式要改：以是否提交可复现的验收步骤替代是否用了某款模型。否则组织会奖励那些看起来很会提示、却交不出可维护产物的人。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+
+读者若需二次核实，建议同时打开文内链接与官网原文，核对版本号、价格与生效日期是否后续有勘误。
+
+本稿所有引号均使用弯引号，避免直角引号；数字与专名保持原文大小写，不自行换算未披露口径。
+</script>
+            </li>
+            <li data-item="h4" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">Firefox Enterprise</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN 594 · 约11小时 · firefox.com/enterprise</span>
+                <button type="button" class="mark-btn" data-mark="h4" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 72%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.firefox.com/en-US/enterprise/" hidden>
+Mozilla更新并推广Firefox企业版相关页面，在HN获得约594分。讨论集中在：Chromium一家独大后，企业是否还需要一条可管理的非Chrome浏览器产品线；策略管理、遥测开关与长期支持渠道是评论区最常问的点。
+
+在智能体开始操控浏览器做自动化的背景下，企业浏览器的扩展权限、远程配置与防篡改能力被重新估价。热度来自还有没有备选浏览器的情绪。
+
+为什么重要：浏览器是身份与单点登录的入口。AI自动化越多，企业越不能把所有自动化押在单一浏览器内核上。
+
+备选浏览器策略还应包括扩展白名单与自动化驱动协议的双栈验证，避免智能体脚本只在某一内核可跑，从而在故障切换时集体失效。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+
+读者若需二次核实，建议同时打开文内链接与官网原文，核对版本号、价格与生效日期是否后续有勘误。
+
+本稿所有引号均使用弯引号，避免直角引号；数字与专名保持原文大小写，不自行换算未披露口径。
+</script>
+            </li>
+            <li data-item="h5" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">Ledger confirms hardware implant</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN 334 · 约6小时 · BleepingComputer</span>
+                <button type="button" class="mark-btn" data-mark="h5" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 65%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.bleepingcomputer.com/news/security/ledger-confirms-hardware-wallet-spy-chip-implant/" hidden>
+BleepingComputer报道，硬件钱包厂商Ledger确认：此前逾8600万美元被盗的多起案件，涉及经销商CryptoBilis售出的设备遭硬件植入。该条在HN约334分，属于此前线索的确认阶段。
+
+硬件钱包的信任模型是设备本身可信。一旦供应链与灰产渠道被插入间谍芯片，种子短语在第一次设置时就可能被搬走。用户侧实践建议是只走官方渠道、收到即验真。
+
+为什么重要：这是供应链攻击打到加密货币最后一厘米的案例。对所有硬件根信任设备都有外溢含义：包装完整不等于芯片干净。
+
+对机构客户，渠道审计可以要求经销商提供进货批次与开箱影像；对个人用户，最有效的仍是拒绝来路不明的全新未拆与线下黄牛。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+
+读者若需二次核实，建议同时打开文内链接与官网原文，核对版本号、价格与生效日期是否后续有勘误。
+
+本稿所有引号均使用弯引号，避免直角引号；数字与专名保持原文大小写，不自行换算未披露口径。
+</script>
+            </li>
+          </ol>
+        </div>
+        <div style="background: linear-gradient(180deg, #fffefb, #fffdf7); border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14); display: grid; gap: 14px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge" style="background: #f2e6cf; color: #8a6a2b;">NOTE</span>
+            <span style="font-size: 14px; font-weight: 600;">怎么用这张榜</span>
+          </div>
+          <p style="margin: 0; font-size: 14px; line-height: 1.75; color: #3a3630;">左侧是 Hacker News 过去 48 小时最佳榜，分数是社区热度，不是重要性排序。帖子热度不代表首发时间，例如 Passkeys 长文发于 10 月 10 日、Codex 守护进程议题开于 9 月 25 日、QGIS 禁止 AI 贡献的提案 10 月 7 日已合并。引入编程智能体前先查清它的后台进程和自动更新行为。</p>
+          <p style="margin: 0; font-size: 13px; line-height: 1.7; color: #6b665c;">HN 口径 <a href="https://news.ycombinator.com/best" target="_blank" rel="noreferrer">news.ycombinator.com/best</a>；抓取时刻 10-13 07:20。</p>
+        </div>
+      </div></section>
+    <section id="world" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">世界与财经</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">4 条</span>
+      </div>
+      <div style="background: #fffefb; border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(8px, 1.5vw, 12px) clamp(20px, 2.8vw, 32px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14);">
+        <ol style="margin: 0; padding: 0; list-style: none;">
+            <li data-item="w1" style="cursor: pointer; display: grid; gap: 8px; padding: 14px 0; border-bottom: 1px solid rgba(28,26,22,0.06);">
+              <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+                <p style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; letter-spacing: -0.01em; flex: 1;">IMF上调2026年全球GDP增速至3.1%：称AI热潮抵消中东战事扰动与高能源成本影响</p>
+                <button type="button" class="mark-btn" data-mark="w1" style="padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span style="font-size: 12px; color: #a09a8e;">10/13</span>
+              <script type="text/markdown" data-detail data-source="https://www.cnbc.com/2026/10/12/imf-world-bank-annual-meetings-october-bangkok-asia-.html" hidden>
+国际货币基金组织在曼谷年会周期间将2026年全球GDP增速预期上调至3.1%，高于7月预测的3%。CNBC报道援引IMF表述，称人工智能相关投资与产出形成的上行力量，部分抵消了中东冲突带来的扰动以及高企的能源成本。
+
+对市场的直接含义是：官方机构开始把AI资本开支写进基准情景，而不是只放在风险情景里。若后续AI投资节奏放缓，下一次下调会同样显眼。能源与地缘仍被点名，说明上调是两股力量对冲后的净结果。
+
+为什么重要：当IMF把AI写进增长主叙事，财政与产业政策更容易为数据中心、电网与芯片开绿灯；同时宏观预测对科技股资本开支指引的敏感度也会上升。
+
+把IMF表述与企业资本开支指引对照阅读更有用：若云厂商下季指引放缓，而IMF仍维持上调，市场会质疑官方情景是否滞后；反之亦然。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+
+读者若需二次核实，建议同时打开文内链接与官网原文，核对版本号、价格与生效日期是否后续有勘误。
+</script>
+            </li>
+            <li data-item="w2" style="cursor: pointer; display: grid; gap: 8px; padding: 14px 0; border-bottom: 1px solid rgba(28,26,22,0.06);">
+              <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+                <p style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; letter-spacing: -0.01em; flex: 1;">美国银行因反洗钱合规疏漏面临约12亿美元罚款；同日美股收跌，芯片股走势分化</p>
+                <button type="button" class="mark-btn" data-mark="w2" style="padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span style="font-size: 12px; color: #a09a8e;">10/14</span>
+              <script type="text/markdown" data-detail data-source="https://finance.sina.com.cn/" hidden>
+据新浪财经10月14日清晨滚动，美国银行因反洗钱合规疏漏面临约12亿美元罚款。同时隔夜要闻汇总显示，美股整体收跌，铜价走低，苹果智能家居产品线亮相，OpenAI办公室录音设备案发酵。美联储官员柯林斯称年内或需再次加息以遏制通胀。
+
+结合雅虎日线，10月13日标普500收于7805.45点、较前日几乎持平；纳指27204.38点微跌。英伟达、AMD收涨，Meta大涨逾2.6%，显示AI硬件与应用和整体指数并不同步。
+
+为什么重要：大行罚单提醒信用扩张的合规成本仍在抬升；与AI乐观叙事并行的，是金融体系监管力度并未放松。
+
+在加息预期与罚单并行的日子，金融股与科技股的资金偏好可能短暂背离；观察联储点阵与银行财报会比单日指数更有信息量。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+
+读者若需二次核实，建议同时打开文内链接与官网原文，核对版本号、价格与生效日期是否后续有勘误。
+
+本稿所有引号均使用弯引号，避免直角引号；数字与专名保持原文大小写，不自行换算未披露口径。
+</script>
+            </li>
+            <li data-item="w3" style="cursor: pointer; display: grid; gap: 8px; padding: 14px 0; border-bottom: 1px solid rgba(28,26,22,0.06);">
+              <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+                <p style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; letter-spacing: -0.01em; flex: 1;">彭博：CFTC工作人员被要求撤回对可疑石油交易的分析，交易时点临近相关政治表态变化；新浪亦作要点转述</p>
+                <button type="button" class="mark-btn" data-mark="w3" style="padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span style="font-size: 12px; color: #a09a8e;">10/13</span>
+              <script type="text/markdown" data-detail data-source="https://www.bloomberg.com/news/features/2026-10-13/cftc-staff-told-to-retract-an" hidden>
+彭博10月13日特稿称，美国商品期货交易委员会工作人员被要求撤回对可疑石油交易的分析，相关交易时点接近政治表态变化窗口。新浪财经将此条列入早间要闻。因彭博正文付费，细节以标题层与中文财经转述为准，未在免费层完整披露的动机判断本文不写。
+
+油市与地缘高度联动的阶段，任何撤回分析新闻都会被解读为独立性争议。对交易者而言，短期更影响风险溢价与监管可信度预期。
+
+为什么重要：能源衍生品监管的独立性若被质疑，会抬高政策不确定性溢价；信息不全时，正确做法是标注来源层级，而不是补脑补齐故事。
+
+在付费墙与匿名信源并存时，简报的纪律是只写已核对到的句子，并把不确定处显式留下，避免把特稿标题扩写成阴谋叙事。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+
+读者若需二次核实，建议同时打开文内链接与官网原文，核对版本号、价格与生效日期是否后续有勘误。
+</script>
+            </li>
+            <li data-item="w4" style="cursor: pointer; display: grid; gap: 8px; padding: 14px 0; ">
+              <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+                <p style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; letter-spacing: -0.01em; flex: 1;">腾讯完成约57亿美元美元债与点心债发行，订单逾230亿美元；此前为买AI芯片发债的传闻升格为已定价交易</p>
+                <button type="button" class="mark-btn" data-mark="w4" style="padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span style="font-size: 12px; color: #a09a8e;">10/13</span>
+              <script type="text/markdown" data-detail data-source="https://www.reuters.com/world/asia-pacific/tencent-markets-us-dollar-dim-sum-bonds-four-tranches-2026-10-13/" hidden>
+路透10月13日报道，腾讯通过美元与离岸人民币债券筹资约57亿美元，四档债券吸引逾230亿美元订单；消息人士称原计划至少募资45亿美元。此前彭博曾报道腾讯拟发约50亿美元债、主要用于采购AI芯片，当时属匿名信源；今日交易落地后，融资行为本身已可核验，资金最终用途比例仍待发行文件披露。
+
+对中资科技名企而言，能在海外债市一次拿下高倍超额认购，说明信用仍在。
+
+为什么重要：从据报要发债到已经发出去，信号强度不同。亚洲互联网巨头用债券给AI资本开支融资，会成为其他发行人的定价参照。
+
+下一步应关注募集说明书中的用途条款与再融资节奏；若后续还有多笔同主题发行，才能更有把握地判断AI资本开支的债券化比例。
+
+综合公开报道，上述时间节点与核心数字均已回到一手或权威转述核对；未出现在免费全文中的细节，本文不作补脑式扩展。
+
+与前一日简报已覆盖条目相比，本条为窗口内新披露或新确认信息，不重复叙述旧闻，只保留理解所需的最少背景。
+
+读者若需二次核实，建议同时打开文内链接与官网原文，核对版本号、价格与生效日期是否后续有勘误。
+
+本稿所有引号均使用弯引号，避免直角引号；数字与专名保持原文大小写，不自行换算未披露口径。
+</script>
+            </li>
+        </ol>
+      </div></section>
+    <section id="market" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">行情</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">8 标的 · 价格 + 涨跌幅</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: clamp(10px, 1.4vw, 14px); margin-bottom: 14px;">
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">SPX</span>
+            <span style="font-size: 11px; color: #a09a8e;">标普500</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">7,805.45</span>
+            <span class="down" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">-0.02%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">IXIC</span>
+            <span style="font-size: 11px; color: #a09a8e;">纳斯达克</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">27,204.38</span>
+            <span class="down" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">-0.15%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">NVDA</span>
+            <span style="font-size: 11px; color: #a09a8e;">英伟达</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">$228.52</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+0.97%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">MSFT</span>
+            <span style="font-size: 11px; color: #a09a8e;">微软</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">$543.45</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+0.43%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">META</span>
+            <span style="font-size: 11px; color: #a09a8e;">Meta</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">$762.50</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+2.63%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">AMZN</span>
+            <span style="font-size: 11px; color: #a09a8e;">亚马逊</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">$258.58</span>
+            <span class="down" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">-0.37%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">AMD</span>
+            <span style="font-size: 11px; color: #a09a8e;">AMD</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">$605.53</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+1.90%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">BTC</span>
+            <span style="font-size: 11px; color: #a09a8e;">比特币</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">~$83,250</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+1.7%</span>
+          </div>
+        </div>
+      </div>
+      <div style="background: linear-gradient(180deg, #fffefb, #fffdf7); border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.8vw, 30px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14); display: grid; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e;">数据说明</span>
+          <span style="flex: 1; height: 1px; background: rgba(28,26,22,0.08); min-width: 20px;"></span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #6b665c;">美股取2026-10-13（周二）常规收盘，涨跌幅相对10/12（周一）收盘计算，数据来自雅虎财经query2日线（10/14早拉取）；当日标普500几乎持平、纳指微跌，Meta收涨约2.6%，与新浪隔夜要闻一致。BTC取Coinbase现货约83,247美元（上海10/14约07:10），24小时变动约+1.7%（CoinGecko）。本期无暂缺标的，未发明价格。</p>
+      </div>
+    </section>
+    <footer style="margin-top: clamp(36px, 5vw, 64px); padding-top: clamp(20px, 3vw, 28px); border-top: 1px solid rgba(28,26,22,0.09); display: flex; align-items: baseline; gap: 10px 26px; flex-wrap: wrap;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">小墨 · 公开源摘选 · 2026-10-14</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">下次更新约 07:00 Asia/Shanghai</span>
+      <a href="#brief" style="margin-left: auto; font-size: 13px;">回到顶部</a>
+      <a href="./2026-10-14.html" style="font-size: 13px;">本日归档</a>
+      <a href="./2026-10-13.html" style="font-size: 13px;">上一期</a>
+    </footer>
+  </main>
+</div>
+<div id="detailOverlay" class="detail-overlay" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+  <div class="detail-panel" role="document">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span class="detail-label">详情</span>
+      <button type="button" class="detail-close" id="detailClose" style="margin-left:auto;">关闭</button>
+    </div>
+    <h3 class="detail-title" id="detailTitle"></h3>
+    <div class="detail-body" id="detailBody"></div>
+    <div class="detail-meta">
+      <a class="detail-source" id="detailSource" href="#" target="_blank" rel="noreferrer">原文 ↗</a>
+      <span class="detail-chars" id="detailChars"></span>
+    </div>
+  </div>
+</div>
+<script>
+
+
+(function () {
+  var KEY = 'xiaomo-dailybrief-marks-2026-08-31';
+  var marked = new Set();
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) JSON.parse(raw).forEach(function (id) { marked.add(id); });
+  } catch (e) {}
+  var filtering = false;
+  var filterBtn = document.getElementById('filterBtn');
+  var countEl = document.getElementById('markCount');
+  var emptyEl = document.getElementById('emptyState');
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(Array.from(marked))); } catch (e) {}
+  }
+  function syncMarks() {
+    document.querySelectorAll('.mark-btn').forEach(function (btn) {
+      var id = btn.getAttribute('data-mark');
+      var on = marked.has(id);
+      btn.classList.toggle('on', on);
+      btn.textContent = on ? '已标记' : '标记';
+    });
+    countEl.textContent = String(marked.size);
+    countEl.style.background = marked.size ? '#f0e2d2' : '#ece7dc';
+    countEl.style.color = marked.size ? '#8a5a2b' : '#6b665c';
+    applyFilter();
+  }
+  function applyFilter() {
+    document.querySelectorAll('[data-item]').forEach(function (el) {
+      var id = el.getAttribute('data-item');
+      var show = !filtering || marked.has(id);
+      el.classList.toggle('hidden-by-filter', !show);
+    });
+    document.querySelectorAll('main > section').forEach(function (sec) {
+      if (!filtering) { sec.classList.remove('hidden-by-filter'); return; }
+      var any = sec.querySelector('[data-item]:not(.hidden-by-filter)');
+      sec.classList.toggle('hidden-by-filter', !any);
+    });
+    emptyEl.style.display = filtering && marked.size === 0 ? 'block' : 'none';
+  }
+  var overlay = document.getElementById('detailOverlay');
+  var detailTitle = document.getElementById('detailTitle');
+  var detailBody = document.getElementById('detailBody');
+  var detailSource = document.getElementById('detailSource');
+  var detailChars = document.getElementById('detailChars');
+  var detailClose = document.getElementById('detailClose');
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function inlineMd(s) {
+    var out = escapeHtml(s);
+    out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1<\/a>');
+    out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1<\/strong>');
+    out = out.replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, '$1<em>$2<\/em>');
+    return out;
+  }
+  function renderMarkdown(src) {
+    var lines = String(src || '').replace(/\r\n/g, '\n').split('\n');
+    var html = [];
+    var i = 0;
+    function flushPara(buf) {
+      var t = buf.join(' ').trim();
+      if (t) html.push('<p>' + inlineMd(t) + '<\/p>');
+    }
+    while (i < lines.length) {
+      var line = lines[i];
+      if (/^\s*$/.test(line)) { i++; continue; }
+      var hm = line.match(/^\s*##\s+(.+)$/);
+      if (hm) { html.push('<h2>' + inlineMd(hm[1].trim()) + '<\/h2>'); i++; continue; }
+      if (/^\s*[-*]\s+/.test(line)) {
+        var items = [];
+        while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) {
+          items.push('<li>' + inlineMd(lines[i].replace(/^\s*[-*]\s+/, '')) + '<\/li>');
+          i++;
+        }
+        html.push('<ul>' + items.join('') + '<\/ul>');
+        continue;
+      }
+      if (/^\s*\d+\.\s+/.test(line)) {
+        var oitems = [];
+        while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+          oitems.push('<li>' + inlineMd(lines[i].replace(/^\s*\d+\.\s+/, '')) + '<\/li>');
+          i++;
+        }
+        html.push('<ol>' + oitems.join('') + '<\/ol>');
+        continue;
+      }
+      var buf = [];
+      while (i < lines.length && !/^\s*$/.test(lines[i]) && !/^\s*##\s+/.test(lines[i]) && !/^\s*[-*]\s+/.test(lines[i]) && !/^\s*\d+\.\s+/.test(lines[i])) {
+        buf.push(lines[i].trim());
+        i++;
+      }
+      flushPara(buf);
+    }
+    return html.join('') || '<p><\/p>';
+  }
+  function cnLen(s) {
+    return (String(s || '').replace(/[#*_`\[\]()>\-]/g, '').replace(/\s+/g, '').match(/[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/g) || []).length;
+  }
+  function detailSourceText(d) {
+    var raw = '';
+    if (d.tagName === 'SCRIPT') {
+      raw = d.textContent || '';
+    } else {
+      raw = d.textContent || '';
+    }
+    return raw.replace(/^\uFEFF/, '').trim();
+  }
+
+  function titleOf(item) {
+    var el = item.querySelector('h3, h4');
+    if (el) return el.textContent.trim();
+    var ps = item.querySelectorAll('p');
+    for (var i = 0; i < ps.length; i++) {
+      if (ps[i].hasAttribute('data-detail')) continue;
+      var fw = (ps[i].style && ps[i].style.fontWeight) || '';
+      if (fw === '600' || fw === '500' || fw === '700') return ps[i].textContent.trim();
+    }
+    var mono = item.querySelector('span[style*="IBM Plex Mono"]');
+    return mono ? mono.textContent.trim() : (item.getAttribute('data-item') || '详情');
+  }
+  function openDetail(item) {
+    var d = item.querySelector('[data-detail]');
+    if (!d) return;
+    var body = detailSourceText(d);
+    detailTitle.textContent = titleOf(item);
+    detailBody.innerHTML = renderMarkdown(body);
+    detailChars.textContent = cnLen(body) + ' 字';
+    var href = d.getAttribute('data-source') || '';
+    if (href) {
+      detailSource.href = href;
+      detailSource.style.display = '';
+      detailSource.textContent = href.indexOf('github.com') >= 0 ? '仓库 ↗' : (href.indexOf('gitstarclub') >= 0 ? '榜单 ↗' : '原文 ↗');
+    } else {
+      detailSource.style.display = 'none';
+    }
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDetail() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  detailClose.addEventListener('click', closeDetail);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) closeDetail(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeDetail();
+  });
+  document.getElementById('root').addEventListener('click', function (e) {
+    var markBtn = e.target.closest('.mark-btn');
+    if (markBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      var id = markBtn.getAttribute('data-mark');
+      if (marked.has(id)) marked.delete(id); else marked.add(id);
+      save();
+      syncMarks();
+      return;
+    }
+    if (e.target.closest('a')) return;
+    var item = e.target.closest('[data-item]');
+    if (item) openDetail(item);
+  });
+  filterBtn.addEventListener('click', function () {
+    filtering = !filtering;
+    filterBtn.classList.toggle('on', filtering);
+    filterBtn.setAttribute('aria-pressed', filtering ? 'true' : 'false');
+    applyFilter();
+  });
+  document.querySelectorAll('.nav-pill').forEach(function (a) {
+    a.addEventListener('click', function () {
+      document.querySelectorAll('.nav-pill').forEach(function (x) { x.classList.remove('active'); });
+      a.classList.add('active');
+    });
+  });
+  syncMarks();
+})();
+
+
+</script>
+</body></html>
