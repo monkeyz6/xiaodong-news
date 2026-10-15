@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="zh-CN" data-mode="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>每日科技情报 · 2026.10.16 · 阅读版</title>
+<style>
+
+
+
+
+:root{
+  --bg:#05060f; --line:rgba(255,255,255,.11); --tx:#EEF2FF;
+  --tx2:rgba(238,242,255,.66); --tx3:rgba(238,242,255,.40);
+  --panel:rgba(255,255,255,.05); --sh:0 20px 54px rgba(0,0,0,.55);
+  --t-cover:#67E8F9; --t-ai:#A78BFA; --t-money:#F5C842; --t-chip:#FF8A3C;
+  --t-oss:#3DFF87; --t-alert:#FF5A4E; --t-rank:#7DA2FF;
+  --flag:#FFD166;
+  --deco:radial-gradient(900px 700px at 8% -8%,rgba(124,92,255,.26),transparent 62%),
+         radial-gradient(760px 620px at 96% 10%,rgba(34,211,238,.15),transparent 62%);
+}
+:root[data-mode="light"]{
+  --bg:#F7F4ED; --line:rgba(21,18,14,.18); --tx:#15120E;
+  --tx2:#4A443C; --tx3:#8A8176;
+  --panel:rgba(21,18,14,.045); --sh:0 14px 36px rgba(21,18,14,.15);
+  --t-cover:#1B3FAE; --t-ai:#5B2BE0; --t-money:#0B6B4F; --t-chip:#E8442A;
+  --t-oss:#00964A; --t-alert:#DC1E28; --t-rank:#1B3FAE;
+  --flag:#9A6B00;
+  --deco:none;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--tx);line-height:1.66;
+ font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+ -webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:var(--deco)}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:5px}
+
+.bar{position:fixed;top:0;left:0;right:0;height:54px;z-index:40;display:flex;align-items:center;gap:14px;
+ padding:0 22px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--line)}
+.brand{font-size:13px;font-weight:800;letter-spacing:.2em}
+.brand i{font-style:normal;color:var(--tx3);font-weight:500;letter-spacing:.06em;margin-left:10px}
+.bar .sp{flex:1}
+.pos{font-size:12px;color:var(--tx3);letter-spacing:.1em}
+.pos b{color:var(--tx);font-weight:700}
+.tbtn{border:1px solid var(--line);background:transparent;color:var(--tx2);border-radius:999px;
+ padding:6px 14px;font-size:12px;cursor:pointer;letter-spacing:.04em;transition:.2s}
+.tbtn:hover{color:var(--tx);border-color:var(--tx3)}
+.prog{position:fixed;top:54px;left:0;height:2px;width:0;background:var(--tx);opacity:.85;z-index:41;transition:width .25s}
+
+.rail{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:35;display:flex;flex-direction:column;gap:1px}
+.rail button{background:none;border:0;cursor:pointer;padding:3px 6px;font-size:10.5px;letter-spacing:.1em;
+ color:var(--tx3);display:flex;align-items:center;gap:7px;transition:color .2s}
+.rail button::after{content:"";width:12px;height:1px;background:currentColor;opacity:.45;transition:width .25s,opacity .2s}
+.rail button:hover{color:var(--tx2)}
+.rail button[aria-current="true"]{color:var(--tx);font-weight:700}
+.rail button[aria-current="true"]::after{width:26px;opacity:1}
+
+main{position:relative;z-index:1;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.item{height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;
+ justify-content:center;padding:54px 100px 22px 62px;position:relative}
+.t-cover{--c:var(--t-cover)} .t-ai{--c:var(--t-ai)} .t-money{--c:var(--t-money)}
+.t-chip{--c:var(--t-chip)} .t-oss{--c:var(--t-oss)} .t-alert{--c:var(--t-alert)}
+.t-rank{--c:var(--t-rank)} .outro{--c:var(--t-cover)}
+.inner{width:100%;max-width:1200px;display:grid;gap:54px;align-items:center;
+ grid-template-columns:minmax(0,1.04fr) minmax(0,1fr)}
+.shot{justify-self:end}
+.shot img{display:block;height:auto;max-height:calc(100dvh - 128px);max-width:100%;aspect-ratio:3/4;
+ border-radius:16px;box-shadow:var(--sh);background:var(--panel)}
+:root[data-mode="light"] .shot img{border-radius:0}
+
+.eyebrow{display:flex;align-items:baseline;gap:13px;margin-bottom:16px;flex-wrap:wrap}
+.rank{font:700 36px/1 ui-monospace,Menlo,monospace;color:var(--c)}
+.tag{font-size:11px;letter-spacing:.17em;font-weight:700;color:var(--c);
+ border:1px solid color-mix(in srgb,var(--c) 45%,transparent);padding:4px 11px;border-radius:999px}
+:root[data-mode="light"] .tag{border-radius:0}
+.title{font-size:clamp(23px,2.25vw,33px);line-height:1.34;font-weight:800;letter-spacing:-.01em;margin-bottom:15px}
+.summary{color:var(--tx2);font-size:15.5px;margin-bottom:19px}
+.why{border-left:2.5px solid var(--c);padding-left:15px;margin-bottom:20px}
+.why b{display:block;font-size:10.5px;letter-spacing:.18em;color:var(--c);margin-bottom:5px}
+.why p{margin:0;font-size:14.5px;color:var(--tx2)}
+.src{font-size:12px;color:var(--tx3);letter-spacing:.03em}
+.flag{color:var(--flag);margin-left:10px}
+.flag::before{content:"◇ "}
+.more{display:none;background:none;border:0;color:var(--c);font-size:13px;cursor:pointer;padding:0;margin-bottom:12px}
+
+.lede{color:var(--tx2);font-size:14.5px;margin-bottom:20px}
+.toc{list-style:none;max-height:52dvh;overflow:auto;padding-right:6px}
+.toc li+li{border-top:1px solid var(--line)}
+.toc button{width:100%;background:none;border:0;cursor:pointer;color:var(--tx2);text-align:left;
+ display:flex;align-items:baseline;gap:12px;padding:7px 2px;font-size:14px;transition:color .18s}
+.toc button:hover{color:var(--tx)}
+.tn{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--tx3);flex:none}
+.tt{flex:1}
+.tf{font-size:10.5px;color:var(--flag);flex:none;letter-spacing:.06em}
+
+.outro{align-items:center}
+.outro-in{max-width:620px;width:100%}
+.outro h2{font-size:clamp(22px,2.2vw,30px);font-weight:800;margin-bottom:22px}
+.checklist{list-style:none;margin-bottom:26px}
+.checklist li{border-top:1px solid var(--line);padding:12px 0}
+.checklist button{background:none;border:0;cursor:pointer;color:var(--tx);display:flex;gap:11px;
+ align-items:baseline;font-size:15px;font-weight:700;text-align:left;padding:0}
+.checklist button:hover span{text-decoration:underline}
+.checklist b{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--flag)}
+.checklist p{font-size:13px;color:var(--tx3);margin-top:5px;padding-left:23px}
+.note{font-size:13px;color:var(--tx3);margin-bottom:22px;line-height:1.8}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--tx);border-radius:10px;
+ padding:10px 20px;font-size:13.5px;cursor:pointer;transition:.2s}
+.btn:hover{border-color:var(--tx3)}
+:root[data-mode="light"] .btn{border-radius:0}
+
+.acts{position:absolute;right:26px;bottom:20px;display:flex;gap:7px;opacity:.24;transition:opacity .25s}
+.item:hover .acts,.acts:focus-within{opacity:1}
+.acts button{width:35px;height:35px;border-radius:10px;cursor:pointer;border:1px solid var(--line);
+ background:var(--panel);color:var(--tx2);display:grid;place-items:center;transition:.2s}
+.acts button:hover{color:var(--tx);border-color:var(--tx3)}
+.acts svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+:root[data-mode="light"] .acts button{border-radius:0}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,14px);z-index:60;background:var(--tx);
+ color:var(--bg);padding:9px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:900px){
+  .rail{display:none}
+  .item{padding:62px 18px 18px;align-items:flex-start}
+  .inner{grid-template-columns:1fr;gap:16px;align-content:start;height:100%}
+  .shot{justify-self:center}
+  .shot img{max-height:62dvh;border-radius:12px}
+  .cover .shot img{max-height:34dvh}
+  .eyebrow{margin-bottom:9px;gap:10px}
+  .rank{font-size:23px}
+  .title{font-size:19px;margin-bottom:8px}
+  .summary{font-size:14px;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .summary.open{-webkit-line-clamp:unset}
+  .why{display:none;margin-bottom:12px}
+  .why.open{display:block}
+  .more{display:inline-block}
+  .src{font-size:11.5px;padding-right:82px}
+  .flag{display:block;margin:4px 0 0}
+  .toc{max-height:none;flex:1}
+  .cover .inner{display:flex;flex-direction:column;min-height:0}
+  .cover .text{display:flex;flex-direction:column;min-height:0;flex:1}
+  .acts{right:16px;bottom:14px;opacity:.42}
+  .outro{padding-top:80px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+
+
+
+</style></head><body>
+<div class="bar">
+  <div class="brand">每日科技情报<i>2026.10.16</i></div><div class="sp"></div>
+  <div class="pos mono"><b id="pos">封面</b></div>
+  <a class="tbtn" href="../index.html" style="text-decoration:none">每日简报</a>
+  <button class="tbtn" id="mode">浅色版</button>
+</div>
+<div class="prog" id="prog"></div>
+<nav class="rail mono" id="rail" aria-label="按重要性排序的目录"><button data-go="0" aria-label="跳到封面">封面</button><button data-go="1" aria-label="跳到01">01</button><button data-go="2" aria-label="跳到02">02</button><button data-go="3" aria-label="跳到03">03</button><button data-go="4" aria-label="跳到04">04</button><button data-go="5" aria-label="跳到05">05</button><button data-go="6" aria-label="跳到06">06</button><button data-go="7" aria-label="跳到07">07</button><button data-go="8" aria-label="跳到08">08</button><button data-go="9" aria-label="跳到09">09</button><button data-go="10" aria-label="跳到10">10</button><button data-go="11" aria-label="跳到11">11</button><button data-go="12" aria-label="跳到12">12</button><button data-go="13" aria-label="跳到结尾">结尾</button></nav>
+<main id="main">
+<section class="item cover t-cover" id="s0" data-i="0">
+  <div class="inner">
+    <figure class="shot"><img data-i="0" alt="封面" src="img/2026-10-16-reader/00_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="tag">2026.10.16 · 周四 · 过去 48 小时</span></div>
+      <h2 class="title">今日科技情报</h2>
+      <p class="lede">共 12 条，按重要性排序。点标题直接跳过去。</p>
+      <ol class="toc"><li><button data-go="1"><span class="tn">01</span><span class="tt">Meta发布Muse Spark Open</span></button></li><li><button data-go="2"><span class="tn">02</span><span class="tt">Anthropic Q3 营收约168亿美元</span><span class='tf'>待核实</span></button></li><li><button data-go="3"><span class="tn">03</span><span class="tt">FTC向双巨头 发民事调查令</span><span class='tf'>待核实</span></button></li><li><button data-go="4"><span class="tn">04</span><span class="tt">台积电净利 再创新高</span></button></li><li><button data-go="5"><span class="tn">05</span><span class="tt">Anthropic开放 METR雇员级访问</span></button></li><li><button data-go="6"><span class="tn">06</span><span class="tt">OpenAI承诺不用 苹果商业秘密</span></button></li><li><button data-go="7"><span class="tn">07</span><span class="tt">Bee发布Frontier 与Eclipse</span></button></li><li><button data-go="8"><span class="tn">08</span><span class="tt">广告变零点击 间谍软件管道</span></button></li><li><button data-go="9"><span class="tn">09</span><span class="tt">英伟达Nemotron 3.5 Super VL</span></button></li><li><button data-go="10"><span class="tn">10</span><span class="tt">ChatGPT可读 Chrome标签页</span></button></li><li><button data-go="11"><span class="tn">11</span><span class="tt">谷歌AI回答 加码内联链接</span></button></li><li><button data-go="12"><span class="tn">12</span><span class="tt">埃森哲据报 把Claude压到$29/月</span></button></li></ol>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="0" aria-label="下载封面"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="0" aria-label="复制封面文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s1" data-i="1">
+  <div class="inner">
+    <figure class="shot"><img data-i="1" alt="第 01 条资讯卡" src="img/2026-10-16-reader/01_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">01</span><span class="tag">开源模型</span></div>
+      <h2 class="title">Meta发布Muse Spark Open</h2>
+      <p class="summary">自称美国最强开源权重：8160亿总参、420亿激活、1M上下文；与苹果用MLX在两至四台M5 Ultra Mac Studio本地跑通。</p>
+      <div class="why"><b>为什么重要</b><p>开源权重绑上苹果桌面算力，闭源API之外多了一条可控本地部署叙事。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Meta博客 10/15</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="1" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="1" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s2" data-i="2">
+  <div class="inner">
+    <figure class="shot"><img data-i="2" alt="第 02 条资讯卡" src="img/2026-10-16-reader/02_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">02</span><span class="tag">资本</span></div>
+      <h2 class="title">Anthropic Q3 营收约168亿美元</h2>
+      <p class="summary">向准IPO投资者披露环比约增45%，称调整后盈利且自由现金流为正；毛利率约85%。非SEC审计季报。</p>
+      <div class="why"><b>为什么重要</b><p>泡沫担忧同周升温时，用现金与利润讲清“前沿模型可做成生意”。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：FT/Axios/Bloomberg 10/14–15<span class="flag">待核实 · 营收与利润率为投资者沟通/知情人士口径，非已申报审计财报。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="2" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="2" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s3" data-i="3">
+  <div class="inner">
+    <figure class="shot"><img data-i="3" alt="第 03 条资讯卡" src="img/2026-10-16-reader/03_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">03</span><span class="tag">监管</span></div>
+      <h2 class="title">FTC向双巨头 发民事调查令</h2>
+      <p class="summary">Axios称超50页文件要求覆盖安全事件、防护与营销材料；Ars/Verge交叉。计划传唤第三方，或要求高管作证。</p>
+      <div class="why"><b>为什么重要</b><p>联邦消费者保护框架正式取证智能体失控，叠加上州诉与欧盟RFI。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Axios/Ars 10/15<span class="flag">待核实 · 调查令全文未公开；以Axios知情人士+Ars转述为准，公司未正式确认。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="3" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="3" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s4" data-i="4">
+  <div class="inner">
+    <figure class="shot"><img data-i="4" alt="第 04 条资讯卡" src="img/2026-10-16-reader/04_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">04</span><span class="tag">半导体</span></div>
+      <h2 class="title">台积电净利 再创新高</h2>
+      <p class="summary">Q3净利约7631亿新台币同比+68.7%，营收约1.49万亿新台币；先进制程占晶圆营收约79%，Q4指引523–543亿美元。</p>
+      <div class="why"><b>为什么重要</b><p>代工龙头用连续纪录利润证明AI芯片需求仍大于供给。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：TSMC新闻稿 10/15</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="4" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="4" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-rank" id="s5" data-i="5">
+  <div class="inner">
+    <figure class="shot"><img data-i="5" alt="第 05 条资讯卡" src="img/2026-10-16-reader/05_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">05</span><span class="tag">安全治理</span></div>
+      <h2 class="title">Anthropic开放 METR雇员级访问</h2>
+      <p class="summary">六名METR研究员获公司硬件与近乎对等内部工具；公司不可否决发表，仅可狭义脱敏。对标银行驻场检查。</p>
+      <div class="why"><b>为什么重要</b><p>把外部评测从口头欢迎写成可核对制度，压缩安全叙事操作空间。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Anthropic博客 10/15</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="5" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="5" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s6" data-i="6">
+  <div class="inner">
+    <figure class="shot"><img data-i="6" alt="第 06 条资讯卡" src="img/2026-10-16-reader/06_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">06</span><span class="tag">诉讼</span></div>
+      <h2 class="title">OpenAI承诺不用 苹果商业秘密</h2>
+      <p class="summary">法官称极可能准予禁令后，OpenAI自愿承诺诉讼期间不将争议信息用于产品，并交14人设备取证镜像。</p>
+      <div class="why"><b>为什么重要</b><p>人才战进入可强制取证与产品使用禁令阶段，挖角合规成本上升。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Bloomberg/Verge 10/15</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="6" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="6" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s7" data-i="7">
+  <div class="inner">
+    <figure class="shot"><img data-i="7" alt="第 07 条资讯卡" src="img/2026-10-16-reader/07_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">07</span><span class="tag">硬件</span></div>
+      <h2 class="title">Bee发布Frontier 与Eclipse</h2>
+      <p class="summary">腕带/别针约75美元、磁吸手机附件约100美元；对话纪要+待办。称音频处理后即删、密钥在设备侧。</p>
+      <div class="why"><b>为什么重要</b><p>大厂把始终在听的个人纪要做成节日档标品，隐私同意与雇主政策承压。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：TechCrunch 10/15</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="7" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="7" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-oss" id="s8" data-i="8">
+  <div class="inner">
+    <figure class="shot"><img data-i="8" alt="第 08 条资讯卡" src="img/2026-10-16-reader/08_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">08</span><span class="tag">安全</span></div>
+      <h2 class="title">广告变零点击 间谍软件管道</h2>
+      <p class="summary">Citizen Lab称Discover-Tech的Controlium把定向广告接上Candiru等雇佣兵间谍软件；半岛电视台设备高置信感染。</p>
+      <div class="why"><b>为什么重要</b><p>程序化广告不再是中立管道，零点击防护不能只靠“不点链接”。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Citizen Lab 10/15</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="8" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="8" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-rank" id="s9" data-i="9">
+  <div class="inner">
+    <figure class="shot"><img data-i="9" alt="第 09 条资讯卡" src="img/2026-10-16-reader/09_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">09</span><span class="tag">开源</span></div>
+      <h2 class="title">英伟达Nemotron 3.5 Super VL</h2>
+      <p class="summary">约1200亿参数开源权重面向企业智能体；宣传单GPU智能体吞吐最高约升5倍，压缩版约24GB。</p>
+      <div class="why"><b>为什么重要</b><p>芯片商发开源智能体模型，把软件黏性绑回自家加速器。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：IT之家/Techmeme 10/15</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="9" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="9" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s10" data-i="10">
+  <div class="inner">
+    <figure class="shot"><img data-i="10" alt="第 10 条资讯卡" src="img/2026-10-16-reader/10_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">10</span><span class="tag">产品</span></div>
+      <h2 class="title">ChatGPT可读 Chrome标签页</h2>
+      <p class="summary">扩展升级后可基于打开标签对比、填表、起草邮件；侧边栏支持操控标签发消息与下载。Atlas浏览器已下线。</p>
+      <div class="why"><b>为什么重要</b><p>浏览器变成智能体执行面，企业DLP与扩展权限策略必须重写。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：The Verge 10/15</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="10" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="10" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s11" data-i="11">
+  <div class="inner">
+    <figure class="shot"><img data-i="11" alt="第 11 条资讯卡" src="img/2026-10-16-reader/11_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">11</span><span class="tag">搜索</span></div>
+      <h2 class="title">谷歌AI回答 加码内联链接</h2>
+      <p class="summary">AI Mode/Overviews链接更靠前更可点；News AI试点扩至逾400家出版方，含FT、CNN、Axios。</p>
+      <div class="why"><b>为什么重要</b><p>回应“AI概览吸走点击”；分发规则微调会立刻改写媒体生存曲线。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：The Verge 10/15</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="11" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="11" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s12" data-i="12">
+  <div class="inner">
+    <figure class="shot"><img data-i="12" alt="第 12 条资讯卡" src="img/2026-10-16-reader/12_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">12</span><span class="tag">企业IT</span></div>
+      <h2 class="title">埃森哲据报 把Claude压到$29/月</h2>
+      <p class="summary">404 Media称内部备忘录将部分员工月度Claude额度从可高达约1000美元压至约29美元。</p>
+      <div class="why"><b>为什么重要</b><p>大客户从“先开放”转向额度墙，席位收入可预测性下降。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：404 Media 10/15</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="12" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="12" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item outro" id="s13" data-i="13">
+  <div class="outro-in">
+    <h2>发布前请确认这 2 条</h2>
+    <ul class="checklist"><li><button data-go="2"><b>02</b><span>Anthropic Q3 营收约168亿美元</span></button><p>营收与利润率为投资者沟通/知情人士口径，非已申报审计财报。</p></li><li><button data-go="3"><b>03</b><span>FTC向双巨头 发民事调查令</span></button><p>调查令全文未公开；以Axios知情人士+Ars转述为准，公司未正式确认。</p></li></ul>
+    <p class="note">切换深浅两套图时，下载按钮会跟着当前这套走。黄标条目在新闻稿或官方口径出现前，请勿写成已交割或已定日期。上一期专区：<a href="./2026-10-15.html">2026-10-15</a>。</p>
+    <button class="btn" id="copyAll">复制全部文案</button>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+<script type="application/json" id="d">{"cards": [{"no": "00", "title": "封面 · 今日科技情报", "copy": "【今日科技情报】2026.10.16 · 过去 48 小时 12 条\n\n01 Meta发布Muse Spark Open\n02 Anthropic Q3 营收约168亿美元\n03 FTC向双巨头 发民事调查令\n04 台积电净利 再创新高\n05 Anthropic开放 METR雇员级访问\n06 OpenAI承诺不用 苹果商业秘密\n07 Bee发布Frontier 与Eclipse\n08 广告变零点击 间谍软件管道\n09 英伟达Nemotron 3.5 Super VL\n10 ChatGPT可读 Chrome标签页\n11 谷歌AI回答 加码内联链接\n12 埃森哲据报 把Claude压到$29/月\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261016_00_深色.png", "fileLight": "科技情报_20261016_00_浅色.png", "dark": "img/2026-10-16-reader/00_dark.png", "light": "img/2026-10-16-reader/00_light.png"}, {"no": "01", "title": "Meta发布Muse Spark Open", "copy": "【开源模型】Meta发布Muse Spark Open\n\n自称美国最强开源权重：8160亿总参、420亿激活、1M上下文；与苹果用MLX在两至四台M5 Ultra Mac Studio本地跑通。\n\n◆ 为什么重要：开源权重绑上苹果桌面算力，闭源API之外多了一条可控本地部署叙事。\n\n来源：Meta博客 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261016_01_深色.png", "fileLight": "科技情报_20261016_01_浅色.png", "dark": "img/2026-10-16-reader/01_dark.png", "light": "img/2026-10-16-reader/01_light.png"}, {"no": "02", "title": "Anthropic Q3 营收约168亿美元", "copy": "【资本】Anthropic Q3 营收约168亿美元\n\n向准IPO投资者披露环比约增45%，称调整后盈利且自由现金流为正；毛利率约85%。非SEC审计季报。\n\n◆ 为什么重要：泡沫担忧同周升温时，用现金与利润讲清“前沿模型可做成生意”。\n\n※ 营收与利润率为投资者沟通/知情人士口径，非已申报审计财报。\n\n来源：FT/Axios/Bloomberg 10/14–15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261016_02_深色.png", "fileLight": "科技情报_20261016_02_浅色.png", "dark": "img/2026-10-16-reader/02_dark.png", "light": "img/2026-10-16-reader/02_light.png"}, {"no": "03", "title": "FTC向双巨头 发民事调查令", "copy": "【监管】FTC向双巨头 发民事调查令\n\nAxios称超50页文件要求覆盖安全事件、防护与营销材料；Ars/Verge交叉。计划传唤第三方，或要求高管作证。\n\n◆ 为什么重要：联邦消费者保护框架正式取证智能体失控，叠加上州诉与欧盟RFI。\n\n※ 调查令全文未公开；以Axios知情人士+Ars转述为准，公司未正式确认。\n\n来源：Axios/Ars 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261016_03_深色.png", "fileLight": "科技情报_20261016_03_浅色.png", "dark": "img/2026-10-16-reader/03_dark.png", "light": "img/2026-10-16-reader/03_light.png"}, {"no": "04", "title": "台积电净利 再创新高", "copy": "【半导体】台积电净利 再创新高\n\nQ3净利约7631亿新台币同比+68.7%，营收约1.49万亿新台币；先进制程占晶圆营收约79%，Q4指引523–543亿美元。\n\n◆ 为什么重要：代工龙头用连续纪录利润证明AI芯片需求仍大于供给。\n\n来源：TSMC新闻稿 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261016_04_深色.png", "fileLight": "科技情报_20261016_04_浅色.png", "dark": "img/2026-10-16-reader/04_dark.png", "light": "img/2026-10-16-reader/04_light.png"}, {"no": "05", "title": "Anthropic开放 METR雇员级访问", "copy": "【安全治理】Anthropic开放 METR雇员级访问\n\n六名METR研究员获公司硬件与近乎对等内部工具；公司不可否决发表，仅可狭义脱敏。对标银行驻场检查。\n\n◆ 为什么重要：把外部评测从口头欢迎写成可核对制度，压缩安全叙事操作空间。\n\n来源：Anthropic博客 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261016_05_深色.png", "fileLight": "科技情报_20261016_05_浅色.png", "dark": "img/2026-10-16-reader/05_dark.png", "light": "img/2026-10-16-reader/05_light.png"}, {"no": "06", "title": "OpenAI承诺不用 苹果商业秘密", "copy": "【诉讼】OpenAI承诺不用 苹果商业秘密\n\n法官称极可能准予禁令后，OpenAI自愿承诺诉讼期间不将争议信息用于产品，并交14人设备取证镜像。\n\n◆ 为什么重要：人才战进入可强制取证与产品使用禁令阶段，挖角合规成本上升。\n\n来源：Bloomberg/Verge 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261016_06_深色.png", "fileLight": "科技情报_20261016_06_浅色.png", "dark": "img/2026-10-16-reader/06_dark.png", "light": "img/2026-10-16-reader/06_light.png"}, {"no": "07", "title": "Bee发布Frontier 与Eclipse", "copy": "【硬件】Bee发布Frontier 与Eclipse\n\n腕带/别针约75美元、磁吸手机附件约100美元；对话纪要+待办。称音频处理后即删、密钥在设备侧。\n\n◆ 为什么重要：大厂把始终在听的个人纪要做成节日档标品，隐私同意与雇主政策承压。\n\n来源：TechCrunch 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261016_07_深色.png", "fileLight": "科技情报_20261016_07_浅色.png", "dark": "img/2026-10-16-reader/07_dark.png", "light": "img/2026-10-16-reader/07_light.png"}, {"no": "08", "title": "广告变零点击 间谍软件管道", "copy": "【安全】广告变零点击 间谍软件管道\n\nCitizen Lab称Discover-Tech的Controlium把定向广告接上Candiru等雇佣兵间谍软件；半岛电视台设备高置信感染。\n\n◆ 为什么重要：程序化广告不再是中立管道，零点击防护不能只靠“不点链接”。\n\n来源：Citizen Lab 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261016_08_深色.png", "fileLight": "科技情报_20261016_08_浅色.png", "dark": "img/2026-10-16-reader/08_dark.png", "light": "img/2026-10-16-reader/08_light.png"}, {"no": "09", "title": "英伟达Nemotron 3.5 Super VL", "copy": "【开源】英伟达Nemotron 3.5 Super VL\n\n约1200亿参数开源权重面向企业智能体；宣传单GPU智能体吞吐最高约升5倍，压缩版约24GB。\n\n◆ 为什么重要：芯片商发开源智能体模型，把软件黏性绑回自家加速器。\n\n来源：IT之家/Techmeme 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261016_09_深色.png", "fileLight": "科技情报_20261016_09_浅色.png", "dark": "img/2026-10-16-reader/09_dark.png", "light": "img/2026-10-16-reader/09_light.png"}, {"no": "10", "title": "ChatGPT可读 Chrome标签页", "copy": "【产品】ChatGPT可读 Chrome标签页\n\n扩展升级后可基于打开标签对比、填表、起草邮件；侧边栏支持操控标签发消息与下载。Atlas浏览器已下线。\n\n◆ 为什么重要：浏览器变成智能体执行面，企业DLP与扩展权限策略必须重写。\n\n来源：The Verge 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261016_10_深色.png", "fileLight": "科技情报_20261016_10_浅色.png", "dark": "img/2026-10-16-reader/10_dark.png", "light": "img/2026-10-16-reader/10_light.png"}, {"no": "11", "title": "谷歌AI回答 加码内联链接", "copy": "【搜索】谷歌AI回答 加码内联链接\n\nAI Mode/Overviews链接更靠前更可点；News AI试点扩至逾400家出版方，含FT、CNN、Axios。\n\n◆ 为什么重要：回应“AI概览吸走点击”；分发规则微调会立刻改写媒体生存曲线。\n\n来源：The Verge 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261016_11_深色.png", "fileLight": "科技情报_20261016_11_浅色.png", "dark": "img/2026-10-16-reader/11_dark.png", "light": "img/2026-10-16-reader/11_light.png"}, {"no": "12", "title": "埃森哲据报 把Claude压到$29/月", "copy": "【企业IT】埃森哲据报 把Claude压到$29/月\n\n404 Media称内部备忘录将部分员工月度Claude额度从可高达约1000美元压至约29美元。\n\n◆ 为什么重要：大客户从“先开放”转向额度墙，席位收入可预测性下降。\n\n来源：404 Media 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261016_12_深色.png", "fileLight": "科技情报_20261016_12_浅色.png", "dark": "img/2026-10-16-reader/12_dark.png", "light": "img/2026-10-16-reader/12_light.png"}], "allCopy": "【今日科技情报】2026.10.16 · 过去 48 小时 12 条\n\n01 Meta发布Muse Spark Open\n02 Anthropic Q3 营收约168亿美元\n03 FTC向双巨头 发民事调查令\n04 台积电净利 再创新高\n05 Anthropic开放 METR雇员级访问\n06 OpenAI承诺不用 苹果商业秘密\n07 Bee发布Frontier 与Eclipse\n08 广告变零点击 间谍软件管道\n09 英伟达Nemotron 3.5 Super VL\n10 ChatGPT可读 Chrome标签页\n11 谷歌AI回答 加码内联链接\n12 埃森哲据报 把Claude压到$29/月\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开源模型】Meta发布Muse Spark Open\n\n自称美国最强开源权重：8160亿总参、420亿激活、1M上下文；与苹果用MLX在两至四台M5 Ultra Mac Studio本地跑通。\n\n◆ 为什么重要：开源权重绑上苹果桌面算力，闭源API之外多了一条可控本地部署叙事。\n\n来源：Meta博客 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【资本】Anthropic Q3 营收约168亿美元\n\n向准IPO投资者披露环比约增45%，称调整后盈利且自由现金流为正；毛利率约85%。非SEC审计季报。\n\n◆ 为什么重要：泡沫担忧同周升温时，用现金与利润讲清“前沿模型可做成生意”。\n\n※ 营收与利润率为投资者沟通/知情人士口径，非已申报审计财报。\n\n来源：FT/Axios/Bloomberg 10/14–15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【监管】FTC向双巨头 发民事调查令\n\nAxios称超50页文件要求覆盖安全事件、防护与营销材料；Ars/Verge交叉。计划传唤第三方，或要求高管作证。\n\n◆ 为什么重要：联邦消费者保护框架正式取证智能体失控，叠加上州诉与欧盟RFI。\n\n※ 调查令全文未公开；以Axios知情人士+Ars转述为准，公司未正式确认。\n\n来源：Axios/Ars 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【半导体】台积电净利 再创新高\n\nQ3净利约7631亿新台币同比+68.7%，营收约1.49万亿新台币；先进制程占晶圆营收约79%，Q4指引523–543亿美元。\n\n◆ 为什么重要：代工龙头用连续纪录利润证明AI芯片需求仍大于供给。\n\n来源：TSMC新闻稿 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【安全治理】Anthropic开放 METR雇员级访问\n\n六名METR研究员获公司硬件与近乎对等内部工具；公司不可否决发表，仅可狭义脱敏。对标银行驻场检查。\n\n◆ 为什么重要：把外部评测从口头欢迎写成可核对制度，压缩安全叙事操作空间。\n\n来源：Anthropic博客 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【诉讼】OpenAI承诺不用 苹果商业秘密\n\n法官称极可能准予禁令后，OpenAI自愿承诺诉讼期间不将争议信息用于产品，并交14人设备取证镜像。\n\n◆ 为什么重要：人才战进入可强制取证与产品使用禁令阶段，挖角合规成本上升。\n\n来源：Bloomberg/Verge 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【硬件】Bee发布Frontier 与Eclipse\n\n腕带/别针约75美元、磁吸手机附件约100美元；对话纪要+待办。称音频处理后即删、密钥在设备侧。\n\n◆ 为什么重要：大厂把始终在听的个人纪要做成节日档标品，隐私同意与雇主政策承压。\n\n来源：TechCrunch 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【安全】广告变零点击 间谍软件管道\n\nCitizen Lab称Discover-Tech的Controlium把定向广告接上Candiru等雇佣兵间谍软件；半岛电视台设备高置信感染。\n\n◆ 为什么重要：程序化广告不再是中立管道，零点击防护不能只靠“不点链接”。\n\n来源：Citizen Lab 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开源】英伟达Nemotron 3.5 Super VL\n\n约1200亿参数开源权重面向企业智能体；宣传单GPU智能体吞吐最高约升5倍，压缩版约24GB。\n\n◆ 为什么重要：芯片商发开源智能体模型，把软件黏性绑回自家加速器。\n\n来源：IT之家/Techmeme 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【产品】ChatGPT可读 Chrome标签页\n\n扩展升级后可基于打开标签对比、填表、起草邮件；侧边栏支持操控标签发消息与下载。Atlas浏览器已下线。\n\n◆ 为什么重要：浏览器变成智能体执行面，企业DLP与扩展权限策略必须重写。\n\n来源：The Verge 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【搜索】谷歌AI回答 加码内联链接\n\nAI Mode/Overviews链接更靠前更可点；News AI试点扩至逾400家出版方，含FT、CNN、Axios。\n\n◆ 为什么重要：回应“AI概览吸走点击”；分发规则微调会立刻改写媒体生存曲线。\n\n来源：The Verge 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【企业IT】埃森哲据报 把Claude压到$29/月\n\n404 Media称内部备忘录将部分员工月度Claude额度从可高达约1000美元压至约29美元。\n\n◆ 为什么重要：大客户从“先开放”转向额度墙，席位收入可预测性下降。\n\n来源：404 Media 10/15\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道"}</script>
+<script>
+const G=JSON.parse(document.getElementById("d").textContent);
+const main=document.getElementById("main"),rail=document.getElementById("rail");
+const secs=[...document.querySelectorAll(".item")];
+const imgs=[...document.querySelectorAll(".shot img")];
+const mode=()=>document.documentElement.dataset.mode;
+let loaded=new Set();
+function load(i){
+  for(let k=Math.max(0,i-2);k<=Math.min(imgs.length-1,i+2);k++){
+    const el=imgs[k];if(!el)continue;
+    const want=G.cards[+el.dataset.i][mode()];
+    if(el.src!==want){el.src=want;loaded.add(k);}
+  }
+}
+function repaint(){loaded.forEach(k=>{const el=imgs[k];el.src=G.cards[+el.dataset.i][mode()];});}
+load(0);
+document.getElementById("mode").onclick=e=>{
+  const r=document.documentElement;
+  r.dataset.mode=mode()==="dark"?"light":"dark";
+  e.currentTarget.textContent=mode()==="dark"?"浅色版":"深色版";
+  repaint();
+};
+const toast=document.getElementById("toast");let tt;
+const say=m=>{toast.textContent=m;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),1700)};
+const copy=t=>navigator.clipboard?.writeText(t).then(()=>say("已复制"),()=>say("复制失败，请手动选中"))??say("复制失败");
+document.addEventListener("click",ev=>{
+  const go=ev.target.closest("[data-go]");
+  if(go){document.getElementById("s"+go.dataset.go).scrollIntoView();return}
+  const a=ev.target.closest("[data-act]");
+  if(a){
+    const c=G.cards[+a.dataset.i],d=mode()==="dark";
+    if(a.dataset.act==="dl"){
+      const l=document.createElement("a");l.href=d?c.dark:c.light;
+      l.download=d?c.fileDark:c.fileLight;l.click();say("已下载 "+l.download);
+    }else copy(c.copy);
+    return;
+  }
+  if(ev.target.id==="copyAll"){copy(G.allCopy);return}
+  const m=ev.target.closest(".more");
+  if(m){
+    const b=m.closest(".text"),on=b.querySelector(".summary").classList.toggle("open");
+    b.querySelector(".why")?.classList.toggle("open",on);
+    m.textContent=on?"收起":"展开全文";m.setAttribute("aria-expanded",on);
+  }
+});
+const pos=document.getElementById("pos"),prog=document.getElementById("prog");
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting||en.intersectionRatio<.55)return;
+  const i=secs.indexOf(en.target);
+  load(i);
+  pos.textContent=i===0?"封面":(i>G.cards.length-1?"结尾":G.cards[i].no);
+  prog.style.width=(i/(secs.length-1)*100)+"%";
+  rail.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-current",String(j===i)));
+}),{root:main,threshold:.55});
+secs.forEach(s=>io.observe(s));
+addEventListener("keydown",e=>{
+  if(e.target.matches("input,textarea"))return;
+  const cur=secs.findIndex(s=>s.getBoundingClientRect().top>-window.innerHeight/2);
+  if(e.key==="ArrowDown"||e.key==="j"){e.preventDefault();secs[Math.min(secs.length-1,cur+1)]?.scrollIntoView()}
+  if(e.key==="ArrowUp"||e.key==="k"){e.preventDefault();secs[Math.max(0,cur-1)]?.scrollIntoView()}
+});
+
+</script>
+</body></html>
