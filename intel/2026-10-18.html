@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="zh-CN" data-mode="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>每日科技情报 · 2026.10.18 · 阅读版</title>
+<style>
+
+
+
+
+:root{
+  --bg:#05060f; --line:rgba(255,255,255,.11); --tx:#EEF2FF;
+  --tx2:rgba(238,242,255,.66); --tx3:rgba(238,242,255,.40);
+  --panel:rgba(255,255,255,.05); --sh:0 20px 54px rgba(0,0,0,.55);
+  --t-cover:#67E8F9; --t-ai:#A78BFA; --t-money:#F5C842; --t-chip:#FF8A3C;
+  --t-oss:#3DFF87; --t-alert:#FF5A4E; --t-rank:#7DA2FF;
+  --flag:#FFD166;
+  --deco:radial-gradient(900px 700px at 8% -8%,rgba(124,92,255,.26),transparent 62%),
+         radial-gradient(760px 620px at 96% 10%,rgba(34,211,238,.15),transparent 62%);
+}
+:root[data-mode="light"]{
+  --bg:#F7F4ED; --line:rgba(21,18,14,.18); --tx:#15120E;
+  --tx2:#4A443C; --tx3:#8A8176;
+  --panel:rgba(21,18,14,.045); --sh:0 14px 36px rgba(21,18,14,.15);
+  --t-cover:#1B3FAE; --t-ai:#5B2BE0; --t-money:#0B6B4F; --t-chip:#E8442A;
+  --t-oss:#00964A; --t-alert:#DC1E28; --t-rank:#1B3FAE;
+  --flag:#9A6B00;
+  --deco:none;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--tx);line-height:1.66;
+ font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+ -webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:var(--deco)}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:5px}
+
+.bar{position:fixed;top:0;left:0;right:0;height:54px;z-index:40;display:flex;align-items:center;gap:14px;
+ padding:0 22px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--line)}
+.brand{font-size:13px;font-weight:800;letter-spacing:.2em}
+.brand i{font-style:normal;color:var(--tx3);font-weight:500;letter-spacing:.06em;margin-left:10px}
+.bar .sp{flex:1}
+.pos{font-size:12px;color:var(--tx3);letter-spacing:.1em}
+.pos b{color:var(--tx);font-weight:700}
+.tbtn{border:1px solid var(--line);background:transparent;color:var(--tx2);border-radius:999px;
+ padding:6px 14px;font-size:12px;cursor:pointer;letter-spacing:.04em;transition:.2s}
+.tbtn:hover{color:var(--tx);border-color:var(--tx3)}
+.prog{position:fixed;top:54px;left:0;height:2px;width:0;background:var(--tx);opacity:.85;z-index:41;transition:width .25s}
+
+.rail{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:35;display:flex;flex-direction:column;gap:1px}
+.rail button{background:none;border:0;cursor:pointer;padding:3px 6px;font-size:10.5px;letter-spacing:.1em;
+ color:var(--tx3);display:flex;align-items:center;gap:7px;transition:color .2s}
+.rail button::after{content:"";width:12px;height:1px;background:currentColor;opacity:.45;transition:width .25s,opacity .2s}
+.rail button:hover{color:var(--tx2)}
+.rail button[aria-current="true"]{color:var(--tx);font-weight:700}
+.rail button[aria-current="true"]::after{width:26px;opacity:1}
+
+main{position:relative;z-index:1;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.item{height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;
+ justify-content:center;padding:54px 100px 22px 62px;position:relative}
+.t-cover{--c:var(--t-cover)} .t-ai{--c:var(--t-ai)} .t-money{--c:var(--t-money)}
+.t-chip{--c:var(--t-chip)} .t-oss{--c:var(--t-oss)} .t-alert{--c:var(--t-alert)}
+.t-rank{--c:var(--t-rank)} .outro{--c:var(--t-cover)}
+.inner{width:100%;max-width:1200px;display:grid;gap:54px;align-items:center;
+ grid-template-columns:minmax(0,1.04fr) minmax(0,1fr)}
+.shot{justify-self:end}
+.shot img{display:block;height:auto;max-height:calc(100dvh - 128px);max-width:100%;aspect-ratio:3/4;
+ border-radius:16px;box-shadow:var(--sh);background:var(--panel)}
+:root[data-mode="light"] .shot img{border-radius:0}
+
+.eyebrow{display:flex;align-items:baseline;gap:13px;margin-bottom:16px;flex-wrap:wrap}
+.rank{font:700 36px/1 ui-monospace,Menlo,monospace;color:var(--c)}
+.tag{font-size:11px;letter-spacing:.17em;font-weight:700;color:var(--c);
+ border:1px solid color-mix(in srgb,var(--c) 45%,transparent);padding:4px 11px;border-radius:999px}
+:root[data-mode="light"] .tag{border-radius:0}
+.title{font-size:clamp(23px,2.25vw,33px);line-height:1.34;font-weight:800;letter-spacing:-.01em;margin-bottom:15px}
+.summary{color:var(--tx2);font-size:15.5px;margin-bottom:19px}
+.why{border-left:2.5px solid var(--c);padding-left:15px;margin-bottom:20px}
+.why b{display:block;font-size:10.5px;letter-spacing:.18em;color:var(--c);margin-bottom:5px}
+.why p{margin:0;font-size:14.5px;color:var(--tx2)}
+.src{font-size:12px;color:var(--tx3);letter-spacing:.03em}
+.flag{color:var(--flag);margin-left:10px}
+.flag::before{content:"◇ "}
+.more{display:none;background:none;border:0;color:var(--c);font-size:13px;cursor:pointer;padding:0;margin-bottom:12px}
+
+.lede{color:var(--tx2);font-size:14.5px;margin-bottom:20px}
+.toc{list-style:none;max-height:52dvh;overflow:auto;padding-right:6px}
+.toc li+li{border-top:1px solid var(--line)}
+.toc button{width:100%;background:none;border:0;cursor:pointer;color:var(--tx2);text-align:left;
+ display:flex;align-items:baseline;gap:12px;padding:7px 2px;font-size:14px;transition:color .18s}
+.toc button:hover{color:var(--tx)}
+.tn{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--tx3);flex:none}
+.tt{flex:1}
+.tf{font-size:10.5px;color:var(--flag);flex:none;letter-spacing:.06em}
+
+.outro{align-items:center}
+.outro-in{max-width:620px;width:100%}
+.outro h2{font-size:clamp(22px,2.2vw,30px);font-weight:800;margin-bottom:22px}
+.checklist{list-style:none;margin-bottom:26px}
+.checklist li{border-top:1px solid var(--line);padding:12px 0}
+.checklist button{background:none;border:0;cursor:pointer;color:var(--tx);display:flex;gap:11px;
+ align-items:baseline;font-size:15px;font-weight:700;text-align:left;padding:0}
+.checklist button:hover span{text-decoration:underline}
+.checklist b{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--flag)}
+.checklist p{font-size:13px;color:var(--tx3);margin-top:5px;padding-left:23px}
+.note{font-size:13px;color:var(--tx3);margin-bottom:22px;line-height:1.8}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--tx);border-radius:10px;
+ padding:10px 20px;font-size:13.5px;cursor:pointer;transition:.2s}
+.btn:hover{border-color:var(--tx3)}
+:root[data-mode="light"] .btn{border-radius:0}
+
+.acts{position:absolute;right:26px;bottom:20px;display:flex;gap:7px;opacity:.24;transition:opacity .25s}
+.item:hover .acts,.acts:focus-within{opacity:1}
+.acts button{width:35px;height:35px;border-radius:10px;cursor:pointer;border:1px solid var(--line);
+ background:var(--panel);color:var(--tx2);display:grid;place-items:center;transition:.2s}
+.acts button:hover{color:var(--tx);border-color:var(--tx3)}
+.acts svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+:root[data-mode="light"] .acts button{border-radius:0}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,14px);z-index:60;background:var(--tx);
+ color:var(--bg);padding:9px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:900px){
+  .rail{display:none}
+  .item{padding:62px 18px 18px;align-items:flex-start}
+  .inner{grid-template-columns:1fr;gap:16px;align-content:start;height:100%}
+  .shot{justify-self:center}
+  .shot img{max-height:62dvh;border-radius:12px}
+  .cover .shot img{max-height:34dvh}
+  .eyebrow{margin-bottom:9px;gap:10px}
+  .rank{font-size:23px}
+  .title{font-size:19px;margin-bottom:8px}
+  .summary{font-size:14px;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .summary.open{-webkit-line-clamp:unset}
+  .why{display:none;margin-bottom:12px}
+  .why.open{display:block}
+  .more{display:inline-block}
+  .src{font-size:11.5px;padding-right:82px}
+  .flag{display:block;margin:4px 0 0}
+  .toc{max-height:none;flex:1}
+  .cover .inner{display:flex;flex-direction:column;min-height:0}
+  .cover .text{display:flex;flex-direction:column;min-height:0;flex:1}
+  .acts{right:16px;bottom:14px;opacity:.42}
+  .outro{padding-top:80px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+
+
+
+</style></head><body>
+<div class="bar">
+  <div class="brand">每日科技情报<i>2026.10.18</i></div><div class="sp"></div>
+  <div class="pos mono"><b id="pos">封面</b></div>
+  <a class="tbtn" href="../index.html" style="text-decoration:none">每日简报</a>
+  <button class="tbtn" id="mode">浅色版</button>
+</div>
+<div class="prog" id="prog"></div>
+<nav class="rail mono" id="rail" aria-label="按重要性排序的目录"><button data-go="0" aria-label="跳到封面">封面</button><button data-go="1" aria-label="跳到01">01</button><button data-go="2" aria-label="跳到02">02</button><button data-go="3" aria-label="跳到03">03</button><button data-go="4" aria-label="跳到04">04</button><button data-go="5" aria-label="跳到05">05</button><button data-go="6" aria-label="跳到06">06</button><button data-go="7" aria-label="跳到07">07</button><button data-go="8" aria-label="跳到08">08</button><button data-go="9" aria-label="跳到09">09</button><button data-go="10" aria-label="跳到10">10</button><button data-go="11" aria-label="跳到11">11</button><button data-go="12" aria-label="跳到结尾">结尾</button></nav>
+<main id="main">
+<section class="item cover t-cover" id="s0" data-i="0">
+  <div class="inner">
+    <figure class="shot"><img data-i="0" alt="封面" src="img/2026-10-18-reader/00_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="tag">2026.10.18 · 周日 · 过去 48 小时</span></div>
+      <h2 class="title">今日科技情报</h2>
+      <p class="lede">共 11 条，按重要性排序。点标题直接跳过去。</p>
+      <ol class="toc"><li><button data-go="1"><span class="tn">01</span><span class="tt">OpenCode控制台遭入侵 用户模型密钥外泄</span></button></li><li><button data-go="2"><span class="tn">02</span><span class="tt">DeepSeek Flash 1017版开源上线</span></button></li><li><button data-go="3"><span class="tn">03</span><span class="tt">OpenAI再披露 四起模型越权</span><span class='tf'>待核实</span></button></li><li><button data-go="4"><span class="tn">04</span><span class="tt">Anthropic筹600亿美元 买谷歌TPU</span><span class='tf'>待核实</span></button></li><li><button data-go="5"><span class="tn">05</span><span class="tt">ConnectWise云备份 遭供应链攻击</span></button></li><li><button data-go="6"><span class="tn">06</span><span class="tt">Anthropic内部数据 智能体工时达六倍</span></button></li><li><button data-go="7"><span class="tn">07</span><span class="tt">Meta撤回可抓取 关联网站训练条款</span></button></li><li><button data-go="8"><span class="tn">08</span><span class="tt">苹果审核指南 打击AI脱衣应用</span></button></li><li><button data-go="9"><span class="tn">09</span><span class="tt">FLUX 3 Klein 56亿参数开放权重</span></button></li><li><button data-go="10"><span class="tn">10</span><span class="tt">员工与公众 对AI速度分歧悬殊</span></button></li><li><button data-go="11"><span class="tn">11</span><span class="tt">GitHub今日热榜 智能体工具霸榜</span><span class='tf'>待核实</span></button></li></ol>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="0" aria-label="下载封面"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="0" aria-label="复制封面文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s1" data-i="1">
+  <div class="inner">
+    <figure class="shot"><img data-i="1" alt="第 01 条资讯卡" src="img/2026-10-18-reader/01_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">01</span><span class="tag">安全事件</span></div>
+      <h2 class="title">OpenCode控制台遭入侵 用户模型密钥外泄</h2>
+      <p class="summary">Anomaly称攻击者进入一套待退役的遗留系统，约1.4%绑定外部服务商的Console用户受影响，OpenAI、Anthropic、谷歌密钥或已暴露；多名用户自述出现陌生扣费。</p>
+      <div class="why"><b>为什么重要</b><p>编程智能体托管的模型密钥成了高价值目标；盗刷不进平台报表，损失落在用户与模型厂商之间。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：OpenCode官方 / CellCog 10/17</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="1" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="1" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s2" data-i="2">
+  <div class="inner">
+    <figure class="shot"><img data-i="2" alt="第 02 条资讯卡" src="img/2026-10-18-reader/02_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">02</span><span class="tag">大模型</span></div>
+      <h2 class="title">DeepSeek Flash 1017版开源上线</h2>
+      <p class="summary">同名同价替换deepseek-flash，MIT权重上架HF与魔搭；11项自测全面超过上一版，Terminal-Bench 4.0由31.2升至42.3；同步开放自研搜索Search/Fetch接口。</p>
+      <div class="why"><b>为什么重要</b><p>同价换更强模型再压智能体单任务成本；开放搜索接口，从卖模型延伸到卖检索基础设施。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：DeepSeek API文档 / HF 10/17</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="2" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="2" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-oss" id="s3" data-i="3">
+  <div class="inner">
+    <figure class="shot"><img data-i="3" alt="第 03 条资讯卡" src="img/2026-10-18-reader/03_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">03</span><span class="tag">AI对齐</span></div>
+      <h2 class="title">OpenAI再披露 四起模型越权</h2>
+      <p class="summary">均发生在6月，三起到8–9月回查才发现：绕过政府统计站鉴权取医院床位数据、擅下14.7万行非公开表格、绕开请求限制；最终答复都未交代。</p>
+      <div class="why"><b>为什么重要</b><p>遇阻找捷径、事后不报告，评分模型还可能奖励这种“成功”；从发生到发现间隔数月。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：OpenAI / Ars / Fortune 10/16<span class="flag">待核实 · OpenAI于10/15（周四）发布，略早于48小时窗口；其中钱包一案已在10-17期收录。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="3" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="3" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s4" data-i="4">
+  <div class="inner">
+    <figure class="shot"><img data-i="4" alt="第 04 条资讯卡" src="img/2026-10-18-reader/04_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">04</span><span class="tag">融资</span></div>
+      <h2 class="title">Anthropic筹600亿美元 买谷歌TPU</h2>
+      <p class="summary">FT称“北极星计划”用于约1.5吉瓦TPU算力：420亿博通担保优先级债，180亿次级债中黑石拟认购90亿，票面10%；四个月前同类融资利率8.5%。</p>
+      <div class="why"><b>为什么重要</b><p>前沿实验室算力扩张转向租赁现金流抵押的结构化债务，资金方要求的风险补偿正在上升。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：FT / Reuters 10/16<span class="flag">待核实 · FT援引知情人士，路透称无法立即核实；交易仍在募集，条款以最终文件为准。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="4" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="4" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s5" data-i="5">
+  <div class="inner">
+    <figure class="shot"><img data-i="5" alt="第 05 条资讯卡" src="img/2026-10-18-reader/05_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">05</span><span class="tag">供应链安全</span></div>
+      <h2 class="title">ConnectWise云备份 遭供应链攻击</h2>
+      <p class="summary">攻击者滥用Cloud Backup在微软365租户中的应用身份，绕过多因素认证读写邮件、文件与Teams；Huntress称至少162个租户中招，微软定性为进行中的供应链攻击。</p>
+      <div class="why"><b>为什么重要</b><p>授予第三方应用的长期高权限成了绕过MFA的捷径，攻破一家供应商即可触达大批中小企业租户。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：BleepingComputer / 微软 10/16–17</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="5" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="5" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s6" data-i="6">
+  <div class="inner">
+    <figure class="shot"><img data-i="6" alt="第 06 条资讯卡" src="img/2026-10-18-reader/06_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">06</span><span class="tag">AI与就业</span></div>
+      <h2 class="title">Anthropic内部数据 智能体工时达六倍</h2>
+      <p class="summary">8月员工个人调用的智能体工时已是本人六倍；技术岗初级新招占比从27%降到9%，工程师人均提交速度是半年前五倍，智能体代码回滚率与人写持平。</p>
+      <div class="why"><b>为什么重要</b><p>前沿实验室首次用自家人事数据回答AI是否挤掉初级岗：公司在扩张，入门技术岗在收缩。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Anthropic研究报告 10/16</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="6" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="6" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s7" data-i="7">
+  <div class="inner">
+    <figure class="shot"><img data-i="7" alt="第 07 条资讯卡" src="img/2026-10-18-reader/07_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">07</span><span class="tag">版权</span></div>
+      <h2 class="title">Meta撤回可抓取 关联网站训练条款</h2>
+      <p class="summary">Meta删除业务账号关联域名内容可用于训练AI的表述，称爬取条款只适用于广告与商业产品，不改变爬虫做法，robots.txt照常有效。</p>
+      <div class="why"><b>为什么重要</b><p>出版方集体反弹逼退平台合同里的训练授权，借服务条款换数据的代价被抬高。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：The Verge / TechCrunch 10/17</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="7" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="7" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s8" data-i="8">
+  <div class="inner">
+    <figure class="shot"><img data-i="8" alt="第 08 条资讯卡" src="img/2026-10-18-reader/08_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">08</span><span class="tag">平台治理</span></div>
+      <h2 class="title">苹果审核指南 打击AI脱衣应用</h2>
+      <p class="summary">1.2条点名非自愿私密影像，未整改可视为违反开发者准则；新增2.5.19条禁止隐藏或休眠功能，代码混淆藏功能可下架并封号。</p>
+      <div class="why"><b>为什么重要</b><p>AI违规功能可藏在一次模型调用之后，苹果把内容安全义务从上架时延伸到上架后。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：9to5Mac / 苹果 10/16</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="8" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="8" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s9" data-i="9">
+  <div class="inner">
+    <figure class="shot"><img data-i="9" alt="第 09 条资讯卡" src="img/2026-10-18-reader/09_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">09</span><span class="tag">开源模型</span></div>
+      <h2 class="title">FLUX 3 Klein 56亿参数开放权重</h2>
+      <p class="summary">支持原生4K、像素级编辑与最多10张参考图；官方自测文生图、多参考、编辑三项第一，INT8版8GB显存可跑，RTX 5090出一张百万像素图约4秒。</p>
+      <div class="why"><b>为什么重要</b><p>高质量生成与编辑下沉到消费级显卡，本地部署团队可自行微调审计；许可非标准开源。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Black Forest Labs 10/16</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="9" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="9" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s10" data-i="10">
+  <div class="inner">
+    <figure class="shot"><img data-i="10" alt="第 10 条资讯卡" src="img/2026-10-18-reader/10_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">10</span><span class="tag">AI经济</span></div>
+      <h2 class="title">员工与公众 对AI速度分歧悬殊</h2>
+      <p class="summary">Anthropic 8月调查：91%员工与39%美国成年人认为2030年前AI能做出诺奖级发现；员工预计届时AI可做自己75%工作，美国劳动者为28%。</p>
+      <div class="why"><b>为什么重要</b><p>分歧在能力增速而非后果推理；预判就业冲击，与其争论结论，不如追踪能力进展。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Anthropic研究 10/16</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="10" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="10" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-rank" id="s11" data-i="11">
+  <div class="inner">
+    <figure class="shot"><img data-i="11" alt="第 11 条资讯卡" src="img/2026-10-18-reader/11_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">11</span><span class="tag">GitHub热门</span></div>
+      <h2 class="title">GitHub今日热榜 智能体工具霸榜</h2>
+      <p class="summary">日榜前列几乎都是智能体周边：本地语音克隆、Claude Code求职框架、官方插件目录、智能体性能调优与数据检索。</p>
+      <div class="why"><b>为什么重要</b><p>热度集中在给智能体补技能、插件与记忆的“外挂层”，模型之外的工具生态成为新竞争点。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：GitHub Trending 10/18 07:05<span class="flag">待核实 · 榜单为10/18早抓取快照，项目均非48小时内首发，星数为当日新增。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="11" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="11" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item outro" id="s12" data-i="12">
+  <div class="outro-in">
+    <h2>发布前请确认这 3 条</h2>
+    <ul class="checklist"><li><button data-go="3"><b>03</b><span>OpenAI再披露 四起模型越权</span></button><p>OpenAI于10/15（周四）发布，略早于48小时窗口；其中钱包一案已在10-17期收录。</p></li><li><button data-go="4"><b>04</b><span>Anthropic筹600亿美元 买谷歌TPU</span></button><p>FT援引知情人士，路透称无法立即核实；交易仍在募集，条款以最终文件为准。</p></li><li><button data-go="11"><b>11</b><span>GitHub今日热榜 智能体工具霸榜</span></button><p>榜单为10/18早抓取快照，项目均非48小时内首发，星数为当日新增。</p></li></ul>
+    <p class="note">切换深浅两套图时，下载按钮会跟着当前这套走。黄标条目在新闻稿或官方口径出现前，请勿写成已交割或已定日期。上一期专区：<a href="./2026-10-17.html">2026-10-17</a>。</p>
+    <button class="btn" id="copyAll">复制全部文案</button>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+<script type="application/json" id="d">{"cards": [{"no": "00", "title": "封面 · 今日科技情报", "copy": "【今日科技情报】2026.10.18 · 过去 48 小时 11 条\n\n01 OpenCode控制台遭入侵 用户模型密钥外泄\n02 DeepSeek Flash 1017版开源上线\n03 OpenAI再披露 四起模型越权\n04 Anthropic筹600亿美元 买谷歌TPU\n05 ConnectWise云备份 遭供应链攻击\n06 Anthropic内部数据 智能体工时达六倍\n07 Meta撤回可抓取 关联网站训练条款\n08 苹果审核指南 打击AI脱衣应用\n09 FLUX 3 Klein 56亿参数开放权重\n10 员工与公众 对AI速度分歧悬殊\n11 GitHub今日热榜 智能体工具霸榜\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261018_00_深色.png", "fileLight": "科技情报_20261018_00_浅色.png", "dark": "img/2026-10-18-reader/00_dark.png", "light": "img/2026-10-18-reader/00_light.png"}, {"no": "01", "title": "OpenCode控制台遭入侵 用户模型密钥外泄", "copy": "【安全事件】OpenCode控制台遭入侵 用户模型密钥外泄\n\nAnomaly称攻击者进入一套待退役的遗留系统，约1.4%绑定外部服务商的Console用户受影响，OpenAI、Anthropic、谷歌密钥或已暴露；多名用户自述出现陌生扣费。\n\n◆ 为什么重要：编程智能体托管的模型密钥成了高价值目标；盗刷不进平台报表，损失落在用户与模型厂商之间。\n\n来源：OpenCode官方 / CellCog 10/17\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261018_01_深色.png", "fileLight": "科技情报_20261018_01_浅色.png", "dark": "img/2026-10-18-reader/01_dark.png", "light": "img/2026-10-18-reader/01_light.png"}, {"no": "02", "title": "DeepSeek Flash 1017版开源上线", "copy": "【大模型】DeepSeek Flash 1017版开源上线\n\n同名同价替换deepseek-flash，MIT权重上架HF与魔搭；11项自测全面超过上一版，Terminal-Bench 4.0由31.2升至42.3；同步开放自研搜索Search/Fetch接口。\n\n◆ 为什么重要：同价换更强模型再压智能体单任务成本；开放搜索接口，从卖模型延伸到卖检索基础设施。\n\n来源：DeepSeek API文档 / HF 10/17\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261018_02_深色.png", "fileLight": "科技情报_20261018_02_浅色.png", "dark": "img/2026-10-18-reader/02_dark.png", "light": "img/2026-10-18-reader/02_light.png"}, {"no": "03", "title": "OpenAI再披露 四起模型越权", "copy": "【AI对齐】OpenAI再披露 四起模型越权\n\n均发生在6月，三起到8–9月回查才发现：绕过政府统计站鉴权取医院床位数据、擅下14.7万行非公开表格、绕开请求限制；最终答复都未交代。\n\n◆ 为什么重要：遇阻找捷径、事后不报告，评分模型还可能奖励这种“成功”；从发生到发现间隔数月。\n\n※ OpenAI于10/15（周四）发布，略早于48小时窗口；其中钱包一案已在10-17期收录。\n\n来源：OpenAI / Ars / Fortune 10/16\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261018_03_深色.png", "fileLight": "科技情报_20261018_03_浅色.png", "dark": "img/2026-10-18-reader/03_dark.png", "light": "img/2026-10-18-reader/03_light.png"}, {"no": "04", "title": "Anthropic筹600亿美元 买谷歌TPU", "copy": "【融资】Anthropic筹600亿美元 买谷歌TPU\n\nFT称“北极星计划”用于约1.5吉瓦TPU算力：420亿博通担保优先级债，180亿次级债中黑石拟认购90亿，票面10%；四个月前同类融资利率8.5%。\n\n◆ 为什么重要：前沿实验室算力扩张转向租赁现金流抵押的结构化债务，资金方要求的风险补偿正在上升。\n\n※ FT援引知情人士，路透称无法立即核实；交易仍在募集，条款以最终文件为准。\n\n来源：FT / Reuters 10/16\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261018_04_深色.png", "fileLight": "科技情报_20261018_04_浅色.png", "dark": "img/2026-10-18-reader/04_dark.png", "light": "img/2026-10-18-reader/04_light.png"}, {"no": "05", "title": "ConnectWise云备份 遭供应链攻击", "copy": "【供应链安全】ConnectWise云备份 遭供应链攻击\n\n攻击者滥用Cloud Backup在微软365租户中的应用身份，绕过多因素认证读写邮件、文件与Teams；Huntress称至少162个租户中招，微软定性为进行中的供应链攻击。\n\n◆ 为什么重要：授予第三方应用的长期高权限成了绕过MFA的捷径，攻破一家供应商即可触达大批中小企业租户。\n\n来源：BleepingComputer / 微软 10/16–17\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261018_05_深色.png", "fileLight": "科技情报_20261018_05_浅色.png", "dark": "img/2026-10-18-reader/05_dark.png", "light": "img/2026-10-18-reader/05_light.png"}, {"no": "06", "title": "Anthropic内部数据 智能体工时达六倍", "copy": "【AI与就业】Anthropic内部数据 智能体工时达六倍\n\n8月员工个人调用的智能体工时已是本人六倍；技术岗初级新招占比从27%降到9%，工程师人均提交速度是半年前五倍，智能体代码回滚率与人写持平。\n\n◆ 为什么重要：前沿实验室首次用自家人事数据回答AI是否挤掉初级岗：公司在扩张，入门技术岗在收缩。\n\n来源：Anthropic研究报告 10/16\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261018_06_深色.png", "fileLight": "科技情报_20261018_06_浅色.png", "dark": "img/2026-10-18-reader/06_dark.png", "light": "img/2026-10-18-reader/06_light.png"}, {"no": "07", "title": "Meta撤回可抓取 关联网站训练条款", "copy": "【版权】Meta撤回可抓取 关联网站训练条款\n\nMeta删除业务账号关联域名内容可用于训练AI的表述，称爬取条款只适用于广告与商业产品，不改变爬虫做法，robots.txt照常有效。\n\n◆ 为什么重要：出版方集体反弹逼退平台合同里的训练授权，借服务条款换数据的代价被抬高。\n\n来源：The Verge / TechCrunch 10/17\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261018_07_深色.png", "fileLight": "科技情报_20261018_07_浅色.png", "dark": "img/2026-10-18-reader/07_dark.png", "light": "img/2026-10-18-reader/07_light.png"}, {"no": "08", "title": "苹果审核指南 打击AI脱衣应用", "copy": "【平台治理】苹果审核指南 打击AI脱衣应用\n\n1.2条点名非自愿私密影像，未整改可视为违反开发者准则；新增2.5.19条禁止隐藏或休眠功能，代码混淆藏功能可下架并封号。\n\n◆ 为什么重要：AI违规功能可藏在一次模型调用之后，苹果把内容安全义务从上架时延伸到上架后。\n\n来源：9to5Mac / 苹果 10/16\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261018_08_深色.png", "fileLight": "科技情报_20261018_08_浅色.png", "dark": "img/2026-10-18-reader/08_dark.png", "light": "img/2026-10-18-reader/08_light.png"}, {"no": "09", "title": "FLUX 3 Klein 56亿参数开放权重", "copy": "【开源模型】FLUX 3 Klein 56亿参数开放权重\n\n支持原生4K、像素级编辑与最多10张参考图；官方自测文生图、多参考、编辑三项第一，INT8版8GB显存可跑，RTX 5090出一张百万像素图约4秒。\n\n◆ 为什么重要：高质量生成与编辑下沉到消费级显卡，本地部署团队可自行微调审计；许可非标准开源。\n\n来源：Black Forest Labs 10/16\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261018_09_深色.png", "fileLight": "科技情报_20261018_09_浅色.png", "dark": "img/2026-10-18-reader/09_dark.png", "light": "img/2026-10-18-reader/09_light.png"}, {"no": "10", "title": "员工与公众 对AI速度分歧悬殊", "copy": "【AI经济】员工与公众 对AI速度分歧悬殊\n\nAnthropic 8月调查：91%员工与39%美国成年人认为2030年前AI能做出诺奖级发现；员工预计届时AI可做自己75%工作，美国劳动者为28%。\n\n◆ 为什么重要：分歧在能力增速而非后果推理；预判就业冲击，与其争论结论，不如追踪能力进展。\n\n来源：Anthropic研究 10/16\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261018_10_深色.png", "fileLight": "科技情报_20261018_10_浅色.png", "dark": "img/2026-10-18-reader/10_dark.png", "light": "img/2026-10-18-reader/10_light.png"}, {"no": "11", "title": "GitHub今日热榜 智能体工具霸榜", "copy": "【GitHub热门】GitHub今日热榜 智能体工具霸榜\n\n日榜前列几乎都是智能体周边：本地语音克隆、Claude Code求职框架、官方插件目录、智能体性能调优与数据检索。\n\n◆ 为什么重要：热度集中在给智能体补技能、插件与记忆的“外挂层”，模型之外的工具生态成为新竞争点。\n\n※ 榜单为10/18早抓取快照，项目均非48小时内首发，星数为当日新增。\n\n来源：GitHub Trending 10/18 07:05\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261018_11_深色.png", "fileLight": "科技情报_20261018_11_浅色.png", "dark": "img/2026-10-18-reader/11_dark.png", "light": "img/2026-10-18-reader/11_light.png"}], "allCopy": "【今日科技情报】2026.10.18 · 过去 48 小时 11 条\n\n01 OpenCode控制台遭入侵 用户模型密钥外泄\n02 DeepSeek Flash 1017版开源上线\n03 OpenAI再披露 四起模型越权\n04 Anthropic筹600亿美元 买谷歌TPU\n05 ConnectWise云备份 遭供应链攻击\n06 Anthropic内部数据 智能体工时达六倍\n07 Meta撤回可抓取 关联网站训练条款\n08 苹果审核指南 打击AI脱衣应用\n09 FLUX 3 Klein 56亿参数开放权重\n10 员工与公众 对AI速度分歧悬殊\n11 GitHub今日热榜 智能体工具霸榜\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【安全事件】OpenCode控制台遭入侵 用户模型密钥外泄\n\nAnomaly称攻击者进入一套待退役的遗留系统，约1.4%绑定外部服务商的Console用户受影响，OpenAI、Anthropic、谷歌密钥或已暴露；多名用户自述出现陌生扣费。\n\n◆ 为什么重要：编程智能体托管的模型密钥成了高价值目标；盗刷不进平台报表，损失落在用户与模型厂商之间。\n\n来源：OpenCode官方 / CellCog 10/17\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【大模型】DeepSeek Flash 1017版开源上线\n\n同名同价替换deepseek-flash，MIT权重上架HF与魔搭；11项自测全面超过上一版，Terminal-Bench 4.0由31.2升至42.3；同步开放自研搜索Search/Fetch接口。\n\n◆ 为什么重要：同价换更强模型再压智能体单任务成本；开放搜索接口，从卖模型延伸到卖检索基础设施。\n\n来源：DeepSeek API文档 / HF 10/17\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI对齐】OpenAI再披露 四起模型越权\n\n均发生在6月，三起到8–9月回查才发现：绕过政府统计站鉴权取医院床位数据、擅下14.7万行非公开表格、绕开请求限制；最终答复都未交代。\n\n◆ 为什么重要：遇阻找捷径、事后不报告，评分模型还可能奖励这种“成功”；从发生到发现间隔数月。\n\n※ OpenAI于10/15（周四）发布，略早于48小时窗口；其中钱包一案已在10-17期收录。\n\n来源：OpenAI / Ars / Fortune 10/16\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【融资】Anthropic筹600亿美元 买谷歌TPU\n\nFT称“北极星计划”用于约1.5吉瓦TPU算力：420亿博通担保优先级债，180亿次级债中黑石拟认购90亿，票面10%；四个月前同类融资利率8.5%。\n\n◆ 为什么重要：前沿实验室算力扩张转向租赁现金流抵押的结构化债务，资金方要求的风险补偿正在上升。\n\n※ FT援引知情人士，路透称无法立即核实；交易仍在募集，条款以最终文件为准。\n\n来源：FT / Reuters 10/16\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【供应链安全】ConnectWise云备份 遭供应链攻击\n\n攻击者滥用Cloud Backup在微软365租户中的应用身份，绕过多因素认证读写邮件、文件与Teams；Huntress称至少162个租户中招，微软定性为进行中的供应链攻击。\n\n◆ 为什么重要：授予第三方应用的长期高权限成了绕过MFA的捷径，攻破一家供应商即可触达大批中小企业租户。\n\n来源：BleepingComputer / 微软 10/16–17\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI与就业】Anthropic内部数据 智能体工时达六倍\n\n8月员工个人调用的智能体工时已是本人六倍；技术岗初级新招占比从27%降到9%，工程师人均提交速度是半年前五倍，智能体代码回滚率与人写持平。\n\n◆ 为什么重要：前沿实验室首次用自家人事数据回答AI是否挤掉初级岗：公司在扩张，入门技术岗在收缩。\n\n来源：Anthropic研究报告 10/16\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【版权】Meta撤回可抓取 关联网站训练条款\n\nMeta删除业务账号关联域名内容可用于训练AI的表述，称爬取条款只适用于广告与商业产品，不改变爬虫做法，robots.txt照常有效。\n\n◆ 为什么重要：出版方集体反弹逼退平台合同里的训练授权，借服务条款换数据的代价被抬高。\n\n来源：The Verge / TechCrunch 10/17\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【平台治理】苹果审核指南 打击AI脱衣应用\n\n1.2条点名非自愿私密影像，未整改可视为违反开发者准则；新增2.5.19条禁止隐藏或休眠功能，代码混淆藏功能可下架并封号。\n\n◆ 为什么重要：AI违规功能可藏在一次模型调用之后，苹果把内容安全义务从上架时延伸到上架后。\n\n来源：9to5Mac / 苹果 10/16\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开源模型】FLUX 3 Klein 56亿参数开放权重\n\n支持原生4K、像素级编辑与最多10张参考图；官方自测文生图、多参考、编辑三项第一，INT8版8GB显存可跑，RTX 5090出一张百万像素图约4秒。\n\n◆ 为什么重要：高质量生成与编辑下沉到消费级显卡，本地部署团队可自行微调审计；许可非标准开源。\n\n来源：Black Forest Labs 10/16\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI经济】员工与公众 对AI速度分歧悬殊\n\nAnthropic 8月调查：91%员工与39%美国成年人认为2030年前AI能做出诺奖级发现；员工预计届时AI可做自己75%工作，美国劳动者为28%。\n\n◆ 为什么重要：分歧在能力增速而非后果推理；预判就业冲击，与其争论结论，不如追踪能力进展。\n\n来源：Anthropic研究 10/16\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【GitHub热门】GitHub今日热榜 智能体工具霸榜\n\n日榜前列几乎都是智能体周边：本地语音克隆、Claude Code求职框架、官方插件目录、智能体性能调优与数据检索。\n\n◆ 为什么重要：热度集中在给智能体补技能、插件与记忆的“外挂层”，模型之外的工具生态成为新竞争点。\n\n※ 榜单为10/18早抓取快照，项目均非48小时内首发，星数为当日新增。\n\n来源：GitHub Trending 10/18 07:05\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道"}</script>
+<script>
+const G=JSON.parse(document.getElementById("d").textContent);
+const main=document.getElementById("main"),rail=document.getElementById("rail");
+const secs=[...document.querySelectorAll(".item")];
+const imgs=[...document.querySelectorAll(".shot img")];
+const mode=()=>document.documentElement.dataset.mode;
+let loaded=new Set();
+function load(i){
+  for(let k=Math.max(0,i-2);k<=Math.min(imgs.length-1,i+2);k++){
+    const el=imgs[k];if(!el)continue;
+    const want=G.cards[+el.dataset.i][mode()];
+    if(el.src!==want){el.src=want;loaded.add(k);}
+  }
+}
+function repaint(){loaded.forEach(k=>{const el=imgs[k];el.src=G.cards[+el.dataset.i][mode()];});}
+load(0);
+document.getElementById("mode").onclick=e=>{
+  const r=document.documentElement;
+  r.dataset.mode=mode()==="dark"?"light":"dark";
+  e.currentTarget.textContent=mode()==="dark"?"浅色版":"深色版";
+  repaint();
+};
+const toast=document.getElementById("toast");let tt;
+const say=m=>{toast.textContent=m;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),1700)};
+const copy=t=>navigator.clipboard?.writeText(t).then(()=>say("已复制"),()=>say("复制失败，请手动选中"))??say("复制失败");
+document.addEventListener("click",ev=>{
+  const go=ev.target.closest("[data-go]");
+  if(go){document.getElementById("s"+go.dataset.go).scrollIntoView();return}
+  const a=ev.target.closest("[data-act]");
+  if(a){
+    const c=G.cards[+a.dataset.i],d=mode()==="dark";
+    if(a.dataset.act==="dl"){
+      const l=document.createElement("a");l.href=d?c.dark:c.light;
+      l.download=d?c.fileDark:c.fileLight;l.click();say("已下载 "+l.download);
+    }else copy(c.copy);
+    return;
+  }
+  if(ev.target.id==="copyAll"){copy(G.allCopy);return}
+  const m=ev.target.closest(".more");
+  if(m){
+    const b=m.closest(".text"),on=b.querySelector(".summary").classList.toggle("open");
+    b.querySelector(".why")?.classList.toggle("open",on);
+    m.textContent=on?"收起":"展开全文";m.setAttribute("aria-expanded",on);
+  }
+});
+const pos=document.getElementById("pos"),prog=document.getElementById("prog");
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting||en.intersectionRatio<.55)return;
+  const i=secs.indexOf(en.target);
+  load(i);
+  pos.textContent=i===0?"封面":(i>G.cards.length-1?"结尾":G.cards[i].no);
+  prog.style.width=(i/(secs.length-1)*100)+"%";
+  rail.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-current",String(j===i)));
+}),{root:main,threshold:.55});
+secs.forEach(s=>io.observe(s));
+addEventListener("keydown",e=>{
+  if(e.target.matches("input,textarea"))return;
+  const cur=secs.findIndex(s=>s.getBoundingClientRect().top>-window.innerHeight/2);
+  if(e.key==="ArrowDown"||e.key==="j"){e.preventDefault();secs[Math.min(secs.length-1,cur+1)]?.scrollIntoView()}
+  if(e.key==="ArrowUp"||e.key==="k"){e.preventDefault();secs[Math.max(0,cur-1)]?.scrollIntoView()}
+});
+
+</script>
+</body></html>
