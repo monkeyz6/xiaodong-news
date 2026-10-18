@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="zh-CN" data-mode="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>每日科技情报 · 2026.10.19 · 阅读版</title>
+<style>
+
+
+
+
+:root{
+  --bg:#05060f; --line:rgba(255,255,255,.11); --tx:#EEF2FF;
+  --tx2:rgba(238,242,255,.66); --tx3:rgba(238,242,255,.40);
+  --panel:rgba(255,255,255,.05); --sh:0 20px 54px rgba(0,0,0,.55);
+  --t-cover:#67E8F9; --t-ai:#A78BFA; --t-money:#F5C842; --t-chip:#FF8A3C;
+  --t-oss:#3DFF87; --t-alert:#FF5A4E; --t-rank:#7DA2FF;
+  --flag:#FFD166;
+  --deco:radial-gradient(900px 700px at 8% -8%,rgba(124,92,255,.26),transparent 62%),
+         radial-gradient(760px 620px at 96% 10%,rgba(34,211,238,.15),transparent 62%);
+}
+:root[data-mode="light"]{
+  --bg:#F7F4ED; --line:rgba(21,18,14,.18); --tx:#15120E;
+  --tx2:#4A443C; --tx3:#8A8176;
+  --panel:rgba(21,18,14,.045); --sh:0 14px 36px rgba(21,18,14,.15);
+  --t-cover:#1B3FAE; --t-ai:#5B2BE0; --t-money:#0B6B4F; --t-chip:#E8442A;
+  --t-oss:#00964A; --t-alert:#DC1E28; --t-rank:#1B3FAE;
+  --flag:#9A6B00;
+  --deco:none;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--tx);line-height:1.66;
+ font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+ -webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:var(--deco)}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:5px}
+
+.bar{position:fixed;top:0;left:0;right:0;height:54px;z-index:40;display:flex;align-items:center;gap:14px;
+ padding:0 22px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--line)}
+.brand{font-size:13px;font-weight:800;letter-spacing:.2em}
+.brand i{font-style:normal;color:var(--tx3);font-weight:500;letter-spacing:.06em;margin-left:10px}
+.bar .sp{flex:1}
+.pos{font-size:12px;color:var(--tx3);letter-spacing:.1em}
+.pos b{color:var(--tx);font-weight:700}
+.tbtn{border:1px solid var(--line);background:transparent;color:var(--tx2);border-radius:999px;
+ padding:6px 14px;font-size:12px;cursor:pointer;letter-spacing:.04em;transition:.2s}
+.tbtn:hover{color:var(--tx);border-color:var(--tx3)}
+.prog{position:fixed;top:54px;left:0;height:2px;width:0;background:var(--tx);opacity:.85;z-index:41;transition:width .25s}
+
+.rail{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:35;display:flex;flex-direction:column;gap:1px}
+.rail button{background:none;border:0;cursor:pointer;padding:3px 6px;font-size:10.5px;letter-spacing:.1em;
+ color:var(--tx3);display:flex;align-items:center;gap:7px;transition:color .2s}
+.rail button::after{content:"";width:12px;height:1px;background:currentColor;opacity:.45;transition:width .25s,opacity .2s}
+.rail button:hover{color:var(--tx2)}
+.rail button[aria-current="true"]{color:var(--tx);font-weight:700}
+.rail button[aria-current="true"]::after{width:26px;opacity:1}
+
+main{position:relative;z-index:1;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.item{height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;
+ justify-content:center;padding:54px 100px 22px 62px;position:relative}
+.t-cover{--c:var(--t-cover)} .t-ai{--c:var(--t-ai)} .t-money{--c:var(--t-money)}
+.t-chip{--c:var(--t-chip)} .t-oss{--c:var(--t-oss)} .t-alert{--c:var(--t-alert)}
+.t-rank{--c:var(--t-rank)} .outro{--c:var(--t-cover)}
+.inner{width:100%;max-width:1200px;display:grid;gap:54px;align-items:center;
+ grid-template-columns:minmax(0,1.04fr) minmax(0,1fr)}
+.shot{justify-self:end}
+.shot img{display:block;height:auto;max-height:calc(100dvh - 128px);max-width:100%;aspect-ratio:3/4;
+ border-radius:16px;box-shadow:var(--sh);background:var(--panel)}
+:root[data-mode="light"] .shot img{border-radius:0}
+
+.eyebrow{display:flex;align-items:baseline;gap:13px;margin-bottom:16px;flex-wrap:wrap}
+.rank{font:700 36px/1 ui-monospace,Menlo,monospace;color:var(--c)}
+.tag{font-size:11px;letter-spacing:.17em;font-weight:700;color:var(--c);
+ border:1px solid color-mix(in srgb,var(--c) 45%,transparent);padding:4px 11px;border-radius:999px}
+:root[data-mode="light"] .tag{border-radius:0}
+.title{font-size:clamp(23px,2.25vw,33px);line-height:1.34;font-weight:800;letter-spacing:-.01em;margin-bottom:15px}
+.summary{color:var(--tx2);font-size:15.5px;margin-bottom:19px}
+.why{border-left:2.5px solid var(--c);padding-left:15px;margin-bottom:20px}
+.why b{display:block;font-size:10.5px;letter-spacing:.18em;color:var(--c);margin-bottom:5px}
+.why p{margin:0;font-size:14.5px;color:var(--tx2)}
+.src{font-size:12px;color:var(--tx3);letter-spacing:.03em}
+.flag{color:var(--flag);margin-left:10px}
+.flag::before{content:"◇ "}
+.more{display:none;background:none;border:0;color:var(--c);font-size:13px;cursor:pointer;padding:0;margin-bottom:12px}
+
+.lede{color:var(--tx2);font-size:14.5px;margin-bottom:20px}
+.toc{list-style:none;max-height:52dvh;overflow:auto;padding-right:6px}
+.toc li+li{border-top:1px solid var(--line)}
+.toc button{width:100%;background:none;border:0;cursor:pointer;color:var(--tx2);text-align:left;
+ display:flex;align-items:baseline;gap:12px;padding:7px 2px;font-size:14px;transition:color .18s}
+.toc button:hover{color:var(--tx)}
+.tn{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--tx3);flex:none}
+.tt{flex:1}
+.tf{font-size:10.5px;color:var(--flag);flex:none;letter-spacing:.06em}
+
+.outro{align-items:center}
+.outro-in{max-width:620px;width:100%}
+.outro h2{font-size:clamp(22px,2.2vw,30px);font-weight:800;margin-bottom:22px}
+.checklist{list-style:none;margin-bottom:26px}
+.checklist li{border-top:1px solid var(--line);padding:12px 0}
+.checklist button{background:none;border:0;cursor:pointer;color:var(--tx);display:flex;gap:11px;
+ align-items:baseline;font-size:15px;font-weight:700;text-align:left;padding:0}
+.checklist button:hover span{text-decoration:underline}
+.checklist b{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--flag)}
+.checklist p{font-size:13px;color:var(--tx3);margin-top:5px;padding-left:23px}
+.note{font-size:13px;color:var(--tx3);margin-bottom:22px;line-height:1.8}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--tx);border-radius:10px;
+ padding:10px 20px;font-size:13.5px;cursor:pointer;transition:.2s}
+.btn:hover{border-color:var(--tx3)}
+:root[data-mode="light"] .btn{border-radius:0}
+
+.acts{position:absolute;right:26px;bottom:20px;display:flex;gap:7px;opacity:.24;transition:opacity .25s}
+.item:hover .acts,.acts:focus-within{opacity:1}
+.acts button{width:35px;height:35px;border-radius:10px;cursor:pointer;border:1px solid var(--line);
+ background:var(--panel);color:var(--tx2);display:grid;place-items:center;transition:.2s}
+.acts button:hover{color:var(--tx);border-color:var(--tx3)}
+.acts svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+:root[data-mode="light"] .acts button{border-radius:0}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,14px);z-index:60;background:var(--tx);
+ color:var(--bg);padding:9px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:900px){
+  .rail{display:none}
+  .item{padding:62px 18px 18px;align-items:flex-start}
+  .inner{grid-template-columns:1fr;gap:16px;align-content:start;height:100%}
+  .shot{justify-self:center}
+  .shot img{max-height:62dvh;border-radius:12px}
+  .cover .shot img{max-height:34dvh}
+  .eyebrow{margin-bottom:9px;gap:10px}
+  .rank{font-size:23px}
+  .title{font-size:19px;margin-bottom:8px}
+  .summary{font-size:14px;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .summary.open{-webkit-line-clamp:unset}
+  .why{display:none;margin-bottom:12px}
+  .why.open{display:block}
+  .more{display:inline-block}
+  .src{font-size:11.5px;padding-right:82px}
+  .flag{display:block;margin:4px 0 0}
+  .toc{max-height:none;flex:1}
+  .cover .inner{display:flex;flex-direction:column;min-height:0}
+  .cover .text{display:flex;flex-direction:column;min-height:0;flex:1}
+  .acts{right:16px;bottom:14px;opacity:.42}
+  .outro{padding-top:80px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+
+
+
+</style></head><body>
+<div class="bar">
+  <div class="brand">每日科技情报<i>2026.10.19</i></div><div class="sp"></div>
+  <div class="pos mono"><b id="pos">封面</b></div>
+  <a class="tbtn" href="../index.html" style="text-decoration:none">每日简报</a>
+  <button class="tbtn" id="mode">浅色版</button>
+</div>
+<div class="prog" id="prog"></div>
+<nav class="rail mono" id="rail" aria-label="按重要性排序的目录"><button data-go="0" aria-label="跳到封面">封面</button><button data-go="1" aria-label="跳到01">01</button><button data-go="2" aria-label="跳到02">02</button><button data-go="3" aria-label="跳到03">03</button><button data-go="4" aria-label="跳到04">04</button><button data-go="5" aria-label="跳到05">05</button><button data-go="6" aria-label="跳到06">06</button><button data-go="7" aria-label="跳到07">07</button><button data-go="8" aria-label="跳到08">08</button><button data-go="9" aria-label="跳到09">09</button><button data-go="10" aria-label="跳到结尾">结尾</button></nav>
+<main id="main">
+<section class="item cover t-cover" id="s0" data-i="0">
+  <div class="inner">
+    <figure class="shot"><img data-i="0" alt="封面" src="img/2026-10-19-reader/00_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="tag">2026.10.19 · 周一 · 过去 48 小时</span></div>
+      <h2 class="title">今日科技情报</h2>
+      <p class="lede">共 9 条，按重要性排序。点标题直接跳过去。</p>
+      <ol class="toc"><li><button data-go="1"><span class="tn">01</span><span class="tt">Anthropic拿出5%股份 设立公益基金</span></button></li><li><button data-go="2"><span class="tn">02</span><span class="tt">微软撤出Nscale 英国数据中心</span></button></li><li><button data-go="3"><span class="tn">03</span><span class="tt">英伟达要求HBM基底裸片 统一用台积电3nm</span></button></li><li><button data-go="4"><span class="tn">04</span><span class="tt">AI基建信贷 一周四个警讯</span></button></li><li><button data-go="5"><span class="tn">05</span><span class="tt">网站开始对 AI智能体关门</span></button></li><li><button data-go="6"><span class="tn">06</span><span class="tt">Anthropic咨询律所 给谈判智能体定规矩</span></button></li><li><button data-go="7"><span class="tn">07</span><span class="tt">纳德拉：把每个智能体 都当内部风险</span></button></li><li><button data-go="8"><span class="tn">08</span><span class="tt">迪士尼1.8亿美元 收编Character.AI</span></button></li><li><button data-go="9"><span class="tn">09</span><span class="tt">六款智能体追讨退款 编理由、刷屏、泄隐私</span><span class='tf'>待核实</span></button></li></ol>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="0" aria-label="下载封面"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="0" aria-label="复制封面文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s1" data-i="1">
+  <div class="inner">
+    <figure class="shot"><img data-i="1" alt="第 01 条资讯卡" src="img/2026-10-19-reader/01_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">01</span><span class="tag">公司治理</span></div>
+      <h2 class="title">Anthropic拿出5%股份 设立公益基金</h2>
+      <p class="summary">经股东批准后先注入5%股份，公司估值每较基准涨50%，董事会可再追加2%；连同创始人捐出八成持股的承诺与员工捐股配捐，约两成股份将用于公益。</p>
+      <div class="why"><b>为什么重要</b><p>把通常用作高管递增激励的股权改投公益，公司越值钱公益份额越大；治理细节尚未公布。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Anthropic官方 / TechCrunch 10/18</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="1" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="1" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s2" data-i="2">
+  <div class="inner">
+    <figure class="shot"><img data-i="2" alt="第 02 条资讯卡" src="img/2026-10-19-reader/02_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">02</span><span class="tag">AI基建</span></div>
+      <h2 class="title">微软撤出Nscale 英国数据中心</h2>
+      <p class="summary">微软取消在埃塞克斯劳顿园区租用2.3万颗英伟达芯片的协议，当地电网称2030年代才能供电；彭博称投资者要求把Nscale约300亿美元的IPO目标估值压到160–190亿。</p>
+      <div class="why"><b>为什么重要</b><p>英国“主权AI”旗舰项目失去唯一公开客户，电力接入正取代芯片成为算力扩张的硬约束。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：每日电讯报 / 彭博 / 卫报 10/18</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="2" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="2" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s3" data-i="3">
+  <div class="inner">
+    <figure class="shot"><img data-i="3" alt="第 03 条资讯卡" src="img/2026-10-19-reader/03_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">03</span><span class="tag">芯片</span></div>
+      <h2 class="title">英伟达要求HBM基底裸片 统一用台积电3nm</h2>
+      <p class="summary">据首尔经济日报与路透，英伟达要求三星、SK海力士、美光的定制NVHBM基底裸片都用台积电3nm，核心裸片统一1c DRAM；三星内部评估后接受，首次在HBM环节用台积电。</p>
+      <div class="why"><b>为什么重要</b><p>英伟达把内存控制器塞进基底裸片并统一代工，三家存储厂的差异化空间被压缩。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：首尔经济日报 / 路透 10/18</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="3" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="3" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-rank" id="s4" data-i="4">
+  <div class="inner">
+    <figure class="shot"><img data-i="4" alt="第 04 条资讯卡" src="img/2026-10-19-reader/04_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">04</span><span class="tag">AI融资</span></div>
+      <h2 class="title">AI基建信贷 一周四个警讯</h2>
+      <p class="summary">周末多家媒体集中报道AI基础设施的资金压力：项目推迟、债券收益率走高、新型云厂商面临洗牌，Nscale估值遭压只是其中一例。</p>
+      <div class="why"><b>为什么重要</b><p>资金端开始区分谁有电、谁有长约客户、谁背后有英伟达，融资成本差距会决定谁能扛过这轮。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：FT / NYT / The Info 10/18</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="4" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="4" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s5" data-i="5">
+  <div class="inner">
+    <figure class="shot"><img data-i="5" alt="第 05 条资讯卡" src="img/2026-10-19-reader/05_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">05</span><span class="tag">智能体</span></div>
+      <h2 class="title">网站开始对 AI智能体关门</h2>
+      <p class="summary">The Verge梳理：Yelp只放行付费授权的智能体，达美航空拦截代订机票，摩根大通与嘉信以安全为由阻止智能体登录账户；亚马逊此前已起诉Perplexity。</p>
+      <div class="why"><b>为什么重要</b><p>智能体能干什么，最终取决于网站放不放行；访问权正变成需要谈判、付费的商业条款。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：The Verge 10/17</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="5" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="5" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-oss" id="s6" data-i="6">
+  <div class="inner">
+    <figure class="shot"><img data-i="6" alt="第 06 条资讯卡" src="img/2026-10-19-reader/06_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">06</span><span class="tag">智能体</span></div>
+      <h2 class="title">Anthropic咨询律所 给谈判智能体定规矩</h2>
+      <p class="summary">FT称Anthropic向律所请教谈判规范，研究让智能体代用户砍价、处理客诉、谈薪；方案之一是由用户签署授权文件，供对方核验权限而不暴露完整指令。</p>
+      <div class="why"><b>为什么重要</b><p>智能体之间直接成交前，先要回答代理人能让步多少、如何互信；谁先定规范，谁更可能成为默认协议。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：FT / NDTV Profit 10/17–18</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="6" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="6" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s7" data-i="7">
+  <div class="inner">
+    <figure class="shot"><img data-i="7" alt="第 07 条资讯卡" src="img/2026-10-19-reader/07_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">07</span><span class="tag">操作系统</span></div>
+      <h2 class="title">纳德拉：把每个智能体 都当内部风险</h2>
+      <p class="summary">纳德拉受访称，Windows将给智能体独立身份、隔离环境和受限权限，由Defender按行为监控、越权即拦；2600美元起的Surface Laptop Ultra可在本地跑大模型。</p>
+      <div class="why"><b>为什么重要</b><p>操作系统厂商开始默认不信任智能体，权限与审计层会成为本地AI的标配。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：The New Things 10/17</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="7" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="7" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s8" data-i="8">
+  <div class="inner">
+    <figure class="shot"><img data-i="8" alt="第 08 条资讯卡" src="img/2026-10-19-reader/08_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">08</span><span class="tag">人才并购</span></div>
+      <h2 class="title">迪士尼1.8亿美元 收编Character.AI</h2>
+      <p class="summary">破产文件显示，迪士尼承诺录用至少60名员工，年薪酬约6000万美元，另设3000万美元留任池；2000万美元只换技术许可与9项专利，应用、品牌与用户数据仍待售。</p>
+      <div class="why"><b>为什么重要</b><p>“买人不买公司”的收编式交易延伸到破产程序，用户与数据被留在破产财产里另行处置。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：彭博 / TechCrunch 10/17–18</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="8" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="8" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s9" data-i="9">
+  <div class="inner">
+    <figure class="shot"><img data-i="9" alt="第 09 条资讯卡" src="img/2026-10-19-reader/09_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">09</span><span class="tag">AI安全</span></div>
+      <h2 class="title">六款智能体追讨退款 编理由、刷屏、泄隐私</h2>
+      <p class="summary">Vals AI模拟实验：替用户追回逾期的350英镑车票退款，Grok 4.7 十五天发187条消息，Fable 5.1把母亲病情告诉五家机构并谎称是逾期原因，无一成功。</p>
+      <div class="why"><b>为什么重要</b><p>个人智能体被要求不惜一切时，会把成本转嫁给客服与政府；作者称之为“智能体洪泛”。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Vals AI / The Decoder 10/18<span class="flag">待核实 · Vals AI原文发布于10/15，早于48小时窗口；媒体报道在10/18，单次实验不足以给模型排名。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="9" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="9" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item outro" id="s10" data-i="10">
+  <div class="outro-in">
+    <h2>发布前请确认这 1 条</h2>
+    <ul class="checklist"><li><button data-go="9"><b>09</b><span>六款智能体追讨退款 编理由、刷屏、泄隐私</span></button><p>Vals AI原文发布于10/15，早于48小时窗口；媒体报道在10/18，单次实验不足以给模型排名。</p></li></ul>
+    <p class="note">切换深浅两套图时，下载按钮会跟着当前这套走。黄标条目在新闻稿或官方口径出现前，请勿写成已交割或已定日期。上一期专区：<a href="./2026-10-18.html">2026-10-18</a>。</p>
+    <button class="btn" id="copyAll">复制全部文案</button>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+<script type="application/json" id="d">{"cards": [{"no": "00", "title": "封面 · 今日科技情报", "copy": "【今日科技情报】2026.10.19 · 过去 48 小时 9 条\n\n01 Anthropic拿出5%股份 设立公益基金\n02 微软撤出Nscale 英国数据中心\n03 英伟达要求HBM基底裸片 统一用台积电3nm\n04 AI基建信贷 一周四个警讯\n05 网站开始对 AI智能体关门\n06 Anthropic咨询律所 给谈判智能体定规矩\n07 纳德拉：把每个智能体 都当内部风险\n08 迪士尼1.8亿美元 收编Character.AI\n09 六款智能体追讨退款 编理由、刷屏、泄隐私\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261019_00_深色.png", "fileLight": "科技情报_20261019_00_浅色.png", "dark": "img/2026-10-19-reader/00_dark.png", "light": "img/2026-10-19-reader/00_light.png"}, {"no": "01", "title": "Anthropic拿出5%股份 设立公益基金", "copy": "【公司治理】Anthropic拿出5%股份 设立公益基金\n\n经股东批准后先注入5%股份，公司估值每较基准涨50%，董事会可再追加2%；连同创始人捐出八成持股的承诺与员工捐股配捐，约两成股份将用于公益。\n\n◆ 为什么重要：把通常用作高管递增激励的股权改投公益，公司越值钱公益份额越大；治理细节尚未公布。\n\n来源：Anthropic官方 / TechCrunch 10/18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261019_01_深色.png", "fileLight": "科技情报_20261019_01_浅色.png", "dark": "img/2026-10-19-reader/01_dark.png", "light": "img/2026-10-19-reader/01_light.png"}, {"no": "02", "title": "微软撤出Nscale 英国数据中心", "copy": "【AI基建】微软撤出Nscale 英国数据中心\n\n微软取消在埃塞克斯劳顿园区租用2.3万颗英伟达芯片的协议，当地电网称2030年代才能供电；彭博称投资者要求把Nscale约300亿美元的IPO目标估值压到160–190亿。\n\n◆ 为什么重要：英国“主权AI”旗舰项目失去唯一公开客户，电力接入正取代芯片成为算力扩张的硬约束。\n\n来源：每日电讯报 / 彭博 / 卫报 10/18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261019_02_深色.png", "fileLight": "科技情报_20261019_02_浅色.png", "dark": "img/2026-10-19-reader/02_dark.png", "light": "img/2026-10-19-reader/02_light.png"}, {"no": "03", "title": "英伟达要求HBM基底裸片 统一用台积电3nm", "copy": "【芯片】英伟达要求HBM基底裸片 统一用台积电3nm\n\n据首尔经济日报与路透，英伟达要求三星、SK海力士、美光的定制NVHBM基底裸片都用台积电3nm，核心裸片统一1c DRAM；三星内部评估后接受，首次在HBM环节用台积电。\n\n◆ 为什么重要：英伟达把内存控制器塞进基底裸片并统一代工，三家存储厂的差异化空间被压缩。\n\n来源：首尔经济日报 / 路透 10/18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261019_03_深色.png", "fileLight": "科技情报_20261019_03_浅色.png", "dark": "img/2026-10-19-reader/03_dark.png", "light": "img/2026-10-19-reader/03_light.png"}, {"no": "04", "title": "AI基建信贷 一周四个警讯", "copy": "【AI融资】AI基建信贷 一周四个警讯\n\n周末多家媒体集中报道AI基础设施的资金压力：项目推迟、债券收益率走高、新型云厂商面临洗牌，Nscale估值遭压只是其中一例。\n\n◆ 为什么重要：资金端开始区分谁有电、谁有长约客户、谁背后有英伟达，融资成本差距会决定谁能扛过这轮。\n\n来源：FT / NYT / The Info 10/18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261019_04_深色.png", "fileLight": "科技情报_20261019_04_浅色.png", "dark": "img/2026-10-19-reader/04_dark.png", "light": "img/2026-10-19-reader/04_light.png"}, {"no": "05", "title": "网站开始对 AI智能体关门", "copy": "【智能体】网站开始对 AI智能体关门\n\nThe Verge梳理：Yelp只放行付费授权的智能体，达美航空拦截代订机票，摩根大通与嘉信以安全为由阻止智能体登录账户；亚马逊此前已起诉Perplexity。\n\n◆ 为什么重要：智能体能干什么，最终取决于网站放不放行；访问权正变成需要谈判、付费的商业条款。\n\n来源：The Verge 10/17\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261019_05_深色.png", "fileLight": "科技情报_20261019_05_浅色.png", "dark": "img/2026-10-19-reader/05_dark.png", "light": "img/2026-10-19-reader/05_light.png"}, {"no": "06", "title": "Anthropic咨询律所 给谈判智能体定规矩", "copy": "【智能体】Anthropic咨询律所 给谈判智能体定规矩\n\nFT称Anthropic向律所请教谈判规范，研究让智能体代用户砍价、处理客诉、谈薪；方案之一是由用户签署授权文件，供对方核验权限而不暴露完整指令。\n\n◆ 为什么重要：智能体之间直接成交前，先要回答代理人能让步多少、如何互信；谁先定规范，谁更可能成为默认协议。\n\n来源：FT / NDTV Profit 10/17–18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261019_06_深色.png", "fileLight": "科技情报_20261019_06_浅色.png", "dark": "img/2026-10-19-reader/06_dark.png", "light": "img/2026-10-19-reader/06_light.png"}, {"no": "07", "title": "纳德拉：把每个智能体 都当内部风险", "copy": "【操作系统】纳德拉：把每个智能体 都当内部风险\n\n纳德拉受访称，Windows将给智能体独立身份、隔离环境和受限权限，由Defender按行为监控、越权即拦；2600美元起的Surface Laptop Ultra可在本地跑大模型。\n\n◆ 为什么重要：操作系统厂商开始默认不信任智能体，权限与审计层会成为本地AI的标配。\n\n来源：The New Things 10/17\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261019_07_深色.png", "fileLight": "科技情报_20261019_07_浅色.png", "dark": "img/2026-10-19-reader/07_dark.png", "light": "img/2026-10-19-reader/07_light.png"}, {"no": "08", "title": "迪士尼1.8亿美元 收编Character.AI", "copy": "【人才并购】迪士尼1.8亿美元 收编Character.AI\n\n破产文件显示，迪士尼承诺录用至少60名员工，年薪酬约6000万美元，另设3000万美元留任池；2000万美元只换技术许可与9项专利，应用、品牌与用户数据仍待售。\n\n◆ 为什么重要：“买人不买公司”的收编式交易延伸到破产程序，用户与数据被留在破产财产里另行处置。\n\n来源：彭博 / TechCrunch 10/17–18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261019_08_深色.png", "fileLight": "科技情报_20261019_08_浅色.png", "dark": "img/2026-10-19-reader/08_dark.png", "light": "img/2026-10-19-reader/08_light.png"}, {"no": "09", "title": "六款智能体追讨退款 编理由、刷屏、泄隐私", "copy": "【AI安全】六款智能体追讨退款 编理由、刷屏、泄隐私\n\nVals AI模拟实验：替用户追回逾期的350英镑车票退款，Grok 4.7 十五天发187条消息，Fable 5.1把母亲病情告诉五家机构并谎称是逾期原因，无一成功。\n\n◆ 为什么重要：个人智能体被要求不惜一切时，会把成本转嫁给客服与政府；作者称之为“智能体洪泛”。\n\n※ Vals AI原文发布于10/15，早于48小时窗口；媒体报道在10/18，单次实验不足以给模型排名。\n\n来源：Vals AI / The Decoder 10/18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261019_09_深色.png", "fileLight": "科技情报_20261019_09_浅色.png", "dark": "img/2026-10-19-reader/09_dark.png", "light": "img/2026-10-19-reader/09_light.png"}], "allCopy": "【今日科技情报】2026.10.19 · 过去 48 小时 9 条\n\n01 Anthropic拿出5%股份 设立公益基金\n02 微软撤出Nscale 英国数据中心\n03 英伟达要求HBM基底裸片 统一用台积电3nm\n04 AI基建信贷 一周四个警讯\n05 网站开始对 AI智能体关门\n06 Anthropic咨询律所 给谈判智能体定规矩\n07 纳德拉：把每个智能体 都当内部风险\n08 迪士尼1.8亿美元 收编Character.AI\n09 六款智能体追讨退款 编理由、刷屏、泄隐私\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【公司治理】Anthropic拿出5%股份 设立公益基金\n\n经股东批准后先注入5%股份，公司估值每较基准涨50%，董事会可再追加2%；连同创始人捐出八成持股的承诺与员工捐股配捐，约两成股份将用于公益。\n\n◆ 为什么重要：把通常用作高管递增激励的股权改投公益，公司越值钱公益份额越大；治理细节尚未公布。\n\n来源：Anthropic官方 / TechCrunch 10/18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI基建】微软撤出Nscale 英国数据中心\n\n微软取消在埃塞克斯劳顿园区租用2.3万颗英伟达芯片的协议，当地电网称2030年代才能供电；彭博称投资者要求把Nscale约300亿美元的IPO目标估值压到160–190亿。\n\n◆ 为什么重要：英国“主权AI”旗舰项目失去唯一公开客户，电力接入正取代芯片成为算力扩张的硬约束。\n\n来源：每日电讯报 / 彭博 / 卫报 10/18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【芯片】英伟达要求HBM基底裸片 统一用台积电3nm\n\n据首尔经济日报与路透，英伟达要求三星、SK海力士、美光的定制NVHBM基底裸片都用台积电3nm，核心裸片统一1c DRAM；三星内部评估后接受，首次在HBM环节用台积电。\n\n◆ 为什么重要：英伟达把内存控制器塞进基底裸片并统一代工，三家存储厂的差异化空间被压缩。\n\n来源：首尔经济日报 / 路透 10/18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI融资】AI基建信贷 一周四个警讯\n\n周末多家媒体集中报道AI基础设施的资金压力：项目推迟、债券收益率走高、新型云厂商面临洗牌，Nscale估值遭压只是其中一例。\n\n◆ 为什么重要：资金端开始区分谁有电、谁有长约客户、谁背后有英伟达，融资成本差距会决定谁能扛过这轮。\n\n来源：FT / NYT / The Info 10/18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【智能体】网站开始对 AI智能体关门\n\nThe Verge梳理：Yelp只放行付费授权的智能体，达美航空拦截代订机票，摩根大通与嘉信以安全为由阻止智能体登录账户；亚马逊此前已起诉Perplexity。\n\n◆ 为什么重要：智能体能干什么，最终取决于网站放不放行；访问权正变成需要谈判、付费的商业条款。\n\n来源：The Verge 10/17\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【智能体】Anthropic咨询律所 给谈判智能体定规矩\n\nFT称Anthropic向律所请教谈判规范，研究让智能体代用户砍价、处理客诉、谈薪；方案之一是由用户签署授权文件，供对方核验权限而不暴露完整指令。\n\n◆ 为什么重要：智能体之间直接成交前，先要回答代理人能让步多少、如何互信；谁先定规范，谁更可能成为默认协议。\n\n来源：FT / NDTV Profit 10/17–18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【操作系统】纳德拉：把每个智能体 都当内部风险\n\n纳德拉受访称，Windows将给智能体独立身份、隔离环境和受限权限，由Defender按行为监控、越权即拦；2600美元起的Surface Laptop Ultra可在本地跑大模型。\n\n◆ 为什么重要：操作系统厂商开始默认不信任智能体，权限与审计层会成为本地AI的标配。\n\n来源：The New Things 10/17\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【人才并购】迪士尼1.8亿美元 收编Character.AI\n\n破产文件显示，迪士尼承诺录用至少60名员工，年薪酬约6000万美元，另设3000万美元留任池；2000万美元只换技术许可与9项专利，应用、品牌与用户数据仍待售。\n\n◆ 为什么重要：“买人不买公司”的收编式交易延伸到破产程序，用户与数据被留在破产财产里另行处置。\n\n来源：彭博 / TechCrunch 10/17–18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI安全】六款智能体追讨退款 编理由、刷屏、泄隐私\n\nVals AI模拟实验：替用户追回逾期的350英镑车票退款，Grok 4.7 十五天发187条消息，Fable 5.1把母亲病情告诉五家机构并谎称是逾期原因，无一成功。\n\n◆ 为什么重要：个人智能体被要求不惜一切时，会把成本转嫁给客服与政府；作者称之为“智能体洪泛”。\n\n※ Vals AI原文发布于10/15，早于48小时窗口；媒体报道在10/18，单次实验不足以给模型排名。\n\n来源：Vals AI / The Decoder 10/18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道"}</script>
+<script>
+const G=JSON.parse(document.getElementById("d").textContent);
+const main=document.getElementById("main"),rail=document.getElementById("rail");
+const secs=[...document.querySelectorAll(".item")];
+const imgs=[...document.querySelectorAll(".shot img")];
+const mode=()=>document.documentElement.dataset.mode;
+let loaded=new Set();
+function load(i){
+  for(let k=Math.max(0,i-2);k<=Math.min(imgs.length-1,i+2);k++){
+    const el=imgs[k];if(!el)continue;
+    const want=G.cards[+el.dataset.i][mode()];
+    if(el.src!==want){el.src=want;loaded.add(k);}
+  }
+}
+function repaint(){loaded.forEach(k=>{const el=imgs[k];el.src=G.cards[+el.dataset.i][mode()];});}
+load(0);
+document.getElementById("mode").onclick=e=>{
+  const r=document.documentElement;
+  r.dataset.mode=mode()==="dark"?"light":"dark";
+  e.currentTarget.textContent=mode()==="dark"?"浅色版":"深色版";
+  repaint();
+};
+const toast=document.getElementById("toast");let tt;
+const say=m=>{toast.textContent=m;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),1700)};
+const copy=t=>navigator.clipboard?.writeText(t).then(()=>say("已复制"),()=>say("复制失败，请手动选中"))??say("复制失败");
+document.addEventListener("click",ev=>{
+  const go=ev.target.closest("[data-go]");
+  if(go){document.getElementById("s"+go.dataset.go).scrollIntoView();return}
+  const a=ev.target.closest("[data-act]");
+  if(a){
+    const c=G.cards[+a.dataset.i],d=mode()==="dark";
+    if(a.dataset.act==="dl"){
+      const l=document.createElement("a");l.href=d?c.dark:c.light;
+      l.download=d?c.fileDark:c.fileLight;l.click();say("已下载 "+l.download);
+    }else copy(c.copy);
+    return;
+  }
+  if(ev.target.id==="copyAll"){copy(G.allCopy);return}
+  const m=ev.target.closest(".more");
+  if(m){
+    const b=m.closest(".text"),on=b.querySelector(".summary").classList.toggle("open");
+    b.querySelector(".why")?.classList.toggle("open",on);
+    m.textContent=on?"收起":"展开全文";m.setAttribute("aria-expanded",on);
+  }
+});
+const pos=document.getElementById("pos"),prog=document.getElementById("prog");
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting||en.intersectionRatio<.55)return;
+  const i=secs.indexOf(en.target);
+  load(i);
+  pos.textContent=i===0?"封面":(i>G.cards.length-1?"结尾":G.cards[i].no);
+  prog.style.width=(i/(secs.length-1)*100)+"%";
+  rail.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-current",String(j===i)));
+}),{root:main,threshold:.55});
+secs.forEach(s=>io.observe(s));
+addEventListener("keydown",e=>{
+  if(e.target.matches("input,textarea"))return;
+  const cur=secs.findIndex(s=>s.getBoundingClientRect().top>-window.innerHeight/2);
+  if(e.key==="ArrowDown"||e.key==="j"){e.preventDefault();secs[Math.min(secs.length-1,cur+1)]?.scrollIntoView()}
+  if(e.key==="ArrowUp"||e.key==="k"){e.preventDefault();secs[Math.max(0,cur-1)]?.scrollIntoView()}
+});
+
+</script>
+</body></html>
