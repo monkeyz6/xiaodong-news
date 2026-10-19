@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="zh-CN" data-mode="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>每日科技情报 · 2026.10.20 · 阅读版</title>
+<style>
+
+
+
+
+:root{
+  --bg:#05060f; --line:rgba(255,255,255,.11); --tx:#EEF2FF;
+  --tx2:rgba(238,242,255,.66); --tx3:rgba(238,242,255,.40);
+  --panel:rgba(255,255,255,.05); --sh:0 20px 54px rgba(0,0,0,.55);
+  --t-cover:#67E8F9; --t-ai:#A78BFA; --t-money:#F5C842; --t-chip:#FF8A3C;
+  --t-oss:#3DFF87; --t-alert:#FF5A4E; --t-rank:#7DA2FF;
+  --flag:#FFD166;
+  --deco:radial-gradient(900px 700px at 8% -8%,rgba(124,92,255,.26),transparent 62%),
+         radial-gradient(760px 620px at 96% 10%,rgba(34,211,238,.15),transparent 62%);
+}
+:root[data-mode="light"]{
+  --bg:#F7F4ED; --line:rgba(21,18,14,.18); --tx:#15120E;
+  --tx2:#4A443C; --tx3:#8A8176;
+  --panel:rgba(21,18,14,.045); --sh:0 14px 36px rgba(21,18,14,.15);
+  --t-cover:#1B3FAE; --t-ai:#5B2BE0; --t-money:#0B6B4F; --t-chip:#E8442A;
+  --t-oss:#00964A; --t-alert:#DC1E28; --t-rank:#1B3FAE;
+  --flag:#9A6B00;
+  --deco:none;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--tx);line-height:1.66;
+ font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+ -webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:var(--deco)}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:5px}
+
+.bar{position:fixed;top:0;left:0;right:0;height:54px;z-index:40;display:flex;align-items:center;gap:14px;
+ padding:0 22px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--line)}
+.brand{font-size:13px;font-weight:800;letter-spacing:.2em}
+.brand i{font-style:normal;color:var(--tx3);font-weight:500;letter-spacing:.06em;margin-left:10px}
+.bar .sp{flex:1}
+.pos{font-size:12px;color:var(--tx3);letter-spacing:.1em}
+.pos b{color:var(--tx);font-weight:700}
+.tbtn{border:1px solid var(--line);background:transparent;color:var(--tx2);border-radius:999px;
+ padding:6px 14px;font-size:12px;cursor:pointer;letter-spacing:.04em;transition:.2s}
+.tbtn:hover{color:var(--tx);border-color:var(--tx3)}
+.prog{position:fixed;top:54px;left:0;height:2px;width:0;background:var(--tx);opacity:.85;z-index:41;transition:width .25s}
+
+.rail{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:35;display:flex;flex-direction:column;gap:1px}
+.rail button{background:none;border:0;cursor:pointer;padding:3px 6px;font-size:10.5px;letter-spacing:.1em;
+ color:var(--tx3);display:flex;align-items:center;gap:7px;transition:color .2s}
+.rail button::after{content:"";width:12px;height:1px;background:currentColor;opacity:.45;transition:width .25s,opacity .2s}
+.rail button:hover{color:var(--tx2)}
+.rail button[aria-current="true"]{color:var(--tx);font-weight:700}
+.rail button[aria-current="true"]::after{width:26px;opacity:1}
+
+main{position:relative;z-index:1;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.item{height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;
+ justify-content:center;padding:54px 100px 22px 62px;position:relative}
+.t-cover{--c:var(--t-cover)} .t-ai{--c:var(--t-ai)} .t-money{--c:var(--t-money)}
+.t-chip{--c:var(--t-chip)} .t-oss{--c:var(--t-oss)} .t-alert{--c:var(--t-alert)}
+.t-rank{--c:var(--t-rank)} .outro{--c:var(--t-cover)}
+.inner{width:100%;max-width:1200px;display:grid;gap:54px;align-items:center;
+ grid-template-columns:minmax(0,1.04fr) minmax(0,1fr)}
+.shot{justify-self:end}
+.shot img{display:block;height:auto;max-height:calc(100dvh - 128px);max-width:100%;aspect-ratio:3/4;
+ border-radius:16px;box-shadow:var(--sh);background:var(--panel)}
+:root[data-mode="light"] .shot img{border-radius:0}
+
+.eyebrow{display:flex;align-items:baseline;gap:13px;margin-bottom:16px;flex-wrap:wrap}
+.rank{font:700 36px/1 ui-monospace,Menlo,monospace;color:var(--c)}
+.tag{font-size:11px;letter-spacing:.17em;font-weight:700;color:var(--c);
+ border:1px solid color-mix(in srgb,var(--c) 45%,transparent);padding:4px 11px;border-radius:999px}
+:root[data-mode="light"] .tag{border-radius:0}
+.title{font-size:clamp(23px,2.25vw,33px);line-height:1.34;font-weight:800;letter-spacing:-.01em;margin-bottom:15px}
+.summary{color:var(--tx2);font-size:15.5px;margin-bottom:19px}
+.why{border-left:2.5px solid var(--c);padding-left:15px;margin-bottom:20px}
+.why b{display:block;font-size:10.5px;letter-spacing:.18em;color:var(--c);margin-bottom:5px}
+.why p{margin:0;font-size:14.5px;color:var(--tx2)}
+.src{font-size:12px;color:var(--tx3);letter-spacing:.03em}
+.flag{color:var(--flag);margin-left:10px}
+.flag::before{content:"◇ "}
+.more{display:none;background:none;border:0;color:var(--c);font-size:13px;cursor:pointer;padding:0;margin-bottom:12px}
+
+.lede{color:var(--tx2);font-size:14.5px;margin-bottom:20px}
+.toc{list-style:none;max-height:52dvh;overflow:auto;padding-right:6px}
+.toc li+li{border-top:1px solid var(--line)}
+.toc button{width:100%;background:none;border:0;cursor:pointer;color:var(--tx2);text-align:left;
+ display:flex;align-items:baseline;gap:12px;padding:7px 2px;font-size:14px;transition:color .18s}
+.toc button:hover{color:var(--tx)}
+.tn{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--tx3);flex:none}
+.tt{flex:1}
+.tf{font-size:10.5px;color:var(--flag);flex:none;letter-spacing:.06em}
+
+.outro{align-items:center}
+.outro-in{max-width:620px;width:100%}
+.outro h2{font-size:clamp(22px,2.2vw,30px);font-weight:800;margin-bottom:22px}
+.checklist{list-style:none;margin-bottom:26px}
+.checklist li{border-top:1px solid var(--line);padding:12px 0}
+.checklist button{background:none;border:0;cursor:pointer;color:var(--tx);display:flex;gap:11px;
+ align-items:baseline;font-size:15px;font-weight:700;text-align:left;padding:0}
+.checklist button:hover span{text-decoration:underline}
+.checklist b{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--flag)}
+.checklist p{font-size:13px;color:var(--tx3);margin-top:5px;padding-left:23px}
+.note{font-size:13px;color:var(--tx3);margin-bottom:22px;line-height:1.8}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--tx);border-radius:10px;
+ padding:10px 20px;font-size:13.5px;cursor:pointer;transition:.2s}
+.btn:hover{border-color:var(--tx3)}
+:root[data-mode="light"] .btn{border-radius:0}
+
+.acts{position:absolute;right:26px;bottom:20px;display:flex;gap:7px;opacity:.24;transition:opacity .25s}
+.item:hover .acts,.acts:focus-within{opacity:1}
+.acts button{width:35px;height:35px;border-radius:10px;cursor:pointer;border:1px solid var(--line);
+ background:var(--panel);color:var(--tx2);display:grid;place-items:center;transition:.2s}
+.acts button:hover{color:var(--tx);border-color:var(--tx3)}
+.acts svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+:root[data-mode="light"] .acts button{border-radius:0}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,14px);z-index:60;background:var(--tx);
+ color:var(--bg);padding:9px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:900px){
+  .rail{display:none}
+  .item{padding:62px 18px 18px;align-items:flex-start}
+  .inner{grid-template-columns:1fr;gap:16px;align-content:start;height:100%}
+  .shot{justify-self:center}
+  .shot img{max-height:62dvh;border-radius:12px}
+  .cover .shot img{max-height:34dvh}
+  .eyebrow{margin-bottom:9px;gap:10px}
+  .rank{font-size:23px}
+  .title{font-size:19px;margin-bottom:8px}
+  .summary{font-size:14px;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .summary.open{-webkit-line-clamp:unset}
+  .why{display:none;margin-bottom:12px}
+  .why.open{display:block}
+  .more{display:inline-block}
+  .src{font-size:11.5px;padding-right:82px}
+  .flag{display:block;margin:4px 0 0}
+  .toc{max-height:none;flex:1}
+  .cover .inner{display:flex;flex-direction:column;min-height:0}
+  .cover .text{display:flex;flex-direction:column;min-height:0;flex:1}
+  .acts{right:16px;bottom:14px;opacity:.42}
+  .outro{padding-top:80px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+
+
+
+</style></head><body>
+<div class="bar">
+  <div class="brand">每日科技情报<i>2026.10.20</i></div><div class="sp"></div>
+  <div class="pos mono"><b id="pos">封面</b></div>
+  <a class="tbtn" href="../index.html" style="text-decoration:none">每日简报</a>
+  <button class="tbtn" id="mode">浅色版</button>
+</div>
+<div class="prog" id="prog"></div>
+<nav class="rail mono" id="rail" aria-label="按重要性排序的目录"><button data-go="0" aria-label="跳到封面">封面</button><button data-go="1" aria-label="跳到01">01</button><button data-go="2" aria-label="跳到02">02</button><button data-go="3" aria-label="跳到03">03</button><button data-go="4" aria-label="跳到04">04</button><button data-go="5" aria-label="跳到05">05</button><button data-go="6" aria-label="跳到06">06</button><button data-go="7" aria-label="跳到07">07</button><button data-go="8" aria-label="跳到08">08</button><button data-go="9" aria-label="跳到09">09</button><button data-go="10" aria-label="跳到10">10</button><button data-go="11" aria-label="跳到结尾">结尾</button></nav>
+<main id="main">
+<section class="item cover t-cover" id="s0" data-i="0">
+  <div class="inner">
+    <figure class="shot"><img data-i="0" alt="封面" src="img/2026-10-20-reader/00_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="tag">2026.10.20 · 周二 · 过去 48 小时</span></div>
+      <h2 class="title">今日科技情报</h2>
+      <p class="lede">共 10 条，按重要性排序。点标题直接跳过去。</p>
+      <ol class="toc"><li><button data-go="1"><span class="tn">01</span><span class="tt">美国联邦民事机构 全面清除DeepSeek</span></button></li><li><button data-go="2"><span class="tn">02</span><span class="tt">一名黑客派AI智能体 攻入100多家公司</span></button></li><li><button data-go="3"><span class="tn">03</span><span class="tt">华为工程师驻场 与DeepSeek共同设计芯片</span></button></li><li><button data-go="4"><span class="tn">04</span><span class="tt">Meta公开吉瓦级集群 满配约100万颗GPU</span></button></li><li><button data-go="5"><span class="tn">05</span><span class="tt">MiniMax M3.1 Flash 成本降七成</span></button></li><li><button data-go="6"><span class="tn">06</span><span class="tt">Nscale与Anthropic 洽谈第二笔大单</span></button></li><li><button data-go="7"><span class="tn">07</span><span class="tt">亚马逊开放 TorchNeuron公测</span></button></li><li><button data-go="8"><span class="tn">08</span><span class="tt">一天五笔AI融资 芯片领跑</span></button></li><li><button data-go="9"><span class="tn">09</span><span class="tt">扩散模型Mercury 3 每秒千余token</span></button></li><li><button data-go="10"><span class="tn">10</span><span class="tt">四个Gemini智能体 零干预通关《我的世界》</span><span class='tf'>待核实</span></button></li></ol>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="0" aria-label="下载封面"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="0" aria-label="复制封面文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s1" data-i="1">
+  <div class="inner">
+    <figure class="shot"><img data-i="1" alt="第 01 条资讯卡" src="img/2026-10-20-reader/01_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">01</span><span class="tag">AI监管</span></div>
+      <h2 class="title">美国联邦民事机构 全面清除DeepSeek</h2>
+      <p class="summary">国土安全部10/19公示供应链排除令：联邦民事机构须在60天内移除DeepSeek产品并停止采购，基于DeepSeek构建的第三方产品同样在列；国防与情报系统除外。</p>
+      <div class="why"><b>为什么重要</b><p>各机构自行屏蔽改为统一排除令，并延伸到第三方产品；向美国政府卖软件的厂商要先查清自家是否嵌了DeepSeek。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：联邦公报 / 彭博 / CyberScoop 10/19</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="1" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="1" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-oss" id="s2" data-i="2">
+  <div class="inner">
+    <figure class="shot"><img data-i="2" alt="第 02 条资讯卡" src="img/2026-10-20-reader/02_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">02</span><span class="tag">AI安全</span></div>
+      <h2 class="title">一名黑客派AI智能体 攻入100多家公司</h2>
+      <p class="summary">NorForge研究员发现暴露在公网的Cairn控制面板，旁观一个中文团伙让智能体自主入侵电商网站；路透核实迪尔、SharkNinja、康明斯在列。</p>
+      <div class="why"><b>为什么重要</b><p>从侦察到入侵几乎全程由智能体完成，每次成功约50美元，“攻击需要熟练人手”这道门槛正在消失。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：路透 / TNW / The Verge 10/19</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="2" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="2" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s3" data-i="3">
+  <div class="inner">
+    <figure class="shot"><img data-i="3" alt="第 03 条资讯卡" src="img/2026-10-20-reader/03_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">03</span><span class="tag">芯片</span></div>
+      <h2 class="title">华为工程师驻场 与DeepSeek共同设计芯片</h2>
+      <p class="summary">The Information称，华为把DeepSeek对计算与芯片间数据传输的反馈纳入设计；DeepSeek最早今年底用昇腾950DT预训练，并优先拿到明年一季度的960DT。</p>
+      <div class="why"><b>为什么重要</b><p>若能完全在国产芯片上训出前沿模型，中国AI公司就多了一条不依赖英伟达的可复制路径。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：The Information 10/19</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="3" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="3" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s4" data-i="4">
+  <div class="inner">
+    <figure class="shot"><img data-i="4" alt="第 04 条资讯卡" src="img/2026-10-20-reader/04_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">04</span><span class="tag">AI基建</span></div>
+      <h2 class="title">Meta公开吉瓦级集群 满配约100万颗GPU</h2>
+      <p class="summary">Meta首次详解俄亥俄州Prometheus：一期已训练出Muse模型，现有数十万颗GPU分布在多栋楼，GB200与GB300 NVL72在役，Vera Rubin即将到位。</p>
+      <div class="why"><b>为什么重要</b><p>前沿模型竞争已是工程可靠性竞争，同样多的GPU，能稳定跑满的比例决定实际算力。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Engineering at Meta 10/19</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="4" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="4" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s5" data-i="5">
+  <div class="inner">
+    <figure class="shot"><img data-i="5" alt="第 05 条资讯卡" src="img/2026-10-20-reader/05_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">05</span><span class="tag">模型发布</span></div>
+      <h2 class="title">MiniMax M3.1 Flash 成本降七成</h2>
+      <p class="summary">MiniMax 10/19发布M3.1 Flash，匿名代号Space Bunny期间已处理超200万亿token；官方称推理速度提升近3倍，DeepSWE v1.1得分73.7%，权重稍后开放。</p>
+      <div class="why"><b>为什么重要</b><p>低价Flash档把编程与电脑操作类智能体的单任务成本继续压低，安全高分模型也更易被攻防两端拿到。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：MiniMax官方 / IT之家 10/19</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="5" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="5" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s6" data-i="6">
+  <div class="inner">
+    <figure class="shot"><img data-i="6" alt="第 06 条资讯卡" src="img/2026-10-20-reader/06_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">06</span><span class="tag">AI融资</span></div>
+      <h2 class="title">Nscale与Anthropic 洽谈第二笔大单</h2>
+      <p class="summary">彭博称，双方洽谈约450亿美元新合同，在西弗吉尼亚Monarch园区第二栋楼部署460兆瓦Vera Rubin算力，最快几天内敲定；8月已签过同等规模的首单。</p>
+      <div class="why"><b>为什么重要</b><p>微软刚撤出其英国项目，美国园区却拿到追加订单：算力合同正向有电、能按时交付的园区集中。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：彭博 / 路透 10/19</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="6" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="6" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-oss" id="s7" data-i="7">
+  <div class="inner">
+    <figure class="shot"><img data-i="7" alt="第 07 条资讯卡" src="img/2026-10-20-reader/07_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">07</span><span class="tag">开源工具</span></div>
+      <h2 class="title">亚马逊开放 TorchNeuron公测</h2>
+      <p class="summary">PyTorch代码只需改一项配置即可在亚马逊Trainium芯片上运行，此前须改写代码调用专用接口；软件已开放公测，周二在PyTorch大会开源。</p>
+      <div class="why"><b>为什么重要</b><p>自研芯片要卖给更多客户，关键是开发者要不要改代码；把迁移降到改配置，是削弱CUDA锁定的直接办法。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：GeekWire 10/19</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="7" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="7" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-rank" id="s8" data-i="8">
+  <div class="inner">
+    <figure class="shot"><img data-i="8" alt="第 08 条资讯卡" src="img/2026-10-20-reader/08_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">08</span><span class="tag">AI融资</span></div>
+      <h2 class="title">一天五笔AI融资 芯片领跑</h2>
+      <p class="summary">10/19多家AI公司宣布融资：RISC-V芯片公司Tenstorrent估值翻倍至62亿美元，企业助手Town四个月成独角兽，机器人模型与代码优化公司也拿到大额资金。</p>
+      <div class="why"><b>为什么重要</b><p>债务市场对AI基建转冷时，股权资金仍在追逐英伟达替代方案与智能体、机器人应用层。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：公司公告 / 路透 / TechCrunch 10/19</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="8" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="8" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s9" data-i="9">
+  <div class="inner">
+    <figure class="shot"><img data-i="9" alt="第 09 条资讯卡" src="img/2026-10-20-reader/09_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">09</span><span class="tag">模型发布</span></div>
+      <h2 class="title">扩散模型Mercury 3 每秒千余token</h2>
+      <p class="summary">Inception发布扩散式语言模型Mercury 3，称在英伟达GPU上达每秒1068个token，质量对标GPT-6 Luna与Claude Haiku 5.5，上下文扩至100万。</p>
+      <div class="why"><b>为什么重要</b><p>智能体每一步都要等模型，延迟层层累积；扩散路线若扩规模后仍保速度，低延迟场景就多一条技术路线。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Inception Labs官方 10/19</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="9" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="9" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s10" data-i="10">
+  <div class="inner">
+    <figure class="shot"><img data-i="10" alt="第 10 条资讯卡" src="img/2026-10-20-reader/10_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">10</span><span class="tag">智能体研究</span></div>
+      <h2 class="title">四个Gemini智能体 零干预通关《我的世界》</h2>
+      <p class="summary">DeepMind论文：四个Gemini 4 Argon智能体靠Mineflayer与共享记忆自行分工，27小时14分击败末影龙，写了2783个程序、死亡605次，全程无人介入。</p>
+      <div class="why"><b>为什么重要</b><p>通用编码智能体能把连贯计划维持一天以上、跨越上千步，衡量重点正从单步能力转向长程执行。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：arXiv / The Decoder 10/18<span class="flag">待核实 · 论文10/15提交arXiv，早于48小时窗口，媒体10/18–19报道；仅单次运行，依赖Mineflayer结构化数据。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="10" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="10" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item outro" id="s11" data-i="11">
+  <div class="outro-in">
+    <h2>发布前请确认这 1 条</h2>
+    <ul class="checklist"><li><button data-go="10"><b>10</b><span>四个Gemini智能体 零干预通关《我的世界》</span></button><p>论文10/15提交arXiv，早于48小时窗口，媒体10/18–19报道；仅单次运行，依赖Mineflayer结构化数据。</p></li></ul>
+    <p class="note">切换深浅两套图时，下载按钮会跟着当前这套走。黄标条目在新闻稿或官方口径出现前，请勿写成已交割或已定日期。上一期专区：<a href="./2026-10-19.html">2026-10-19</a>。</p>
+    <button class="btn" id="copyAll">复制全部文案</button>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+<script type="application/json" id="d">{"cards": [{"no": "00", "title": "封面 · 今日科技情报", "copy": "【今日科技情报】2026.10.20 · 过去 48 小时 10 条\n\n01 美国联邦民事机构 全面清除DeepSeek\n02 一名黑客派AI智能体 攻入100多家公司\n03 华为工程师驻场 与DeepSeek共同设计芯片\n04 Meta公开吉瓦级集群 满配约100万颗GPU\n05 MiniMax M3.1 Flash 成本降七成\n06 Nscale与Anthropic 洽谈第二笔大单\n07 亚马逊开放 TorchNeuron公测\n08 一天五笔AI融资 芯片领跑\n09 扩散模型Mercury 3 每秒千余token\n10 四个Gemini智能体 零干预通关《我的世界》\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261020_00_深色.png", "fileLight": "科技情报_20261020_00_浅色.png", "dark": "img/2026-10-20-reader/00_dark.png", "light": "img/2026-10-20-reader/00_light.png"}, {"no": "01", "title": "美国联邦民事机构 全面清除DeepSeek", "copy": "【AI监管】美国联邦民事机构 全面清除DeepSeek\n\n国土安全部10/19公示供应链排除令：联邦民事机构须在60天内移除DeepSeek产品并停止采购，基于DeepSeek构建的第三方产品同样在列；国防与情报系统除外。\n\n◆ 为什么重要：各机构自行屏蔽改为统一排除令，并延伸到第三方产品；向美国政府卖软件的厂商要先查清自家是否嵌了DeepSeek。\n\n来源：联邦公报 / 彭博 / CyberScoop 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261020_01_深色.png", "fileLight": "科技情报_20261020_01_浅色.png", "dark": "img/2026-10-20-reader/01_dark.png", "light": "img/2026-10-20-reader/01_light.png"}, {"no": "02", "title": "一名黑客派AI智能体 攻入100多家公司", "copy": "【AI安全】一名黑客派AI智能体 攻入100多家公司\n\nNorForge研究员发现暴露在公网的Cairn控制面板，旁观一个中文团伙让智能体自主入侵电商网站；路透核实迪尔、SharkNinja、康明斯在列。\n\n◆ 为什么重要：从侦察到入侵几乎全程由智能体完成，每次成功约50美元，“攻击需要熟练人手”这道门槛正在消失。\n\n来源：路透 / TNW / The Verge 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261020_02_深色.png", "fileLight": "科技情报_20261020_02_浅色.png", "dark": "img/2026-10-20-reader/02_dark.png", "light": "img/2026-10-20-reader/02_light.png"}, {"no": "03", "title": "华为工程师驻场 与DeepSeek共同设计芯片", "copy": "【芯片】华为工程师驻场 与DeepSeek共同设计芯片\n\nThe Information称，华为把DeepSeek对计算与芯片间数据传输的反馈纳入设计；DeepSeek最早今年底用昇腾950DT预训练，并优先拿到明年一季度的960DT。\n\n◆ 为什么重要：若能完全在国产芯片上训出前沿模型，中国AI公司就多了一条不依赖英伟达的可复制路径。\n\n来源：The Information 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261020_03_深色.png", "fileLight": "科技情报_20261020_03_浅色.png", "dark": "img/2026-10-20-reader/03_dark.png", "light": "img/2026-10-20-reader/03_light.png"}, {"no": "04", "title": "Meta公开吉瓦级集群 满配约100万颗GPU", "copy": "【AI基建】Meta公开吉瓦级集群 满配约100万颗GPU\n\nMeta首次详解俄亥俄州Prometheus：一期已训练出Muse模型，现有数十万颗GPU分布在多栋楼，GB200与GB300 NVL72在役，Vera Rubin即将到位。\n\n◆ 为什么重要：前沿模型竞争已是工程可靠性竞争，同样多的GPU，能稳定跑满的比例决定实际算力。\n\n来源：Engineering at Meta 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261020_04_深色.png", "fileLight": "科技情报_20261020_04_浅色.png", "dark": "img/2026-10-20-reader/04_dark.png", "light": "img/2026-10-20-reader/04_light.png"}, {"no": "05", "title": "MiniMax M3.1 Flash 成本降七成", "copy": "【模型发布】MiniMax M3.1 Flash 成本降七成\n\nMiniMax 10/19发布M3.1 Flash，匿名代号Space Bunny期间已处理超200万亿token；官方称推理速度提升近3倍，DeepSWE v1.1得分73.7%，权重稍后开放。\n\n◆ 为什么重要：低价Flash档把编程与电脑操作类智能体的单任务成本继续压低，安全高分模型也更易被攻防两端拿到。\n\n来源：MiniMax官方 / IT之家 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261020_05_深色.png", "fileLight": "科技情报_20261020_05_浅色.png", "dark": "img/2026-10-20-reader/05_dark.png", "light": "img/2026-10-20-reader/05_light.png"}, {"no": "06", "title": "Nscale与Anthropic 洽谈第二笔大单", "copy": "【AI融资】Nscale与Anthropic 洽谈第二笔大单\n\n彭博称，双方洽谈约450亿美元新合同，在西弗吉尼亚Monarch园区第二栋楼部署460兆瓦Vera Rubin算力，最快几天内敲定；8月已签过同等规模的首单。\n\n◆ 为什么重要：微软刚撤出其英国项目，美国园区却拿到追加订单：算力合同正向有电、能按时交付的园区集中。\n\n来源：彭博 / 路透 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261020_06_深色.png", "fileLight": "科技情报_20261020_06_浅色.png", "dark": "img/2026-10-20-reader/06_dark.png", "light": "img/2026-10-20-reader/06_light.png"}, {"no": "07", "title": "亚马逊开放 TorchNeuron公测", "copy": "【开源工具】亚马逊开放 TorchNeuron公测\n\nPyTorch代码只需改一项配置即可在亚马逊Trainium芯片上运行，此前须改写代码调用专用接口；软件已开放公测，周二在PyTorch大会开源。\n\n◆ 为什么重要：自研芯片要卖给更多客户，关键是开发者要不要改代码；把迁移降到改配置，是削弱CUDA锁定的直接办法。\n\n来源：GeekWire 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261020_07_深色.png", "fileLight": "科技情报_20261020_07_浅色.png", "dark": "img/2026-10-20-reader/07_dark.png", "light": "img/2026-10-20-reader/07_light.png"}, {"no": "08", "title": "一天五笔AI融资 芯片领跑", "copy": "【AI融资】一天五笔AI融资 芯片领跑\n\n10/19多家AI公司宣布融资：RISC-V芯片公司Tenstorrent估值翻倍至62亿美元，企业助手Town四个月成独角兽，机器人模型与代码优化公司也拿到大额资金。\n\n◆ 为什么重要：债务市场对AI基建转冷时，股权资金仍在追逐英伟达替代方案与智能体、机器人应用层。\n\n来源：公司公告 / 路透 / TechCrunch 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261020_08_深色.png", "fileLight": "科技情报_20261020_08_浅色.png", "dark": "img/2026-10-20-reader/08_dark.png", "light": "img/2026-10-20-reader/08_light.png"}, {"no": "09", "title": "扩散模型Mercury 3 每秒千余token", "copy": "【模型发布】扩散模型Mercury 3 每秒千余token\n\nInception发布扩散式语言模型Mercury 3，称在英伟达GPU上达每秒1068个token，质量对标GPT-6 Luna与Claude Haiku 5.5，上下文扩至100万。\n\n◆ 为什么重要：智能体每一步都要等模型，延迟层层累积；扩散路线若扩规模后仍保速度，低延迟场景就多一条技术路线。\n\n来源：Inception Labs官方 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261020_09_深色.png", "fileLight": "科技情报_20261020_09_浅色.png", "dark": "img/2026-10-20-reader/09_dark.png", "light": "img/2026-10-20-reader/09_light.png"}, {"no": "10", "title": "四个Gemini智能体 零干预通关《我的世界》", "copy": "【智能体研究】四个Gemini智能体 零干预通关《我的世界》\n\nDeepMind论文：四个Gemini 4 Argon智能体靠Mineflayer与共享记忆自行分工，27小时14分击败末影龙，写了2783个程序、死亡605次，全程无人介入。\n\n◆ 为什么重要：通用编码智能体能把连贯计划维持一天以上、跨越上千步，衡量重点正从单步能力转向长程执行。\n\n※ 论文10/15提交arXiv，早于48小时窗口，媒体10/18–19报道；仅单次运行，依赖Mineflayer结构化数据。\n\n来源：arXiv / The Decoder 10/18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261020_10_深色.png", "fileLight": "科技情报_20261020_10_浅色.png", "dark": "img/2026-10-20-reader/10_dark.png", "light": "img/2026-10-20-reader/10_light.png"}], "allCopy": "【今日科技情报】2026.10.20 · 过去 48 小时 10 条\n\n01 美国联邦民事机构 全面清除DeepSeek\n02 一名黑客派AI智能体 攻入100多家公司\n03 华为工程师驻场 与DeepSeek共同设计芯片\n04 Meta公开吉瓦级集群 满配约100万颗GPU\n05 MiniMax M3.1 Flash 成本降七成\n06 Nscale与Anthropic 洽谈第二笔大单\n07 亚马逊开放 TorchNeuron公测\n08 一天五笔AI融资 芯片领跑\n09 扩散模型Mercury 3 每秒千余token\n10 四个Gemini智能体 零干预通关《我的世界》\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI监管】美国联邦民事机构 全面清除DeepSeek\n\n国土安全部10/19公示供应链排除令：联邦民事机构须在60天内移除DeepSeek产品并停止采购，基于DeepSeek构建的第三方产品同样在列；国防与情报系统除外。\n\n◆ 为什么重要：各机构自行屏蔽改为统一排除令，并延伸到第三方产品；向美国政府卖软件的厂商要先查清自家是否嵌了DeepSeek。\n\n来源：联邦公报 / 彭博 / CyberScoop 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI安全】一名黑客派AI智能体 攻入100多家公司\n\nNorForge研究员发现暴露在公网的Cairn控制面板，旁观一个中文团伙让智能体自主入侵电商网站；路透核实迪尔、SharkNinja、康明斯在列。\n\n◆ 为什么重要：从侦察到入侵几乎全程由智能体完成，每次成功约50美元，“攻击需要熟练人手”这道门槛正在消失。\n\n来源：路透 / TNW / The Verge 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【芯片】华为工程师驻场 与DeepSeek共同设计芯片\n\nThe Information称，华为把DeepSeek对计算与芯片间数据传输的反馈纳入设计；DeepSeek最早今年底用昇腾950DT预训练，并优先拿到明年一季度的960DT。\n\n◆ 为什么重要：若能完全在国产芯片上训出前沿模型，中国AI公司就多了一条不依赖英伟达的可复制路径。\n\n来源：The Information 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI基建】Meta公开吉瓦级集群 满配约100万颗GPU\n\nMeta首次详解俄亥俄州Prometheus：一期已训练出Muse模型，现有数十万颗GPU分布在多栋楼，GB200与GB300 NVL72在役，Vera Rubin即将到位。\n\n◆ 为什么重要：前沿模型竞争已是工程可靠性竞争，同样多的GPU，能稳定跑满的比例决定实际算力。\n\n来源：Engineering at Meta 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【模型发布】MiniMax M3.1 Flash 成本降七成\n\nMiniMax 10/19发布M3.1 Flash，匿名代号Space Bunny期间已处理超200万亿token；官方称推理速度提升近3倍，DeepSWE v1.1得分73.7%，权重稍后开放。\n\n◆ 为什么重要：低价Flash档把编程与电脑操作类智能体的单任务成本继续压低，安全高分模型也更易被攻防两端拿到。\n\n来源：MiniMax官方 / IT之家 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI融资】Nscale与Anthropic 洽谈第二笔大单\n\n彭博称，双方洽谈约450亿美元新合同，在西弗吉尼亚Monarch园区第二栋楼部署460兆瓦Vera Rubin算力，最快几天内敲定；8月已签过同等规模的首单。\n\n◆ 为什么重要：微软刚撤出其英国项目，美国园区却拿到追加订单：算力合同正向有电、能按时交付的园区集中。\n\n来源：彭博 / 路透 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开源工具】亚马逊开放 TorchNeuron公测\n\nPyTorch代码只需改一项配置即可在亚马逊Trainium芯片上运行，此前须改写代码调用专用接口；软件已开放公测，周二在PyTorch大会开源。\n\n◆ 为什么重要：自研芯片要卖给更多客户，关键是开发者要不要改代码；把迁移降到改配置，是削弱CUDA锁定的直接办法。\n\n来源：GeekWire 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI融资】一天五笔AI融资 芯片领跑\n\n10/19多家AI公司宣布融资：RISC-V芯片公司Tenstorrent估值翻倍至62亿美元，企业助手Town四个月成独角兽，机器人模型与代码优化公司也拿到大额资金。\n\n◆ 为什么重要：债务市场对AI基建转冷时，股权资金仍在追逐英伟达替代方案与智能体、机器人应用层。\n\n来源：公司公告 / 路透 / TechCrunch 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【模型发布】扩散模型Mercury 3 每秒千余token\n\nInception发布扩散式语言模型Mercury 3，称在英伟达GPU上达每秒1068个token，质量对标GPT-6 Luna与Claude Haiku 5.5，上下文扩至100万。\n\n◆ 为什么重要：智能体每一步都要等模型，延迟层层累积；扩散路线若扩规模后仍保速度，低延迟场景就多一条技术路线。\n\n来源：Inception Labs官方 10/19\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【智能体研究】四个Gemini智能体 零干预通关《我的世界》\n\nDeepMind论文：四个Gemini 4 Argon智能体靠Mineflayer与共享记忆自行分工，27小时14分击败末影龙，写了2783个程序、死亡605次，全程无人介入。\n\n◆ 为什么重要：通用编码智能体能把连贯计划维持一天以上、跨越上千步，衡量重点正从单步能力转向长程执行。\n\n※ 论文10/15提交arXiv，早于48小时窗口，媒体10/18–19报道；仅单次运行，依赖Mineflayer结构化数据。\n\n来源：arXiv / The Decoder 10/18\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道"}</script>
+<script>
+const G=JSON.parse(document.getElementById("d").textContent);
+const main=document.getElementById("main"),rail=document.getElementById("rail");
+const secs=[...document.querySelectorAll(".item")];
+const imgs=[...document.querySelectorAll(".shot img")];
+const mode=()=>document.documentElement.dataset.mode;
+let loaded=new Set();
+function load(i){
+  for(let k=Math.max(0,i-2);k<=Math.min(imgs.length-1,i+2);k++){
+    const el=imgs[k];if(!el)continue;
+    const want=G.cards[+el.dataset.i][mode()];
+    if(el.src!==want){el.src=want;loaded.add(k);}
+  }
+}
+function repaint(){loaded.forEach(k=>{const el=imgs[k];el.src=G.cards[+el.dataset.i][mode()];});}
+load(0);
+document.getElementById("mode").onclick=e=>{
+  const r=document.documentElement;
+  r.dataset.mode=mode()==="dark"?"light":"dark";
+  e.currentTarget.textContent=mode()==="dark"?"浅色版":"深色版";
+  repaint();
+};
+const toast=document.getElementById("toast");let tt;
+const say=m=>{toast.textContent=m;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),1700)};
+const copy=t=>navigator.clipboard?.writeText(t).then(()=>say("已复制"),()=>say("复制失败，请手动选中"))??say("复制失败");
+document.addEventListener("click",ev=>{
+  const go=ev.target.closest("[data-go]");
+  if(go){document.getElementById("s"+go.dataset.go).scrollIntoView();return}
+  const a=ev.target.closest("[data-act]");
+  if(a){
+    const c=G.cards[+a.dataset.i],d=mode()==="dark";
+    if(a.dataset.act==="dl"){
+      const l=document.createElement("a");l.href=d?c.dark:c.light;
+      l.download=d?c.fileDark:c.fileLight;l.click();say("已下载 "+l.download);
+    }else copy(c.copy);
+    return;
+  }
+  if(ev.target.id==="copyAll"){copy(G.allCopy);return}
+  const m=ev.target.closest(".more");
+  if(m){
+    const b=m.closest(".text"),on=b.querySelector(".summary").classList.toggle("open");
+    b.querySelector(".why")?.classList.toggle("open",on);
+    m.textContent=on?"收起":"展开全文";m.setAttribute("aria-expanded",on);
+  }
+});
+const pos=document.getElementById("pos"),prog=document.getElementById("prog");
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting||en.intersectionRatio<.55)return;
+  const i=secs.indexOf(en.target);
+  load(i);
+  pos.textContent=i===0?"封面":(i>G.cards.length-1?"结尾":G.cards[i].no);
+  prog.style.width=(i/(secs.length-1)*100)+"%";
+  rail.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-current",String(j===i)));
+}),{root:main,threshold:.55});
+secs.forEach(s=>io.observe(s));
+addEventListener("keydown",e=>{
+  if(e.target.matches("input,textarea"))return;
+  const cur=secs.findIndex(s=>s.getBoundingClientRect().top>-window.innerHeight/2);
+  if(e.key==="ArrowDown"||e.key==="j"){e.preventDefault();secs[Math.min(secs.length-1,cur+1)]?.scrollIntoView()}
+  if(e.key==="ArrowUp"||e.key==="k"){e.preventDefault();secs[Math.max(0,cur-1)]?.scrollIntoView()}
+});
+
+</script>
+</body></html>

@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="小墨 · 每日简报 · 2026-10-20 — 要点 / AI与前沿 / 热度 / 世界与财经 / 行情">
+<title>每日简报 · 2026-10-20 · 小墨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+
+
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 92px; scroll-behavior: smooth; }
+  body { margin: 0; background: #f5f2ec; color: #1c1a16; font-family: 'Instrument Sans', 'Noto Sans SC', system-ui, sans-serif; -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+  a { color: #8a5a2b; text-decoration: none; }
+  a:hover { color: #6d4520; text-decoration: underline; text-underline-offset: 3px; }
+  button { font: inherit; color: inherit; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .nav-pill { padding: 6px 11px; border-radius: 999px; font-size: 13px; font-weight: 500; color: #6b665c; }
+  .nav-pill:hover { background: #ece7dc; color: #1c1a16; text-decoration: none; }
+  .nav-pill.active { color: #1c1a16; background: #ece7dc; }
+  .mark-btn { padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(28,26,22,0.12); background: transparent; cursor: pointer; font-size: 12px; color: #6b665c; }
+  .mark-btn:hover { border-color: rgba(138,90,43,0.5); color: #8a5a2b; }
+  .mark-btn.on { background: #f0e2d2; border-color: rgba(138,90,43,0.45); color: #8a5a2b; }
+  .filter-btn { margin-left: auto; display: flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1px solid rgba(28,26,22,0.12); background: #fffefb; cursor: pointer; font-size: 13px; font-weight: 500; box-shadow: 0 1px 2px rgba(28,26,22,0.04); }
+  .filter-btn:hover, .filter-btn.on { border-color: rgba(138,90,43,0.45); }
+  .filter-btn.on { background: #f0e2d2; }
+  [data-item].hidden-by-filter { display: none !important; }
+  section.hidden-by-filter { display: none !important; }
+  .up { color: #2f6b4f; }
+  .down { color: #a8422f; }
+  .flat { color: #6b665c; }
+  .heatbar { display: block; height: 3px; border-radius: 999px; background: #ece7dc; overflow: hidden; }
+  .heatbar > i { display: block; height: 100%; border-radius: 999px; background: #8a5a2b; }
+  .badge { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; padding: 0 6px; white-space: nowrap; box-sizing: border-box; height: 22px; border-radius: 7px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; }
+  .badge.sm { min-width: 20px; padding: 0 5px; height: 20px; border-radius: 6px; font-size: 9px; }
+  .detail-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(28,26,22,0.38); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: none; align-items: flex-end; justify-content: center; padding: 16px; }
+  .detail-overlay.open { display: flex; }
+  .detail-panel { width: min(640px, 100%); max-height: min(88vh, 820px); overflow: auto; background: #fffefb; border-radius: 22px 22px 18px 18px; box-shadow: 0 24px 60px -20px rgba(28,26,22,0.35); border: 1px solid rgba(255,255,255,0.95); padding: clamp(20px, 3vw, 32px); animation: rise 0.28s ease both; }
+  @media (min-width: 720px) {
+    .detail-overlay { align-items: center; }
+    .detail-panel { border-radius: 24px; }
+  }
+  .detail-close { appearance: none; border: 1px solid rgba(28,26,22,0.12); background: #f5f2ec; color: #6b665c; border-radius: 999px; padding: 6px 14px; cursor: pointer; font-size: 13px; }
+  .detail-close:hover { border-color: rgba(138,90,43,0.45); color: #8a5a2b; }
+  .detail-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e; }
+  .detail-title { margin: 8px 0 0; font-size: clamp(18px, 2.4vw, 24px); font-weight: 700; line-height: 1.35; letter-spacing: -0.02em; color: #1c1a16; }
+  .detail-body { margin: 16px 0 0; font-size: 15px; line-height: 1.85; color: #3a3630; }
+  .detail-body p { margin: 0 0 0.9em; line-height: 1.85; }
+  .detail-body p:last-child { margin-bottom: 0; }
+  .detail-body h2 { margin: 1.1em 0 0.55em; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: #1c1a16; font-family: 'Instrument Sans', 'Noto Sans SC', system-ui, sans-serif; }
+  .detail-body h2:first-child { margin-top: 0; }
+  .detail-body ul, .detail-body ol { margin: 0 0 0.9em; padding-left: 1.35em; line-height: 1.85; }
+  .detail-body li { margin: 0.2em 0; }
+  .detail-body li > p { margin: 0; }
+  .detail-body strong { font-weight: 700; color: #1c1a16; }
+  .detail-body em { font-style: italic; }
+  .detail-body a { color: #8a5a2b; text-decoration: underline; text-underline-offset: 3px; }
+  .detail-meta { margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(28,26,22,0.08); display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .detail-source { font-size: 14px; font-weight: 500; color: #8a5a2b; }
+  .detail-chars { margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e; }
+
+
+</style></head><body>
+<div id="root" style="min-height: 100vh; background: #f5f2ec; padding-bottom: 80px;">
+  <header style="position: sticky; top: 0; z-index: 20; background: rgba(245,242,236,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(28,26,22,0.07);">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 14px clamp(16px, 4vw, 40px); display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: baseline; gap: 10px;">
+        <span style="font-size: 17px; font-weight: 700; letter-spacing: -0.01em;">每日简报</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: #a09a8e; text-transform: uppercase;">Daily Brief</span>
+      </div>
+      <nav style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap; margin-left: 4px;">
+        <a href="#brief" class="nav-pill active">要点</a>
+        <a href="#ai" class="nav-pill">AI 与前沿</a>
+        <a href="#heat" class="nav-pill">今日热度</a>
+        <a href="#world" class="nav-pill">世界与财经</a>
+        <a href="#market" class="nav-pill">行情</a>
+        <a href="intel.html" class="nav-pill">情报专区</a>
+      </nav>
+      <button type="button" class="filter-btn" id="filterBtn" aria-pressed="false">
+        <span>只看已标记</span>
+        <span id="markCount" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; min-width: 18px; padding: 1px 6px; border-radius: 999px; background: #ece7dc; color: #6b665c; text-align: center;">0</span>
+      </button>
+    </div>
+  </header>
+<main style="max-width: 1120px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px);">
+<p id="emptyState" style="display: none; margin: clamp(48px, 8vw, 96px) 0; text-align: center; font-size: 15px; color: #a09a8e;">还没有标记的条目 · 点任意一条右侧的“标记”留到晚上深读</p>
+    <section id="brief" style="padding: clamp(28px, 5vw, 56px) 0 clamp(24px, 4vw, 40px);">
+      <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: clamp(20px, 3vw, 30px);">
+        <h1 style="margin: 0; font-size: clamp(34px, 6vw, 56px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02;">今日要点</h1>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; letter-spacing: 0.02em;">2026-10-20 · 周二</span>
+      </div>
+      <div style="animation: rise 0.5s ease both; background: linear-gradient(180deg, #fffefb, #fffdf7); border-radius: clamp(20px, 3vw, 30px); padding: clamp(22px, 3.4vw, 40px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 20px 44px -22px rgba(28,26,22,0.18); border: 1px solid rgba(255,255,255,0.9);">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: clamp(18px, 2.6vw, 26px); flex-wrap: wrap;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e;">小墨摘选 · 5 条</span>
+          <span style="flex: 1; height: 1px; background: rgba(28,26,22,0.08); min-width: 20px;"></span>
+          <span style="font-size: 12px; color: #a09a8e;">公开源 · 2026-10-18/10-20</span>
+        </div>
+        <ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 20px;">
+          <li data-item="b1" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">01</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">美国国土安全部下令联邦民事机构清除DeepSeek产品并禁止今后采购，基于DeepSeek构建的第三方产品同样在列，国防与情报系统除外</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #f5e8e8; color: #6d2f2f;">AI监管</span>
+                <span style="font-size: 13px; color: #6b665c;">联邦公报 / 彭博 / CyberScoop</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/19</span>
+                <button type="button" class="mark-btn" data-mark="b1" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://www.federalregister.gov/public-inspection/2026-21447/order-exclusion-and-removal-of-deepseek-products-from-federal-civilian-executive-branch-information" hidden>
+据《华尔街日报》、彭博社与MeriTalk报道，美国国土安全部（DHS）10月19日通过《联邦公报》公示一项命令，要求联邦民事行政机构从信息系统中移除杭州深度求索人工智能公司（DeepSeek）及其关联方的产品和服务，并禁止今后采购；禁令同样覆盖基于DeepSeek实现构建的第三方产品与服务。该文件定于10月20日正式刊登。
+
+命令依据2018年《联邦采购供应链安全法》和联邦采购安全委员会的审查作出。彭博与MeriTalk称命令由国土安全部长马克韦恩·穆林于7月24日签署，限制从7月下旬起就已生效；CyberScoop则称公告所附信函日期为6月26日。机构需在60天内完成移除，如需例外须提前60天申请并给出“令人信服的理由”。国防部、情报界和国家安全系统不受约束，执行由网络安全与基础设施安全局（CISA）负责。
+
+DHS列出的理由包括：用户数据存储在中国服务器上，提示词与生成内容会传回中国，取证分析发现安全和隐私漏洞，以及模型可能生成不准确或有害的内容。命令还建议各机构在移除期间加强流量监控、日志记录和数据外泄防护。
+
+为什么重要：此前各联邦机构是各自决定是否屏蔽DeepSeek，这次改为统一的供应链排除令，并延伸到“基于DeepSeek构建”的第三方产品。向美国政府销售软件的厂商，需要核查自家产品里是否嵌入了DeepSeek的模型或接口。
+
+“基于DeepSeek实现”的边界，例如在本地部署其开放权重模型是否算在内，公开报道尚未说明。
+</script>
+            </div>
+          </li>
+          <li data-item="b2" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">02</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">安全研究员旁观一名中文黑客用AI智能体尝试入侵1200多个网站、攻入100多家公司站点，迪尔、SharkNinja在列，约花5000美元token</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #f5e8e8; color: #6d2f2f;">AI安全</span>
+                <span style="font-size: 13px; color: #6b665c;">路透 / TNW / The Verge</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/19</span>
+                <button type="button" class="mark-btn" data-mark="b2" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://www.yahoo.com/news/us/articles/exclusive-one-hacker-used-ai-100625247.html" hidden>
+路透社10月19日独家报道，网络安全公司NorForge首席威胁研究员Snorre Fagerland在扫描互联网时，发现了二十多个意外暴露在公网上的Cairn控制面板。Cairn是一个开源的AI问题求解平台：操作者设定目标，多个AI智能体逐步推进，并把发现写到共享看板上。借助这些面板，他得以旁观多名黑客让智能体自主发动攻击。
+
+最活跃的是一个使用中文的团伙。从9月25日起，它把美国、加拿大、澳大利亚和日本的电商网站作为目标，下达的指令不到100个汉字。截至上周末，其智能体已尝试入侵1200多个网站，攻入了100多家公司的站点，路透核实的受害者包括农机制造商迪尔、家电公司SharkNinja和发动机制造商康明斯。成功的入侵平均要花约23小时反复试探。NorForge称，这些任务都运行在名为“claudecode_deepseek-v4.1-flash”的工作节点上，可能是用Claude Code驱动DeepSeek V4.1 Flash。Fagerland估计整场行动耗费约5000美元的token，约合每次成功入侵50美元，报告也承认这一估算不确定性较大。据TNW转述，该团伙意在植入上传型网页后门，长期控制商店与支付系统。
+
+迪尔称已完成必要处置，未发现敏感信息被访问；SharkNinja称受影响的只是一个独立的产品支持站点；康明斯称正在调查一家第三方供应商运营的网站。另一伙人则让智能体窃取信用卡和加密货币。
+
+为什么重要：这是公开报道中少见的、从侦察到入侵几乎全程由智能体完成的真实攻击。攻击的边际成本降到几十美元一次，“攻击需要熟练人手”这道门槛正在消失。
+
+路透未能确认实际被窃取的数据规模。
+</script>
+            </div>
+          </li>
+          <li data-item="b3" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">03</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">The Information：华为工程师驻场DeepSeek共同设计AI芯片，DeepSeek最早今年底用昇腾950DT预训练，并将优先拿到明年一季度的960DT</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #f5efe0; color: #6d5a2f;">芯片</span>
+                <span style="font-size: 13px; color: #6b665c;">The Information / Investing.com</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/19</span>
+                <button type="button" class="mark-btn" data-mark="b3" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://www.theinformation.com/articles/deepseek-shaping-huaweis-ai-chips-growing-challenge-nvidia" hidden>
+据The Information 10月19日援引两名知情人士报道，DeepSeek正与华为密切合作，参与塑造华为未来AI芯片的设计。华为工程师常驻DeepSeek办公室，把它在模型如何做计算、如何在处理器之间传输数据等方面的反馈纳入芯片设计。报道称，这种关系已超出芯片客户与供应商之间的常规沟通。
+
+按计划，DeepSeek最早将在2026年底开始用华为昇腾950DT做预训练；华为还计划把预计2027年第一季度推出的下一代昇腾960DT大部分优先供给DeepSeek。AI Weekly转述称，950DT搭载华为自研的HiZQ 2.0高带宽内存（144GB、每秒4TB）。软件侧，DeepSeek使用开源编程语言TileLang来降低对英伟达CUDA的依赖，上月已发布兼容昇腾950的版本。
+
+差距依然明显。据研究机构Epoch AI的数据，英伟达B300的原始算力约为昇腾950的7倍；训练一个前沿模型可能需要上万颗华为芯片连续协同工作数周，产能与系统可靠性都是考验。报道称DeepSeek并未放弃英伟达，仍在设法获得其先进芯片。
+
+为什么重要：中国头部模型公司过去主要在推理端使用国产芯片，预训练仍依赖英伟达。如果DeepSeek能完全在华为芯片上训练出前沿模型，其他中国AI公司就多了一条不依赖美国芯片的可复制路径；模型公司直接参与芯片设计，也会让华为的产品更贴近大模型的真实负载。
+
+以上均来自匿名信源，DeepSeek与华为尚未公开确认。
+</script>
+            </div>
+          </li>
+          <li data-item="b4" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">04</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">Meta首次详解俄亥俄州吉瓦级超算集群Prometheus：一期已训练出Muse模型，满配约100万颗GPU，预训练有效算力利用率超85%</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #e8eef5; color: #2f4a6d;">AI基建</span>
+                <span style="font-size: 13px; color: #6b665c;">Engineering at Meta</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/19</span>
+                <button type="button" class="mark-btn" data-mark="b4" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://engineering.fb.com/2026/10/19/data-center-engineering/inside-prometheus-meta-gigawatt-scale-supercluster/" hidden>
+Meta工程博客10月19日首次详细介绍了位于俄亥俄州新奥尔巴尼的吉瓦级超算集群Prometheus。两年前这里还是承载普通网页流量的常规数据中心，改造后成为前沿模型的训练基地。集群分期建设，一期已经完工，并用于训练Meta近期发布的Muse系列基础模型，包括面向个人与专业智能体任务的Muse Wonder。目前Prometheus由数十万颗GPU组成，分布在多栋互联的建筑中，包括传统机房、AI优化机房和快速部署结构；满配时将达到约100万颗GPU。
+
+硬件方面，集群已部署两代英伟达平台：基于GB200 NVL72的Catalina（Meta选用让每颗GPU拥有800G横向带宽的Ariel配置），以及基于GB300 NVL72的Clemente；第三代基于Vera Rubin NVL72的平台即将到位。单栋建筑内的以太网网络最多互联20736颗GPU，跨楼聚合网络覆盖2公里到100多公里的距离。
+
+可靠性数据是这篇文章的重点。Muse Wonder训练期间，预训练的有效算力利用率超过85%，强化学习超过90%，平均无中断时间约4.7万GPU小时，后续固件修复后提升到5.4万以上。由于NVL72把单点故障的影响范围扩大了9倍，Meta让每个72卡机柜只跑64卡，留8卡作为柜内备件。
+
+为什么重要：前沿模型竞争已经变成工程可靠性的竞争，同样多的GPU，能稳定跑满的比例决定实际可用的算力。Meta公开这些指标，也是在展示其超级智能实验室的训练底座。
+
+文章未披露集群总投资与电力来源细节。
+</script>
+            </div>
+          </li>
+          <li data-item="b5" style="display: grid; grid-template-columns: auto 1fr; gap: clamp(12px, 2vw, 20px); align-items: start; cursor: pointer;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #8a5a2b; padding-top: 5px;">05</span>
+            <div style="display: grid; gap: 8px;">
+              <p style="margin: 0; font-size: clamp(17px, 2.1vw, 21px); font-weight: 600; line-height: 1.42; letter-spacing: -0.012em;">彭博：Nscale与Anthropic洽谈第二笔约450亿美元算力合同，在西弗吉尼亚园区第二栋楼部署460兆瓦Vera Rubin，最快几天内敲定</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span class="badge" style="background: #e8eef5; color: #2f4a6d;">AI融资</span>
+                <span style="font-size: 13px; color: #6b665c;">彭博 / 路透</span>
+                <span style="width: 3px; height: 3px; border-radius: 50%; background: #cdc6b8;"></span>
+                <span style="font-size: 13px; color: #a09a8e;">10/19</span>
+                <button type="button" class="mark-btn" data-mark="b5" style="margin-left: auto;">标记</button>
+              </div>
+              <script type="text/markdown" data-detail data-source="https://www.ksl.com/article/51638329/nscale-anthropic-in-talks-for-45-billion-cloud-computing-deal-bloomberg-news-reports" hidden>
+据彭博社10月19日援引知情人士报道，英国数据中心公司Nscale正与Anthropic洽谈一笔价值约450亿美元的新算力合同，涉及其西弗吉尼亚州Monarch园区的第二栋建筑，将用英伟达Vera Rubin芯片提供460兆瓦算力。路透社随后从一名知情人士处证实了洽谈。据报道，交易最快几天内敲定，但条款仍可能变化；Anthropic还对园区预计中的第三栋建筑拥有优先承租权。Nscale与Anthropic均拒绝置评。
+
+这将是双方的第二笔大单。今年8月，Anthropic已同意在六年内花费450亿美元租用Monarch园区的算力，规模同为约460兆瓦，Vera Rubin芯片预计明年底开始上线。Nscale的上市文件显示，Anthropic与其签订的基础设施协议价值最高约446亿美元。
+
+消息出现的时间点很微妙：就在一天前，微软退出了Nscale在英国埃塞克斯的旗舰数据中心项目，原因是当地电网要到2030年代才能供电；彭博也报道，部分投资者要求把Nscale约300亿美元的IPO目标估值压到160亿至190亿美元。路透称，Nscale在两年半内把合同总额从1亿美元做到了1030亿美元以上。
+
+为什么重要：AI算力合同正在向“有电、能按时交付”的园区集中。英国项目卡在电网接入，美国园区却拿到追加订单，Anthropic则在上市前继续锁定长期算力。
+
+合同金额是未来多年的承诺而非已收现金，Nscale还要证明能按期建成。
+</script>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+    <section id="ai" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">AI 与前沿</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">6 条 · 点击看详情</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(12px, 1.8vw, 18px);">
+        <article data-item="a1" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #eee8f5; color: #4a2f6d;">模型发布</span>
+            <span style="font-size: 12px; color: #6b665c;">MiniMax官方 / IT之家</span>
+            <button type="button" class="mark-btn" data-mark="a1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">MiniMax发布M3.1 Flash：推理速度提升近3倍、智能体任务成本降七成，国内定价每百万token输入1元、输出4元，权重稍后开放</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">匿名代号Space Bunny期间已处理超200万亿token；DeepSWE v1.1得分73.7%，OSWorld V2得分61.7</p>
+          <span class="heatbar"><i style="width: 78%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.minimax.io/blog/minimax-m31f" hidden>
+MiniMax（稀宇科技）10月19日正式发布M3.1 Flash。公司称，此前以匿名身份处理了超过200万亿token的模型“Space Bunny”，就是M3.1 Flash的早期版本。新模型主打智能体任务、编程、电脑操作和网络安全，官方称线上推理速度提升近3倍，在智能体任务中的综合使用成本比前代降低70%。
+
+官方公布的成绩包括：DeepSWE v1.1得分73.7%，BankerToolBench得分76.2，OSWorld V2得分61.7，Agents' Last Exam得分29.6，后两项称位列国产模型第一；CyberGym漏洞发现与验证测试得分82%。MiniMax称通过更激进的稀疏化提升推理效率，日常输出速度可超过每秒200个token，中位数稳定在170以上。官方还称，它在AutomationBench-AA中位居前列，能端到端完成销售、营销、运营、客服、财务和人力资源等跨SaaS系统的企业工作流；内部安全专家评测中，代码审计、漏洞修补、渗透测试、恶意代码分析与逆向工程表现突出。
+
+定价方面，国际版每百万token输入0.15美元、输出0.60美元、缓存读取0.015美元；国内版输入1元、输出4元、缓存读取0.1元。模型已上线MiniMax API、M Plan订阅和MiniMax Code，权重将“稍后”开放（Techmeme标题称10月23日，官方博客未写明日期）；追求能力上限的Pro版本也将随后推出。该发布在Hacker News最佳榜获得约328分。
+
+为什么重要：低价Flash档模型正在把编程与电脑操作类智能体的单任务成本继续压低；网络安全高分的模型以低价开放，也意味着攻防两端都更容易获得这类能力。
+
+以上成绩均为官方自报，第三方复测结果尚未出来。
+</script>
+        </article>
+        <article data-item="a2" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #e8f5ee; color: #2f6d4a;">开源工具</span>
+            <span style="font-size: 12px; color: #6b665c;">GeekWire / 亚马逊</span>
+            <button type="button" class="mark-btn" data-mark="a2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">亚马逊开放TorchNeuron公开测试：PyTorch代码改个配置就能跑在Trainium芯片上，周二将在PyTorch大会开源</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">此前需改写代码调用专用接口；谷歌在做类似的TorchTPU，微软称将把大部分AI服务迁到自研Maia</p>
+          <span class="heatbar"><i style="width: 66%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.geekwire.com/2026/amazon-challenges-nvidias-software-advantage-with-new-tool-for-its-ai-chips/" hidden>
+据GeekWire 10月19日报道，亚马逊宣布向所有开发者开放TorchNeuron公开测试。这款软件让用PyTorch写的代码直接运行在亚马逊自研的Trainium芯片上，它自去年底开始私测。亚马逊芯片设计部门Annapurna Labs技术软件副总裁Colin Brace说，过去开发者要在Trainium上跑PyTorch，必须改写代码去调用亚马逊芯片专用的编程接口，现在只需一项基本配置改动，“懂PyTorch就懂Trainium”。亚马逊计划于周二在加州圣何塞举行的PyTorch大会期间将其开源。
+
+英伟达在AI芯片市场的优势很大一部分来自CUDA：行业大量AI软件围绕它构建，迁移到其他硬件往往要花数月工程量，许多公司因此不愿更换。谷歌今年4月公布了类似项目TorchTPU；微软上周称计划把大部分AI服务改跑在自研Maia芯片上。报道还提到，亚马逊据称正洽谈以约70亿美元估值收购Decart，这家初创公司做的正是把模型从英伟达迁移到Trainium等芯片的软件。
+
+目前Trainium的大用户主要是与亚马逊有资本关系的AI实验室：Anthropic用它训练和运行Claude；OpenAI今年2月同意使用2吉瓦的Trainium算力，这是亚马逊向其投资500亿美元交易的一部分。
+
+为什么重要：自研芯片要卖给更多客户，关键不在算力参数，而在开发者要不要改代码。把迁移成本降到“改配置”，是云厂商削弱CUDA锁定效应最直接的办法。
+
+实际性能与算子覆盖范围，要等开源后由开发者验证。
+</script>
+        </article>
+        <article data-item="a3" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #e8eef5; color: #2f4a6d;">AI融资</span>
+            <span style="font-size: 12px; color: #6b665c;">Tenstorrent官方 / 路透 / TechCrunch</span>
+            <button type="button" class="mark-btn" data-mark="a3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">Tenstorrent完成15亿美元E轮融资、投后估值62亿美元；同日Town、Dream Labs、Tolan、doubleAI等AI公司密集融资</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">Jim Keller领导的RISC-V芯片公司估值较2024年翻倍有余，资金用于量产Galaxy服务器</p>
+          <span class="heatbar"><i style="width: 58%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://tenstorrent.com/en/newsroom/tenstorrent-announces-series-e" hidden>
+Tenstorrent 10月19日宣布完成15亿美元E轮融资，投后估值62亿美元。本轮由Trace Capital与Innovation X领投，方舟投资、闪迪、摩根士丹利、富达、T. Rowe Price、Tether Investments、Cadence Ventures等参与。据路透社，它在2024年12月的上一轮融资超过6.93亿美元，投前估值20亿美元。
+
+Tenstorrent由曾主导苹果A4/A5、AMD Zen和特斯拉自动驾驶芯片设计的Jim Keller担任首席执行官，基于开源RISC-V架构开发AI处理器与系统，并向三星、LG等芯片设计方授权其TT-Ascalon CPU与Tensix AI核心。公司称，资金将用于大规模部署Galaxy服务器，继续服务大语言模型与视频生成等开放权重模型，并推进可授权的AI与CPU IP。它从单卡、工作站到机柜、超级集群和定制IP各层级都卖，软件栈开源，开发者可在本地运行前沿模型，企业可在私有环境部署。Keller说：“我们打造一种架构，卖成各种规模。”
+
+同一天还有多笔AI融资：企业AI助手公司Town以10亿美元估值完成1.08亿美元B轮，距公开上线仅四个月；英伟达GR00T团队前负责人创办的Dream Labs获9000万美元种子轮，推出机器人基础模型API，其Dream-1模型用人类第一视角视频训练，把机器人控制当作视频预测问题，旗舰版每小时3美元、轻量版0.75美元；AI陪伴应用Tolan获3000万美元，由USV领投；以色列doubleAI称已融资2.2亿美元，约一半用于购买1000颗英伟达B300，并推出代码执行模型Maxwell。
+
+为什么重要：AI基础设施的债务融资正在承压，股权资金却仍在流向能提供英伟达替代方案的芯片公司，以及智能体、机器人等应用层。
+
+各公司估值与营收数据均为自述或媒体援引，未经审计。
+</script>
+        </article>
+        <article data-item="a4" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #f5e8e8; color: #6d2f2f;">智能体安全</span>
+            <span style="font-size: 12px; color: #6b665c;">GeekWire / TechCrunch / IT之家</span>
+            <button type="button" class="mark-btn" data-mark="a4" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">微软推出把AI智能体当“内部威胁”管理的安全工具：持续评估每个智能体的风险，可降权、要求人工审批或直接关停</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">守护智能体加入Project Perception；Defender可识别的员工自带智能体从25种增至60种</p>
+          <span class="heatbar"><i style="width: 55%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.geekwire.com/2026/microsoft-unveils-tools-to-monitor-and-corral-rogue-ai-agents/" hidden>
+微软10月19日在最高档办公订阅Microsoft 365 E7和安全系统Project Perception中推出一组新功能，核心思路是把企业内部运行的AI智能体当作潜在的“内部威胁”来管理。据GeekWire，系统会为每个智能体持续更新风险评估，依据包括它能接触哪些数据、行为是否开始偏离所接受的任务；风险上升时，可以收回其修改权限而保留只读、要求人类审批高风险步骤，或直接关停。
+
+微软还把Defender能识别的员工电脑上的智能体类型从25种扩大到60种，覆盖Claude Code、OpenAI Codex、GitHub Copilot等。Project Perception新增的“守护智能体”可以调查某个智能体风险变化的原因，并建议或直接采取遏制措施。微软安全业务负责人Hayete Gallot写道，前沿模型“无论来源如何都无法完全信任”，原因不是恶意，而是行为不可预测：模型的训练目标是完成任务，而不是遵守组织规范。
+
+这些功能目前为私人预览，计划在11月17日至19日的Ignite大会上扩大供应；E7每用户每月99美元。此举延续了纳德拉10月10日博客中“对模型的管控应来自模型之外”的主张。
+
+为什么重要：微软同时是OpenAI和Anthropic的投资方，却在提醒客户不要轻信这些伙伴的模型。智能体的权限与审计层正在变成独立于模型厂商的一门生意，云厂商希望由自己来卖这一层。
+
+功能仍在预览，实际拦截效果有待企业部署后检验。
+</script>
+        </article>
+        <article data-item="a5" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #eee8f5; color: #4a2f6d;">智能体研究</span>
+            <span style="font-size: 12px; color: #6b665c;">arXiv / The Decoder / IT之家</span>
+            <button type="button" class="mark-btn" data-mark="a5" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">谷歌DeepMind：四个Gemini 4 Argon智能体零人工干预通关《我的世界》，27小时14分击败末影龙，写了2783个程序、死亡605次</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">论文10月15日提交arXiv，媒体10/18–19报道；按2027年标准价计算耗费约1620美元</p>
+          <span class="heatbar"><i style="width: 52%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://arxiv.org/abs/2610.22319" hidden>
+谷歌DeepMind研究人员Maxence Faldor、Satinder Singh和Roberta Raileanu于10月15日在arXiv提交论文称，他们把四个由Gemini 4 Argon驱动的智能体放进随机生成、难度为“简单”的《我的世界》生存世界，只给一个目标：击败末影龙。The Decoder、IT之家等媒体于10月18日至19日报道了这项成果。
+
+研究人员没有分配角色、没有写任何游戏逻辑，也没有使用预先探好的地图种子。每个智能体通过开源库Mineflayer控制一名玩家，借助游戏内聊天和共享记忆协调。它们自行分工，有的建末影人农场，有的收集食物，有的负责探索；会互相提醒威胁、找回阵亡队友的物品，并把错误记进共享记忆。研究人员可以通过仪表盘观察、随时暂停或终止，但全程没有介入。最终团队用27小时14分击败末影龙，期间写了2783个JavaScript程序，发送229条聊天消息，死亡605次；据IT之家，其中13.5小时用于抵达末地。按Gemini 4 Argon将于2027年生效的标准价计算，整场耗费约1620美元。
+
+作者称，据其所知这是AI智能体首次端到端自主通关《我的世界》，并认为长时间保持连贯计划、多智能体协作，正是复杂软件工程与企业任务所需的能力。
+
+为什么重要：几年前通关这类游戏还需要专门从零训练的系统，如今通用编码智能体就能完成，衡量重点正从单步能力转向跨越上千个相互依赖步骤的长程执行。
+
+这只是单次运行，且依赖Mineflayer提供的结构化游戏数据与寻路能力，论文也讨论了这些局限。
+</script>
+        </article>
+        <article data-item="a6" style="cursor: pointer; background: #fffefb; border-radius: 20px; padding: 22px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge sm" style="background: #eee8f5; color: #4a2f6d;">模型发布</span>
+            <span style="font-size: 12px; color: #6b665c;">Inception Labs官方</span>
+            <button type="button" class="mark-btn" data-mark="a6" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+          </div>
+          <h4 style="margin: 0; font-size: 17px; font-weight: 600; line-height: 1.4; letter-spacing: -0.015em;">Inception发布扩散语言模型Mercury 3：称每秒1068个token，质量对标GPT-6 Luna与Claude Haiku 5.5，上下文扩至100万</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #6b665c;">规模是Mercury 1的40多倍；标价每百万token输入0.20美元、输出0.70美元，首发五折</p>
+          <span class="heatbar"><i style="width: 46%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.inceptionlabs.ai/blog/introducing-mercury-3" hidden>
+Inception Labs 10月19日发布Mercury 3，称这是迄今能力最强的扩散式大语言模型。与逐个token自回归生成的主流模型不同，扩散模型对整段文本并行地逐步去噪生成，主打速度。公司称，Mercury 3在多项基准上超过GPT-6 Luna和Claude Haiku 5.5等速度优先的前沿模型，同时快4到8倍，在英伟达GPU上达到每秒1068个token。
+
+Mercury 3的参数总量是Mercury 1的40多倍，Inception称从Mercury 1（mini）到Mercury 3，标准基准上的智能水平提高了3倍，“驱动自回归模型进步的规模定律对扩散模型同样成立”。上下文长度从Mercury 2.5的26万token扩展到100万token。定价为每百万token输入0.20美元、输出0.70美元，首发期间五折，缓存token比输入价再便宜90%。
+
+早期合作方已把它用在语音和聊天客服、实时辅导、数据工程与网页浏览智能体等对延迟敏感的场景。一家智能眼镜搜索公司称，在其测试中Mercury 3的生成中位耗时0.9秒、端到端中位响应2.2秒；一家教育公司称，提示、批改和释义约一秒返回，可直接替换原有模型；客服平台Lorikeet称早期测试中延迟与评测表现都优于其他模型。Inception同时推出面向语音的Mercury Voice和用于高并发分类的决策模型Mercury Decide。该发布在Hacker News获约206分。
+
+为什么重要：智能体每一步都要等模型输出，延迟会层层累积。如果扩散路线在扩大规模后仍能保持速度优势，低延迟场景的模型选择就多了一条技术路线。
+
+基准结果为公司自报，对比口径尚需第三方验证。
+</script>
+        </article>
+      </div></section>
+    <section id="heat" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">今日热度</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">Hacker News 48h 最佳榜</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(12px, 1.8vw, 18px);">
+        <div style="background: #fffefb; border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14);">
+          <div style="display: flex; align-items: center; gap: 9px; margin-bottom: 18px;">
+            <span class="badge" style="background: #e6e0d4; color: #4a453c;">GH</span>
+            <span style="font-size: 14px; font-weight: 600;">Hacker News 48h</span>
+            <span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #a09a8e;">截至 10-20 07:12</span>
+          </div>
+          <ol style="margin: 0; padding: 0; list-style: none; display: grid; gap: 16px;">
+            <li data-item="h1" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">Namecheap just seized and disabled all my domains</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN · 665分</span>
+                <button type="button" class="mark-btn" data-mark="h1" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 98%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.reddit.com/r/sysadmin/comments/1x8cycd/namecheap_just_seized_and_disabled_all_my_domains" hidden>
+一位系统管理员10月17日在Reddit的r/sysadmin版块发帖称，域名注册商Namecheap在发出一封邮件、给出72小时终止通知后，冻结并停用了他公司名下的全部域名，而他在控制台里找不到任何申诉入口。帖子登上r/sysadmin当周热门，10月18日被转到Hacker News，获得约665分、近350条评论，是本期热度榜首。
+
+安全博客Secure in Seconds整理该帖时指出，评论区里大量系统管理员分享了在不同注册商遭遇类似停用的经历，例如因钓鱼投诉被暂停、邮件中断数天。文章强调这只是当事人单方面的说法，Namecheap的处理依据外界看不到；但这类机制普遍存在：注册商对滥用投诉负有责任，合规流程通常先暂停、后调查，速度远快于申诉。
+
+文章给出的应对建议包括：所有域名开启转移锁，防止账户被盗或欠费导致域名流失；把承载邮件和登录的生产域名与营销域名分放到不同注册商；把DNS托管从注册商处迁走，这样即便注册商账户出事，解析记录仍在，换注册商后数小时即可恢复；确保WHOIS和账户联系邮箱有人每天查看，以免错过申诉窗口。
+
+为什么值得看：域名是企业少数没法“从备份恢复”的资产，一旦被冻结，邮件、网站、多因素认证推送和证书续期会同时受影响。多数中小企业把所有域名放在同一注册商、同一张信用卡、同一个没人看的邮箱下，风险高度集中。
+
+截至抓取时，未见Namecheap公开回应或域名恢复的消息。
+</script>
+            </li>
+            <li data-item="h2" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">Ousted Savannah police officer gave ICE agent husband access to Flock system</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN · 624分</span>
+                <button type="button" class="mark-btn" data-mark="h2" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 92%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://www.wjcl.com/article/savannah-police-officer-ice-agent-flock-access/74135816" hidden>
+据美国佐治亚州地方电视台WJCL获得的文件，萨凡纳警察局一名已被解雇的警员Amber Harpe，把自己的Flock车牌识别系统账号和密码交给了在移民和海关执法局（ICE）工作的丈夫，后者用它做了数百次与ICE调查相关的查询。
+
+内部审计发现，2026年1月至7月间，Harpe账号的查询量异常偏高：共983条搜索记录，涉及佐治亚、新泽西、马里兰、佛罗里达、南卡罗来纳和北卡罗来纳六个州的97个可识别车牌，其中48个南卡车牌占了788条。警局文件还提到，审计识别出的登记车主大多为西班牙裔。她丈夫没有通过国土安全部获得自己的Flock账号；他向调查人员称，每次查询都与追查持有效逮捕令的ICE目标有关，否认出于私人目的。Harpe承认知道不得共享账号，并称自己很少用Flock，主要用来协助寻找走失的行为健康患者。警局认定她故意让未授权人员进入敏感系统、破坏了记录使用者身份的安全措施，将其解雇。WJCL此前还报道过该局另有六名员工因涉嫌滥用车牌识别系统被解雇。
+
+为什么值得看：车牌识别网络的审计日志按账号记录“谁在查”，共享凭据会让这层问责失效。地方警局的数据经个人关系流向联邦移民执法，也正是批评者对这类系统最担心的情形。
+
+文件是警局单方面的调查记录，当事人丈夫的说法尚未经独立核实。
+</script>
+            </li>
+            <li data-item="h3" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">Linux 7.3</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN · 576分</span>
+                <button type="button" class="mark-btn" data-mark="h3" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 86%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://lwn.net/Articles/1101143/" hidden>
+Linus Torvalds于10月18日（周日）发布Linux 7.3正式版，LWN随即刊发公告，帖子在Hacker News获得约576分。Torvalds在发布邮件里说，最后一周没发生什么特别的事，7.4的合并窗口第二天开启；不过他正在家庭年假中，白天要“在船上和水下度过”，下午再回来合并代码，接下来一段时间日程会有些不规律。按惯例，合并窗口约持续两周，之后进入候选版测试阶段。
+
+他称这一版“在所有方面都破了纪录”：共合入18765个非合并提交，来自3021名开发者，其中807人是首次向内核提交代码。主要变化包括：binfmt_misc机制的重要扩展；面向大型系统的组调度性能改进；一个对所有操作都返回失败的新文件系统failfs；新的fchroot()系统调用（通过文件描述符而非路径切换根目录）；为BPF程序提供全局per-CPU数据；完成sched_ext子调度器功能；虚拟机的工作集跟踪；ntfs3文件系统支持备用数据流；以及一长串SMB服务器改进。LWN的两篇合并窗口总结与KernelNewbies的7.3页面列出了更完整的细节。
+
+为什么值得看：首次贡献者超过800人、开发者总数突破3000，说明内核社区的参与面仍在扩大。sched_ext子调度器完工，意味着用BPF编写、可按需加载的调度策略又补齐了一块，发行版和云厂商可以在不改内核主线调度器的情况下尝试新策略。
+
+各发行版何时跟进7.3，取决于各自的发布周期。
+</script>
+            </li>
+            <li data-item="h4" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">Hybrid Reasoning Agents: LLM agents that think in latent space, act through text</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN · 501分</span>
+                <button type="button" class="mark-btn" data-mark="h4" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 76%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://arxiv.org/abs/2610.18861" hidden>
+Jiaru Zou、Yunzhe Qi、Federico Bianchi、Pan Lu、James Zou等作者的论文《混合推理智能体》（Hybrid Reasoning Agents）10月18日登上Hacker News，获得约501分、200多条评论。论文于10月13日提交arXiv。
+
+论文要回答的问题是：能否让智能体在人类语言之外思考，同时仍用语言与外部环境交互。现有大模型智能体的推理和交互都通过文本进行；“潜空间推理”让模型在内部的连续表示中思考，效率更高，但缺少原生的工具调用能力，推理过程也不透明。作者提出的HybridAgent在统一的生成过程中动态切换潜空间推理与文本交互：轻量模块HybridLink负责在两种模式间切换，连续的工作记忆在多轮中无损保留混合上下文，潜在“思考”也可以直接检查。
+
+训练上，作者先用HybridSFT教会骨干模型与HybridLink配合、稳定地进行带工具调用的混合生成，再用HybridRL学习何时在潜空间思考、何时用文本行动。在3种模型规模、覆盖数学、科学、医学、搜索和智能体推理的11个基准上，与基于文本或潜空间方法的前沿智能体和框架相比，性能平均提升10.4%，token用量减少35.5%至54.7%，推理快1.8至2.6倍，成本降低2.7至3.7倍。代码与数据已公开。
+
+为什么值得看：智能体的成本很大一部分花在冗长的文本思考上。如果内部推理可以不落成文字、又能保持可检查，长任务的速度和费用都有压缩空间。
+
+结果来自作者自评，潜在思考到底有多可解释，还需要独立检验。
+</script>
+            </li>
+            <li data-item="h5" style="cursor: pointer; display: grid; gap: 7px;">
+              <div style="display: flex; align-items: baseline; gap: 8px;">
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500;">I no longer care to work on any Ruby gems so I&#x27;ve archived all my repositories</span>
+                <span style="font-size: 11px; color: #a09a8e;">HN · 407分</span>
+                <button type="button" class="mark-btn" data-mark="h5" style="margin-left: auto; padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span class="heatbar"><i style="width: 62%;"></i></span>
+              <script type="text/markdown" data-detail data-source="https://po-ru.com/2026/10/18/why-im-no-longer-updating-this-repository" hidden>
+一位长期维护Ruby gem的开发者10月18日在个人博客po-ru.com发文，宣布把自己所有Ruby gem的源码仓库归档、不再维护，并在每个仓库里链接这篇文章说明原因。帖子在Hacker News获得约407分、近400条评论。
+
+作者引用Ruby设计者松本行弘2000年的文章和2019年的采访：Ruby为让程序员快乐而设计，“为人而非为机器”。他说，自己写下这些代码时，Ruby还被视为为了快乐、创造和人而存在，那个时代已经过去，他的热情也随之消失。他认为Rails由一个观点令他反感的人掌控（社区正在尝试分叉），而这位创始人在今年Rails World的主题演讲中似乎已不太关心编程本身，转而用大模型智能体批量生成Rust应用，却并不看生成的代码。作者还指出，Ruby语言本身现在也大量借助智能体开发，松本行弘在演讲中把Ruby重新定位为“AI时代的编程语言”，并称大模型需要更多优质的人写Ruby代码来学习。
+
+在他看来，这意味着开源公地正被大公司掠夺式开采，用来喂养那些产出又反过来污染公地的机器，他不再愿意为此贡献。文章结尾写道：想要改动，“去问你的智能体吧”。
+
+为什么值得看：开源维护者的动力一直建立在“为人写代码、被人使用”的互惠之上。当代码主要被当作训练数据、语言本身也由智能体生成时，一部分维护者选择退出，长尾依赖库的维护风险会随之上升。
+
+这是作者的个人立场，评论区争论激烈，不代表Ruby社区整体态度。
+</script>
+            </li>
+          </ol>
+        </div>
+        <div style="background: linear-gradient(180deg, #fffefb, #fffdf7); border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.6vw, 28px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14); display: grid; gap: 14px; align-content: start;">
+          <div style="display: flex; align-items: center; gap: 9px;">
+            <span class="badge" style="background: #f2e6cf; color: #8a6a2b;">NOTE</span>
+            <span style="font-size: 14px; font-weight: 600;">怎么用这张榜</span>
+          </div>
+          <p style="margin: 0; font-size: 14px; line-height: 1.75; color: #3a3630;">左侧是 Hacker News 过去 48 小时最佳榜，分数是社区热度，不是重要性排序。帖子热度不代表首发时间，例如 Namecheap 帖子原文发于 10 月 17 日，混合推理智能体论文 10 月 13 日提交。DeepSeek 搜索接口（约 597 分）、Meta 条款跟进与 Anthropic 安全法案门槛已在前几期收录，此处不再重复；MiniMax M3.1 Flash（约 328 分）与 Mercury 3（约 206 分）见本期 AI 与前沿。</p>
+          <p style="margin: 0; font-size: 13px; line-height: 1.7; color: #6b665c;">HN 口径 <a href="https://news.ycombinator.com/best" target="_blank" rel="noreferrer">news.ycombinator.com/best</a>；抓取时刻 10-20 07:12（北京时间）。</p>
+        </div>
+      </div></section>
+    <section id="world" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">世界与财经</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">4 条</span>
+      </div>
+      <div style="background: #fffefb; border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(8px, 1.5vw, 12px) clamp(20px, 2.8vw, 32px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14);">
+        <ol style="margin: 0; padding: 0; list-style: none;">
+            <li data-item="w1" style="cursor: pointer; display: grid; gap: 8px; padding: 14px 0; border-bottom: 1px solid rgba(28,26,22,0.06);">
+              <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+                <p style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; letter-spacing: -0.01em; flex: 1;">苹果宣布10月28日（北京时间29日凌晨）在洛杉矶举行“Pro and tell”发布会，古尔曼称首款触屏OLED MacBook Pro将登场</p>
+                <button type="button" class="mark-btn" data-mark="w1" style="padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span style="font-size: 12px; color: #a09a8e;">10/19</span>
+              <script type="text/markdown" data-detail data-source="https://9to5mac.com/2026/10/19/apple-announces-special-event-for-october-28/" hidden>
+据9to5Mac与IT之家报道，苹果10月19日向媒体发出邀请，将于太平洋时间10月28日上午10点（北京时间10月29日凌晨1点）在洛杉矶举行特别活动，主题为“Pro and tell”。这是苹果本月第二场发布活动：10月13日在纽约的“Welcome home”活动已发布HomeView智能显示器、HomePod mini 2和新款Apple TV 4K。邀请由苹果全球营销高级副总裁乔斯维亚克在社交媒体上发布；苹果中国官方账号此前也在小红书预告“好多好消息，下周和你说”。
+
+据彭博社记者古尔曼此前的报道，这场活动的重头戏可能是苹果首款触屏MacBook Pro：14英寸和16英寸两款，配OLED屏幕，首次加入灵动岛，机身“明显更轻”，预计搭载M5 Pro与M5 Max芯片。此外还可能有换装OLED屏幕、改进扬声器系统并调整前置摄像头位置的新iPad mini，以及搭载M6芯片、外观与现款相近的新iMac和入门款14英寸MacBook Pro。IT之家援引此前消息称，相应产品预计11月6日发售。
+
+另据IT之家，苹果同日向开发者推送iOS、iPadOS与macOS等27.2候选版，其中Siri AI新增英语、法语、日语、韩语、葡萄牙语和西班牙语支持，此前测试的新版“健康”App则被撤回、推迟到后续更新。
+
+为什么重要：Mac长期不做触屏，若首款触屏OLED MacBook Pro落地，意味着苹果在笔记本交互上改变了多年的产品路线，也会让Windows阵营的触屏二合一笔记本面对新的对手。上一期提到的古尔曼11月上市时间表，也将随这场发布会得到验证。
+
+以上产品均为爆料，以发布会实际公布为准。
+</script>
+            </li>
+            <li data-item="w2" style="cursor: pointer; display: grid; gap: 8px; padding: 14px 0; border-bottom: 1px solid rgba(28,26,22,0.06);">
+              <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+                <p style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; letter-spacing: -0.01em; flex: 1;">马斯克称明年将给每个美国儿童一股SpaceX股票，按上周五收盘价计约105亿美元；前一天Anthropic刚宣布拿出5%股份做公益</p>
+                <button type="button" class="mark-btn" data-mark="w2" style="padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span style="font-size: 12px; color: #a09a8e;">10/19</span>
+              <script type="text/markdown" data-detail data-source="https://www.cnbc.com/2026/10/19/elon-musk-spacex-shares-giveaway-kids.html" hidden>
+据CNBC报道，SpaceX首席执行官马斯克10月19日在X上发文称，将在2027年给美国每个儿童一股自己持有的SpaceX股票，并称“这将是许多次中的第一次”，但没有说明具体如何发放。CNBC已向SpaceX和马斯克的家族办公室询问细节。
+
+按人口普查数据，截至2025年7月1日美国有7200万名18岁以下儿童。以SpaceX上周五146.03美元的收盘价计算，这份赠与价值约105亿美元。根据8月提交给美国证交会的文件，马斯克目前持有约48亿股SpaceX股票，算上未归属的奖励和期权为64亿股，对应48.4%的实益持股。
+
+Altimeter Capital创始人格斯特纳在X上称赞这一举动是“史上最大的慈善捐赠”，并建议通过“特朗普账户”发放。Techmeme把这条消息与前一天Anthropic向公益基金注入5%股份的新闻并列。
+
+CNBC同时指出，马斯克近来的资金动向主要在政治领域：7月以来他向共和党团体捐款超过2.76亿美元，是2026年中期选举已知的最大捐款人。他兑现慈善承诺的记录也参差不齐：曾承诺向OpenAI捐款最多10亿美元，2016年至2020年实际约3800万美元。
+
+为什么重要：科技财富如何分配正被摆上台面，Anthropic与马斯克前后两天都拿出自家公司股份做公益承诺。把上市公司股票直接发给全体儿童在规模上前所未有，能否落地取决于发放渠道、监管与税务安排。
+
+目前只有一条社交媒体帖子，尚无正式方案。
+</script>
+            </li>
+            <li data-item="w3" style="cursor: pointer; display: grid; gap: 8px; padding: 14px 0; border-bottom: 1px solid rgba(28,26,22,0.06);">
+              <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+                <p style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; letter-spacing: -0.01em; flex: 1;">日本MMX火星卫星探测器由H3火箭发射升空，计划2027年8月抵达火星，首次尝试登陆火卫一采样，2031年带回地球</p>
+                <button type="button" class="mark-btn" data-mark="w3" style="padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span style="font-size: 12px; color: #a09a8e;">10/20</span>
+              <script type="text/markdown" data-detail data-source="https://www.ithome.com/0/015/068.htm" hidden>
+据IT之家10月20日报道，日本宇宙航空研究开发机构（JAXA）主导的火星卫星探测任务MMX，于北京时间10月20日凌晨在种子岛航天中心由H3运载火箭发射升空，这是H3火箭的第十次发射。发射约71分钟后，上面级完成地火转移加速并释放探测器，最高速度约每小时3.89万公里，任务控制中心随即传出欢呼。
+
+MMX将经过约10个月的飞行，于2027年8月抵达火星，进入环绕火卫一的准卫星轨道，在火星系统停留约三年。它搭载由法国和德国航天机构联合研制的IDEFIX漫游车，计划在2028年末或2029年初登陆直径约22公里的火卫一。选定着陆点后，MMX将两次着陆火卫一采集样本，之后转入经过火卫二附近的轨道多次飞掠，2030年11月启程返回，样本返回舱预计2031年在澳大利亚着陆。若成功，它将是首个登陆火卫一并带回样本的探测器。
+
+科学目标是解开火星卫星的起源之谜：两颗卫星近圆的赤道轨道支持“巨大撞击后物质聚合”的假说，而它们不规则的土豆形外观和光谱成分又让人怀疑是被俘获的小行星。样本将与火星岩石和小行星物质比对。美国航空航天局和欧洲空间局参与了任务，美方提供了伽马射线与中子探测仪MEGANE等设备。
+
+为什么重要：火星系统的样本返回是行星科学的长期目标，MMX有望率先从火星卫星带回物质，也延续了日本在“隼鸟”系列小行星采样任务上积累的经验。
+
+探测器还要经历长途巡航和多次高风险着陆，后续节点仍有变数。
+</script>
+            </li>
+            <li data-item="w4" style="cursor: pointer; display: grid; gap: 8px; padding: 14px 0; ">
+              <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+                <p style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.45; letter-spacing: -0.01em; flex: 1;">Semafor：Waymo计划年底前把车队从4000辆扩到8000辆、明年底达到2万辆，资金来自本月首次无谷歌担保借入的50亿美元</p>
+                <button type="button" class="mark-btn" data-mark="w4" style="padding: 3px 9px; font-size: 11px;">标记</button>
+              </div>
+              <span style="font-size: 12px; color: #a09a8e;">10/19</span>
+              <script type="text/markdown" data-detail data-source="https://www.semafor.com/article/10/19/2026/waymo-plans-to-quintuple-its-fleet" hidden>
+据Semafor 10月19日援引知情人士的独家报道，Waymo计划把自动驾驶车队从目前的约4000辆扩大到今年年底的8000辆，并在2027年底前增至2万辆，扩张资金来自它最近借入的50亿美元。Waymo拒绝置评，只在官网声明中表示，这笔资金用于在美国和海外扩张。
+
+这是Waymo首次在没有母公司谷歌担保的情况下举债：50亿美元来自私人信贷机构，协议还允许它日后以车队租赁资产证券化的方式继续借钱。据彭博与路透此前报道，这笔定期贷款由太平洋投资管理公司、黑石和Sixth Street等牵头，贷款人以私人信贷和债券管理机构为主；利率、期限与抵押条件未公开。按Semafor的说法，Waymo目前在美国15座城市运营，正把服务扩展到多伦多、圣迭戈、坦帕和圣安东尼奥等地，并在纳什维尔与Lyft合作开设了为车辆充电、清洁和维护的场站。为扩充车队，《纽约邮报》报道称Waymo已从中国订购数千辆车，它还在使用吉利旗下极氪车型的改装版本。
+
+为什么重要：无人驾驶出租车的竞争正从技术验证转向规模化运营，车辆采购、场站和融资能力成为关键。以车队资产为抵押借款，说明Waymo开始像租车公司那样用重资产金融工具推动扩张；车队一年多扩大五倍，也会放大各地监管与公众接受度的考验。
+
+扩张数字来自匿名信源，Waymo尚未正式确认。
+</script>
+            </li>
+        </ol>
+      </div></section>
+    <section id="market" style="padding: clamp(32px, 5vw, 60px) 0 0;">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: clamp(16px, 2.4vw, 24px);">
+        <h2 style="margin: 0; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; letter-spacing: -0.025em;">行情</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">8 标的 · 价格 + 涨跌幅</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: clamp(10px, 1.4vw, 14px); margin-bottom: 14px;">
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">SPX</span>
+            <span style="font-size: 11px; color: #a09a8e;">标普500</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">7,690.73</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+0.41%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">IXIC</span>
+            <span style="font-size: 11px; color: #a09a8e;">纳斯达克</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">26,430.89</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+1.11%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">NVDA</span>
+            <span style="font-size: 11px; color: #a09a8e;">英伟达</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">$217.09</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+1.38%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">MSFT</span>
+            <span style="font-size: 11px; color: #a09a8e;">微软</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">$533.52</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+0.84%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">AMD</span>
+            <span style="font-size: 11px; color: #a09a8e;">AMD</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">$538.05</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+1.76%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">GOOGL</span>
+            <span style="font-size: 11px; color: #a09a8e;">谷歌</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">$344.18</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+1.05%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">BTC</span>
+            <span style="font-size: 11px; color: #a09a8e;">比特币</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">~$81,928</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+0.33%</span>
+          </div>
+        </div>
+        <div style="background: #fffefb; border-radius: 20px; padding: 20px; box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 10px 24px -16px rgba(28,26,22,0.14); display: grid; gap: 10px;">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500;">ETH</span>
+            <span style="font-size: 11px; color: #a09a8e;">以太坊</span>
+          </div>
+          <div style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 24px; font-weight: 500; letter-spacing: -0.02em;">~$2,404</span>
+            <span class="up" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px;">+0.62%</span>
+          </div>
+        </div>
+      </div>
+      <div style="background: linear-gradient(180deg, #fffefb, #fffdf7); border-radius: clamp(18px, 2.4vw, 24px); padding: clamp(20px, 2.8vw, 30px); box-shadow: 0 1px 2px rgba(28,26,22,0.04), 0 12px 28px -18px rgba(28,26,22,0.14); display: grid; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #a09a8e;">数据说明</span>
+          <span style="flex: 1; height: 1px; background: rgba(28,26,22,0.08); min-width: 20px;"></span>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #6b665c;">美股取2026-10-19（周一）常规收盘，涨跌幅相对10/16（周五）收盘。今早雅虎财经接口限流，个股与纳斯达克综合指数改取纳斯达克官网行情（收盘后数据，非盘后价），标普500取美联社收盘报道（7,690.73点，涨31.29点）。加密资产为实时：BTC取Coinbase现货约81,928美元（上海10/20约07:14），CoinGecko 24小时约+0.33%；ETH取Coinbase约2,404美元，CoinGecko 24小时约+0.62%。本期无暂缺标的，未发明价格。</p>
+      </div>
+    </section>
+    <footer style="margin-top: clamp(36px, 5vw, 64px); padding-top: clamp(20px, 3vw, 28px); border-top: 1px solid rgba(28,26,22,0.09); display: flex; align-items: baseline; gap: 10px 26px; flex-wrap: wrap;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">小墨 · 公开源摘选 · 2026-10-20</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a09a8e;">下次更新约 07:00 Asia/Shanghai</span>
+      <a href="#brief" style="margin-left: auto; font-size: 13px;">回到顶部</a>
+      <a href="./2026-10-20.html" style="font-size: 13px;">本日归档</a>
+      <a href="./2026-10-19.html" style="font-size: 13px;">上一期</a>
+    </footer>
+  </main>
+</div>
+<div id="detailOverlay" class="detail-overlay" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+  <div class="detail-panel" role="document">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span class="detail-label">详情</span>
+      <button type="button" class="detail-close" id="detailClose" style="margin-left:auto;">关闭</button>
+    </div>
+    <h3 class="detail-title" id="detailTitle"></h3>
+    <div class="detail-body" id="detailBody"></div>
+    <div class="detail-meta">
+      <a class="detail-source" id="detailSource" href="#" target="_blank" rel="noreferrer">原文 ↗</a>
+      <span class="detail-chars" id="detailChars"></span>
+    </div>
+  </div>
+</div>
+<script>
+
+
+(function () {
+  var KEY = 'xiaomo-dailybrief-marks-2026-08-31';
+  var marked = new Set();
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) JSON.parse(raw).forEach(function (id) { marked.add(id); });
+  } catch (e) {}
+  var filtering = false;
+  var filterBtn = document.getElementById('filterBtn');
+  var countEl = document.getElementById('markCount');
+  var emptyEl = document.getElementById('emptyState');
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify(Array.from(marked))); } catch (e) {}
+  }
+  function syncMarks() {
+    document.querySelectorAll('.mark-btn').forEach(function (btn) {
+      var id = btn.getAttribute('data-mark');
+      var on = marked.has(id);
+      btn.classList.toggle('on', on);
+      btn.textContent = on ? '已标记' : '标记';
+    });
+    countEl.textContent = String(marked.size);
+    countEl.style.background = marked.size ? '#f0e2d2' : '#ece7dc';
+    countEl.style.color = marked.size ? '#8a5a2b' : '#6b665c';
+    applyFilter();
+  }
+  function applyFilter() {
+    document.querySelectorAll('[data-item]').forEach(function (el) {
+      var id = el.getAttribute('data-item');
+      var show = !filtering || marked.has(id);
+      el.classList.toggle('hidden-by-filter', !show);
+    });
+    document.querySelectorAll('main > section').forEach(function (sec) {
+      if (!filtering) { sec.classList.remove('hidden-by-filter'); return; }
+      var any = sec.querySelector('[data-item]:not(.hidden-by-filter)');
+      sec.classList.toggle('hidden-by-filter', !any);
+    });
+    emptyEl.style.display = filtering && marked.size === 0 ? 'block' : 'none';
+  }
+  var overlay = document.getElementById('detailOverlay');
+  var detailTitle = document.getElementById('detailTitle');
+  var detailBody = document.getElementById('detailBody');
+  var detailSource = document.getElementById('detailSource');
+  var detailChars = document.getElementById('detailChars');
+  var detailClose = document.getElementById('detailClose');
+
+  function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function inlineMd(s) {
+    var out = escapeHtml(s);
+    out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1<\/a>');
+    out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1<\/strong>');
+    out = out.replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, '$1<em>$2<\/em>');
+    return out;
+  }
+  function renderMarkdown(src) {
+    var lines = String(src || '').replace(/\r\n/g, '\n').split('\n');
+    var html = [];
+    var i = 0;
+    function flushPara(buf) {
+      var t = buf.join(' ').trim();
+      if (t) html.push('<p>' + inlineMd(t) + '<\/p>');
+    }
+    while (i < lines.length) {
+      var line = lines[i];
+      if (/^\s*$/.test(line)) { i++; continue; }
+      var hm = line.match(/^\s*##\s+(.+)$/);
+      if (hm) { html.push('<h2>' + inlineMd(hm[1].trim()) + '<\/h2>'); i++; continue; }
+      if (/^\s*[-*]\s+/.test(line)) {
+        var items = [];
+        while (i < lines.length && /^\s*[-*]\s+/.test(lines[i])) {
+          items.push('<li>' + inlineMd(lines[i].replace(/^\s*[-*]\s+/, '')) + '<\/li>');
+          i++;
+        }
+        html.push('<ul>' + items.join('') + '<\/ul>');
+        continue;
+      }
+      if (/^\s*\d+\.\s+/.test(line)) {
+        var oitems = [];
+        while (i < lines.length && /^\s*\d+\.\s+/.test(lines[i])) {
+          oitems.push('<li>' + inlineMd(lines[i].replace(/^\s*\d+\.\s+/, '')) + '<\/li>');
+          i++;
+        }
+        html.push('<ol>' + oitems.join('') + '<\/ol>');
+        continue;
+      }
+      var buf = [];
+      while (i < lines.length && !/^\s*$/.test(lines[i]) && !/^\s*##\s+/.test(lines[i]) && !/^\s*[-*]\s+/.test(lines[i]) && !/^\s*\d+\.\s+/.test(lines[i])) {
+        buf.push(lines[i].trim());
+        i++;
+      }
+      flushPara(buf);
+    }
+    return html.join('') || '<p><\/p>';
+  }
+  function cnLen(s) {
+    return (String(s || '').replace(/[#*_`\[\]()>\-]/g, '').replace(/\s+/g, '').match(/[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff]/g) || []).length;
+  }
+  function detailSourceText(d) {
+    var raw = '';
+    if (d.tagName === 'SCRIPT') {
+      raw = d.textContent || '';
+    } else {
+      raw = d.textContent || '';
+    }
+    return raw.replace(/^\uFEFF/, '').trim();
+  }
+
+  function titleOf(item) {
+    var el = item.querySelector('h3, h4');
+    if (el) return el.textContent.trim();
+    var ps = item.querySelectorAll('p');
+    for (var i = 0; i < ps.length; i++) {
+      if (ps[i].hasAttribute('data-detail')) continue;
+      var fw = (ps[i].style && ps[i].style.fontWeight) || '';
+      if (fw === '600' || fw === '500' || fw === '700') return ps[i].textContent.trim();
+    }
+    var mono = item.querySelector('span[style*="IBM Plex Mono"]');
+    return mono ? mono.textContent.trim() : (item.getAttribute('data-item') || '详情');
+  }
+  function openDetail(item) {
+    var d = item.querySelector('[data-detail]');
+    if (!d) return;
+    var body = detailSourceText(d);
+    detailTitle.textContent = titleOf(item);
+    detailBody.innerHTML = renderMarkdown(body);
+    detailChars.textContent = cnLen(body) + ' 字';
+    var href = d.getAttribute('data-source') || '';
+    if (href) {
+      detailSource.href = href;
+      detailSource.style.display = '';
+      detailSource.textContent = href.indexOf('github.com') >= 0 ? '仓库 ↗' : (href.indexOf('gitstarclub') >= 0 ? '榜单 ↗' : '原文 ↗');
+    } else {
+      detailSource.style.display = 'none';
+    }
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDetail() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  detailClose.addEventListener('click', closeDetail);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) closeDetail(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeDetail();
+  });
+  document.getElementById('root').addEventListener('click', function (e) {
+    var markBtn = e.target.closest('.mark-btn');
+    if (markBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      var id = markBtn.getAttribute('data-mark');
+      if (marked.has(id)) marked.delete(id); else marked.add(id);
+      save();
+      syncMarks();
+      return;
+    }
+    if (e.target.closest('a')) return;
+    var item = e.target.closest('[data-item]');
+    if (item) openDetail(item);
+  });
+  filterBtn.addEventListener('click', function () {
+    filtering = !filtering;
+    filterBtn.classList.toggle('on', filtering);
+    filterBtn.setAttribute('aria-pressed', filtering ? 'true' : 'false');
+    applyFilter();
+  });
+  document.querySelectorAll('.nav-pill').forEach(function (a) {
+    a.addEventListener('click', function () {
+      document.querySelectorAll('.nav-pill').forEach(function (x) { x.classList.remove('active'); });
+      a.classList.add('active');
+    });
+  });
+  syncMarks();
+})();
+
+
+</script>
+</body></html>
