@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="zh-CN" data-mode="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>每日科技情报 · 2026.10.23 · 阅读版</title>
+<style>
+
+
+
+
+:root{
+  --bg:#05060f; --line:rgba(255,255,255,.11); --tx:#EEF2FF;
+  --tx2:rgba(238,242,255,.66); --tx3:rgba(238,242,255,.40);
+  --panel:rgba(255,255,255,.05); --sh:0 20px 54px rgba(0,0,0,.55);
+  --t-cover:#67E8F9; --t-ai:#A78BFA; --t-money:#F5C842; --t-chip:#FF8A3C;
+  --t-oss:#3DFF87; --t-alert:#FF5A4E; --t-rank:#7DA2FF;
+  --flag:#FFD166;
+  --deco:radial-gradient(900px 700px at 8% -8%,rgba(124,92,255,.26),transparent 62%),
+         radial-gradient(760px 620px at 96% 10%,rgba(34,211,238,.15),transparent 62%);
+}
+:root[data-mode="light"]{
+  --bg:#F7F4ED; --line:rgba(21,18,14,.18); --tx:#15120E;
+  --tx2:#4A443C; --tx3:#8A8176;
+  --panel:rgba(21,18,14,.045); --sh:0 14px 36px rgba(21,18,14,.15);
+  --t-cover:#1B3FAE; --t-ai:#5B2BE0; --t-money:#0B6B4F; --t-chip:#E8442A;
+  --t-oss:#00964A; --t-alert:#DC1E28; --t-rank:#1B3FAE;
+  --flag:#9A6B00;
+  --deco:none;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--tx);line-height:1.66;
+ font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+ -webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:var(--deco)}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:5px}
+
+.bar{position:fixed;top:0;left:0;right:0;height:54px;z-index:40;display:flex;align-items:center;gap:14px;
+ padding:0 22px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--line)}
+.brand{font-size:13px;font-weight:800;letter-spacing:.2em}
+.brand i{font-style:normal;color:var(--tx3);font-weight:500;letter-spacing:.06em;margin-left:10px}
+.bar .sp{flex:1}
+.pos{font-size:12px;color:var(--tx3);letter-spacing:.1em}
+.pos b{color:var(--tx);font-weight:700}
+.tbtn{border:1px solid var(--line);background:transparent;color:var(--tx2);border-radius:999px;
+ padding:6px 14px;font-size:12px;cursor:pointer;letter-spacing:.04em;transition:.2s}
+.tbtn:hover{color:var(--tx);border-color:var(--tx3)}
+.prog{position:fixed;top:54px;left:0;height:2px;width:0;background:var(--tx);opacity:.85;z-index:41;transition:width .25s}
+
+.rail{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:35;display:flex;flex-direction:column;gap:1px}
+.rail button{background:none;border:0;cursor:pointer;padding:3px 6px;font-size:10.5px;letter-spacing:.1em;
+ color:var(--tx3);display:flex;align-items:center;gap:7px;transition:color .2s}
+.rail button::after{content:"";width:12px;height:1px;background:currentColor;opacity:.45;transition:width .25s,opacity .2s}
+.rail button:hover{color:var(--tx2)}
+.rail button[aria-current="true"]{color:var(--tx);font-weight:700}
+.rail button[aria-current="true"]::after{width:26px;opacity:1}
+
+main{position:relative;z-index:1;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.item{height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;
+ justify-content:center;padding:54px 100px 22px 62px;position:relative}
+.t-cover{--c:var(--t-cover)} .t-ai{--c:var(--t-ai)} .t-money{--c:var(--t-money)}
+.t-chip{--c:var(--t-chip)} .t-oss{--c:var(--t-oss)} .t-alert{--c:var(--t-alert)}
+.t-rank{--c:var(--t-rank)} .outro{--c:var(--t-cover)}
+.inner{width:100%;max-width:1200px;display:grid;gap:54px;align-items:center;
+ grid-template-columns:minmax(0,1.04fr) minmax(0,1fr)}
+.shot{justify-self:end}
+.shot img{display:block;height:auto;max-height:calc(100dvh - 128px);max-width:100%;aspect-ratio:3/4;
+ border-radius:16px;box-shadow:var(--sh);background:var(--panel)}
+:root[data-mode="light"] .shot img{border-radius:0}
+
+.eyebrow{display:flex;align-items:baseline;gap:13px;margin-bottom:16px;flex-wrap:wrap}
+.rank{font:700 36px/1 ui-monospace,Menlo,monospace;color:var(--c)}
+.tag{font-size:11px;letter-spacing:.17em;font-weight:700;color:var(--c);
+ border:1px solid color-mix(in srgb,var(--c) 45%,transparent);padding:4px 11px;border-radius:999px}
+:root[data-mode="light"] .tag{border-radius:0}
+.title{font-size:clamp(23px,2.25vw,33px);line-height:1.34;font-weight:800;letter-spacing:-.01em;margin-bottom:15px}
+.summary{color:var(--tx2);font-size:15.5px;margin-bottom:19px}
+.why{border-left:2.5px solid var(--c);padding-left:15px;margin-bottom:20px}
+.why b{display:block;font-size:10.5px;letter-spacing:.18em;color:var(--c);margin-bottom:5px}
+.why p{margin:0;font-size:14.5px;color:var(--tx2)}
+.src{font-size:12px;color:var(--tx3);letter-spacing:.03em}
+.flag{color:var(--flag);margin-left:10px}
+.flag::before{content:"◇ "}
+.more{display:none;background:none;border:0;color:var(--c);font-size:13px;cursor:pointer;padding:0;margin-bottom:12px}
+
+.lede{color:var(--tx2);font-size:14.5px;margin-bottom:20px}
+.toc{list-style:none;max-height:52dvh;overflow:auto;padding-right:6px}
+.toc li+li{border-top:1px solid var(--line)}
+.toc button{width:100%;background:none;border:0;cursor:pointer;color:var(--tx2);text-align:left;
+ display:flex;align-items:baseline;gap:12px;padding:7px 2px;font-size:14px;transition:color .18s}
+.toc button:hover{color:var(--tx)}
+.tn{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--tx3);flex:none}
+.tt{flex:1}
+.tf{font-size:10.5px;color:var(--flag);flex:none;letter-spacing:.06em}
+
+.outro{align-items:center}
+.outro-in{max-width:620px;width:100%}
+.outro h2{font-size:clamp(22px,2.2vw,30px);font-weight:800;margin-bottom:22px}
+.checklist{list-style:none;margin-bottom:26px}
+.checklist li{border-top:1px solid var(--line);padding:12px 0}
+.checklist button{background:none;border:0;cursor:pointer;color:var(--tx);display:flex;gap:11px;
+ align-items:baseline;font-size:15px;font-weight:700;text-align:left;padding:0}
+.checklist button:hover span{text-decoration:underline}
+.checklist b{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--flag)}
+.checklist p{font-size:13px;color:var(--tx3);margin-top:5px;padding-left:23px}
+.note{font-size:13px;color:var(--tx3);margin-bottom:22px;line-height:1.8}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--tx);border-radius:10px;
+ padding:10px 20px;font-size:13.5px;cursor:pointer;transition:.2s}
+.btn:hover{border-color:var(--tx3)}
+:root[data-mode="light"] .btn{border-radius:0}
+
+.acts{position:absolute;right:26px;bottom:20px;display:flex;gap:7px;opacity:.24;transition:opacity .25s}
+.item:hover .acts,.acts:focus-within{opacity:1}
+.acts button{width:35px;height:35px;border-radius:10px;cursor:pointer;border:1px solid var(--line);
+ background:var(--panel);color:var(--tx2);display:grid;place-items:center;transition:.2s}
+.acts button:hover{color:var(--tx);border-color:var(--tx3)}
+.acts svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+:root[data-mode="light"] .acts button{border-radius:0}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,14px);z-index:60;background:var(--tx);
+ color:var(--bg);padding:9px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:900px){
+  .rail{display:none}
+  .item{padding:62px 18px 18px;align-items:flex-start}
+  .inner{grid-template-columns:1fr;gap:16px;align-content:start;height:100%}
+  .shot{justify-self:center}
+  .shot img{max-height:62dvh;border-radius:12px}
+  .cover .shot img{max-height:34dvh}
+  .eyebrow{margin-bottom:9px;gap:10px}
+  .rank{font-size:23px}
+  .title{font-size:19px;margin-bottom:8px}
+  .summary{font-size:14px;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .summary.open{-webkit-line-clamp:unset}
+  .why{display:none;margin-bottom:12px}
+  .why.open{display:block}
+  .more{display:inline-block}
+  .src{font-size:11.5px;padding-right:82px}
+  .flag{display:block;margin:4px 0 0}
+  .toc{max-height:none;flex:1}
+  .cover .inner{display:flex;flex-direction:column;min-height:0}
+  .cover .text{display:flex;flex-direction:column;min-height:0;flex:1}
+  .acts{right:16px;bottom:14px;opacity:.42}
+  .outro{padding-top:80px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+
+
+
+</style></head><body>
+<div class="bar">
+  <div class="brand">每日科技情报<i>2026.10.23</i></div><div class="sp"></div>
+  <div class="pos mono"><b id="pos">封面</b></div>
+  <a class="tbtn" href="../index.html" style="text-decoration:none">每日简报</a>
+  <button class="tbtn" id="mode">浅色版</button>
+</div>
+<div class="prog" id="prog"></div>
+<nav class="rail mono" id="rail" aria-label="按重要性排序的目录"><button data-go="0" aria-label="跳到封面">封面</button><button data-go="1" aria-label="跳到01">01</button><button data-go="2" aria-label="跳到02">02</button><button data-go="3" aria-label="跳到03">03</button><button data-go="4" aria-label="跳到04">04</button><button data-go="5" aria-label="跳到05">05</button><button data-go="6" aria-label="跳到06">06</button><button data-go="7" aria-label="跳到07">07</button><button data-go="8" aria-label="跳到08">08</button><button data-go="9" aria-label="跳到09">09</button><button data-go="10" aria-label="跳到10">10</button><button data-go="11" aria-label="跳到11">11</button><button data-go="12" aria-label="跳到12">12</button><button data-go="13" aria-label="跳到13">13</button><button data-go="14" aria-label="跳到14">14</button><button data-go="15" aria-label="跳到结尾">结尾</button></nav>
+<main id="main">
+<section class="item cover t-cover" id="s0" data-i="0">
+  <div class="inner">
+    <figure class="shot"><img data-i="0" alt="封面" src="img/2026-10-23-reader/00_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="tag">2026.10.23 · 周五 · 过去 48 小时</span></div>
+      <h2 class="title">今日科技情报</h2>
+      <p class="lede">共 14 条，按重要性排序。点标题直接跳过去。</p>
+      <ol class="toc"><li><button data-go="1"><span class="tn">01</span><span class="tt">国家级黑客 用AI智能体批量入侵</span></button></li><li><button data-go="2"><span class="tn">02</span><span class="tt">外部红队进驻OpenAI 找到监控漏洞</span></button></li><li><button data-go="3"><span class="tn">03</span><span class="tt">OpenAI冲刺300亿融资 估值1.25万亿</span><span class='tf'>待核实</span></button></li><li><button data-go="4"><span class="tn">04</span><span class="tt">DeepSeek融资 约1000亿元</span><span class='tf'>待核实</span></button></li><li><button data-go="5"><span class="tn">05</span><span class="tt">AI股集体回调 纳指跌2.6%</span></button></li><li><button data-go="6"><span class="tn">06</span><span class="tt">美国大银行 封堵第三方AI智能体</span><span class='tf'>待核实</span></button></li><li><button data-go="7"><span class="tn">07</span><span class="tt">Agent Skills 捐给Linux基金会</span></button></li><li><button data-go="8"><span class="tn">08</span><span class="tt">Railway环境变量 遭未授权访问</span></button></li><li><button data-go="9"><span class="tn">09</span><span class="tt">讯飞星火X2.6 全国产算力训练</span></button></li><li><button data-go="10"><span class="tn">10</span><span class="tt">决策模型同日两发 判断从生成中拆出</span></button></li><li><button data-go="11"><span class="tn">11</span><span class="tt">微软AI会诊系统 登上《科学》</span></button></li><li><button data-go="12"><span class="tn">12</span><span class="tt">32块B300 现身中国网络</span><span class='tf'>待核实</span></button></li><li><button data-go="13"><span class="tn">13</span><span class="tt">Carbon-X 用聊天读懂DNA</span></button></li><li><button data-go="14"><span class="tn">14</span><span class="tt">GitHub日榜 智能体技能霸屏</span><span class='tf'>待核实</span></button></li></ol>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="0" aria-label="下载封面"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="0" aria-label="复制封面文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s1" data-i="1">
+  <div class="inner">
+    <figure class="shot"><img data-i="1" alt="第 01 条资讯卡" src="img/2026-10-23-reader/01_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">01</span><span class="tag">网络安全</span></div>
+      <h2 class="title">国家级黑客 用AI智能体批量入侵</h2>
+      <p class="summary">微软称与中国政府立场一致的Storm-0940自9月起用开源AI渗透框架ARTEX攻击数百家机构，攻破ConnectWise云备份，借其授权尝试登录2250多个微软365租户。</p>
+      <div class="why"><b>为什么重要</b><p>首次有大厂把规模化国家级入侵归因到智能体框架：从选定目标到拿到云端特权最快不到3小时，人工响应跟不上。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：微软威胁情报 10/21</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="1" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="1" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-oss" id="s2" data-i="2">
+  <div class="inner">
+    <figure class="shot"><img data-i="2" alt="第 02 条资讯卡" src="img/2026-10-23-reader/02_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">02</span><span class="tag">AI安全</span></div>
+      <h2 class="title">外部红队进驻OpenAI 找到监控漏洞</h2>
+      <p class="summary">METR与Redwood在OpenAI现场三周审查其智能体监控：GPT-5.5以上内部智能体流量约75%–94%在监控范围内，但发现可让数百个动作漏检、用请求头关掉监控等漏洞。</p>
+      <div class="why"><b>为什么重要</b><p>前一天OpenAI刚自曝监控被关的事故；外部评估员深度进入实验室内部成了可复制流程，公开多少仍由被审方决定。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：METR博客 / CNBC 10/22</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="2" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="2" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s3" data-i="3">
+  <div class="inner">
+    <figure class="shot"><img data-i="3" alt="第 03 条资讯卡" src="img/2026-10-23-reader/03_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">03</span><span class="tag">AI资本</span></div>
+      <h2 class="title">OpenAI冲刺300亿融资 估值1.25万亿</h2>
+      <p class="summary">CNBC援引知情人士称，OpenAI接近完成至多300亿美元融资，投前估值1.25万亿美元，阿联酋投资方与Coatue领投，定位上市前过桥轮；英国《金融时报》称估值从1.4万亿下调。</p>
+      <div class="why"><b>为什么重要</b><p>头部实验室都在上市前夜，估值被压价但海湾资本继续当主力，超大额AI融资开始讨价还价。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：CNBC / 英国《金融时报》 10/22<span class="flag">待核实 · 融资规模与估值来自匿名知情人士，OpenAI未确认，条款未定。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="3" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="3" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s4" data-i="4">
+  <div class="inner">
+    <figure class="shot"><img data-i="4" alt="第 04 条资讯卡" src="img/2026-10-23-reader/04_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">04</span><span class="tag">中国AI</span></div>
+      <h2 class="title">DeepSeek融资 约1000亿元</h2>
+      <p class="summary">彭博、路透、《华尔街日报》援引知情人士：DeepSeek新一轮融资约1000亿元人民币，为原目标两倍；宁德时代与腾讯出资最多，美的、美团、吉利、兆易创新首次入股。</p>
+      <div class="why"><b>为什么重要</b><p>出资方几乎全是制造与互联网巨头，产业资本直接为国产大模型的算力和人才买单，中美头部实验室同步扩充弹药。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：彭博 / 路透 / 《华尔街日报》 10/22<span class="flag">待核实 · 金额与投资方名单来自匿名知情人士，尚未最终敲定，公司未回应。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="4" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="4" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-rank" id="s5" data-i="5">
+  <div class="inner">
+    <figure class="shot"><img data-i="5" alt="第 05 条资讯卡" src="img/2026-10-23-reader/05_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">05</span><span class="tag">市场</span></div>
+      <h2 class="title">AI股集体回调 纳指跌2.6%</h2>
+      <p class="summary">10/22纳指跌2.6%创6月以来最差；Meta季报显示租赁与合同承诺约8250亿美元，黄仁勋称新兴云“缺营运资本”，芯片与AI电力股大跌，道指反而微涨。</p>
+      <div class="why"><b>为什么重要</b><p>市场开始追问资本开支以外的长期承诺由谁出钱：最大买家的账单和最大卖家的“资本不够”同时摆上桌面。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：CNBC / 美联社 / 纳斯达克 10/22</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="5" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="5" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s6" data-i="6">
+  <div class="inner">
+    <figure class="shot"><img data-i="6" alt="第 06 条资讯卡" src="img/2026-10-23-reader/06_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">06</span><span class="tag">智能体治理</span></div>
+      <h2 class="title">美国大银行 封堵第三方AI智能体</h2>
+      <p class="summary">Axios称多家美国银行发现第三方AI智能体进入客户账户，部分疑似脱离用户指令自行操作；摩根士丹利已封堵，摩根大通、美银、富国、花旗收紧到只读。</p>
+      <div class="why"><b>为什么重要</b><p>智能体靠借用户密码登录，银行无法识别也分不清责任，只能一刀切；专用身份认证与授权是进入支付场景的前提。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Axios / 路透 10/22<span class="flag">待核实 · 细节来自匿名知情人士，多数银行未公开置评。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="6" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="6" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s7" data-i="7">
+  <div class="inner">
+    <figure class="shot"><img data-i="7" alt="第 07 条资讯卡" src="img/2026-10-23-reader/07_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">07</span><span class="tag">开放标准</span></div>
+      <h2 class="title">Agent Skills 捐给Linux基金会</h2>
+      <p class="summary">Anthropic把Agent Skills标准捐给智能体AI基金会：70多个平台已接入，含ChatGPT、Cursor、Copilot；捐出名称、GitHub组织与域名，多家工程师以个人身份维护。</p>
+      <div class="why"><b>为什么重要</b><p>继MCP后又一个智能体标准归中立机构；技能常带可执行脚本，路线图把安全指南列入，来源审查将像软件包供应链一样常态化。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Anthropic官方 10/22</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="7" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="7" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-oss" id="s8" data-i="8">
+  <div class="inner">
+    <figure class="shot"><img data-i="8" alt="第 08 条资讯卡" src="img/2026-10-23-reader/08_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">08</span><span class="tag">供应链安全</span></div>
+      <h2 class="title">Railway环境变量 遭未授权访问</h2>
+      <p class="summary">云平台Railway 10/21披露，未授权方访问了加密存储的客户环境变量，部分已被解密；公司称这是针对平台公司、意在攻破AI推理服务商的系列攻击之一，部署全部暂停。</p>
+      <div class="why"><b>为什么重要</b><p>AI接口密钥成了新的高价值目标，攻击者从托管平台下手可一次拿到大量上游凭据；同周LiteLLM投毒也指向同一类密钥。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Railway官方博客 10/21</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="8" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="8" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s9" data-i="9">
+  <div class="inner">
+    <figure class="shot"><img data-i="9" alt="第 09 条资讯卡" src="img/2026-10-23-reader/09_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">09</span><span class="tag">国产模型</span></div>
+      <h2 class="title">讯飞星火X2.6 全国产算力训练</h2>
+      <p class="summary">科大讯飞1024开发者节发布星火X2.6：293B总参数、激活30B的MoE，上下文1M，主打代码与智能体能力；X2.6-4B端侧模型同步开源，推理限时免费。</p>
+      <div class="why"><b>为什么重要</b><p>芯片出口持续收紧下，只用国产集群训练出可用的代码与智能体模型，是产业链闭环的关键检验，仍待第三方评测。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：IT之家 / 科大讯飞 10/22</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="9" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="9" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s10" data-i="10">
+  <div class="inner">
+    <figure class="shot"><img data-i="10" alt="第 10 条资讯卡" src="img/2026-10-23-reader/10_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">10</span><span class="tag">开发者</span></div>
+      <h2 class="title">决策模型同日两发 判断从生成中拆出</h2>
+      <p class="summary">OpenAI Decisions API正式上线，基于GPT-6 Luna只回答有限选项问题，最快10倍；蚂蚁数科同日发布LingDT-Decision-1.0，称客服场景token消耗降90%。</p>
+      <div class="why"><b>为什么重要</b><p>智能体每一步都要做分类与路由，单独定价“判断”会重算智能体的单位成本和延迟，客服与风控最先受益。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：OpenAI官方 / 量子位 10/22</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="10" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="10" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s11" data-i="11">
+  <div class="inner">
+    <figure class="shot"><img data-i="11" alt="第 11 条资讯卡" src="img/2026-10-23-reader/11_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">11</span><span class="tag">AI医疗</span></div>
+      <h2 class="title">微软AI会诊系统 登上《科学》</h2>
+      <p class="summary">微软诊断编排器用多个智能体模拟专家会诊，基于GPT-5；在《新英格兰医学杂志》病例上准确率约83%，同条件全科医生约36%，急诊病例80%对47%。</p>
+      <div class="why"><b>为什么重要</b><p>多智能体协作在高风险专业领域拿到同行评审证据，但只测过历史病例，苏莱曼也承认仍需临床验证。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：《科学》/ The Verge 10/22</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="11" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="11" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s12" data-i="12">
+  <div class="inner">
+    <figure class="shot"><img data-i="12" alt="第 12 条资讯卡" src="img/2026-10-23-reader/12_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">12</span><span class="tag">芯片管制</span></div>
+      <h2 class="title">32块B300 现身中国网络</h2>
+      <p class="summary">安全公司Lava扫描公开暴露的英伟达GPU监控接口，在IP定位到中国的端点中识别出32块B300，以及共4724块GPU；The Information称相关系统关联中国电信。</p>
+      <div class="why"><b>为什么重要</b><p>最先进的Blackwell Ultra受美国严格出口许可管控，暴露的监控数据给了外界核查算力去向的新线索。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Lava / The Information 10/22<span class="flag">待核实 · 仅基于IP地理定位，可能经代理转发；Lava称不能证明存在违规。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="12" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="12" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s13" data-i="13">
+  <div class="inner">
+    <figure class="shot"><img data-i="13" alt="第 13 条资讯卡" src="img/2026-10-23-reader/13_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">13</span><span class="tag">开放权重</span></div>
+      <h2 class="title">Carbon-X 用聊天读懂DNA</h2>
+      <p class="summary">Hugging Face联合中关村学院、那不勒斯费德里科二世大学发布开放权重模型Carbon-X，可用自然语言询问一段DNA变化对基因活性和健康的影响，可在笔记本本地运行。</p>
+      <div class="why"><b>为什么重要</b><p>判断突变良性还是致病是靶向药与基因疗法的关键一步；本地运行绕开患者数据不能上云的合规障碍，但尚未经湿实验验证。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：《连线》 10/22</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="13" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="13" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-rank" id="s14" data-i="14">
+  <div class="inner">
+    <figure class="shot"><img data-i="14" alt="第 14 条资讯卡" src="img/2026-10-23-reader/14_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">14</span><span class="tag">GitHub热门</span></div>
+      <h2 class="title">GitHub日榜 智能体技能霸屏</h2>
+      <p class="summary">10/23早GitHub日榜前列几乎都是给编程智能体用的技能与插件：Cloudflare的多阶段安全审计技能单日涨约3000星，代码库转知识图谱、Claude Code指南紧随其后。</p>
+      <div class="why"><b>为什么重要</b><p>与Agent Skills标准捐赠同日，技能文件正成为智能体生态的分发单位；安全审计类技能最受欢迎。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：GitHub Trending 10/23<span class="flag">待核实 · 均非48小时内首发，仅为近两日冲榜；星数为当日增量。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="14" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="14" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item outro" id="s15" data-i="15">
+  <div class="outro-in">
+    <h2>发布前请确认这 5 条</h2>
+    <ul class="checklist"><li><button data-go="3"><b>03</b><span>OpenAI冲刺300亿融资 估值1.25万亿</span></button><p>融资规模与估值来自匿名知情人士，OpenAI未确认，条款未定。</p></li><li><button data-go="4"><b>04</b><span>DeepSeek融资 约1000亿元</span></button><p>金额与投资方名单来自匿名知情人士，尚未最终敲定，公司未回应。</p></li><li><button data-go="6"><b>06</b><span>美国大银行 封堵第三方AI智能体</span></button><p>细节来自匿名知情人士，多数银行未公开置评。</p></li><li><button data-go="12"><b>12</b><span>32块B300 现身中国网络</span></button><p>仅基于IP地理定位，可能经代理转发；Lava称不能证明存在违规。</p></li><li><button data-go="14"><b>14</b><span>GitHub日榜 智能体技能霸屏</span></button><p>均非48小时内首发，仅为近两日冲榜；星数为当日增量。</p></li></ul>
+    <p class="note">切换深浅两套图时，下载按钮会跟着当前这套走。黄标条目在新闻稿或官方口径出现前，请勿写成已交割或已定日期。上一期专区：<a href="./2026-10-22.html">2026-10-22</a>。</p>
+    <button class="btn" id="copyAll">复制全部文案</button>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+<script type="application/json" id="d">{"cards": [{"no": "00", "title": "封面 · 今日科技情报", "copy": "【今日科技情报】2026.10.23 · 过去 48 小时 14 条\n\n01 国家级黑客 用AI智能体批量入侵\n02 外部红队进驻OpenAI 找到监控漏洞\n03 OpenAI冲刺300亿融资 估值1.25万亿\n04 DeepSeek融资 约1000亿元\n05 AI股集体回调 纳指跌2.6%\n06 美国大银行 封堵第三方AI智能体\n07 Agent Skills 捐给Linux基金会\n08 Railway环境变量 遭未授权访问\n09 讯飞星火X2.6 全国产算力训练\n10 决策模型同日两发 判断从生成中拆出\n11 微软AI会诊系统 登上《科学》\n12 32块B300 现身中国网络\n13 Carbon-X 用聊天读懂DNA\n14 GitHub日榜 智能体技能霸屏\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_00_深色.png", "fileLight": "科技情报_20261023_00_浅色.png", "dark": "img/2026-10-23-reader/00_dark.png", "light": "img/2026-10-23-reader/00_light.png"}, {"no": "01", "title": "国家级黑客 用AI智能体批量入侵", "copy": "【网络安全】国家级黑客 用AI智能体批量入侵\n\n微软称与中国政府立场一致的Storm-0940自9月起用开源AI渗透框架ARTEX攻击数百家机构，攻破ConnectWise云备份，借其授权尝试登录2250多个微软365租户。\n\n◆ 为什么重要：首次有大厂把规模化国家级入侵归因到智能体框架：从选定目标到拿到云端特权最快不到3小时，人工响应跟不上。\n\n来源：微软威胁情报 10/21\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_01_深色.png", "fileLight": "科技情报_20261023_01_浅色.png", "dark": "img/2026-10-23-reader/01_dark.png", "light": "img/2026-10-23-reader/01_light.png"}, {"no": "02", "title": "外部红队进驻OpenAI 找到监控漏洞", "copy": "【AI安全】外部红队进驻OpenAI 找到监控漏洞\n\nMETR与Redwood在OpenAI现场三周审查其智能体监控：GPT-5.5以上内部智能体流量约75%–94%在监控范围内，但发现可让数百个动作漏检、用请求头关掉监控等漏洞。\n\n◆ 为什么重要：前一天OpenAI刚自曝监控被关的事故；外部评估员深度进入实验室内部成了可复制流程，公开多少仍由被审方决定。\n\n来源：METR博客 / CNBC 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_02_深色.png", "fileLight": "科技情报_20261023_02_浅色.png", "dark": "img/2026-10-23-reader/02_dark.png", "light": "img/2026-10-23-reader/02_light.png"}, {"no": "03", "title": "OpenAI冲刺300亿融资 估值1.25万亿", "copy": "【AI资本】OpenAI冲刺300亿融资 估值1.25万亿\n\nCNBC援引知情人士称，OpenAI接近完成至多300亿美元融资，投前估值1.25万亿美元，阿联酋投资方与Coatue领投，定位上市前过桥轮；英国《金融时报》称估值从1.4万亿下调。\n\n◆ 为什么重要：头部实验室都在上市前夜，估值被压价但海湾资本继续当主力，超大额AI融资开始讨价还价。\n\n※ 融资规模与估值来自匿名知情人士，OpenAI未确认，条款未定。\n\n来源：CNBC / 英国《金融时报》 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_03_深色.png", "fileLight": "科技情报_20261023_03_浅色.png", "dark": "img/2026-10-23-reader/03_dark.png", "light": "img/2026-10-23-reader/03_light.png"}, {"no": "04", "title": "DeepSeek融资 约1000亿元", "copy": "【中国AI】DeepSeek融资 约1000亿元\n\n彭博、路透、《华尔街日报》援引知情人士：DeepSeek新一轮融资约1000亿元人民币，为原目标两倍；宁德时代与腾讯出资最多，美的、美团、吉利、兆易创新首次入股。\n\n◆ 为什么重要：出资方几乎全是制造与互联网巨头，产业资本直接为国产大模型的算力和人才买单，中美头部实验室同步扩充弹药。\n\n※ 金额与投资方名单来自匿名知情人士，尚未最终敲定，公司未回应。\n\n来源：彭博 / 路透 / 《华尔街日报》 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_04_深色.png", "fileLight": "科技情报_20261023_04_浅色.png", "dark": "img/2026-10-23-reader/04_dark.png", "light": "img/2026-10-23-reader/04_light.png"}, {"no": "05", "title": "AI股集体回调 纳指跌2.6%", "copy": "【市场】AI股集体回调 纳指跌2.6%\n\n10/22纳指跌2.6%创6月以来最差；Meta季报显示租赁与合同承诺约8250亿美元，黄仁勋称新兴云“缺营运资本”，芯片与AI电力股大跌，道指反而微涨。\n\n◆ 为什么重要：市场开始追问资本开支以外的长期承诺由谁出钱：最大买家的账单和最大卖家的“资本不够”同时摆上桌面。\n\n来源：CNBC / 美联社 / 纳斯达克 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_05_深色.png", "fileLight": "科技情报_20261023_05_浅色.png", "dark": "img/2026-10-23-reader/05_dark.png", "light": "img/2026-10-23-reader/05_light.png"}, {"no": "06", "title": "美国大银行 封堵第三方AI智能体", "copy": "【智能体治理】美国大银行 封堵第三方AI智能体\n\nAxios称多家美国银行发现第三方AI智能体进入客户账户，部分疑似脱离用户指令自行操作；摩根士丹利已封堵，摩根大通、美银、富国、花旗收紧到只读。\n\n◆ 为什么重要：智能体靠借用户密码登录，银行无法识别也分不清责任，只能一刀切；专用身份认证与授权是进入支付场景的前提。\n\n※ 细节来自匿名知情人士，多数银行未公开置评。\n\n来源：Axios / 路透 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_06_深色.png", "fileLight": "科技情报_20261023_06_浅色.png", "dark": "img/2026-10-23-reader/06_dark.png", "light": "img/2026-10-23-reader/06_light.png"}, {"no": "07", "title": "Agent Skills 捐给Linux基金会", "copy": "【开放标准】Agent Skills 捐给Linux基金会\n\nAnthropic把Agent Skills标准捐给智能体AI基金会：70多个平台已接入，含ChatGPT、Cursor、Copilot；捐出名称、GitHub组织与域名，多家工程师以个人身份维护。\n\n◆ 为什么重要：继MCP后又一个智能体标准归中立机构；技能常带可执行脚本，路线图把安全指南列入，来源审查将像软件包供应链一样常态化。\n\n来源：Anthropic官方 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_07_深色.png", "fileLight": "科技情报_20261023_07_浅色.png", "dark": "img/2026-10-23-reader/07_dark.png", "light": "img/2026-10-23-reader/07_light.png"}, {"no": "08", "title": "Railway环境变量 遭未授权访问", "copy": "【供应链安全】Railway环境变量 遭未授权访问\n\n云平台Railway 10/21披露，未授权方访问了加密存储的客户环境变量，部分已被解密；公司称这是针对平台公司、意在攻破AI推理服务商的系列攻击之一，部署全部暂停。\n\n◆ 为什么重要：AI接口密钥成了新的高价值目标，攻击者从托管平台下手可一次拿到大量上游凭据；同周LiteLLM投毒也指向同一类密钥。\n\n来源：Railway官方博客 10/21\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_08_深色.png", "fileLight": "科技情报_20261023_08_浅色.png", "dark": "img/2026-10-23-reader/08_dark.png", "light": "img/2026-10-23-reader/08_light.png"}, {"no": "09", "title": "讯飞星火X2.6 全国产算力训练", "copy": "【国产模型】讯飞星火X2.6 全国产算力训练\n\n科大讯飞1024开发者节发布星火X2.6：293B总参数、激活30B的MoE，上下文1M，主打代码与智能体能力；X2.6-4B端侧模型同步开源，推理限时免费。\n\n◆ 为什么重要：芯片出口持续收紧下，只用国产集群训练出可用的代码与智能体模型，是产业链闭环的关键检验，仍待第三方评测。\n\n来源：IT之家 / 科大讯飞 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_09_深色.png", "fileLight": "科技情报_20261023_09_浅色.png", "dark": "img/2026-10-23-reader/09_dark.png", "light": "img/2026-10-23-reader/09_light.png"}, {"no": "10", "title": "决策模型同日两发 判断从生成中拆出", "copy": "【开发者】决策模型同日两发 判断从生成中拆出\n\nOpenAI Decisions API正式上线，基于GPT-6 Luna只回答有限选项问题，最快10倍；蚂蚁数科同日发布LingDT-Decision-1.0，称客服场景token消耗降90%。\n\n◆ 为什么重要：智能体每一步都要做分类与路由，单独定价“判断”会重算智能体的单位成本和延迟，客服与风控最先受益。\n\n来源：OpenAI官方 / 量子位 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_10_深色.png", "fileLight": "科技情报_20261023_10_浅色.png", "dark": "img/2026-10-23-reader/10_dark.png", "light": "img/2026-10-23-reader/10_light.png"}, {"no": "11", "title": "微软AI会诊系统 登上《科学》", "copy": "【AI医疗】微软AI会诊系统 登上《科学》\n\n微软诊断编排器用多个智能体模拟专家会诊，基于GPT-5；在《新英格兰医学杂志》病例上准确率约83%，同条件全科医生约36%，急诊病例80%对47%。\n\n◆ 为什么重要：多智能体协作在高风险专业领域拿到同行评审证据，但只测过历史病例，苏莱曼也承认仍需临床验证。\n\n来源：《科学》/ The Verge 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_11_深色.png", "fileLight": "科技情报_20261023_11_浅色.png", "dark": "img/2026-10-23-reader/11_dark.png", "light": "img/2026-10-23-reader/11_light.png"}, {"no": "12", "title": "32块B300 现身中国网络", "copy": "【芯片管制】32块B300 现身中国网络\n\n安全公司Lava扫描公开暴露的英伟达GPU监控接口，在IP定位到中国的端点中识别出32块B300，以及共4724块GPU；The Information称相关系统关联中国电信。\n\n◆ 为什么重要：最先进的Blackwell Ultra受美国严格出口许可管控，暴露的监控数据给了外界核查算力去向的新线索。\n\n※ 仅基于IP地理定位，可能经代理转发；Lava称不能证明存在违规。\n\n来源：Lava / The Information 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_12_深色.png", "fileLight": "科技情报_20261023_12_浅色.png", "dark": "img/2026-10-23-reader/12_dark.png", "light": "img/2026-10-23-reader/12_light.png"}, {"no": "13", "title": "Carbon-X 用聊天读懂DNA", "copy": "【开放权重】Carbon-X 用聊天读懂DNA\n\nHugging Face联合中关村学院、那不勒斯费德里科二世大学发布开放权重模型Carbon-X，可用自然语言询问一段DNA变化对基因活性和健康的影响，可在笔记本本地运行。\n\n◆ 为什么重要：判断突变良性还是致病是靶向药与基因疗法的关键一步；本地运行绕开患者数据不能上云的合规障碍，但尚未经湿实验验证。\n\n来源：《连线》 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_13_深色.png", "fileLight": "科技情报_20261023_13_浅色.png", "dark": "img/2026-10-23-reader/13_dark.png", "light": "img/2026-10-23-reader/13_light.png"}, {"no": "14", "title": "GitHub日榜 智能体技能霸屏", "copy": "【GitHub热门】GitHub日榜 智能体技能霸屏\n\n10/23早GitHub日榜前列几乎都是给编程智能体用的技能与插件：Cloudflare的多阶段安全审计技能单日涨约3000星，代码库转知识图谱、Claude Code指南紧随其后。\n\n◆ 为什么重要：与Agent Skills标准捐赠同日，技能文件正成为智能体生态的分发单位；安全审计类技能最受欢迎。\n\n※ 均非48小时内首发，仅为近两日冲榜；星数为当日增量。\n\n来源：GitHub Trending 10/23\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261023_14_深色.png", "fileLight": "科技情报_20261023_14_浅色.png", "dark": "img/2026-10-23-reader/14_dark.png", "light": "img/2026-10-23-reader/14_light.png"}], "allCopy": "【今日科技情报】2026.10.23 · 过去 48 小时 14 条\n\n01 国家级黑客 用AI智能体批量入侵\n02 外部红队进驻OpenAI 找到监控漏洞\n03 OpenAI冲刺300亿融资 估值1.25万亿\n04 DeepSeek融资 约1000亿元\n05 AI股集体回调 纳指跌2.6%\n06 美国大银行 封堵第三方AI智能体\n07 Agent Skills 捐给Linux基金会\n08 Railway环境变量 遭未授权访问\n09 讯飞星火X2.6 全国产算力训练\n10 决策模型同日两发 判断从生成中拆出\n11 微软AI会诊系统 登上《科学》\n12 32块B300 现身中国网络\n13 Carbon-X 用聊天读懂DNA\n14 GitHub日榜 智能体技能霸屏\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【网络安全】国家级黑客 用AI智能体批量入侵\n\n微软称与中国政府立场一致的Storm-0940自9月起用开源AI渗透框架ARTEX攻击数百家机构，攻破ConnectWise云备份，借其授权尝试登录2250多个微软365租户。\n\n◆ 为什么重要：首次有大厂把规模化国家级入侵归因到智能体框架：从选定目标到拿到云端特权最快不到3小时，人工响应跟不上。\n\n来源：微软威胁情报 10/21\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI安全】外部红队进驻OpenAI 找到监控漏洞\n\nMETR与Redwood在OpenAI现场三周审查其智能体监控：GPT-5.5以上内部智能体流量约75%–94%在监控范围内，但发现可让数百个动作漏检、用请求头关掉监控等漏洞。\n\n◆ 为什么重要：前一天OpenAI刚自曝监控被关的事故；外部评估员深度进入实验室内部成了可复制流程，公开多少仍由被审方决定。\n\n来源：METR博客 / CNBC 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI资本】OpenAI冲刺300亿融资 估值1.25万亿\n\nCNBC援引知情人士称，OpenAI接近完成至多300亿美元融资，投前估值1.25万亿美元，阿联酋投资方与Coatue领投，定位上市前过桥轮；英国《金融时报》称估值从1.4万亿下调。\n\n◆ 为什么重要：头部实验室都在上市前夜，估值被压价但海湾资本继续当主力，超大额AI融资开始讨价还价。\n\n※ 融资规模与估值来自匿名知情人士，OpenAI未确认，条款未定。\n\n来源：CNBC / 英国《金融时报》 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【中国AI】DeepSeek融资 约1000亿元\n\n彭博、路透、《华尔街日报》援引知情人士：DeepSeek新一轮融资约1000亿元人民币，为原目标两倍；宁德时代与腾讯出资最多，美的、美团、吉利、兆易创新首次入股。\n\n◆ 为什么重要：出资方几乎全是制造与互联网巨头，产业资本直接为国产大模型的算力和人才买单，中美头部实验室同步扩充弹药。\n\n※ 金额与投资方名单来自匿名知情人士，尚未最终敲定，公司未回应。\n\n来源：彭博 / 路透 / 《华尔街日报》 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【市场】AI股集体回调 纳指跌2.6%\n\n10/22纳指跌2.6%创6月以来最差；Meta季报显示租赁与合同承诺约8250亿美元，黄仁勋称新兴云“缺营运资本”，芯片与AI电力股大跌，道指反而微涨。\n\n◆ 为什么重要：市场开始追问资本开支以外的长期承诺由谁出钱：最大买家的账单和最大卖家的“资本不够”同时摆上桌面。\n\n来源：CNBC / 美联社 / 纳斯达克 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【智能体治理】美国大银行 封堵第三方AI智能体\n\nAxios称多家美国银行发现第三方AI智能体进入客户账户，部分疑似脱离用户指令自行操作；摩根士丹利已封堵，摩根大通、美银、富国、花旗收紧到只读。\n\n◆ 为什么重要：智能体靠借用户密码登录，银行无法识别也分不清责任，只能一刀切；专用身份认证与授权是进入支付场景的前提。\n\n※ 细节来自匿名知情人士，多数银行未公开置评。\n\n来源：Axios / 路透 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开放标准】Agent Skills 捐给Linux基金会\n\nAnthropic把Agent Skills标准捐给智能体AI基金会：70多个平台已接入，含ChatGPT、Cursor、Copilot；捐出名称、GitHub组织与域名，多家工程师以个人身份维护。\n\n◆ 为什么重要：继MCP后又一个智能体标准归中立机构；技能常带可执行脚本，路线图把安全指南列入，来源审查将像软件包供应链一样常态化。\n\n来源：Anthropic官方 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【供应链安全】Railway环境变量 遭未授权访问\n\n云平台Railway 10/21披露，未授权方访问了加密存储的客户环境变量，部分已被解密；公司称这是针对平台公司、意在攻破AI推理服务商的系列攻击之一，部署全部暂停。\n\n◆ 为什么重要：AI接口密钥成了新的高价值目标，攻击者从托管平台下手可一次拿到大量上游凭据；同周LiteLLM投毒也指向同一类密钥。\n\n来源：Railway官方博客 10/21\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【国产模型】讯飞星火X2.6 全国产算力训练\n\n科大讯飞1024开发者节发布星火X2.6：293B总参数、激活30B的MoE，上下文1M，主打代码与智能体能力；X2.6-4B端侧模型同步开源，推理限时免费。\n\n◆ 为什么重要：芯片出口持续收紧下，只用国产集群训练出可用的代码与智能体模型，是产业链闭环的关键检验，仍待第三方评测。\n\n来源：IT之家 / 科大讯飞 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开发者】决策模型同日两发 判断从生成中拆出\n\nOpenAI Decisions API正式上线，基于GPT-6 Luna只回答有限选项问题，最快10倍；蚂蚁数科同日发布LingDT-Decision-1.0，称客服场景token消耗降90%。\n\n◆ 为什么重要：智能体每一步都要做分类与路由，单独定价“判断”会重算智能体的单位成本和延迟，客服与风控最先受益。\n\n来源：OpenAI官方 / 量子位 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI医疗】微软AI会诊系统 登上《科学》\n\n微软诊断编排器用多个智能体模拟专家会诊，基于GPT-5；在《新英格兰医学杂志》病例上准确率约83%，同条件全科医生约36%，急诊病例80%对47%。\n\n◆ 为什么重要：多智能体协作在高风险专业领域拿到同行评审证据，但只测过历史病例，苏莱曼也承认仍需临床验证。\n\n来源：《科学》/ The Verge 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【芯片管制】32块B300 现身中国网络\n\n安全公司Lava扫描公开暴露的英伟达GPU监控接口，在IP定位到中国的端点中识别出32块B300，以及共4724块GPU；The Information称相关系统关联中国电信。\n\n◆ 为什么重要：最先进的Blackwell Ultra受美国严格出口许可管控，暴露的监控数据给了外界核查算力去向的新线索。\n\n※ 仅基于IP地理定位，可能经代理转发；Lava称不能证明存在违规。\n\n来源：Lava / The Information 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开放权重】Carbon-X 用聊天读懂DNA\n\nHugging Face联合中关村学院、那不勒斯费德里科二世大学发布开放权重模型Carbon-X，可用自然语言询问一段DNA变化对基因活性和健康的影响，可在笔记本本地运行。\n\n◆ 为什么重要：判断突变良性还是致病是靶向药与基因疗法的关键一步；本地运行绕开患者数据不能上云的合规障碍，但尚未经湿实验验证。\n\n来源：《连线》 10/22\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【GitHub热门】GitHub日榜 智能体技能霸屏\n\n10/23早GitHub日榜前列几乎都是给编程智能体用的技能与插件：Cloudflare的多阶段安全审计技能单日涨约3000星，代码库转知识图谱、Claude Code指南紧随其后。\n\n◆ 为什么重要：与Agent Skills标准捐赠同日，技能文件正成为智能体生态的分发单位；安全审计类技能最受欢迎。\n\n※ 均非48小时内首发，仅为近两日冲榜；星数为当日增量。\n\n来源：GitHub Trending 10/23\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道"}</script>
+<script>
+const G=JSON.parse(document.getElementById("d").textContent);
+const main=document.getElementById("main"),rail=document.getElementById("rail");
+const secs=[...document.querySelectorAll(".item")];
+const imgs=[...document.querySelectorAll(".shot img")];
+const mode=()=>document.documentElement.dataset.mode;
+let loaded=new Set();
+function load(i){
+  for(let k=Math.max(0,i-2);k<=Math.min(imgs.length-1,i+2);k++){
+    const el=imgs[k];if(!el)continue;
+    const want=G.cards[+el.dataset.i][mode()];
+    if(el.src!==want){el.src=want;loaded.add(k);}
+  }
+}
+function repaint(){loaded.forEach(k=>{const el=imgs[k];el.src=G.cards[+el.dataset.i][mode()];});}
+load(0);
+document.getElementById("mode").onclick=e=>{
+  const r=document.documentElement;
+  r.dataset.mode=mode()==="dark"?"light":"dark";
+  e.currentTarget.textContent=mode()==="dark"?"浅色版":"深色版";
+  repaint();
+};
+const toast=document.getElementById("toast");let tt;
+const say=m=>{toast.textContent=m;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),1700)};
+const copy=t=>navigator.clipboard?.writeText(t).then(()=>say("已复制"),()=>say("复制失败，请手动选中"))??say("复制失败");
+document.addEventListener("click",ev=>{
+  const go=ev.target.closest("[data-go]");
+  if(go){document.getElementById("s"+go.dataset.go).scrollIntoView();return}
+  const a=ev.target.closest("[data-act]");
+  if(a){
+    const c=G.cards[+a.dataset.i],d=mode()==="dark";
+    if(a.dataset.act==="dl"){
+      const l=document.createElement("a");l.href=d?c.dark:c.light;
+      l.download=d?c.fileDark:c.fileLight;l.click();say("已下载 "+l.download);
+    }else copy(c.copy);
+    return;
+  }
+  if(ev.target.id==="copyAll"){copy(G.allCopy);return}
+  const m=ev.target.closest(".more");
+  if(m){
+    const b=m.closest(".text"),on=b.querySelector(".summary").classList.toggle("open");
+    b.querySelector(".why")?.classList.toggle("open",on);
+    m.textContent=on?"收起":"展开全文";m.setAttribute("aria-expanded",on);
+  }
+});
+const pos=document.getElementById("pos"),prog=document.getElementById("prog");
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting||en.intersectionRatio<.55)return;
+  const i=secs.indexOf(en.target);
+  load(i);
+  pos.textContent=i===0?"封面":(i>G.cards.length-1?"结尾":G.cards[i].no);
+  prog.style.width=(i/(secs.length-1)*100)+"%";
+  rail.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-current",String(j===i)));
+}),{root:main,threshold:.55});
+secs.forEach(s=>io.observe(s));
+addEventListener("keydown",e=>{
+  if(e.target.matches("input,textarea"))return;
+  const cur=secs.findIndex(s=>s.getBoundingClientRect().top>-window.innerHeight/2);
+  if(e.key==="ArrowDown"||e.key==="j"){e.preventDefault();secs[Math.min(secs.length-1,cur+1)]?.scrollIntoView()}
+  if(e.key==="ArrowUp"||e.key==="k"){e.preventDefault();secs[Math.max(0,cur-1)]?.scrollIntoView()}
+});
+
+</script>
+</body></html>
