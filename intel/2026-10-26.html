@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="zh-CN" data-mode="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>每日科技情报 · 2026.10.26 · 阅读版</title>
+<style>
+
+
+
+
+:root{
+  --bg:#05060f; --line:rgba(255,255,255,.11); --tx:#EEF2FF;
+  --tx2:rgba(238,242,255,.66); --tx3:rgba(238,242,255,.40);
+  --panel:rgba(255,255,255,.05); --sh:0 20px 54px rgba(0,0,0,.55);
+  --t-cover:#67E8F9; --t-ai:#A78BFA; --t-money:#F5C842; --t-chip:#FF8A3C;
+  --t-oss:#3DFF87; --t-alert:#FF5A4E; --t-rank:#7DA2FF;
+  --flag:#FFD166;
+  --deco:radial-gradient(900px 700px at 8% -8%,rgba(124,92,255,.26),transparent 62%),
+         radial-gradient(760px 620px at 96% 10%,rgba(34,211,238,.15),transparent 62%);
+}
+:root[data-mode="light"]{
+  --bg:#F7F4ED; --line:rgba(21,18,14,.18); --tx:#15120E;
+  --tx2:#4A443C; --tx3:#8A8176;
+  --panel:rgba(21,18,14,.045); --sh:0 14px 36px rgba(21,18,14,.15);
+  --t-cover:#1B3FAE; --t-ai:#5B2BE0; --t-money:#0B6B4F; --t-chip:#E8442A;
+  --t-oss:#00964A; --t-alert:#DC1E28; --t-rank:#1B3FAE;
+  --flag:#9A6B00;
+  --deco:none;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--tx);line-height:1.66;
+ font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+ -webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:var(--deco)}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:5px}
+
+.bar{position:fixed;top:0;left:0;right:0;height:54px;z-index:40;display:flex;align-items:center;gap:14px;
+ padding:0 22px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--line)}
+.brand{font-size:13px;font-weight:800;letter-spacing:.2em}
+.brand i{font-style:normal;color:var(--tx3);font-weight:500;letter-spacing:.06em;margin-left:10px}
+.bar .sp{flex:1}
+.pos{font-size:12px;color:var(--tx3);letter-spacing:.1em}
+.pos b{color:var(--tx);font-weight:700}
+.tbtn{border:1px solid var(--line);background:transparent;color:var(--tx2);border-radius:999px;
+ padding:6px 14px;font-size:12px;cursor:pointer;letter-spacing:.04em;transition:.2s}
+.tbtn:hover{color:var(--tx);border-color:var(--tx3)}
+.prog{position:fixed;top:54px;left:0;height:2px;width:0;background:var(--tx);opacity:.85;z-index:41;transition:width .25s}
+
+.rail{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:35;display:flex;flex-direction:column;gap:1px}
+.rail button{background:none;border:0;cursor:pointer;padding:3px 6px;font-size:10.5px;letter-spacing:.1em;
+ color:var(--tx3);display:flex;align-items:center;gap:7px;transition:color .2s}
+.rail button::after{content:"";width:12px;height:1px;background:currentColor;opacity:.45;transition:width .25s,opacity .2s}
+.rail button:hover{color:var(--tx2)}
+.rail button[aria-current="true"]{color:var(--tx);font-weight:700}
+.rail button[aria-current="true"]::after{width:26px;opacity:1}
+
+main{position:relative;z-index:1;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.item{height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;
+ justify-content:center;padding:54px 100px 22px 62px;position:relative}
+.t-cover{--c:var(--t-cover)} .t-ai{--c:var(--t-ai)} .t-money{--c:var(--t-money)}
+.t-chip{--c:var(--t-chip)} .t-oss{--c:var(--t-oss)} .t-alert{--c:var(--t-alert)}
+.t-rank{--c:var(--t-rank)} .outro{--c:var(--t-cover)}
+.inner{width:100%;max-width:1200px;display:grid;gap:54px;align-items:center;
+ grid-template-columns:minmax(0,1.04fr) minmax(0,1fr)}
+.shot{justify-self:end}
+.shot img{display:block;height:auto;max-height:calc(100dvh - 128px);max-width:100%;aspect-ratio:3/4;
+ border-radius:16px;box-shadow:var(--sh);background:var(--panel)}
+:root[data-mode="light"] .shot img{border-radius:0}
+
+.eyebrow{display:flex;align-items:baseline;gap:13px;margin-bottom:16px;flex-wrap:wrap}
+.rank{font:700 36px/1 ui-monospace,Menlo,monospace;color:var(--c)}
+.tag{font-size:11px;letter-spacing:.17em;font-weight:700;color:var(--c);
+ border:1px solid color-mix(in srgb,var(--c) 45%,transparent);padding:4px 11px;border-radius:999px}
+:root[data-mode="light"] .tag{border-radius:0}
+.title{font-size:clamp(23px,2.25vw,33px);line-height:1.34;font-weight:800;letter-spacing:-.01em;margin-bottom:15px}
+.summary{color:var(--tx2);font-size:15.5px;margin-bottom:19px}
+.why{border-left:2.5px solid var(--c);padding-left:15px;margin-bottom:20px}
+.why b{display:block;font-size:10.5px;letter-spacing:.18em;color:var(--c);margin-bottom:5px}
+.why p{margin:0;font-size:14.5px;color:var(--tx2)}
+.src{font-size:12px;color:var(--tx3);letter-spacing:.03em}
+.flag{color:var(--flag);margin-left:10px}
+.flag::before{content:"◇ "}
+.more{display:none;background:none;border:0;color:var(--c);font-size:13px;cursor:pointer;padding:0;margin-bottom:12px}
+
+.lede{color:var(--tx2);font-size:14.5px;margin-bottom:20px}
+.toc{list-style:none;max-height:52dvh;overflow:auto;padding-right:6px}
+.toc li+li{border-top:1px solid var(--line)}
+.toc button{width:100%;background:none;border:0;cursor:pointer;color:var(--tx2);text-align:left;
+ display:flex;align-items:baseline;gap:12px;padding:7px 2px;font-size:14px;transition:color .18s}
+.toc button:hover{color:var(--tx)}
+.tn{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--tx3);flex:none}
+.tt{flex:1}
+.tf{font-size:10.5px;color:var(--flag);flex:none;letter-spacing:.06em}
+
+.outro{align-items:center}
+.outro-in{max-width:620px;width:100%}
+.outro h2{font-size:clamp(22px,2.2vw,30px);font-weight:800;margin-bottom:22px}
+.checklist{list-style:none;margin-bottom:26px}
+.checklist li{border-top:1px solid var(--line);padding:12px 0}
+.checklist button{background:none;border:0;cursor:pointer;color:var(--tx);display:flex;gap:11px;
+ align-items:baseline;font-size:15px;font-weight:700;text-align:left;padding:0}
+.checklist button:hover span{text-decoration:underline}
+.checklist b{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--flag)}
+.checklist p{font-size:13px;color:var(--tx3);margin-top:5px;padding-left:23px}
+.note{font-size:13px;color:var(--tx3);margin-bottom:22px;line-height:1.8}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--tx);border-radius:10px;
+ padding:10px 20px;font-size:13.5px;cursor:pointer;transition:.2s}
+.btn:hover{border-color:var(--tx3)}
+:root[data-mode="light"] .btn{border-radius:0}
+
+.acts{position:absolute;right:26px;bottom:20px;display:flex;gap:7px;opacity:.24;transition:opacity .25s}
+.item:hover .acts,.acts:focus-within{opacity:1}
+.acts button{width:35px;height:35px;border-radius:10px;cursor:pointer;border:1px solid var(--line);
+ background:var(--panel);color:var(--tx2);display:grid;place-items:center;transition:.2s}
+.acts button:hover{color:var(--tx);border-color:var(--tx3)}
+.acts svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+:root[data-mode="light"] .acts button{border-radius:0}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,14px);z-index:60;background:var(--tx);
+ color:var(--bg);padding:9px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:900px){
+  .rail{display:none}
+  .item{padding:62px 18px 18px;align-items:flex-start}
+  .inner{grid-template-columns:1fr;gap:16px;align-content:start;height:100%}
+  .shot{justify-self:center}
+  .shot img{max-height:62dvh;border-radius:12px}
+  .cover .shot img{max-height:34dvh}
+  .eyebrow{margin-bottom:9px;gap:10px}
+  .rank{font-size:23px}
+  .title{font-size:19px;margin-bottom:8px}
+  .summary{font-size:14px;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .summary.open{-webkit-line-clamp:unset}
+  .why{display:none;margin-bottom:12px}
+  .why.open{display:block}
+  .more{display:inline-block}
+  .src{font-size:11.5px;padding-right:82px}
+  .flag{display:block;margin:4px 0 0}
+  .toc{max-height:none;flex:1}
+  .cover .inner{display:flex;flex-direction:column;min-height:0}
+  .cover .text{display:flex;flex-direction:column;min-height:0;flex:1}
+  .acts{right:16px;bottom:14px;opacity:.42}
+  .outro{padding-top:80px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+
+
+
+</style></head><body>
+<div class="bar">
+  <div class="brand">每日科技情报<i>2026.10.26</i></div><div class="sp"></div>
+  <div class="pos mono"><b id="pos">封面</b></div>
+  <a class="tbtn" href="../index.html" style="text-decoration:none">每日简报</a>
+  <button class="tbtn" id="mode">浅色版</button>
+</div>
+<div class="prog" id="prog"></div>
+<nav class="rail mono" id="rail" aria-label="按重要性排序的目录"><button data-go="0" aria-label="跳到封面">封面</button><button data-go="1" aria-label="跳到01">01</button><button data-go="2" aria-label="跳到02">02</button><button data-go="3" aria-label="跳到03">03</button><button data-go="4" aria-label="跳到04">04</button><button data-go="5" aria-label="跳到05">05</button><button data-go="6" aria-label="跳到06">06</button><button data-go="7" aria-label="跳到07">07</button><button data-go="8" aria-label="跳到08">08</button><button data-go="9" aria-label="跳到09">09</button><button data-go="10" aria-label="跳到10">10</button><button data-go="11" aria-label="跳到结尾">结尾</button></nav>
+<main id="main">
+<section class="item cover t-cover" id="s0" data-i="0">
+  <div class="inner">
+    <figure class="shot"><img data-i="0" alt="封面" src="img/2026-10-26-reader/00_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="tag">2026.10.26 · 周一 · 过去 48 小时</span></div>
+      <h2 class="title">今日科技情报</h2>
+      <p class="lede">共 10 条，按重要性排序。点标题直接跳过去。</p>
+      <ol class="toc"><li><button data-go="1"><span class="tn">01</span><span class="tt">马斯克：债市已对 新云关门</span></button></li><li><button data-go="2"><span class="tn">02</span><span class="tt">下载文件夹里的 AGENTS.md能劫持智能体</span><span class='tf'>待核实</span></button></li><li><button data-go="3"><span class="tn">03</span><span class="tt">猫王版权方起诉 Anthropic</span></button></li><li><button data-go="4"><span class="tn">04</span><span class="tt">Tailscale SSH曝 可蠕虫式提权</span></button></li><li><button data-go="5"><span class="tn">05</span><span class="tt">十年前的CNN 诊断皮肤癌胜过前沿大模型</span></button></li><li><button data-go="6"><span class="tn">06</span><span class="tt">德明利季度净利 暴增29倍</span></button></li><li><button data-go="7"><span class="tn">07</span><span class="tt">Teams开放第三方 深伪检测</span></button></li><li><button data-go="8"><span class="tn">08</span><span class="tt">GEEKCON自称 最后一届人类黑客赛</span></button></li><li><button data-go="9"><span class="tn">09</span><span class="tt">r/opensource 全面禁AI引发反弹</span></button></li><li><button data-go="10"><span class="tn">10</span><span class="tt">GitHub日榜 本地语音克隆登顶</span><span class='tf'>待核实</span></button></li></ol>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="0" aria-label="下载封面"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="0" aria-label="复制封面文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s1" data-i="1">
+  <div class="inner">
+    <figure class="shot"><img data-i="1" alt="第 01 条资讯卡" src="img/2026-10-26-reader/01_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">01</span><span class="tag">AI基建</span></div>
+      <h2 class="title">马斯克：债市已对 新云关门</h2>
+      <p class="summary">马斯克10/25在X上称，过去几周债市几乎不再借钱给没有AI数据中心以外收入的公司；SpaceX已为买GPU完成400亿美元债务融资，因其是投资级并有星链和发射收入。</p>
+      <div class="why"><b>为什么重要</b><p>最大买家之一亲口确认融资分层：有现金流的巨头还能借，200多家新云将面临出清，算力供给会向少数玩家集中。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：马斯克 X / IT之家 10/25</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="1" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="1" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s2" data-i="2">
+  <div class="inner">
+    <figure class="shot"><img data-i="2" alt="第 02 条资讯卡" src="img/2026-10-26-reader/02_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">02</span><span class="tag">智能体安全</span></div>
+      <h2 class="title">下载文件夹里的 AGENTS.md能劫持智能体</h2>
+      <p class="summary">Forever Security在客户下载目录发现恶意AGENTS.md，诱Codex装恶意npm包；复现显示网页可静默放下该文件，Codex九成以上照做，Claude Code会泄露OAuth令牌。</p>
+      <div class="why"><b>为什么重要</b><p>智能体把工作目录里的说明文件当指令执行，而下载目录是网页能直接写入的地方，网页因此能间接指挥你的智能体。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Forever/Bleeping 10/25<span class="flag">待核实 · Forever Security报告10/22首发，本条为10/25 BleepingComputer跟进复现。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="2" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="2" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s3" data-i="3">
+  <div class="inner">
+    <figure class="shot"><img data-i="3" alt="第 03 条资讯卡" src="img/2026-10-26-reader/03_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">03</span><span class="tag">版权诉讼</span></div>
+      <h2 class="title">猫王版权方起诉 Anthropic</h2>
+      <p class="summary">猫王版权方10/23起诉Anthropic，称Claude未经许可用274首猫王歌曲训练、至今仍能输出歌词，按每首15万美元索赔约4110万美元，并要求禁令和销毁副本。</p>
+      <div class="why"><b>为什么重要</b><p>继作家、唱片公司之后，艺人遗产方也直接起诉，诉状把模型至今能输出歌词作为证据，输出侧版权风险被推到台前。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Billboard / NBC 10/24</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="3" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="3" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s4" data-i="4">
+  <div class="inner">
+    <figure class="shot"><img data-i="4" alt="第 04 条资讯卡" src="img/2026-10-26-reader/04_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">04</span><span class="tag">网络安全</span></div>
+      <h2 class="title">Tailscale SSH曝 可蠕虫式提权</h2>
+      <p class="summary">研究员Erica Windisch发布Tailworm报告：Tailscale SSH开启端口转发时，一台被控设备可在目标机拿到root并沿规则逐台扩散；Tailscale称在修，尚无CVE和补丁。</p>
+      <div class="why"><b>为什么重要</b><p>零信任组网把单点失陷放大成全网特权，自建headscale连转发都关不掉，运维需先自查SSH规则。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Tailworm / THN 10/25</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="4" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="4" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s5" data-i="5">
+  <div class="inner">
+    <figure class="shot"><img data-i="5" alt="第 05 条资讯卡" src="img/2026-10-26-reader/05_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">05</span><span class="tag">医疗AI</span></div>
+      <h2 class="title">十年前的CNN 诊断皮肤癌胜过前沿大模型</h2>
+      <p class="summary">医生用200例活检确诊病例测试：微调20分钟的Inception v3正确率62%，GPT-6 Astra和Claude Fable 5.1均为42%；30例黑色素瘤两模型首选仅判对8例和11例。</p>
+      <div class="why"><b>为什么重要</b><p>通用大模型看图问诊远不如小型专用模型，医疗场景直接拿聊天机器人当诊断工具风险很高。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Lynch Lab 10/25</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="5" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="5" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s6" data-i="6">
+  <div class="inner">
+    <figure class="shot"><img data-i="6" alt="第 06 条资讯卡" src="img/2026-10-26-reader/06_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">06</span><span class="tag">存储芯片</span></div>
+      <h2 class="title">德明利季度净利 暴增29倍</h2>
+      <p class="summary">存储企业德明利10/25公告：三季度营收116.45亿元、同比增357%，归母净利27.29亿元、同比增2902.75%；野村同周报告称存储需求到2028年前仍将快速增长。</p>
+      <div class="why"><b>为什么重要</b><p>AI数据中心抢走先进存储产能，涨价红利正落到中游存储厂，也说明消费电子涨价短期难回落。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：德明利公告 / IT之家 10/25</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="6" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="6" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-oss" id="s7" data-i="7">
+  <div class="inner">
+    <figure class="shot"><img data-i="7" alt="第 07 条资讯卡" src="img/2026-10-26-reader/07_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">07</span><span class="tag">深度伪造</span></div>
+      <h2 class="title">Teams开放第三方 深伪检测</h2>
+      <p class="summary">微软Teams将允许组织接入认证的第三方工具，扫描会议音视频检测深度伪造，11月中旬起在桌面版、Mac版和网页版推出；检测机器人给出0到1置信度和低中高三级判断。</p>
+      <div class="why"><b>为什么重要</b><p>AI换脸冒充同事开会的骗局已有先例，平台把检测做成标准接口，企业可以像装杀毒软件一样给会议加一道关。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Windows Latest / IT之家 10/25</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="7" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="7" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s8" data-i="8">
+  <div class="inner">
+    <figure class="shot"><img data-i="8" alt="第 08 条资讯卡" src="img/2026-10-26-reader/08_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">08</span><span class="tag">AI与安全</span></div>
+      <h2 class="title">GEEKCON自称 最后一届人类黑客赛</h2>
+      <p class="summary">GEEKCON 2026上海站10/24闭幕，主办方称AI几乎已替代人类黑客，今年差点停办；现场展示远程劫持无人机绕过电子围栏、一条链接劫持银行App转账，并设AI黑客挑战赛。</p>
+      <div class="why"><b>为什么重要</b><p>连顶级白帽赛事都公开承认AI挖洞效率压过人类，攻防两端的人力结构和人才培养路线都要重排。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：GEEKCON / IT之家 10/25</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="8" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="8" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-rank" id="s9" data-i="9">
+  <div class="inner">
+    <figure class="shot"><img data-i="9" alt="第 09 条资讯卡" src="img/2026-10-26-reader/09_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">09</span><span class="tag">开源社区</span></div>
+      <h2 class="title">r/opensource 全面禁AI引发反弹</h2>
+      <p class="summary">r/opensource 10/24发布新规：用AI、由AI做或为AI做的项目都不欢迎，项目须满一年、多人维护，还让不会英语的用户离开；评论区炸锅，有人另立r/trueopensource。</p>
+      <div class="why"><b>为什么重要</b><p>开源社区对AI的不信任已从吐槽变成门槛，AI辅助项目在传统开源渠道获取关注和贡献者会更难。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：The Verge 10/25</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="9" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="9" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-rank" id="s10" data-i="10">
+  <div class="inner">
+    <figure class="shot"><img data-i="10" alt="第 10 条资讯卡" src="img/2026-10-26-reader/10_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">10</span><span class="tag">GitHub热门</span></div>
+      <h2 class="title">GitHub日榜 本地语音克隆登顶</h2>
+      <p class="summary">10/26早GitHub日榜：全本地语音克隆工具VoiceStudio单日涨星最多之一，Cloudflare安全审计技能继续领涨，反AI味设计技能、迷你双足鸭机器人同时上榜。</p>
+      <div class="why"><b>为什么重要</b><p>本地化替代云端语音服务、给智能体加审计和设计规范，是开发者当下最愿意点星的方向。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：GitHub Trending 10/26<span class="flag">待核实 · 均非48小时内首发，仅为近两日冲榜；星数为当日增量。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="10" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="10" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item outro" id="s11" data-i="11">
+  <div class="outro-in">
+    <h2>发布前请确认这 2 条</h2>
+    <ul class="checklist"><li><button data-go="2"><b>02</b><span>下载文件夹里的 AGENTS.md能劫持智能体</span></button><p>Forever Security报告10/22首发，本条为10/25 BleepingComputer跟进复现。</p></li><li><button data-go="10"><b>10</b><span>GitHub日榜 本地语音克隆登顶</span></button><p>均非48小时内首发，仅为近两日冲榜；星数为当日增量。</p></li></ul>
+    <p class="note">切换深浅两套图时，下载按钮会跟着当前这套走。黄标条目在新闻稿或官方口径出现前，请勿写成已交割或已定日期。上一期专区：<a href="./2026-10-25.html">2026-10-25</a>。</p>
+    <button class="btn" id="copyAll">复制全部文案</button>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+<script type="application/json" id="d">{"cards": [{"no": "00", "title": "封面 · 今日科技情报", "copy": "【今日科技情报】2026.10.26 · 过去 48 小时 10 条\n\n01 马斯克：债市已对 新云关门\n02 下载文件夹里的 AGENTS.md能劫持智能体\n03 猫王版权方起诉 Anthropic\n04 Tailscale SSH曝 可蠕虫式提权\n05 十年前的CNN 诊断皮肤癌胜过前沿大模型\n06 德明利季度净利 暴增29倍\n07 Teams开放第三方 深伪检测\n08 GEEKCON自称 最后一届人类黑客赛\n09 r/opensource 全面禁AI引发反弹\n10 GitHub日榜 本地语音克隆登顶\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261026_00_深色.png", "fileLight": "科技情报_20261026_00_浅色.png", "dark": "img/2026-10-26-reader/00_dark.png", "light": "img/2026-10-26-reader/00_light.png"}, {"no": "01", "title": "马斯克：债市已对 新云关门", "copy": "【AI基建】马斯克：债市已对 新云关门\n\n马斯克10/25在X上称，过去几周债市几乎不再借钱给没有AI数据中心以外收入的公司；SpaceX已为买GPU完成400亿美元债务融资，因其是投资级并有星链和发射收入。\n\n◆ 为什么重要：最大买家之一亲口确认融资分层：有现金流的巨头还能借，200多家新云将面临出清，算力供给会向少数玩家集中。\n\n来源：马斯克 X / IT之家 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261026_01_深色.png", "fileLight": "科技情报_20261026_01_浅色.png", "dark": "img/2026-10-26-reader/01_dark.png", "light": "img/2026-10-26-reader/01_light.png"}, {"no": "02", "title": "下载文件夹里的 AGENTS.md能劫持智能体", "copy": "【智能体安全】下载文件夹里的 AGENTS.md能劫持智能体\n\nForever Security在客户下载目录发现恶意AGENTS.md，诱Codex装恶意npm包；复现显示网页可静默放下该文件，Codex九成以上照做，Claude Code会泄露OAuth令牌。\n\n◆ 为什么重要：智能体把工作目录里的说明文件当指令执行，而下载目录是网页能直接写入的地方，网页因此能间接指挥你的智能体。\n\n※ Forever Security报告10/22首发，本条为10/25 BleepingComputer跟进复现。\n\n来源：Forever/Bleeping 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261026_02_深色.png", "fileLight": "科技情报_20261026_02_浅色.png", "dark": "img/2026-10-26-reader/02_dark.png", "light": "img/2026-10-26-reader/02_light.png"}, {"no": "03", "title": "猫王版权方起诉 Anthropic", "copy": "【版权诉讼】猫王版权方起诉 Anthropic\n\n猫王版权方10/23起诉Anthropic，称Claude未经许可用274首猫王歌曲训练、至今仍能输出歌词，按每首15万美元索赔约4110万美元，并要求禁令和销毁副本。\n\n◆ 为什么重要：继作家、唱片公司之后，艺人遗产方也直接起诉，诉状把模型至今能输出歌词作为证据，输出侧版权风险被推到台前。\n\n来源：Billboard / NBC 10/24\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261026_03_深色.png", "fileLight": "科技情报_20261026_03_浅色.png", "dark": "img/2026-10-26-reader/03_dark.png", "light": "img/2026-10-26-reader/03_light.png"}, {"no": "04", "title": "Tailscale SSH曝 可蠕虫式提权", "copy": "【网络安全】Tailscale SSH曝 可蠕虫式提权\n\n研究员Erica Windisch发布Tailworm报告：Tailscale SSH开启端口转发时，一台被控设备可在目标机拿到root并沿规则逐台扩散；Tailscale称在修，尚无CVE和补丁。\n\n◆ 为什么重要：零信任组网把单点失陷放大成全网特权，自建headscale连转发都关不掉，运维需先自查SSH规则。\n\n来源：Tailworm / THN 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261026_04_深色.png", "fileLight": "科技情报_20261026_04_浅色.png", "dark": "img/2026-10-26-reader/04_dark.png", "light": "img/2026-10-26-reader/04_light.png"}, {"no": "05", "title": "十年前的CNN 诊断皮肤癌胜过前沿大模型", "copy": "【医疗AI】十年前的CNN 诊断皮肤癌胜过前沿大模型\n\n医生用200例活检确诊病例测试：微调20分钟的Inception v3正确率62%，GPT-6 Astra和Claude Fable 5.1均为42%；30例黑色素瘤两模型首选仅判对8例和11例。\n\n◆ 为什么重要：通用大模型看图问诊远不如小型专用模型，医疗场景直接拿聊天机器人当诊断工具风险很高。\n\n来源：Lynch Lab 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261026_05_深色.png", "fileLight": "科技情报_20261026_05_浅色.png", "dark": "img/2026-10-26-reader/05_dark.png", "light": "img/2026-10-26-reader/05_light.png"}, {"no": "06", "title": "德明利季度净利 暴增29倍", "copy": "【存储芯片】德明利季度净利 暴增29倍\n\n存储企业德明利10/25公告：三季度营收116.45亿元、同比增357%，归母净利27.29亿元、同比增2902.75%；野村同周报告称存储需求到2028年前仍将快速增长。\n\n◆ 为什么重要：AI数据中心抢走先进存储产能，涨价红利正落到中游存储厂，也说明消费电子涨价短期难回落。\n\n来源：德明利公告 / IT之家 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261026_06_深色.png", "fileLight": "科技情报_20261026_06_浅色.png", "dark": "img/2026-10-26-reader/06_dark.png", "light": "img/2026-10-26-reader/06_light.png"}, {"no": "07", "title": "Teams开放第三方 深伪检测", "copy": "【深度伪造】Teams开放第三方 深伪检测\n\n微软Teams将允许组织接入认证的第三方工具，扫描会议音视频检测深度伪造，11月中旬起在桌面版、Mac版和网页版推出；检测机器人给出0到1置信度和低中高三级判断。\n\n◆ 为什么重要：AI换脸冒充同事开会的骗局已有先例，平台把检测做成标准接口，企业可以像装杀毒软件一样给会议加一道关。\n\n来源：Windows Latest / IT之家 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261026_07_深色.png", "fileLight": "科技情报_20261026_07_浅色.png", "dark": "img/2026-10-26-reader/07_dark.png", "light": "img/2026-10-26-reader/07_light.png"}, {"no": "08", "title": "GEEKCON自称 最后一届人类黑客赛", "copy": "【AI与安全】GEEKCON自称 最后一届人类黑客赛\n\nGEEKCON 2026上海站10/24闭幕，主办方称AI几乎已替代人类黑客，今年差点停办；现场展示远程劫持无人机绕过电子围栏、一条链接劫持银行App转账，并设AI黑客挑战赛。\n\n◆ 为什么重要：连顶级白帽赛事都公开承认AI挖洞效率压过人类，攻防两端的人力结构和人才培养路线都要重排。\n\n来源：GEEKCON / IT之家 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261026_08_深色.png", "fileLight": "科技情报_20261026_08_浅色.png", "dark": "img/2026-10-26-reader/08_dark.png", "light": "img/2026-10-26-reader/08_light.png"}, {"no": "09", "title": "r/opensource 全面禁AI引发反弹", "copy": "【开源社区】r/opensource 全面禁AI引发反弹\n\nr/opensource 10/24发布新规：用AI、由AI做或为AI做的项目都不欢迎，项目须满一年、多人维护，还让不会英语的用户离开；评论区炸锅，有人另立r/trueopensource。\n\n◆ 为什么重要：开源社区对AI的不信任已从吐槽变成门槛，AI辅助项目在传统开源渠道获取关注和贡献者会更难。\n\n来源：The Verge 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261026_09_深色.png", "fileLight": "科技情报_20261026_09_浅色.png", "dark": "img/2026-10-26-reader/09_dark.png", "light": "img/2026-10-26-reader/09_light.png"}, {"no": "10", "title": "GitHub日榜 本地语音克隆登顶", "copy": "【GitHub热门】GitHub日榜 本地语音克隆登顶\n\n10/26早GitHub日榜：全本地语音克隆工具VoiceStudio单日涨星最多之一，Cloudflare安全审计技能继续领涨，反AI味设计技能、迷你双足鸭机器人同时上榜。\n\n◆ 为什么重要：本地化替代云端语音服务、给智能体加审计和设计规范，是开发者当下最愿意点星的方向。\n\n※ 均非48小时内首发，仅为近两日冲榜；星数为当日增量。\n\n来源：GitHub Trending 10/26\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261026_10_深色.png", "fileLight": "科技情报_20261026_10_浅色.png", "dark": "img/2026-10-26-reader/10_dark.png", "light": "img/2026-10-26-reader/10_light.png"}], "allCopy": "【今日科技情报】2026.10.26 · 过去 48 小时 10 条\n\n01 马斯克：债市已对 新云关门\n02 下载文件夹里的 AGENTS.md能劫持智能体\n03 猫王版权方起诉 Anthropic\n04 Tailscale SSH曝 可蠕虫式提权\n05 十年前的CNN 诊断皮肤癌胜过前沿大模型\n06 德明利季度净利 暴增29倍\n07 Teams开放第三方 深伪检测\n08 GEEKCON自称 最后一届人类黑客赛\n09 r/opensource 全面禁AI引发反弹\n10 GitHub日榜 本地语音克隆登顶\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI基建】马斯克：债市已对 新云关门\n\n马斯克10/25在X上称，过去几周债市几乎不再借钱给没有AI数据中心以外收入的公司；SpaceX已为买GPU完成400亿美元债务融资，因其是投资级并有星链和发射收入。\n\n◆ 为什么重要：最大买家之一亲口确认融资分层：有现金流的巨头还能借，200多家新云将面临出清，算力供给会向少数玩家集中。\n\n来源：马斯克 X / IT之家 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【智能体安全】下载文件夹里的 AGENTS.md能劫持智能体\n\nForever Security在客户下载目录发现恶意AGENTS.md，诱Codex装恶意npm包；复现显示网页可静默放下该文件，Codex九成以上照做，Claude Code会泄露OAuth令牌。\n\n◆ 为什么重要：智能体把工作目录里的说明文件当指令执行，而下载目录是网页能直接写入的地方，网页因此能间接指挥你的智能体。\n\n※ Forever Security报告10/22首发，本条为10/25 BleepingComputer跟进复现。\n\n来源：Forever/Bleeping 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【版权诉讼】猫王版权方起诉 Anthropic\n\n猫王版权方10/23起诉Anthropic，称Claude未经许可用274首猫王歌曲训练、至今仍能输出歌词，按每首15万美元索赔约4110万美元，并要求禁令和销毁副本。\n\n◆ 为什么重要：继作家、唱片公司之后，艺人遗产方也直接起诉，诉状把模型至今能输出歌词作为证据，输出侧版权风险被推到台前。\n\n来源：Billboard / NBC 10/24\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【网络安全】Tailscale SSH曝 可蠕虫式提权\n\n研究员Erica Windisch发布Tailworm报告：Tailscale SSH开启端口转发时，一台被控设备可在目标机拿到root并沿规则逐台扩散；Tailscale称在修，尚无CVE和补丁。\n\n◆ 为什么重要：零信任组网把单点失陷放大成全网特权，自建headscale连转发都关不掉，运维需先自查SSH规则。\n\n来源：Tailworm / THN 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【医疗AI】十年前的CNN 诊断皮肤癌胜过前沿大模型\n\n医生用200例活检确诊病例测试：微调20分钟的Inception v3正确率62%，GPT-6 Astra和Claude Fable 5.1均为42%；30例黑色素瘤两模型首选仅判对8例和11例。\n\n◆ 为什么重要：通用大模型看图问诊远不如小型专用模型，医疗场景直接拿聊天机器人当诊断工具风险很高。\n\n来源：Lynch Lab 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【存储芯片】德明利季度净利 暴增29倍\n\n存储企业德明利10/25公告：三季度营收116.45亿元、同比增357%，归母净利27.29亿元、同比增2902.75%；野村同周报告称存储需求到2028年前仍将快速增长。\n\n◆ 为什么重要：AI数据中心抢走先进存储产能，涨价红利正落到中游存储厂，也说明消费电子涨价短期难回落。\n\n来源：德明利公告 / IT之家 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【深度伪造】Teams开放第三方 深伪检测\n\n微软Teams将允许组织接入认证的第三方工具，扫描会议音视频检测深度伪造，11月中旬起在桌面版、Mac版和网页版推出；检测机器人给出0到1置信度和低中高三级判断。\n\n◆ 为什么重要：AI换脸冒充同事开会的骗局已有先例，平台把检测做成标准接口，企业可以像装杀毒软件一样给会议加一道关。\n\n来源：Windows Latest / IT之家 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI与安全】GEEKCON自称 最后一届人类黑客赛\n\nGEEKCON 2026上海站10/24闭幕，主办方称AI几乎已替代人类黑客，今年差点停办；现场展示远程劫持无人机绕过电子围栏、一条链接劫持银行App转账，并设AI黑客挑战赛。\n\n◆ 为什么重要：连顶级白帽赛事都公开承认AI挖洞效率压过人类，攻防两端的人力结构和人才培养路线都要重排。\n\n来源：GEEKCON / IT之家 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开源社区】r/opensource 全面禁AI引发反弹\n\nr/opensource 10/24发布新规：用AI、由AI做或为AI做的项目都不欢迎，项目须满一年、多人维护，还让不会英语的用户离开；评论区炸锅，有人另立r/trueopensource。\n\n◆ 为什么重要：开源社区对AI的不信任已从吐槽变成门槛，AI辅助项目在传统开源渠道获取关注和贡献者会更难。\n\n来源：The Verge 10/25\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【GitHub热门】GitHub日榜 本地语音克隆登顶\n\n10/26早GitHub日榜：全本地语音克隆工具VoiceStudio单日涨星最多之一，Cloudflare安全审计技能继续领涨，反AI味设计技能、迷你双足鸭机器人同时上榜。\n\n◆ 为什么重要：本地化替代云端语音服务、给智能体加审计和设计规范，是开发者当下最愿意点星的方向。\n\n※ 均非48小时内首发，仅为近两日冲榜；星数为当日增量。\n\n来源：GitHub Trending 10/26\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道"}</script>
+<script>
+const G=JSON.parse(document.getElementById("d").textContent);
+const main=document.getElementById("main"),rail=document.getElementById("rail");
+const secs=[...document.querySelectorAll(".item")];
+const imgs=[...document.querySelectorAll(".shot img")];
+const mode=()=>document.documentElement.dataset.mode;
+let loaded=new Set();
+function load(i){
+  for(let k=Math.max(0,i-2);k<=Math.min(imgs.length-1,i+2);k++){
+    const el=imgs[k];if(!el)continue;
+    const want=G.cards[+el.dataset.i][mode()];
+    if(el.src!==want){el.src=want;loaded.add(k);}
+  }
+}
+function repaint(){loaded.forEach(k=>{const el=imgs[k];el.src=G.cards[+el.dataset.i][mode()];});}
+load(0);
+document.getElementById("mode").onclick=e=>{
+  const r=document.documentElement;
+  r.dataset.mode=mode()==="dark"?"light":"dark";
+  e.currentTarget.textContent=mode()==="dark"?"浅色版":"深色版";
+  repaint();
+};
+const toast=document.getElementById("toast");let tt;
+const say=m=>{toast.textContent=m;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),1700)};
+const copy=t=>navigator.clipboard?.writeText(t).then(()=>say("已复制"),()=>say("复制失败，请手动选中"))??say("复制失败");
+document.addEventListener("click",ev=>{
+  const go=ev.target.closest("[data-go]");
+  if(go){document.getElementById("s"+go.dataset.go).scrollIntoView();return}
+  const a=ev.target.closest("[data-act]");
+  if(a){
+    const c=G.cards[+a.dataset.i],d=mode()==="dark";
+    if(a.dataset.act==="dl"){
+      const l=document.createElement("a");l.href=d?c.dark:c.light;
+      l.download=d?c.fileDark:c.fileLight;l.click();say("已下载 "+l.download);
+    }else copy(c.copy);
+    return;
+  }
+  if(ev.target.id==="copyAll"){copy(G.allCopy);return}
+  const m=ev.target.closest(".more");
+  if(m){
+    const b=m.closest(".text"),on=b.querySelector(".summary").classList.toggle("open");
+    b.querySelector(".why")?.classList.toggle("open",on);
+    m.textContent=on?"收起":"展开全文";m.setAttribute("aria-expanded",on);
+  }
+});
+const pos=document.getElementById("pos"),prog=document.getElementById("prog");
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting||en.intersectionRatio<.55)return;
+  const i=secs.indexOf(en.target);
+  load(i);
+  pos.textContent=i===0?"封面":(i>G.cards.length-1?"结尾":G.cards[i].no);
+  prog.style.width=(i/(secs.length-1)*100)+"%";
+  rail.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-current",String(j===i)));
+}),{root:main,threshold:.55});
+secs.forEach(s=>io.observe(s));
+addEventListener("keydown",e=>{
+  if(e.target.matches("input,textarea"))return;
+  const cur=secs.findIndex(s=>s.getBoundingClientRect().top>-window.innerHeight/2);
+  if(e.key==="ArrowDown"||e.key==="j"){e.preventDefault();secs[Math.min(secs.length-1,cur+1)]?.scrollIntoView()}
+  if(e.key==="ArrowUp"||e.key==="k"){e.preventDefault();secs[Math.max(0,cur-1)]?.scrollIntoView()}
+});
+
+</script>
+</body></html>
