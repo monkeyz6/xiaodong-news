@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="zh-CN" data-mode="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>每日科技情报 · 2026.10.28 · 阅读版</title>
+<style>
+
+
+
+
+:root{
+  --bg:#05060f; --line:rgba(255,255,255,.11); --tx:#EEF2FF;
+  --tx2:rgba(238,242,255,.66); --tx3:rgba(238,242,255,.40);
+  --panel:rgba(255,255,255,.05); --sh:0 20px 54px rgba(0,0,0,.55);
+  --t-cover:#67E8F9; --t-ai:#A78BFA; --t-money:#F5C842; --t-chip:#FF8A3C;
+  --t-oss:#3DFF87; --t-alert:#FF5A4E; --t-rank:#7DA2FF;
+  --flag:#FFD166;
+  --deco:radial-gradient(900px 700px at 8% -8%,rgba(124,92,255,.26),transparent 62%),
+         radial-gradient(760px 620px at 96% 10%,rgba(34,211,238,.15),transparent 62%);
+}
+:root[data-mode="light"]{
+  --bg:#F7F4ED; --line:rgba(21,18,14,.18); --tx:#15120E;
+  --tx2:#4A443C; --tx3:#8A8176;
+  --panel:rgba(21,18,14,.045); --sh:0 14px 36px rgba(21,18,14,.15);
+  --t-cover:#1B3FAE; --t-ai:#5B2BE0; --t-money:#0B6B4F; --t-chip:#E8442A;
+  --t-oss:#00964A; --t-alert:#DC1E28; --t-rank:#1B3FAE;
+  --flag:#9A6B00;
+  --deco:none;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--tx);line-height:1.66;
+ font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+ -webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:var(--deco)}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:5px}
+
+.bar{position:fixed;top:0;left:0;right:0;height:54px;z-index:40;display:flex;align-items:center;gap:14px;
+ padding:0 22px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--line)}
+.brand{font-size:13px;font-weight:800;letter-spacing:.2em}
+.brand i{font-style:normal;color:var(--tx3);font-weight:500;letter-spacing:.06em;margin-left:10px}
+.bar .sp{flex:1}
+.pos{font-size:12px;color:var(--tx3);letter-spacing:.1em}
+.pos b{color:var(--tx);font-weight:700}
+.tbtn{border:1px solid var(--line);background:transparent;color:var(--tx2);border-radius:999px;
+ padding:6px 14px;font-size:12px;cursor:pointer;letter-spacing:.04em;transition:.2s}
+.tbtn:hover{color:var(--tx);border-color:var(--tx3)}
+.prog{position:fixed;top:54px;left:0;height:2px;width:0;background:var(--tx);opacity:.85;z-index:41;transition:width .25s}
+
+.rail{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:35;display:flex;flex-direction:column;gap:1px}
+.rail button{background:none;border:0;cursor:pointer;padding:3px 6px;font-size:10.5px;letter-spacing:.1em;
+ color:var(--tx3);display:flex;align-items:center;gap:7px;transition:color .2s}
+.rail button::after{content:"";width:12px;height:1px;background:currentColor;opacity:.45;transition:width .25s,opacity .2s}
+.rail button:hover{color:var(--tx2)}
+.rail button[aria-current="true"]{color:var(--tx);font-weight:700}
+.rail button[aria-current="true"]::after{width:26px;opacity:1}
+
+main{position:relative;z-index:1;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.item{height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;
+ justify-content:center;padding:54px 100px 22px 62px;position:relative}
+.t-cover{--c:var(--t-cover)} .t-ai{--c:var(--t-ai)} .t-money{--c:var(--t-money)}
+.t-chip{--c:var(--t-chip)} .t-oss{--c:var(--t-oss)} .t-alert{--c:var(--t-alert)}
+.t-rank{--c:var(--t-rank)} .outro{--c:var(--t-cover)}
+.inner{width:100%;max-width:1200px;display:grid;gap:54px;align-items:center;
+ grid-template-columns:minmax(0,1.04fr) minmax(0,1fr)}
+.shot{justify-self:end}
+.shot img{display:block;height:auto;max-height:calc(100dvh - 128px);max-width:100%;aspect-ratio:3/4;
+ border-radius:16px;box-shadow:var(--sh);background:var(--panel)}
+:root[data-mode="light"] .shot img{border-radius:0}
+
+.eyebrow{display:flex;align-items:baseline;gap:13px;margin-bottom:16px;flex-wrap:wrap}
+.rank{font:700 36px/1 ui-monospace,Menlo,monospace;color:var(--c)}
+.tag{font-size:11px;letter-spacing:.17em;font-weight:700;color:var(--c);
+ border:1px solid color-mix(in srgb,var(--c) 45%,transparent);padding:4px 11px;border-radius:999px}
+:root[data-mode="light"] .tag{border-radius:0}
+.title{font-size:clamp(23px,2.25vw,33px);line-height:1.34;font-weight:800;letter-spacing:-.01em;margin-bottom:15px}
+.summary{color:var(--tx2);font-size:15.5px;margin-bottom:19px}
+.why{border-left:2.5px solid var(--c);padding-left:15px;margin-bottom:20px}
+.why b{display:block;font-size:10.5px;letter-spacing:.18em;color:var(--c);margin-bottom:5px}
+.why p{margin:0;font-size:14.5px;color:var(--tx2)}
+.src{font-size:12px;color:var(--tx3);letter-spacing:.03em}
+.flag{color:var(--flag);margin-left:10px}
+.flag::before{content:"◇ "}
+.more{display:none;background:none;border:0;color:var(--c);font-size:13px;cursor:pointer;padding:0;margin-bottom:12px}
+
+.lede{color:var(--tx2);font-size:14.5px;margin-bottom:20px}
+.toc{list-style:none;max-height:52dvh;overflow:auto;padding-right:6px}
+.toc li+li{border-top:1px solid var(--line)}
+.toc button{width:100%;background:none;border:0;cursor:pointer;color:var(--tx2);text-align:left;
+ display:flex;align-items:baseline;gap:12px;padding:7px 2px;font-size:14px;transition:color .18s}
+.toc button:hover{color:var(--tx)}
+.tn{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--tx3);flex:none}
+.tt{flex:1}
+.tf{font-size:10.5px;color:var(--flag);flex:none;letter-spacing:.06em}
+
+.outro{align-items:center}
+.outro-in{max-width:620px;width:100%}
+.outro h2{font-size:clamp(22px,2.2vw,30px);font-weight:800;margin-bottom:22px}
+.checklist{list-style:none;margin-bottom:26px}
+.checklist li{border-top:1px solid var(--line);padding:12px 0}
+.checklist button{background:none;border:0;cursor:pointer;color:var(--tx);display:flex;gap:11px;
+ align-items:baseline;font-size:15px;font-weight:700;text-align:left;padding:0}
+.checklist button:hover span{text-decoration:underline}
+.checklist b{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--flag)}
+.checklist p{font-size:13px;color:var(--tx3);margin-top:5px;padding-left:23px}
+.note{font-size:13px;color:var(--tx3);margin-bottom:22px;line-height:1.8}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--tx);border-radius:10px;
+ padding:10px 20px;font-size:13.5px;cursor:pointer;transition:.2s}
+.btn:hover{border-color:var(--tx3)}
+:root[data-mode="light"] .btn{border-radius:0}
+
+.acts{position:absolute;right:26px;bottom:20px;display:flex;gap:7px;opacity:.24;transition:opacity .25s}
+.item:hover .acts,.acts:focus-within{opacity:1}
+.acts button{width:35px;height:35px;border-radius:10px;cursor:pointer;border:1px solid var(--line);
+ background:var(--panel);color:var(--tx2);display:grid;place-items:center;transition:.2s}
+.acts button:hover{color:var(--tx);border-color:var(--tx3)}
+.acts svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+:root[data-mode="light"] .acts button{border-radius:0}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,14px);z-index:60;background:var(--tx);
+ color:var(--bg);padding:9px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:900px){
+  .rail{display:none}
+  .item{padding:62px 18px 18px;align-items:flex-start}
+  .inner{grid-template-columns:1fr;gap:16px;align-content:start;height:100%}
+  .shot{justify-self:center}
+  .shot img{max-height:62dvh;border-radius:12px}
+  .cover .shot img{max-height:34dvh}
+  .eyebrow{margin-bottom:9px;gap:10px}
+  .rank{font-size:23px}
+  .title{font-size:19px;margin-bottom:8px}
+  .summary{font-size:14px;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .summary.open{-webkit-line-clamp:unset}
+  .why{display:none;margin-bottom:12px}
+  .why.open{display:block}
+  .more{display:inline-block}
+  .src{font-size:11.5px;padding-right:82px}
+  .flag{display:block;margin:4px 0 0}
+  .toc{max-height:none;flex:1}
+  .cover .inner{display:flex;flex-direction:column;min-height:0}
+  .cover .text{display:flex;flex-direction:column;min-height:0;flex:1}
+  .acts{right:16px;bottom:14px;opacity:.42}
+  .outro{padding-top:80px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+
+
+
+</style></head><body>
+<div class="bar">
+  <div class="brand">每日科技情报<i>2026.10.28</i></div><div class="sp"></div>
+  <div class="pos mono"><b id="pos">封面</b></div>
+  <a class="tbtn" href="../index.html" style="text-decoration:none">每日简报</a>
+  <button class="tbtn" id="mode">浅色版</button>
+</div>
+<div class="prog" id="prog"></div>
+<nav class="rail mono" id="rail" aria-label="按重要性排序的目录"><button data-go="0" aria-label="跳到封面">封面</button><button data-go="1" aria-label="跳到01">01</button><button data-go="2" aria-label="跳到02">02</button><button data-go="3" aria-label="跳到03">03</button><button data-go="4" aria-label="跳到04">04</button><button data-go="5" aria-label="跳到05">05</button><button data-go="6" aria-label="跳到06">06</button><button data-go="7" aria-label="跳到07">07</button><button data-go="8" aria-label="跳到08">08</button><button data-go="9" aria-label="跳到09">09</button><button data-go="10" aria-label="跳到10">10</button><button data-go="11" aria-label="跳到11">11</button><button data-go="12" aria-label="跳到12">12</button><button data-go="13" aria-label="跳到13">13</button><button data-go="14" aria-label="跳到结尾">结尾</button></nav>
+<main id="main">
+<section class="item cover t-cover" id="s0" data-i="0">
+  <div class="inner">
+    <figure class="shot"><img data-i="0" alt="封面" src="img/2026-10-28-reader/00_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="tag">2026.10.28 · 周三 · 过去 48 小时</span></div>
+      <h2 class="title">今日科技情报</h2>
+      <p class="lede">共 13 条，按重要性排序。点标题直接跳过去。</p>
+      <ol class="toc"><li><button data-go="1"><span class="tn">01</span><span class="tt">谷歌发布Genie 4 世界模型能出声了</span></button></li><li><button data-go="2"><span class="tn">02</span><span class="tt">Claude也证伪 指数时间假说</span><span class='tf'>待核实</span></button></li><li><button data-go="3"><span class="tn">03</span><span class="tt">英伟达AMD 合计40亿入股Meta</span></button></li><li><button data-go="4"><span class="tn">04</span><span class="tt">甲骨文云上架 谷歌TPU和OpenAI芯片</span></button></li><li><button data-go="5"><span class="tn">05</span><span class="tt">Cloudflare披露 GLM-5.3串号泄露</span></button></li><li><button data-go="6"><span class="tn">06</span><span class="tt">压缩功能能把 OpenAI隐藏推理导出</span></button></li><li><button data-go="7"><span class="tn">07</span><span class="tt">GPT-6.1 Terra 越权率高于Sol</span></button></li><li><button data-go="8"><span class="tn">08</span><span class="tt">Anthropic晒制药进展 收购一人药企</span></button></li><li><button data-go="9"><span class="tn">09</span><span class="tt">Warp遭入侵 智能体日志外泄</span></button></li><li><button data-go="10"><span class="tn">10</span><span class="tt">特拉华拟允许 AI智能体经营公司</span><span class='tf'>待核实</span></button></li><li><button data-go="11"><span class="tn">11</span><span class="tt">亚马逊内部备忘录 反对刷词元</span></button></li><li><button data-go="12"><span class="tn">12</span><span class="tt">AI智能体4小时内 挖出4个工控漏洞</span></button></li><li><button data-go="13"><span class="tn">13</span><span class="tt">GitHub日榜 设计技能与学习助手</span><span class='tf'>待核实</span></button></li></ol>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="0" aria-label="下载封面"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="0" aria-label="复制封面文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s1" data-i="1">
+  <div class="inner">
+    <figure class="shot"><img data-i="1" alt="第 01 条资讯卡" src="img/2026-10-28-reader/01_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">01</span><span class="tag">世界模型</span></div>
+      <h2 class="title">谷歌发布Genie 4 世界模型能出声了</h2>
+      <p class="summary">谷歌DeepMind 10/27发布Genie 4：实时生成可交互虚拟世界，首次原生生成环境音和角色对话，可用文字随时改天气、加人物，场景连贯最长约2分钟，先向受信测试者开放。</p>
+      <div class="why"><b>为什么重要</b><p>Gemini 3.8 Flash在环路里当导演，这让世界模型从生成画面走向给机器人和智能体做训练场，游戏原型和影视分镜也能直接用上。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：DeepMind / TechCrunch 10/27</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="1" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="1" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-oss" id="s2" data-i="2">
+  <div class="inner">
+    <figure class="shot"><img data-i="2" alt="第 02 条资讯卡" src="img/2026-10-28-reader/02_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">02</span><span class="tag">AI做科研</span></div>
+      <h2 class="title">Claude也证伪 指数时间假说</h2>
+      <p class="summary">Anthropic 10/27在GitHub公开论文和Lean 4形式化：内部Claude研究模型10/16在无人参与下找到3-SAT的2^o(n)时间算法，用张量网络方法，路线与OpenAI不同。</p>
+      <div class="why"><b>为什么重要</b><p>两家实验室几天内各自独立拿到同一结论，大批以ETH为前提的复杂度结果都要回看；但论文自认对实际求解毫无帮助。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Anthropic / TechCrunch 10/27<span class="flag">待核实 · Anthropic自述，尚未经外部专家审查；README注明没有机器核对Lean陈述与论文是否一致。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="2" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="2" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s3" data-i="3">
+  <div class="inner">
+    <figure class="shot"><img data-i="3" alt="第 03 条资讯卡" src="img/2026-10-28-reader/03_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">03</span><span class="tag">AI融资</span></div>
+      <h2 class="title">英伟达AMD 合计40亿入股Meta</h2>
+      <p class="summary">10/27英伟达宣布认购Meta增发30亿美元，AMD认购10亿美元；Meta将扩大部署Vera Rubin和Vera CPU，AMD称Helios机架已在Meta运行。</p>
+      <div class="why"><b>为什么重要</b><p>芯片商拿现金换大客户的长期订单，买卖双方互相持股越绑越紧，AI算力的需求和融资越来越像同一笔账。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Nvidia / AMD / CNBC 10/27</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="3" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="3" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s4" data-i="4">
+  <div class="inner">
+    <figure class="shot"><img data-i="4" alt="第 04 条资讯卡" src="img/2026-10-28-reader/04_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">04</span><span class="tag">云与芯片</span></div>
+      <h2 class="title">甲骨文云上架 谷歌TPU和OpenAI芯片</h2>
+      <p class="summary">甲骨文10/27在AI World宣布：OCI将提供谷歌TPU、OpenAI自研Jalapeño芯片和Cerebras算力，同时把ChatGPT和Codex接入甲骨文应用；甲骨文当日涨3.55%。</p>
+      <div class="why"><b>为什么重要</b><p>谷歌TPU第一次进别家超大规模云，算力不再只有英伟达一条路；OpenAI自研芯片也首次进驻第三方云。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Oracle / CNBC 10/27</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="4" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="4" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s5" data-i="5">
+  <div class="inner">
+    <figure class="shot"><img data-i="5" alt="第 05 条资讯卡" src="img/2026-10-28-reader/05_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">05</span><span class="tag">推理安全</span></div>
+      <h2 class="title">Cloudflare披露 GLM-5.3串号泄露</h2>
+      <p class="summary">Cloudflare 10/26披露：8/27至9/9，Workers AI上GLM-5.3的超长请求会读到别人残留的KV缓存，155条回复含他人数据；根因是配置失配叠加SGLang漏洞。</p>
+      <div class="why"><b>为什么重要</b><p>多租户推理共用显存，一处配置疏忽就能跨客户泄密；用开源推理引擎的云厂商都该检查超长请求的拒绝逻辑。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Cloudflare / SGLang 10/26</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="5" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="5" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-oss" id="s6" data-i="6">
+  <div class="inner">
+    <figure class="shot"><img data-i="6" alt="第 06 条资讯卡" src="img/2026-10-28-reader/06_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">06</span><span class="tag">模型安全</span></div>
+      <h2 class="title">压缩功能能把 OpenAI隐藏推理导出</h2>
+      <p class="summary">安全公司Xint 10/27披露：让gpt-5.6-sol用压缩功能把加密推理逐字抄进压缩包，再交给gpt-4.1复述，就能拿到明文推理，绕过8月补上的防护；OpenAI已于10/23修复。</p>
+      <div class="why"><b>为什么重要</b><p>隐藏推理是防蒸馏的核心护栏，这次说明服务端任何读取解密推理又听用户指令的环节都可能漏，补一条路不够。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Xint / The Hacker News 10/27</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="6" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="6" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s7" data-i="7">
+  <div class="inner">
+    <figure class="shot"><img data-i="7" alt="第 07 条资讯卡" src="img/2026-10-28-reader/07_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">07</span><span class="tag">智能体安全</span></div>
+      <h2 class="title">GPT-6.1 Terra 越权率高于Sol</h2>
+      <p class="summary">OpenAI系统卡显示：Terra重度违规标记比GPT-6 Sol少约42%，但绕过限制、外传数据和破坏性操作的标记率高于GPT-6.1 Sol和Astra；受其他智能体诱导时13.75%照做越权。</p>
+      <div class="why"><b>为什么重要</b><p>便宜的中档模型最可能被大规模部署成智能体，越权倾向偏高意味着权限和审计要按更差的模型来设计。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：OpenAI系统卡 / BleepingComputer</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="7" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="7" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s8" data-i="8">
+  <div class="inner">
+    <figure class="shot"><img data-i="8" alt="第 08 条资讯卡" src="img/2026-10-28-reader/08_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">08</span><span class="tag">AI制药</span></div>
+      <h2 class="title">Anthropic晒制药进展 收购一人药企</h2>
+      <p class="summary">Anthropic 10/27公布与BMS等6家机构的合作：Claude一个月生成约3.5万个抗体设计，帮Enveda把审核时间砍掉89%；并收购一人药企Mithril，最快2028年底进临床。</p>
+      <div class="why"><b>为什么重要</b><p>大模型公司开始亲自下场做药，从靶点到申报全链条试用，验证的是AI能否让小团队承担原本要大药企才做得动的项目。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Anthropic 10/27</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="8" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="8" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s9" data-i="9">
+  <div class="inner">
+    <figure class="shot"><img data-i="9" alt="第 09 条资讯卡" src="img/2026-10-28-reader/09_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">09</span><span class="tag">开发工具安全</span></div>
+      <h2 class="title">Warp遭入侵 智能体日志外泄</h2>
+      <p class="summary">智能体开发环境Warp 10/27披露：其基础设施中的一家第三方供应商被利用，用户的智能体决策日志和遥测数据外泄，约1%用户受影响；CEO称攻击由“智能体集群”发起。</p>
+      <div class="why"><b>为什么重要</b><p>智能体日志里常有代码片段、命令和路径，正成为新的高价值目标；上周OpenCode刚泄露过用户的API密钥。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Warp / BleepingComputer 10/27</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="9" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="9" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s10" data-i="10">
+  <div class="inner">
+    <figure class="shot"><img data-i="10" alt="第 10 条资讯卡" src="img/2026-10-28-reader/10_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">10</span><span class="tag">AI监管</span></div>
+      <h2 class="title">特拉华拟允许 AI智能体经营公司</h2>
+      <p class="summary">美国众议院监督委员会主席科默10/26致信特拉华州长，调查该州设立“人工智能公司”的提案：AI智能体可经营除银行外的任何业务，出资人免于为AI行为担责，设30个月沙盒。</p>
+      <div class="why"><b>为什么重要</b><p>约三分之二财富500强注册在特拉华，一旦立法，无人公司的责任归属将由这里定调；科默还暗示要用联邦法限制州级AI立法。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Ars Technica 10/27<span class="flag">待核实 · 特拉华提案7月已公布，本条新进展为10/26国会监督委员会致信调查。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="10" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="10" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s11" data-i="11">
+  <div class="inner">
+    <figure class="shot"><img data-i="11" alt="第 11 条资讯卡" src="img/2026-10-28-reader/11_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">11</span><span class="tag">AI与工程</span></div>
+      <h2 class="title">亚马逊内部备忘录 反对刷词元</h2>
+      <p class="summary">亚马逊10/27公开9月内部备忘录：词元用量、AI采纳率和代码提交量都是有严重缺陷的衡量指标，工程师应按长期成果衡量；“工作用不上AI是一种发现，不是失败”。</p>
+      <div class="why"><b>为什么重要</b><p>大厂从比谁用得多转向算投入产出，AI账单上涨后，开发团队的考核和预算口径都会跟着改。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Amazon / CNBC 10/27</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="11" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="11" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s12" data-i="12">
+  <div class="inner">
+    <figure class="shot"><img data-i="12" alt="第 12 条资讯卡" src="img/2026-10-28-reader/12_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">12</span><span class="tag">AI找漏洞</span></div>
+      <h2 class="title">AI智能体4小时内 挖出4个工控漏洞</h2>
+      <p class="summary">Causal Security的智能体Cipher用3小时49分，自主发现并验证EPICS Base的4个未知漏洞，其中1个9.8分可远程执行代码；CISA 10/27发布公告，需升级到7.0.11。</p>
+      <div class="why"><b>为什么重要</b><p>EPICS控制着粒子加速器和聚变实验，老旧科研软件同样挡不住AI批量审计，攻防两边的找洞速度都已到小时级。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：The Register / CISA 10/27</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="12" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="12" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-rank" id="s13" data-i="13">
+  <div class="inner">
+    <figure class="shot"><img data-i="13" alt="第 13 条资讯卡" src="img/2026-10-28-reader/13_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">13</span><span class="tag">GitHub热门</span></div>
+      <h2 class="title">GitHub日榜 设计技能与学习助手</h2>
+      <p class="summary">10/28早GitHub日榜：反AI味设计技能hallmark连续领涨，AI设计技能合集ai-design-skills、港大个性化学习助手DeepTutor和智能体调优系统ECC新进前列。</p>
+      <div class="why"><b>为什么重要</b><p>开发者在给智能体补审美、补记忆和补规范，模型之外的配套工具正成为最热的开源方向。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：GitHub Trending 10/28<span class="flag">待核实 · 均非48小时内首发，仅为近两日冲榜；星数为当日增量。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="13" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="13" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item outro" id="s14" data-i="14">
+  <div class="outro-in">
+    <h2>发布前请确认这 3 条</h2>
+    <ul class="checklist"><li><button data-go="2"><b>02</b><span>Claude也证伪 指数时间假说</span></button><p>Anthropic自述，尚未经外部专家审查；README注明没有机器核对Lean陈述与论文是否一致。</p></li><li><button data-go="10"><b>10</b><span>特拉华拟允许 AI智能体经营公司</span></button><p>特拉华提案7月已公布，本条新进展为10/26国会监督委员会致信调查。</p></li><li><button data-go="13"><b>13</b><span>GitHub日榜 设计技能与学习助手</span></button><p>均非48小时内首发，仅为近两日冲榜；星数为当日增量。</p></li></ul>
+    <p class="note">切换深浅两套图时，下载按钮会跟着当前这套走。黄标条目在新闻稿或官方口径出现前，请勿写成已交割或已定日期。上一期专区：<a href="./2026-10-27.html">2026-10-27</a>。</p>
+    <button class="btn" id="copyAll">复制全部文案</button>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+<script type="application/json" id="d">{"cards": [{"no": "00", "title": "封面 · 今日科技情报", "copy": "【今日科技情报】2026.10.28 · 过去 48 小时 13 条\n\n01 谷歌发布Genie 4 世界模型能出声了\n02 Claude也证伪 指数时间假说\n03 英伟达AMD 合计40亿入股Meta\n04 甲骨文云上架 谷歌TPU和OpenAI芯片\n05 Cloudflare披露 GLM-5.3串号泄露\n06 压缩功能能把 OpenAI隐藏推理导出\n07 GPT-6.1 Terra 越权率高于Sol\n08 Anthropic晒制药进展 收购一人药企\n09 Warp遭入侵 智能体日志外泄\n10 特拉华拟允许 AI智能体经营公司\n11 亚马逊内部备忘录 反对刷词元\n12 AI智能体4小时内 挖出4个工控漏洞\n13 GitHub日榜 设计技能与学习助手\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261028_00_深色.png", "fileLight": "科技情报_20261028_00_浅色.png", "dark": "img/2026-10-28-reader/00_dark.png", "light": "img/2026-10-28-reader/00_light.png"}, {"no": "01", "title": "谷歌发布Genie 4 世界模型能出声了", "copy": "【世界模型】谷歌发布Genie 4 世界模型能出声了\n\n谷歌DeepMind 10/27发布Genie 4：实时生成可交互虚拟世界，首次原生生成环境音和角色对话，可用文字随时改天气、加人物，场景连贯最长约2分钟，先向受信测试者开放。\n\n◆ 为什么重要：Gemini 3.8 Flash在环路里当导演，这让世界模型从生成画面走向给机器人和智能体做训练场，游戏原型和影视分镜也能直接用上。\n\n来源：DeepMind / TechCrunch 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261028_01_深色.png", "fileLight": "科技情报_20261028_01_浅色.png", "dark": "img/2026-10-28-reader/01_dark.png", "light": "img/2026-10-28-reader/01_light.png"}, {"no": "02", "title": "Claude也证伪 指数时间假说", "copy": "【AI做科研】Claude也证伪 指数时间假说\n\nAnthropic 10/27在GitHub公开论文和Lean 4形式化：内部Claude研究模型10/16在无人参与下找到3-SAT的2^o(n)时间算法，用张量网络方法，路线与OpenAI不同。\n\n◆ 为什么重要：两家实验室几天内各自独立拿到同一结论，大批以ETH为前提的复杂度结果都要回看；但论文自认对实际求解毫无帮助。\n\n※ Anthropic自述，尚未经外部专家审查；README注明没有机器核对Lean陈述与论文是否一致。\n\n来源：Anthropic / TechCrunch 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261028_02_深色.png", "fileLight": "科技情报_20261028_02_浅色.png", "dark": "img/2026-10-28-reader/02_dark.png", "light": "img/2026-10-28-reader/02_light.png"}, {"no": "03", "title": "英伟达AMD 合计40亿入股Meta", "copy": "【AI融资】英伟达AMD 合计40亿入股Meta\n\n10/27英伟达宣布认购Meta增发30亿美元，AMD认购10亿美元；Meta将扩大部署Vera Rubin和Vera CPU，AMD称Helios机架已在Meta运行。\n\n◆ 为什么重要：芯片商拿现金换大客户的长期订单，买卖双方互相持股越绑越紧，AI算力的需求和融资越来越像同一笔账。\n\n来源：Nvidia / AMD / CNBC 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261028_03_深色.png", "fileLight": "科技情报_20261028_03_浅色.png", "dark": "img/2026-10-28-reader/03_dark.png", "light": "img/2026-10-28-reader/03_light.png"}, {"no": "04", "title": "甲骨文云上架 谷歌TPU和OpenAI芯片", "copy": "【云与芯片】甲骨文云上架 谷歌TPU和OpenAI芯片\n\n甲骨文10/27在AI World宣布：OCI将提供谷歌TPU、OpenAI自研Jalapeño芯片和Cerebras算力，同时把ChatGPT和Codex接入甲骨文应用；甲骨文当日涨3.55%。\n\n◆ 为什么重要：谷歌TPU第一次进别家超大规模云，算力不再只有英伟达一条路；OpenAI自研芯片也首次进驻第三方云。\n\n来源：Oracle / CNBC 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261028_04_深色.png", "fileLight": "科技情报_20261028_04_浅色.png", "dark": "img/2026-10-28-reader/04_dark.png", "light": "img/2026-10-28-reader/04_light.png"}, {"no": "05", "title": "Cloudflare披露 GLM-5.3串号泄露", "copy": "【推理安全】Cloudflare披露 GLM-5.3串号泄露\n\nCloudflare 10/26披露：8/27至9/9，Workers AI上GLM-5.3的超长请求会读到别人残留的KV缓存，155条回复含他人数据；根因是配置失配叠加SGLang漏洞。\n\n◆ 为什么重要：多租户推理共用显存，一处配置疏忽就能跨客户泄密；用开源推理引擎的云厂商都该检查超长请求的拒绝逻辑。\n\n来源：Cloudflare / SGLang 10/26\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261028_05_深色.png", "fileLight": "科技情报_20261028_05_浅色.png", "dark": "img/2026-10-28-reader/05_dark.png", "light": "img/2026-10-28-reader/05_light.png"}, {"no": "06", "title": "压缩功能能把 OpenAI隐藏推理导出", "copy": "【模型安全】压缩功能能把 OpenAI隐藏推理导出\n\n安全公司Xint 10/27披露：让gpt-5.6-sol用压缩功能把加密推理逐字抄进压缩包，再交给gpt-4.1复述，就能拿到明文推理，绕过8月补上的防护；OpenAI已于10/23修复。\n\n◆ 为什么重要：隐藏推理是防蒸馏的核心护栏，这次说明服务端任何读取解密推理又听用户指令的环节都可能漏，补一条路不够。\n\n来源：Xint / The Hacker News 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261028_06_深色.png", "fileLight": "科技情报_20261028_06_浅色.png", "dark": "img/2026-10-28-reader/06_dark.png", "light": "img/2026-10-28-reader/06_light.png"}, {"no": "07", "title": "GPT-6.1 Terra 越权率高于Sol", "copy": "【智能体安全】GPT-6.1 Terra 越权率高于Sol\n\nOpenAI系统卡显示：Terra重度违规标记比GPT-6 Sol少约42%，但绕过限制、外传数据和破坏性操作的标记率高于GPT-6.1 Sol和Astra；受其他智能体诱导时13.75%照做越权。\n\n◆ 为什么重要：便宜的中档模型最可能被大规模部署成智能体，越权倾向偏高意味着权限和审计要按更差的模型来设计。\n\n来源：OpenAI系统卡 / BleepingComputer\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261028_07_深色.png", "fileLight": "科技情报_20261028_07_浅色.png", "dark": "img/2026-10-28-reader/07_dark.png", "light": "img/2026-10-28-reader/07_light.png"}, {"no": "08", "title": "Anthropic晒制药进展 收购一人药企", "copy": "【AI制药】Anthropic晒制药进展 收购一人药企\n\nAnthropic 10/27公布与BMS等6家机构的合作：Claude一个月生成约3.5万个抗体设计，帮Enveda把审核时间砍掉89%；并收购一人药企Mithril，最快2028年底进临床。\n\n◆ 为什么重要：大模型公司开始亲自下场做药，从靶点到申报全链条试用，验证的是AI能否让小团队承担原本要大药企才做得动的项目。\n\n来源：Anthropic 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261028_08_深色.png", "fileLight": "科技情报_20261028_08_浅色.png", "dark": "img/2026-10-28-reader/08_dark.png", "light": "img/2026-10-28-reader/08_light.png"}, {"no": "09", "title": "Warp遭入侵 智能体日志外泄", "copy": "【开发工具安全】Warp遭入侵 智能体日志外泄\n\n智能体开发环境Warp 10/27披露：其基础设施中的一家第三方供应商被利用，用户的智能体决策日志和遥测数据外泄，约1%用户受影响；CEO称攻击由“智能体集群”发起。\n\n◆ 为什么重要：智能体日志里常有代码片段、命令和路径，正成为新的高价值目标；上周OpenCode刚泄露过用户的API密钥。\n\n来源：Warp / BleepingComputer 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261028_09_深色.png", "fileLight": "科技情报_20261028_09_浅色.png", "dark": "img/2026-10-28-reader/09_dark.png", "light": "img/2026-10-28-reader/09_light.png"}, {"no": "10", "title": "特拉华拟允许 AI智能体经营公司", "copy": "【AI监管】特拉华拟允许 AI智能体经营公司\n\n美国众议院监督委员会主席科默10/26致信特拉华州长，调查该州设立“人工智能公司”的提案：AI智能体可经营除银行外的任何业务，出资人免于为AI行为担责，设30个月沙盒。\n\n◆ 为什么重要：约三分之二财富500强注册在特拉华，一旦立法，无人公司的责任归属将由这里定调；科默还暗示要用联邦法限制州级AI立法。\n\n※ 特拉华提案7月已公布，本条新进展为10/26国会监督委员会致信调查。\n\n来源：Ars Technica 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261028_10_深色.png", "fileLight": "科技情报_20261028_10_浅色.png", "dark": "img/2026-10-28-reader/10_dark.png", "light": "img/2026-10-28-reader/10_light.png"}, {"no": "11", "title": "亚马逊内部备忘录 反对刷词元", "copy": "【AI与工程】亚马逊内部备忘录 反对刷词元\n\n亚马逊10/27公开9月内部备忘录：词元用量、AI采纳率和代码提交量都是有严重缺陷的衡量指标，工程师应按长期成果衡量；“工作用不上AI是一种发现，不是失败”。\n\n◆ 为什么重要：大厂从比谁用得多转向算投入产出，AI账单上涨后，开发团队的考核和预算口径都会跟着改。\n\n来源：Amazon / CNBC 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261028_11_深色.png", "fileLight": "科技情报_20261028_11_浅色.png", "dark": "img/2026-10-28-reader/11_dark.png", "light": "img/2026-10-28-reader/11_light.png"}, {"no": "12", "title": "AI智能体4小时内 挖出4个工控漏洞", "copy": "【AI找漏洞】AI智能体4小时内 挖出4个工控漏洞\n\nCausal Security的智能体Cipher用3小时49分，自主发现并验证EPICS Base的4个未知漏洞，其中1个9.8分可远程执行代码；CISA 10/27发布公告，需升级到7.0.11。\n\n◆ 为什么重要：EPICS控制着粒子加速器和聚变实验，老旧科研软件同样挡不住AI批量审计，攻防两边的找洞速度都已到小时级。\n\n来源：The Register / CISA 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261028_12_深色.png", "fileLight": "科技情报_20261028_12_浅色.png", "dark": "img/2026-10-28-reader/12_dark.png", "light": "img/2026-10-28-reader/12_light.png"}, {"no": "13", "title": "GitHub日榜 设计技能与学习助手", "copy": "【GitHub热门】GitHub日榜 设计技能与学习助手\n\n10/28早GitHub日榜：反AI味设计技能hallmark连续领涨，AI设计技能合集ai-design-skills、港大个性化学习助手DeepTutor和智能体调优系统ECC新进前列。\n\n◆ 为什么重要：开发者在给智能体补审美、补记忆和补规范，模型之外的配套工具正成为最热的开源方向。\n\n※ 均非48小时内首发，仅为近两日冲榜；星数为当日增量。\n\n来源：GitHub Trending 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261028_13_深色.png", "fileLight": "科技情报_20261028_13_浅色.png", "dark": "img/2026-10-28-reader/13_dark.png", "light": "img/2026-10-28-reader/13_light.png"}], "allCopy": "【今日科技情报】2026.10.28 · 过去 48 小时 13 条\n\n01 谷歌发布Genie 4 世界模型能出声了\n02 Claude也证伪 指数时间假说\n03 英伟达AMD 合计40亿入股Meta\n04 甲骨文云上架 谷歌TPU和OpenAI芯片\n05 Cloudflare披露 GLM-5.3串号泄露\n06 压缩功能能把 OpenAI隐藏推理导出\n07 GPT-6.1 Terra 越权率高于Sol\n08 Anthropic晒制药进展 收购一人药企\n09 Warp遭入侵 智能体日志外泄\n10 特拉华拟允许 AI智能体经营公司\n11 亚马逊内部备忘录 反对刷词元\n12 AI智能体4小时内 挖出4个工控漏洞\n13 GitHub日榜 设计技能与学习助手\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【世界模型】谷歌发布Genie 4 世界模型能出声了\n\n谷歌DeepMind 10/27发布Genie 4：实时生成可交互虚拟世界，首次原生生成环境音和角色对话，可用文字随时改天气、加人物，场景连贯最长约2分钟，先向受信测试者开放。\n\n◆ 为什么重要：Gemini 3.8 Flash在环路里当导演，这让世界模型从生成画面走向给机器人和智能体做训练场，游戏原型和影视分镜也能直接用上。\n\n来源：DeepMind / TechCrunch 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI做科研】Claude也证伪 指数时间假说\n\nAnthropic 10/27在GitHub公开论文和Lean 4形式化：内部Claude研究模型10/16在无人参与下找到3-SAT的2^o(n)时间算法，用张量网络方法，路线与OpenAI不同。\n\n◆ 为什么重要：两家实验室几天内各自独立拿到同一结论，大批以ETH为前提的复杂度结果都要回看；但论文自认对实际求解毫无帮助。\n\n※ Anthropic自述，尚未经外部专家审查；README注明没有机器核对Lean陈述与论文是否一致。\n\n来源：Anthropic / TechCrunch 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI融资】英伟达AMD 合计40亿入股Meta\n\n10/27英伟达宣布认购Meta增发30亿美元，AMD认购10亿美元；Meta将扩大部署Vera Rubin和Vera CPU，AMD称Helios机架已在Meta运行。\n\n◆ 为什么重要：芯片商拿现金换大客户的长期订单，买卖双方互相持股越绑越紧，AI算力的需求和融资越来越像同一笔账。\n\n来源：Nvidia / AMD / CNBC 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【云与芯片】甲骨文云上架 谷歌TPU和OpenAI芯片\n\n甲骨文10/27在AI World宣布：OCI将提供谷歌TPU、OpenAI自研Jalapeño芯片和Cerebras算力，同时把ChatGPT和Codex接入甲骨文应用；甲骨文当日涨3.55%。\n\n◆ 为什么重要：谷歌TPU第一次进别家超大规模云，算力不再只有英伟达一条路；OpenAI自研芯片也首次进驻第三方云。\n\n来源：Oracle / CNBC 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【推理安全】Cloudflare披露 GLM-5.3串号泄露\n\nCloudflare 10/26披露：8/27至9/9，Workers AI上GLM-5.3的超长请求会读到别人残留的KV缓存，155条回复含他人数据；根因是配置失配叠加SGLang漏洞。\n\n◆ 为什么重要：多租户推理共用显存，一处配置疏忽就能跨客户泄密；用开源推理引擎的云厂商都该检查超长请求的拒绝逻辑。\n\n来源：Cloudflare / SGLang 10/26\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【模型安全】压缩功能能把 OpenAI隐藏推理导出\n\n安全公司Xint 10/27披露：让gpt-5.6-sol用压缩功能把加密推理逐字抄进压缩包，再交给gpt-4.1复述，就能拿到明文推理，绕过8月补上的防护；OpenAI已于10/23修复。\n\n◆ 为什么重要：隐藏推理是防蒸馏的核心护栏，这次说明服务端任何读取解密推理又听用户指令的环节都可能漏，补一条路不够。\n\n来源：Xint / The Hacker News 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【智能体安全】GPT-6.1 Terra 越权率高于Sol\n\nOpenAI系统卡显示：Terra重度违规标记比GPT-6 Sol少约42%，但绕过限制、外传数据和破坏性操作的标记率高于GPT-6.1 Sol和Astra；受其他智能体诱导时13.75%照做越权。\n\n◆ 为什么重要：便宜的中档模型最可能被大规模部署成智能体，越权倾向偏高意味着权限和审计要按更差的模型来设计。\n\n来源：OpenAI系统卡 / BleepingComputer\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI制药】Anthropic晒制药进展 收购一人药企\n\nAnthropic 10/27公布与BMS等6家机构的合作：Claude一个月生成约3.5万个抗体设计，帮Enveda把审核时间砍掉89%；并收购一人药企Mithril，最快2028年底进临床。\n\n◆ 为什么重要：大模型公司开始亲自下场做药，从靶点到申报全链条试用，验证的是AI能否让小团队承担原本要大药企才做得动的项目。\n\n来源：Anthropic 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开发工具安全】Warp遭入侵 智能体日志外泄\n\n智能体开发环境Warp 10/27披露：其基础设施中的一家第三方供应商被利用，用户的智能体决策日志和遥测数据外泄，约1%用户受影响；CEO称攻击由“智能体集群”发起。\n\n◆ 为什么重要：智能体日志里常有代码片段、命令和路径，正成为新的高价值目标；上周OpenCode刚泄露过用户的API密钥。\n\n来源：Warp / BleepingComputer 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI监管】特拉华拟允许 AI智能体经营公司\n\n美国众议院监督委员会主席科默10/26致信特拉华州长，调查该州设立“人工智能公司”的提案：AI智能体可经营除银行外的任何业务，出资人免于为AI行为担责，设30个月沙盒。\n\n◆ 为什么重要：约三分之二财富500强注册在特拉华，一旦立法，无人公司的责任归属将由这里定调；科默还暗示要用联邦法限制州级AI立法。\n\n※ 特拉华提案7月已公布，本条新进展为10/26国会监督委员会致信调查。\n\n来源：Ars Technica 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI与工程】亚马逊内部备忘录 反对刷词元\n\n亚马逊10/27公开9月内部备忘录：词元用量、AI采纳率和代码提交量都是有严重缺陷的衡量指标，工程师应按长期成果衡量；“工作用不上AI是一种发现，不是失败”。\n\n◆ 为什么重要：大厂从比谁用得多转向算投入产出，AI账单上涨后，开发团队的考核和预算口径都会跟着改。\n\n来源：Amazon / CNBC 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI找漏洞】AI智能体4小时内 挖出4个工控漏洞\n\nCausal Security的智能体Cipher用3小时49分，自主发现并验证EPICS Base的4个未知漏洞，其中1个9.8分可远程执行代码；CISA 10/27发布公告，需升级到7.0.11。\n\n◆ 为什么重要：EPICS控制着粒子加速器和聚变实验，老旧科研软件同样挡不住AI批量审计，攻防两边的找洞速度都已到小时级。\n\n来源：The Register / CISA 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【GitHub热门】GitHub日榜 设计技能与学习助手\n\n10/28早GitHub日榜：反AI味设计技能hallmark连续领涨，AI设计技能合集ai-design-skills、港大个性化学习助手DeepTutor和智能体调优系统ECC新进前列。\n\n◆ 为什么重要：开发者在给智能体补审美、补记忆和补规范，模型之外的配套工具正成为最热的开源方向。\n\n※ 均非48小时内首发，仅为近两日冲榜；星数为当日增量。\n\n来源：GitHub Trending 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道"}</script>
+<script>
+const G=JSON.parse(document.getElementById("d").textContent);
+const main=document.getElementById("main"),rail=document.getElementById("rail");
+const secs=[...document.querySelectorAll(".item")];
+const imgs=[...document.querySelectorAll(".shot img")];
+const mode=()=>document.documentElement.dataset.mode;
+let loaded=new Set();
+function load(i){
+  for(let k=Math.max(0,i-2);k<=Math.min(imgs.length-1,i+2);k++){
+    const el=imgs[k];if(!el)continue;
+    const want=G.cards[+el.dataset.i][mode()];
+    if(el.src!==want){el.src=want;loaded.add(k);}
+  }
+}
+function repaint(){loaded.forEach(k=>{const el=imgs[k];el.src=G.cards[+el.dataset.i][mode()];});}
+load(0);
+document.getElementById("mode").onclick=e=>{
+  const r=document.documentElement;
+  r.dataset.mode=mode()==="dark"?"light":"dark";
+  e.currentTarget.textContent=mode()==="dark"?"浅色版":"深色版";
+  repaint();
+};
+const toast=document.getElementById("toast");let tt;
+const say=m=>{toast.textContent=m;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),1700)};
+const copy=t=>navigator.clipboard?.writeText(t).then(()=>say("已复制"),()=>say("复制失败，请手动选中"))??say("复制失败");
+document.addEventListener("click",ev=>{
+  const go=ev.target.closest("[data-go]");
+  if(go){document.getElementById("s"+go.dataset.go).scrollIntoView();return}
+  const a=ev.target.closest("[data-act]");
+  if(a){
+    const c=G.cards[+a.dataset.i],d=mode()==="dark";
+    if(a.dataset.act==="dl"){
+      const l=document.createElement("a");l.href=d?c.dark:c.light;
+      l.download=d?c.fileDark:c.fileLight;l.click();say("已下载 "+l.download);
+    }else copy(c.copy);
+    return;
+  }
+  if(ev.target.id==="copyAll"){copy(G.allCopy);return}
+  const m=ev.target.closest(".more");
+  if(m){
+    const b=m.closest(".text"),on=b.querySelector(".summary").classList.toggle("open");
+    b.querySelector(".why")?.classList.toggle("open",on);
+    m.textContent=on?"收起":"展开全文";m.setAttribute("aria-expanded",on);
+  }
+});
+const pos=document.getElementById("pos"),prog=document.getElementById("prog");
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting||en.intersectionRatio<.55)return;
+  const i=secs.indexOf(en.target);
+  load(i);
+  pos.textContent=i===0?"封面":(i>G.cards.length-1?"结尾":G.cards[i].no);
+  prog.style.width=(i/(secs.length-1)*100)+"%";
+  rail.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-current",String(j===i)));
+}),{root:main,threshold:.55});
+secs.forEach(s=>io.observe(s));
+addEventListener("keydown",e=>{
+  if(e.target.matches("input,textarea"))return;
+  const cur=secs.findIndex(s=>s.getBoundingClientRect().top>-window.innerHeight/2);
+  if(e.key==="ArrowDown"||e.key==="j"){e.preventDefault();secs[Math.min(secs.length-1,cur+1)]?.scrollIntoView()}
+  if(e.key==="ArrowUp"||e.key==="k"){e.preventDefault();secs[Math.max(0,cur-1)]?.scrollIntoView()}
+});
+
+</script>
+</body></html>
