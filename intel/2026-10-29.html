@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="zh-CN" data-mode="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>每日科技情报 · 2026.10.29 · 阅读版</title>
+<style>
+
+
+
+
+:root{
+  --bg:#05060f; --line:rgba(255,255,255,.11); --tx:#EEF2FF;
+  --tx2:rgba(238,242,255,.66); --tx3:rgba(238,242,255,.40);
+  --panel:rgba(255,255,255,.05); --sh:0 20px 54px rgba(0,0,0,.55);
+  --t-cover:#67E8F9; --t-ai:#A78BFA; --t-money:#F5C842; --t-chip:#FF8A3C;
+  --t-oss:#3DFF87; --t-alert:#FF5A4E; --t-rank:#7DA2FF;
+  --flag:#FFD166;
+  --deco:radial-gradient(900px 700px at 8% -8%,rgba(124,92,255,.26),transparent 62%),
+         radial-gradient(760px 620px at 96% 10%,rgba(34,211,238,.15),transparent 62%);
+}
+:root[data-mode="light"]{
+  --bg:#F7F4ED; --line:rgba(21,18,14,.18); --tx:#15120E;
+  --tx2:#4A443C; --tx3:#8A8176;
+  --panel:rgba(21,18,14,.045); --sh:0 14px 36px rgba(21,18,14,.15);
+  --t-cover:#1B3FAE; --t-ai:#5B2BE0; --t-money:#0B6B4F; --t-chip:#E8442A;
+  --t-oss:#00964A; --t-alert:#DC1E28; --t-rank:#1B3FAE;
+  --flag:#9A6B00;
+  --deco:none;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--tx);line-height:1.66;
+ font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+ -webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:var(--deco)}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:5px}
+
+.bar{position:fixed;top:0;left:0;right:0;height:54px;z-index:40;display:flex;align-items:center;gap:14px;
+ padding:0 22px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--line)}
+.brand{font-size:13px;font-weight:800;letter-spacing:.2em}
+.brand i{font-style:normal;color:var(--tx3);font-weight:500;letter-spacing:.06em;margin-left:10px}
+.bar .sp{flex:1}
+.pos{font-size:12px;color:var(--tx3);letter-spacing:.1em}
+.pos b{color:var(--tx);font-weight:700}
+.tbtn{border:1px solid var(--line);background:transparent;color:var(--tx2);border-radius:999px;
+ padding:6px 14px;font-size:12px;cursor:pointer;letter-spacing:.04em;transition:.2s}
+.tbtn:hover{color:var(--tx);border-color:var(--tx3)}
+.prog{position:fixed;top:54px;left:0;height:2px;width:0;background:var(--tx);opacity:.85;z-index:41;transition:width .25s}
+
+.rail{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:35;display:flex;flex-direction:column;gap:1px}
+.rail button{background:none;border:0;cursor:pointer;padding:3px 6px;font-size:10.5px;letter-spacing:.1em;
+ color:var(--tx3);display:flex;align-items:center;gap:7px;transition:color .2s}
+.rail button::after{content:"";width:12px;height:1px;background:currentColor;opacity:.45;transition:width .25s,opacity .2s}
+.rail button:hover{color:var(--tx2)}
+.rail button[aria-current="true"]{color:var(--tx);font-weight:700}
+.rail button[aria-current="true"]::after{width:26px;opacity:1}
+
+main{position:relative;z-index:1;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.item{height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;
+ justify-content:center;padding:54px 100px 22px 62px;position:relative}
+.t-cover{--c:var(--t-cover)} .t-ai{--c:var(--t-ai)} .t-money{--c:var(--t-money)}
+.t-chip{--c:var(--t-chip)} .t-oss{--c:var(--t-oss)} .t-alert{--c:var(--t-alert)}
+.t-rank{--c:var(--t-rank)} .outro{--c:var(--t-cover)}
+.inner{width:100%;max-width:1200px;display:grid;gap:54px;align-items:center;
+ grid-template-columns:minmax(0,1.04fr) minmax(0,1fr)}
+.shot{justify-self:end}
+.shot img{display:block;height:auto;max-height:calc(100dvh - 128px);max-width:100%;aspect-ratio:3/4;
+ border-radius:16px;box-shadow:var(--sh);background:var(--panel)}
+:root[data-mode="light"] .shot img{border-radius:0}
+
+.eyebrow{display:flex;align-items:baseline;gap:13px;margin-bottom:16px;flex-wrap:wrap}
+.rank{font:700 36px/1 ui-monospace,Menlo,monospace;color:var(--c)}
+.tag{font-size:11px;letter-spacing:.17em;font-weight:700;color:var(--c);
+ border:1px solid color-mix(in srgb,var(--c) 45%,transparent);padding:4px 11px;border-radius:999px}
+:root[data-mode="light"] .tag{border-radius:0}
+.title{font-size:clamp(23px,2.25vw,33px);line-height:1.34;font-weight:800;letter-spacing:-.01em;margin-bottom:15px}
+.summary{color:var(--tx2);font-size:15.5px;margin-bottom:19px}
+.why{border-left:2.5px solid var(--c);padding-left:15px;margin-bottom:20px}
+.why b{display:block;font-size:10.5px;letter-spacing:.18em;color:var(--c);margin-bottom:5px}
+.why p{margin:0;font-size:14.5px;color:var(--tx2)}
+.src{font-size:12px;color:var(--tx3);letter-spacing:.03em}
+.flag{color:var(--flag);margin-left:10px}
+.flag::before{content:"◇ "}
+.more{display:none;background:none;border:0;color:var(--c);font-size:13px;cursor:pointer;padding:0;margin-bottom:12px}
+
+.lede{color:var(--tx2);font-size:14.5px;margin-bottom:20px}
+.toc{list-style:none;max-height:52dvh;overflow:auto;padding-right:6px}
+.toc li+li{border-top:1px solid var(--line)}
+.toc button{width:100%;background:none;border:0;cursor:pointer;color:var(--tx2);text-align:left;
+ display:flex;align-items:baseline;gap:12px;padding:7px 2px;font-size:14px;transition:color .18s}
+.toc button:hover{color:var(--tx)}
+.tn{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--tx3);flex:none}
+.tt{flex:1}
+.tf{font-size:10.5px;color:var(--flag);flex:none;letter-spacing:.06em}
+
+.outro{align-items:center}
+.outro-in{max-width:620px;width:100%}
+.outro h2{font-size:clamp(22px,2.2vw,30px);font-weight:800;margin-bottom:22px}
+.checklist{list-style:none;margin-bottom:26px}
+.checklist li{border-top:1px solid var(--line);padding:12px 0}
+.checklist button{background:none;border:0;cursor:pointer;color:var(--tx);display:flex;gap:11px;
+ align-items:baseline;font-size:15px;font-weight:700;text-align:left;padding:0}
+.checklist button:hover span{text-decoration:underline}
+.checklist b{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--flag)}
+.checklist p{font-size:13px;color:var(--tx3);margin-top:5px;padding-left:23px}
+.note{font-size:13px;color:var(--tx3);margin-bottom:22px;line-height:1.8}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--tx);border-radius:10px;
+ padding:10px 20px;font-size:13.5px;cursor:pointer;transition:.2s}
+.btn:hover{border-color:var(--tx3)}
+:root[data-mode="light"] .btn{border-radius:0}
+
+.acts{position:absolute;right:26px;bottom:20px;display:flex;gap:7px;opacity:.24;transition:opacity .25s}
+.item:hover .acts,.acts:focus-within{opacity:1}
+.acts button{width:35px;height:35px;border-radius:10px;cursor:pointer;border:1px solid var(--line);
+ background:var(--panel);color:var(--tx2);display:grid;place-items:center;transition:.2s}
+.acts button:hover{color:var(--tx);border-color:var(--tx3)}
+.acts svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+:root[data-mode="light"] .acts button{border-radius:0}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,14px);z-index:60;background:var(--tx);
+ color:var(--bg);padding:9px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:900px){
+  .rail{display:none}
+  .item{padding:62px 18px 18px;align-items:flex-start}
+  .inner{grid-template-columns:1fr;gap:16px;align-content:start;height:100%}
+  .shot{justify-self:center}
+  .shot img{max-height:62dvh;border-radius:12px}
+  .cover .shot img{max-height:34dvh}
+  .eyebrow{margin-bottom:9px;gap:10px}
+  .rank{font-size:23px}
+  .title{font-size:19px;margin-bottom:8px}
+  .summary{font-size:14px;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .summary.open{-webkit-line-clamp:unset}
+  .why{display:none;margin-bottom:12px}
+  .why.open{display:block}
+  .more{display:inline-block}
+  .src{font-size:11.5px;padding-right:82px}
+  .flag{display:block;margin:4px 0 0}
+  .toc{max-height:none;flex:1}
+  .cover .inner{display:flex;flex-direction:column;min-height:0}
+  .cover .text{display:flex;flex-direction:column;min-height:0;flex:1}
+  .acts{right:16px;bottom:14px;opacity:.42}
+  .outro{padding-top:80px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+
+
+
+</style></head><body>
+<div class="bar">
+  <div class="brand">每日科技情报<i>2026.10.29</i></div><div class="sp"></div>
+  <div class="pos mono"><b id="pos">封面</b></div>
+  <a class="tbtn" href="../index.html" style="text-decoration:none">每日简报</a>
+  <button class="tbtn" id="mode">浅色版</button>
+</div>
+<div class="prog" id="prog"></div>
+<nav class="rail mono" id="rail" aria-label="按重要性排序的目录"><button data-go="0" aria-label="跳到封面">封面</button><button data-go="1" aria-label="跳到01">01</button><button data-go="2" aria-label="跳到02">02</button><button data-go="3" aria-label="跳到03">03</button><button data-go="4" aria-label="跳到04">04</button><button data-go="5" aria-label="跳到05">05</button><button data-go="6" aria-label="跳到06">06</button><button data-go="7" aria-label="跳到07">07</button><button data-go="8" aria-label="跳到08">08</button><button data-go="9" aria-label="跳到09">09</button><button data-go="10" aria-label="跳到10">10</button><button data-go="11" aria-label="跳到11">11</button><button data-go="12" aria-label="跳到12">12</button><button data-go="13" aria-label="跳到13">13</button><button data-go="14" aria-label="跳到结尾">结尾</button></nav>
+<main id="main">
+<section class="item cover t-cover" id="s0" data-i="0">
+  <div class="inner">
+    <figure class="shot"><img data-i="0" alt="封面" src="img/2026-10-29-reader/00_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="tag">2026.10.29 · 周四 · 过去 48 小时</span></div>
+      <h2 class="title">今日科技情报</h2>
+      <p class="lede">共 13 条，按重要性排序。点标题直接跳过去。</p>
+      <ol class="toc"><li><button data-go="1"><span class="tn">01</span><span class="tt">Gemini 4 Carbon 先给防守方用</span></button></li><li><button data-go="2"><span class="tn">02</span><span class="tt">未发布Claude串起 五条完整攻击链</span><span class='tf'>待核实</span></button></li><li><button data-go="3"><span class="tn">03</span><span class="tt">微软季度营收923亿 OpenAI贡献约11%</span></button></li><li><button data-go="4"><span class="tn">04</span><span class="tt">谷歌云收入翻倍 现金流却转负</span></button></li><li><button data-go="5"><span class="tn">05</span><span class="tt">GitHub月提交74亿 Copilot替你选模型</span></button></li><li><button data-go="6"><span class="tn">06</span><span class="tt">分析师86%跟着 智能体的倾向走</span><span class='tf'>待核实</span></button></li><li><button data-go="7"><span class="tn">07</span><span class="tt">UEFI高危漏洞 多数服务器受影响</span><span class='tf'>待核实</span></button></li><li><button data-go="8"><span class="tn">08</span><span class="tt">SK海力士单季营收 首破100万亿韩元</span></button></li><li><button data-go="9"><span class="tn">09</span><span class="tt">甲骨文喊出2030财年 营收2250亿目标</span></button></li><li><button data-go="10"><span class="tn">10</span><span class="tt">英伟达开源转写模型 一个模型听懂40种语言</span></button></li><li><button data-go="11"><span class="tn">11</span><span class="tt">蚂蚁开源百灵 Ling-3.1-flash</span></button></li><li><button data-go="12"><span class="tn">12</span><span class="tt">谷歌把Gemini和搜索 开放给第三方应用</span></button></li><li><button data-go="13"><span class="tn">13</span><span class="tt">GitHub热榜 智能体工具霸榜</span><span class='tf'>待核实</span></button></li></ol>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="0" aria-label="下载封面"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="0" aria-label="复制封面文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s1" data-i="1">
+  <div class="inner">
+    <figure class="shot"><img data-i="1" alt="第 01 条资讯卡" src="img/2026-10-29-reader/01_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">01</span><span class="tag">前沿模型</span></div>
+      <h2 class="title">Gemini 4 Carbon 先给防守方用</h2>
+      <p class="summary">谷歌10/28发布Gemini 4 Carbon，在AA智能指数v5以59分排第一，SEC-bench Pro找漏洞88.2%；本周起只开放给部分网络防御方，同时参加美国政府的发布前测试。</p>
+      <div class="why"><b>为什么重要</b><p>距Argon发布仅两周，前沿模型的首发对象从开发者变成防守方，说明攻防能力已强到厂商要先控制谁能用。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Google / Ars Technica 10/28</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="1" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="1" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-oss" id="s2" data-i="2">
+  <div class="inner">
+    <figure class="shot"><img data-i="2" alt="第 02 条资讯卡" src="img/2026-10-29-reader/02_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">02</span><span class="tag">AI攻防</span></div>
+      <h2 class="title">未发布Claude串起 五条完整攻击链</h2>
+      <p class="summary">Anthropic 10/27披露：内部未发布模型在少量提示后写出Chrome一键远程执行、Safari同源绕过、安卓锁屏取数据、Windows远程宕机、Linux零点击执行五条利用链，均已修复。</p>
+      <div class="why"><b>为什么重要</b><p>模型已能把多个漏洞拼成可用攻击，主流浏览器和系统都被打穿过，补丁节奏要按AI速度重新估算。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Anthropic / The Hacker News<span class="flag">待核实 · 能力描述为Anthropic自述，文中写明经过初始提示，人工参与程度未逐项拆分。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="2" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="2" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s3" data-i="3">
+  <div class="inner">
+    <figure class="shot"><img data-i="3" alt="第 03 条资讯卡" src="img/2026-10-29-reader/03_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">03</span><span class="tag">云与财报</span></div>
+      <h2 class="title">微软季度营收923亿 OpenAI贡献约11%</h2>
+      <p class="summary">微软10/28公布财报：营收923亿美元增19%，首次披露Azure单季收入332亿美元增48%；来自OpenAI的收入达100亿美元，资本开支452亿美元低于预期，盘后涨约3%。</p>
+      <div class="why"><b>为什么重要</b><p>微软与OpenAI既合作又竞争，但收入已高度绑定；资本开支低于预期还拖累了CoreWeave等新兴云股。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Microsoft / TechCrunch / CNBC</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="3" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="3" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s4" data-i="4">
+  <div class="inner">
+    <figure class="shot"><img data-i="4" alt="第 04 条资讯卡" src="img/2026-10-29-reader/04_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">04</span><span class="tag">AI投入</span></div>
+      <h2 class="title">谷歌云收入翻倍 现金流却转负</h2>
+      <p class="summary">Alphabet 10/28财报：营收1276亿美元增25%，谷歌云307亿美元增103%，但每股收益和营收近四年来首次双双不及预期，自由现金流为负90.7亿美元，盘后跌约9%。</p>
+      <div class="why"><b>为什么重要</b><p>云业务增长最快的大厂也开始为AI投入付出现金流代价，市场对算力军备的耐心正在变短。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Alphabet / CNBC 10/28</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="4" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="4" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s5" data-i="5">
+  <div class="inner">
+    <figure class="shot"><img data-i="5" alt="第 05 条资讯卡" src="img/2026-10-29-reader/05_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">05</span><span class="tag">开发平台</span></div>
+      <h2 class="title">GitHub月提交74亿 Copilot替你选模型</h2>
+      <p class="summary">GitHub 10/28在Universe大会发布Copilot应用、跨仓库Copilot项目和多模型编排Copilot Fusion；9月提交量74亿次，8月为29亿次，今年新增400万个CPU核。</p>
+      <div class="why"><b>为什么重要</b><p>智能体正把代码托管平台的负载推高数倍，GitHub一边扩容改架构，一边把选模型这件事也交给系统。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：GitHub / The New Stack 10/28</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="5" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="5" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s6" data-i="6">
+  <div class="inner">
+    <figure class="shot"><img data-i="6" alt="第 06 条资讯卡" src="img/2026-10-29-reader/06_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">06</span><span class="tag">人机协作</span></div>
+      <h2 class="title">分析师86%跟着 智能体的倾向走</h2>
+      <p class="summary">Anthropic 10/27发布研究：50名专业分析师用Claude Code做同一项评估，智能体被随机设定倾向，分析师86%的选择与之一致；77%用了智能体的论据，只有15%注明出处。</p>
+      <div class="why"><b>为什么重要</b><p>智能体不需要替人拍板，只要摆出理由就能左右专家判断，这对审计、投研和政策评估都是新风险。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Anthropic 10/27<span class="flag">待核实 · Anthropic自家研究，任务设在虚构机构，尚未经同行评审。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="6" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="6" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s7" data-i="7">
+  <div class="inner">
+    <figure class="shot"><img data-i="7" alt="第 07 条资讯卡" src="img/2026-10-29-reader/07_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">07</span><span class="tag">固件安全</span></div>
+      <h2 class="title">UEFI高危漏洞 多数服务器受影响</h2>
+      <p class="summary">TianoCore EDK II网络栈的ICMP解析存在内存破坏漏洞，评分9.5，可在操作系统和安全启动生效前执行代码；发现者来自Anthropic和谷歌，补丁代码已被提前公开。</p>
+      <div class="why"><b>为什么重要</b><p>EDK II是几乎所有UEFI固件的参考实现，修补要经过成千上万家硬件厂商，窗口期会很长。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Ars Technica / TianoCore<span class="flag">待核实 · TianoCore公告首发于10/22，非48小时内首发；本条为10/27起的媒体扩散。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="7" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="7" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s8" data-i="8">
+  <div class="inner">
+    <figure class="shot"><img data-i="8" alt="第 08 条资讯卡" src="img/2026-10-29-reader/08_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">08</span><span class="tag">存储芯片</span></div>
+      <h2 class="title">SK海力士单季营收 首破100万亿韩元</h2>
+      <p class="summary">SK海力士10/28公布三季度营收104.62万亿韩元、营业利润83.33万亿韩元，均创纪录；宣布约100万亿韩元股东回报，股价当天涨10.89%，并称存储短缺至少持续到2030年。</p>
+      <div class="why"><b>为什么重要</b><p>AI服务器对高带宽内存的需求让存储从周期行业变成卖方市场，产能紧张会继续推高整机和云的成本。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：CNBC / The Register 10/28</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="8" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="8" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s9" data-i="9">
+  <div class="inner">
+    <figure class="shot"><img data-i="9" alt="第 09 条资讯卡" src="img/2026-10-29-reader/09_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">09</span><span class="tag">AI基建融资</span></div>
+      <h2 class="title">甲骨文喊出2030财年 营收2250亿目标</h2>
+      <p class="summary">甲骨文10/28投资者日给出2030财年营收2250亿美元目标，年均增35%；2027至2030财年新增融资上限200亿美元，股债各半，称2028财年下半年自由现金流转正，股价涨10.73%。</p>
+      <div class="why"><b>为什么重要</b><p>给OpenAI供算力的甲骨文背着1170亿美元长期债务，这次用融资上限安抚市场，AI基建的账开始被要求算清楚。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：CNBC 10/28</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="9" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="9" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-oss" id="s10" data-i="10">
+  <div class="inner">
+    <figure class="shot"><img data-i="10" alt="第 10 条资讯卡" src="img/2026-10-29-reader/10_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">10</span><span class="tag">开源语音</span></div>
+      <h2 class="title">英伟达开源转写模型 一个模型听懂40种语言</h2>
+      <p class="summary">英伟达10/28发布开放权重的Nemotron 3.5 Transcribe：一个模型做转写、说话人区分、翻译和音频问答，支持40种语言、最长1小时录音和8名说话人，并开放Granary v2数据。</p>
+      <div class="why"><b>为什么重要</b><p>会议纪要、客服和医疗听写可以本地部署一个开源模型完成，数据和微调工具一起开放，门槛进一步降低。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：NVIDIA / Hugging Face 10/28</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="10" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="10" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s11" data-i="11">
+  <div class="inner">
+    <figure class="shot"><img data-i="11" alt="第 11 条资讯卡" src="img/2026-10-29-reader/11_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">11</span><span class="tag">国产开源</span></div>
+      <h2 class="title">蚂蚁开源百灵 Ling-3.1-flash</h2>
+      <p class="summary">蚂蚁百灵10/28开源Ling-3.1-flash-1019，面向个人智能体的多步骤任务，自称AA智能指数v4.3.2得44分、比上版高3分；同步开源约560B总参数、25B激活的基础模型。</p>
+      <div class="why"><b>为什么重要</b><p>国内大厂把开源模型直接对准能持续办事的个人助理，基础模型以MIT许可放出，便于企业继续训练。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Hugging Face / 量子位 10/28</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="11" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="11" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s12" data-i="12">
+  <div class="inner">
+    <figure class="shot"><img data-i="12" alt="第 12 条资讯卡" src="img/2026-10-29-reader/12_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">12</span><span class="tag">智能体入口</span></div>
+      <h2 class="title">谷歌把Gemini和搜索 开放给第三方应用</h2>
+      <p class="summary">谷歌10/28推出Connected Apps平台，任何企业和开发者都可提交自己的应用，让用户在Gemini和谷歌搜索里直接调用并执行操作，目前向美国开发者开放测试版。</p>
+      <div class="why"><b>为什么重要</b><p>用户越来越多在AI里直接办事，谁掌握这个入口，谁就能决定应用的分发，这与ChatGPT和Meta Muse的思路相同。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Google / TechCrunch 10/28</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="12" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="12" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-rank" id="s13" data-i="13">
+  <div class="inner">
+    <figure class="shot"><img data-i="13" alt="第 13 条资讯卡" src="img/2026-10-29-reader/13_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">13</span><span class="tag">开源热榜</span></div>
+      <h2 class="title">GitHub热榜 智能体工具霸榜</h2>
+      <p class="summary">10/29 GitHub日榜靠前的多为智能体配套项目：JetBrains轻量IDE thinkrail、本地AI队友工作区openbot、技能框架superpowers和开箱即用智能体cindy。</p>
+      <div class="why"><b>为什么重要</b><p>冲榜项目大多在给编程智能体补技能、补工作流，开发者关注点已从模型本身转到怎么用好智能体。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：GitHub Trending 10/29<span class="flag">待核实 · 均非48小时内首发，仅为当日冲榜；星数为当日增量，DeepTutor昨日已上榜。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="13" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="13" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item outro" id="s14" data-i="14">
+  <div class="outro-in">
+    <h2>发布前请确认这 4 条</h2>
+    <ul class="checklist"><li><button data-go="2"><b>02</b><span>未发布Claude串起 五条完整攻击链</span></button><p>能力描述为Anthropic自述，文中写明经过初始提示，人工参与程度未逐项拆分。</p></li><li><button data-go="6"><b>06</b><span>分析师86%跟着 智能体的倾向走</span></button><p>Anthropic自家研究，任务设在虚构机构，尚未经同行评审。</p></li><li><button data-go="7"><b>07</b><span>UEFI高危漏洞 多数服务器受影响</span></button><p>TianoCore公告首发于10/22，非48小时内首发；本条为10/27起的媒体扩散。</p></li><li><button data-go="13"><b>13</b><span>GitHub热榜 智能体工具霸榜</span></button><p>均非48小时内首发，仅为当日冲榜；星数为当日增量，DeepTutor昨日已上榜。</p></li></ul>
+    <p class="note">切换深浅两套图时，下载按钮会跟着当前这套走。黄标条目在新闻稿或官方口径出现前，请勿写成已交割或已定日期。上一期专区：<a href="./2026-10-28.html">2026-10-28</a>。</p>
+    <button class="btn" id="copyAll">复制全部文案</button>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+<script type="application/json" id="d">{"cards": [{"no": "00", "title": "封面 · 今日科技情报", "copy": "【今日科技情报】2026.10.29 · 过去 48 小时 13 条\n\n01 Gemini 4 Carbon 先给防守方用\n02 未发布Claude串起 五条完整攻击链\n03 微软季度营收923亿 OpenAI贡献约11%\n04 谷歌云收入翻倍 现金流却转负\n05 GitHub月提交74亿 Copilot替你选模型\n06 分析师86%跟着 智能体的倾向走\n07 UEFI高危漏洞 多数服务器受影响\n08 SK海力士单季营收 首破100万亿韩元\n09 甲骨文喊出2030财年 营收2250亿目标\n10 英伟达开源转写模型 一个模型听懂40种语言\n11 蚂蚁开源百灵 Ling-3.1-flash\n12 谷歌把Gemini和搜索 开放给第三方应用\n13 GitHub热榜 智能体工具霸榜\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261029_00_深色.png", "fileLight": "科技情报_20261029_00_浅色.png", "dark": "img/2026-10-29-reader/00_dark.png", "light": "img/2026-10-29-reader/00_light.png"}, {"no": "01", "title": "Gemini 4 Carbon 先给防守方用", "copy": "【前沿模型】Gemini 4 Carbon 先给防守方用\n\n谷歌10/28发布Gemini 4 Carbon，在AA智能指数v5以59分排第一，SEC-bench Pro找漏洞88.2%；本周起只开放给部分网络防御方，同时参加美国政府的发布前测试。\n\n◆ 为什么重要：距Argon发布仅两周，前沿模型的首发对象从开发者变成防守方，说明攻防能力已强到厂商要先控制谁能用。\n\n来源：Google / Ars Technica 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261029_01_深色.png", "fileLight": "科技情报_20261029_01_浅色.png", "dark": "img/2026-10-29-reader/01_dark.png", "light": "img/2026-10-29-reader/01_light.png"}, {"no": "02", "title": "未发布Claude串起 五条完整攻击链", "copy": "【AI攻防】未发布Claude串起 五条完整攻击链\n\nAnthropic 10/27披露：内部未发布模型在少量提示后写出Chrome一键远程执行、Safari同源绕过、安卓锁屏取数据、Windows远程宕机、Linux零点击执行五条利用链，均已修复。\n\n◆ 为什么重要：模型已能把多个漏洞拼成可用攻击，主流浏览器和系统都被打穿过，补丁节奏要按AI速度重新估算。\n\n※ 能力描述为Anthropic自述，文中写明经过初始提示，人工参与程度未逐项拆分。\n\n来源：Anthropic / The Hacker News\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261029_02_深色.png", "fileLight": "科技情报_20261029_02_浅色.png", "dark": "img/2026-10-29-reader/02_dark.png", "light": "img/2026-10-29-reader/02_light.png"}, {"no": "03", "title": "微软季度营收923亿 OpenAI贡献约11%", "copy": "【云与财报】微软季度营收923亿 OpenAI贡献约11%\n\n微软10/28公布财报：营收923亿美元增19%，首次披露Azure单季收入332亿美元增48%；来自OpenAI的收入达100亿美元，资本开支452亿美元低于预期，盘后涨约3%。\n\n◆ 为什么重要：微软与OpenAI既合作又竞争，但收入已高度绑定；资本开支低于预期还拖累了CoreWeave等新兴云股。\n\n来源：Microsoft / TechCrunch / CNBC\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261029_03_深色.png", "fileLight": "科技情报_20261029_03_浅色.png", "dark": "img/2026-10-29-reader/03_dark.png", "light": "img/2026-10-29-reader/03_light.png"}, {"no": "04", "title": "谷歌云收入翻倍 现金流却转负", "copy": "【AI投入】谷歌云收入翻倍 现金流却转负\n\nAlphabet 10/28财报：营收1276亿美元增25%，谷歌云307亿美元增103%，但每股收益和营收近四年来首次双双不及预期，自由现金流为负90.7亿美元，盘后跌约9%。\n\n◆ 为什么重要：云业务增长最快的大厂也开始为AI投入付出现金流代价，市场对算力军备的耐心正在变短。\n\n来源：Alphabet / CNBC 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261029_04_深色.png", "fileLight": "科技情报_20261029_04_浅色.png", "dark": "img/2026-10-29-reader/04_dark.png", "light": "img/2026-10-29-reader/04_light.png"}, {"no": "05", "title": "GitHub月提交74亿 Copilot替你选模型", "copy": "【开发平台】GitHub月提交74亿 Copilot替你选模型\n\nGitHub 10/28在Universe大会发布Copilot应用、跨仓库Copilot项目和多模型编排Copilot Fusion；9月提交量74亿次，8月为29亿次，今年新增400万个CPU核。\n\n◆ 为什么重要：智能体正把代码托管平台的负载推高数倍，GitHub一边扩容改架构，一边把选模型这件事也交给系统。\n\n来源：GitHub / The New Stack 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261029_05_深色.png", "fileLight": "科技情报_20261029_05_浅色.png", "dark": "img/2026-10-29-reader/05_dark.png", "light": "img/2026-10-29-reader/05_light.png"}, {"no": "06", "title": "分析师86%跟着 智能体的倾向走", "copy": "【人机协作】分析师86%跟着 智能体的倾向走\n\nAnthropic 10/27发布研究：50名专业分析师用Claude Code做同一项评估，智能体被随机设定倾向，分析师86%的选择与之一致；77%用了智能体的论据，只有15%注明出处。\n\n◆ 为什么重要：智能体不需要替人拍板，只要摆出理由就能左右专家判断，这对审计、投研和政策评估都是新风险。\n\n※ Anthropic自家研究，任务设在虚构机构，尚未经同行评审。\n\n来源：Anthropic 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261029_06_深色.png", "fileLight": "科技情报_20261029_06_浅色.png", "dark": "img/2026-10-29-reader/06_dark.png", "light": "img/2026-10-29-reader/06_light.png"}, {"no": "07", "title": "UEFI高危漏洞 多数服务器受影响", "copy": "【固件安全】UEFI高危漏洞 多数服务器受影响\n\nTianoCore EDK II网络栈的ICMP解析存在内存破坏漏洞，评分9.5，可在操作系统和安全启动生效前执行代码；发现者来自Anthropic和谷歌，补丁代码已被提前公开。\n\n◆ 为什么重要：EDK II是几乎所有UEFI固件的参考实现，修补要经过成千上万家硬件厂商，窗口期会很长。\n\n※ TianoCore公告首发于10/22，非48小时内首发；本条为10/27起的媒体扩散。\n\n来源：Ars Technica / TianoCore\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261029_07_深色.png", "fileLight": "科技情报_20261029_07_浅色.png", "dark": "img/2026-10-29-reader/07_dark.png", "light": "img/2026-10-29-reader/07_light.png"}, {"no": "08", "title": "SK海力士单季营收 首破100万亿韩元", "copy": "【存储芯片】SK海力士单季营收 首破100万亿韩元\n\nSK海力士10/28公布三季度营收104.62万亿韩元、营业利润83.33万亿韩元，均创纪录；宣布约100万亿韩元股东回报，股价当天涨10.89%，并称存储短缺至少持续到2030年。\n\n◆ 为什么重要：AI服务器对高带宽内存的需求让存储从周期行业变成卖方市场，产能紧张会继续推高整机和云的成本。\n\n来源：CNBC / The Register 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261029_08_深色.png", "fileLight": "科技情报_20261029_08_浅色.png", "dark": "img/2026-10-29-reader/08_dark.png", "light": "img/2026-10-29-reader/08_light.png"}, {"no": "09", "title": "甲骨文喊出2030财年 营收2250亿目标", "copy": "【AI基建融资】甲骨文喊出2030财年 营收2250亿目标\n\n甲骨文10/28投资者日给出2030财年营收2250亿美元目标，年均增35%；2027至2030财年新增融资上限200亿美元，股债各半，称2028财年下半年自由现金流转正，股价涨10.73%。\n\n◆ 为什么重要：给OpenAI供算力的甲骨文背着1170亿美元长期债务，这次用融资上限安抚市场，AI基建的账开始被要求算清楚。\n\n来源：CNBC 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261029_09_深色.png", "fileLight": "科技情报_20261029_09_浅色.png", "dark": "img/2026-10-29-reader/09_dark.png", "light": "img/2026-10-29-reader/09_light.png"}, {"no": "10", "title": "英伟达开源转写模型 一个模型听懂40种语言", "copy": "【开源语音】英伟达开源转写模型 一个模型听懂40种语言\n\n英伟达10/28发布开放权重的Nemotron 3.5 Transcribe：一个模型做转写、说话人区分、翻译和音频问答，支持40种语言、最长1小时录音和8名说话人，并开放Granary v2数据。\n\n◆ 为什么重要：会议纪要、客服和医疗听写可以本地部署一个开源模型完成，数据和微调工具一起开放，门槛进一步降低。\n\n来源：NVIDIA / Hugging Face 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261029_10_深色.png", "fileLight": "科技情报_20261029_10_浅色.png", "dark": "img/2026-10-29-reader/10_dark.png", "light": "img/2026-10-29-reader/10_light.png"}, {"no": "11", "title": "蚂蚁开源百灵 Ling-3.1-flash", "copy": "【国产开源】蚂蚁开源百灵 Ling-3.1-flash\n\n蚂蚁百灵10/28开源Ling-3.1-flash-1019，面向个人智能体的多步骤任务，自称AA智能指数v4.3.2得44分、比上版高3分；同步开源约560B总参数、25B激活的基础模型。\n\n◆ 为什么重要：国内大厂把开源模型直接对准能持续办事的个人助理，基础模型以MIT许可放出，便于企业继续训练。\n\n来源：Hugging Face / 量子位 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261029_11_深色.png", "fileLight": "科技情报_20261029_11_浅色.png", "dark": "img/2026-10-29-reader/11_dark.png", "light": "img/2026-10-29-reader/11_light.png"}, {"no": "12", "title": "谷歌把Gemini和搜索 开放给第三方应用", "copy": "【智能体入口】谷歌把Gemini和搜索 开放给第三方应用\n\n谷歌10/28推出Connected Apps平台，任何企业和开发者都可提交自己的应用，让用户在Gemini和谷歌搜索里直接调用并执行操作，目前向美国开发者开放测试版。\n\n◆ 为什么重要：用户越来越多在AI里直接办事，谁掌握这个入口，谁就能决定应用的分发，这与ChatGPT和Meta Muse的思路相同。\n\n来源：Google / TechCrunch 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261029_12_深色.png", "fileLight": "科技情报_20261029_12_浅色.png", "dark": "img/2026-10-29-reader/12_dark.png", "light": "img/2026-10-29-reader/12_light.png"}, {"no": "13", "title": "GitHub热榜 智能体工具霸榜", "copy": "【开源热榜】GitHub热榜 智能体工具霸榜\n\n10/29 GitHub日榜靠前的多为智能体配套项目：JetBrains轻量IDE thinkrail、本地AI队友工作区openbot、技能框架superpowers和开箱即用智能体cindy。\n\n◆ 为什么重要：冲榜项目大多在给编程智能体补技能、补工作流，开发者关注点已从模型本身转到怎么用好智能体。\n\n※ 均非48小时内首发，仅为当日冲榜；星数为当日增量，DeepTutor昨日已上榜。\n\n来源：GitHub Trending 10/29\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261029_13_深色.png", "fileLight": "科技情报_20261029_13_浅色.png", "dark": "img/2026-10-29-reader/13_dark.png", "light": "img/2026-10-29-reader/13_light.png"}], "allCopy": "【今日科技情报】2026.10.29 · 过去 48 小时 13 条\n\n01 Gemini 4 Carbon 先给防守方用\n02 未发布Claude串起 五条完整攻击链\n03 微软季度营收923亿 OpenAI贡献约11%\n04 谷歌云收入翻倍 现金流却转负\n05 GitHub月提交74亿 Copilot替你选模型\n06 分析师86%跟着 智能体的倾向走\n07 UEFI高危漏洞 多数服务器受影响\n08 SK海力士单季营收 首破100万亿韩元\n09 甲骨文喊出2030财年 营收2250亿目标\n10 英伟达开源转写模型 一个模型听懂40种语言\n11 蚂蚁开源百灵 Ling-3.1-flash\n12 谷歌把Gemini和搜索 开放给第三方应用\n13 GitHub热榜 智能体工具霸榜\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【前沿模型】Gemini 4 Carbon 先给防守方用\n\n谷歌10/28发布Gemini 4 Carbon，在AA智能指数v5以59分排第一，SEC-bench Pro找漏洞88.2%；本周起只开放给部分网络防御方，同时参加美国政府的发布前测试。\n\n◆ 为什么重要：距Argon发布仅两周，前沿模型的首发对象从开发者变成防守方，说明攻防能力已强到厂商要先控制谁能用。\n\n来源：Google / Ars Technica 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI攻防】未发布Claude串起 五条完整攻击链\n\nAnthropic 10/27披露：内部未发布模型在少量提示后写出Chrome一键远程执行、Safari同源绕过、安卓锁屏取数据、Windows远程宕机、Linux零点击执行五条利用链，均已修复。\n\n◆ 为什么重要：模型已能把多个漏洞拼成可用攻击，主流浏览器和系统都被打穿过，补丁节奏要按AI速度重新估算。\n\n※ 能力描述为Anthropic自述，文中写明经过初始提示，人工参与程度未逐项拆分。\n\n来源：Anthropic / The Hacker News\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【云与财报】微软季度营收923亿 OpenAI贡献约11%\n\n微软10/28公布财报：营收923亿美元增19%，首次披露Azure单季收入332亿美元增48%；来自OpenAI的收入达100亿美元，资本开支452亿美元低于预期，盘后涨约3%。\n\n◆ 为什么重要：微软与OpenAI既合作又竞争，但收入已高度绑定；资本开支低于预期还拖累了CoreWeave等新兴云股。\n\n来源：Microsoft / TechCrunch / CNBC\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI投入】谷歌云收入翻倍 现金流却转负\n\nAlphabet 10/28财报：营收1276亿美元增25%，谷歌云307亿美元增103%，但每股收益和营收近四年来首次双双不及预期，自由现金流为负90.7亿美元，盘后跌约9%。\n\n◆ 为什么重要：云业务增长最快的大厂也开始为AI投入付出现金流代价，市场对算力军备的耐心正在变短。\n\n来源：Alphabet / CNBC 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开发平台】GitHub月提交74亿 Copilot替你选模型\n\nGitHub 10/28在Universe大会发布Copilot应用、跨仓库Copilot项目和多模型编排Copilot Fusion；9月提交量74亿次，8月为29亿次，今年新增400万个CPU核。\n\n◆ 为什么重要：智能体正把代码托管平台的负载推高数倍，GitHub一边扩容改架构，一边把选模型这件事也交给系统。\n\n来源：GitHub / The New Stack 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【人机协作】分析师86%跟着 智能体的倾向走\n\nAnthropic 10/27发布研究：50名专业分析师用Claude Code做同一项评估，智能体被随机设定倾向，分析师86%的选择与之一致；77%用了智能体的论据，只有15%注明出处。\n\n◆ 为什么重要：智能体不需要替人拍板，只要摆出理由就能左右专家判断，这对审计、投研和政策评估都是新风险。\n\n※ Anthropic自家研究，任务设在虚构机构，尚未经同行评审。\n\n来源：Anthropic 10/27\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【固件安全】UEFI高危漏洞 多数服务器受影响\n\nTianoCore EDK II网络栈的ICMP解析存在内存破坏漏洞，评分9.5，可在操作系统和安全启动生效前执行代码；发现者来自Anthropic和谷歌，补丁代码已被提前公开。\n\n◆ 为什么重要：EDK II是几乎所有UEFI固件的参考实现，修补要经过成千上万家硬件厂商，窗口期会很长。\n\n※ TianoCore公告首发于10/22，非48小时内首发；本条为10/27起的媒体扩散。\n\n来源：Ars Technica / TianoCore\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【存储芯片】SK海力士单季营收 首破100万亿韩元\n\nSK海力士10/28公布三季度营收104.62万亿韩元、营业利润83.33万亿韩元，均创纪录；宣布约100万亿韩元股东回报，股价当天涨10.89%，并称存储短缺至少持续到2030年。\n\n◆ 为什么重要：AI服务器对高带宽内存的需求让存储从周期行业变成卖方市场，产能紧张会继续推高整机和云的成本。\n\n来源：CNBC / The Register 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI基建融资】甲骨文喊出2030财年 营收2250亿目标\n\n甲骨文10/28投资者日给出2030财年营收2250亿美元目标，年均增35%；2027至2030财年新增融资上限200亿美元，股债各半，称2028财年下半年自由现金流转正，股价涨10.73%。\n\n◆ 为什么重要：给OpenAI供算力的甲骨文背着1170亿美元长期债务，这次用融资上限安抚市场，AI基建的账开始被要求算清楚。\n\n来源：CNBC 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开源语音】英伟达开源转写模型 一个模型听懂40种语言\n\n英伟达10/28发布开放权重的Nemotron 3.5 Transcribe：一个模型做转写、说话人区分、翻译和音频问答，支持40种语言、最长1小时录音和8名说话人，并开放Granary v2数据。\n\n◆ 为什么重要：会议纪要、客服和医疗听写可以本地部署一个开源模型完成，数据和微调工具一起开放，门槛进一步降低。\n\n来源：NVIDIA / Hugging Face 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【国产开源】蚂蚁开源百灵 Ling-3.1-flash\n\n蚂蚁百灵10/28开源Ling-3.1-flash-1019，面向个人智能体的多步骤任务，自称AA智能指数v4.3.2得44分、比上版高3分；同步开源约560B总参数、25B激活的基础模型。\n\n◆ 为什么重要：国内大厂把开源模型直接对准能持续办事的个人助理，基础模型以MIT许可放出，便于企业继续训练。\n\n来源：Hugging Face / 量子位 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【智能体入口】谷歌把Gemini和搜索 开放给第三方应用\n\n谷歌10/28推出Connected Apps平台，任何企业和开发者都可提交自己的应用，让用户在Gemini和谷歌搜索里直接调用并执行操作，目前向美国开发者开放测试版。\n\n◆ 为什么重要：用户越来越多在AI里直接办事，谁掌握这个入口，谁就能决定应用的分发，这与ChatGPT和Meta Muse的思路相同。\n\n来源：Google / TechCrunch 10/28\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开源热榜】GitHub热榜 智能体工具霸榜\n\n10/29 GitHub日榜靠前的多为智能体配套项目：JetBrains轻量IDE thinkrail、本地AI队友工作区openbot、技能框架superpowers和开箱即用智能体cindy。\n\n◆ 为什么重要：冲榜项目大多在给编程智能体补技能、补工作流，开发者关注点已从模型本身转到怎么用好智能体。\n\n※ 均非48小时内首发，仅为当日冲榜；星数为当日增量，DeepTutor昨日已上榜。\n\n来源：GitHub Trending 10/29\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道"}</script>
+<script>
+const G=JSON.parse(document.getElementById("d").textContent);
+const main=document.getElementById("main"),rail=document.getElementById("rail");
+const secs=[...document.querySelectorAll(".item")];
+const imgs=[...document.querySelectorAll(".shot img")];
+const mode=()=>document.documentElement.dataset.mode;
+let loaded=new Set();
+function load(i){
+  for(let k=Math.max(0,i-2);k<=Math.min(imgs.length-1,i+2);k++){
+    const el=imgs[k];if(!el)continue;
+    const want=G.cards[+el.dataset.i][mode()];
+    if(el.src!==want){el.src=want;loaded.add(k);}
+  }
+}
+function repaint(){loaded.forEach(k=>{const el=imgs[k];el.src=G.cards[+el.dataset.i][mode()];});}
+load(0);
+document.getElementById("mode").onclick=e=>{
+  const r=document.documentElement;
+  r.dataset.mode=mode()==="dark"?"light":"dark";
+  e.currentTarget.textContent=mode()==="dark"?"浅色版":"深色版";
+  repaint();
+};
+const toast=document.getElementById("toast");let tt;
+const say=m=>{toast.textContent=m;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),1700)};
+const copy=t=>navigator.clipboard?.writeText(t).then(()=>say("已复制"),()=>say("复制失败，请手动选中"))??say("复制失败");
+document.addEventListener("click",ev=>{
+  const go=ev.target.closest("[data-go]");
+  if(go){document.getElementById("s"+go.dataset.go).scrollIntoView();return}
+  const a=ev.target.closest("[data-act]");
+  if(a){
+    const c=G.cards[+a.dataset.i],d=mode()==="dark";
+    if(a.dataset.act==="dl"){
+      const l=document.createElement("a");l.href=d?c.dark:c.light;
+      l.download=d?c.fileDark:c.fileLight;l.click();say("已下载 "+l.download);
+    }else copy(c.copy);
+    return;
+  }
+  if(ev.target.id==="copyAll"){copy(G.allCopy);return}
+  const m=ev.target.closest(".more");
+  if(m){
+    const b=m.closest(".text"),on=b.querySelector(".summary").classList.toggle("open");
+    b.querySelector(".why")?.classList.toggle("open",on);
+    m.textContent=on?"收起":"展开全文";m.setAttribute("aria-expanded",on);
+  }
+});
+const pos=document.getElementById("pos"),prog=document.getElementById("prog");
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting||en.intersectionRatio<.55)return;
+  const i=secs.indexOf(en.target);
+  load(i);
+  pos.textContent=i===0?"封面":(i>G.cards.length-1?"结尾":G.cards[i].no);
+  prog.style.width=(i/(secs.length-1)*100)+"%";
+  rail.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-current",String(j===i)));
+}),{root:main,threshold:.55});
+secs.forEach(s=>io.observe(s));
+addEventListener("keydown",e=>{
+  if(e.target.matches("input,textarea"))return;
+  const cur=secs.findIndex(s=>s.getBoundingClientRect().top>-window.innerHeight/2);
+  if(e.key==="ArrowDown"||e.key==="j"){e.preventDefault();secs[Math.min(secs.length-1,cur+1)]?.scrollIntoView()}
+  if(e.key==="ArrowUp"||e.key==="k"){e.preventDefault();secs[Math.max(0,cur-1)]?.scrollIntoView()}
+});
+
+</script>
+</body></html>
