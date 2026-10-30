@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="zh-CN" data-mode="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>每日科技情报 · 2026.10.31 · 阅读版</title>
+<style>
+
+
+
+
+:root{
+  --bg:#05060f; --line:rgba(255,255,255,.11); --tx:#EEF2FF;
+  --tx2:rgba(238,242,255,.66); --tx3:rgba(238,242,255,.40);
+  --panel:rgba(255,255,255,.05); --sh:0 20px 54px rgba(0,0,0,.55);
+  --t-cover:#67E8F9; --t-ai:#A78BFA; --t-money:#F5C842; --t-chip:#FF8A3C;
+  --t-oss:#3DFF87; --t-alert:#FF5A4E; --t-rank:#7DA2FF;
+  --flag:#FFD166;
+  --deco:radial-gradient(900px 700px at 8% -8%,rgba(124,92,255,.26),transparent 62%),
+         radial-gradient(760px 620px at 96% 10%,rgba(34,211,238,.15),transparent 62%);
+}
+:root[data-mode="light"]{
+  --bg:#F7F4ED; --line:rgba(21,18,14,.18); --tx:#15120E;
+  --tx2:#4A443C; --tx3:#8A8176;
+  --panel:rgba(21,18,14,.045); --sh:0 14px 36px rgba(21,18,14,.15);
+  --t-cover:#1B3FAE; --t-ai:#5B2BE0; --t-money:#0B6B4F; --t-chip:#E8442A;
+  --t-oss:#00964A; --t-alert:#DC1E28; --t-rank:#1B3FAE;
+  --flag:#9A6B00;
+  --deco:none;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--tx);line-height:1.66;
+ font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+ -webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:var(--deco)}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:5px}
+
+.bar{position:fixed;top:0;left:0;right:0;height:54px;z-index:40;display:flex;align-items:center;gap:14px;
+ padding:0 22px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--line)}
+.brand{font-size:13px;font-weight:800;letter-spacing:.2em}
+.brand i{font-style:normal;color:var(--tx3);font-weight:500;letter-spacing:.06em;margin-left:10px}
+.bar .sp{flex:1}
+.pos{font-size:12px;color:var(--tx3);letter-spacing:.1em}
+.pos b{color:var(--tx);font-weight:700}
+.tbtn{border:1px solid var(--line);background:transparent;color:var(--tx2);border-radius:999px;
+ padding:6px 14px;font-size:12px;cursor:pointer;letter-spacing:.04em;transition:.2s}
+.tbtn:hover{color:var(--tx);border-color:var(--tx3)}
+.prog{position:fixed;top:54px;left:0;height:2px;width:0;background:var(--tx);opacity:.85;z-index:41;transition:width .25s}
+
+.rail{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:35;display:flex;flex-direction:column;gap:1px}
+.rail button{background:none;border:0;cursor:pointer;padding:3px 6px;font-size:10.5px;letter-spacing:.1em;
+ color:var(--tx3);display:flex;align-items:center;gap:7px;transition:color .2s}
+.rail button::after{content:"";width:12px;height:1px;background:currentColor;opacity:.45;transition:width .25s,opacity .2s}
+.rail button:hover{color:var(--tx2)}
+.rail button[aria-current="true"]{color:var(--tx);font-weight:700}
+.rail button[aria-current="true"]::after{width:26px;opacity:1}
+
+main{position:relative;z-index:1;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.item{height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;
+ justify-content:center;padding:54px 100px 22px 62px;position:relative}
+.t-cover{--c:var(--t-cover)} .t-ai{--c:var(--t-ai)} .t-money{--c:var(--t-money)}
+.t-chip{--c:var(--t-chip)} .t-oss{--c:var(--t-oss)} .t-alert{--c:var(--t-alert)}
+.t-rank{--c:var(--t-rank)} .outro{--c:var(--t-cover)}
+.inner{width:100%;max-width:1200px;display:grid;gap:54px;align-items:center;
+ grid-template-columns:minmax(0,1.04fr) minmax(0,1fr)}
+.shot{justify-self:end}
+.shot img{display:block;height:auto;max-height:calc(100dvh - 128px);max-width:100%;aspect-ratio:3/4;
+ border-radius:16px;box-shadow:var(--sh);background:var(--panel)}
+:root[data-mode="light"] .shot img{border-radius:0}
+
+.eyebrow{display:flex;align-items:baseline;gap:13px;margin-bottom:16px;flex-wrap:wrap}
+.rank{font:700 36px/1 ui-monospace,Menlo,monospace;color:var(--c)}
+.tag{font-size:11px;letter-spacing:.17em;font-weight:700;color:var(--c);
+ border:1px solid color-mix(in srgb,var(--c) 45%,transparent);padding:4px 11px;border-radius:999px}
+:root[data-mode="light"] .tag{border-radius:0}
+.title{font-size:clamp(23px,2.25vw,33px);line-height:1.34;font-weight:800;letter-spacing:-.01em;margin-bottom:15px}
+.summary{color:var(--tx2);font-size:15.5px;margin-bottom:19px}
+.why{border-left:2.5px solid var(--c);padding-left:15px;margin-bottom:20px}
+.why b{display:block;font-size:10.5px;letter-spacing:.18em;color:var(--c);margin-bottom:5px}
+.why p{margin:0;font-size:14.5px;color:var(--tx2)}
+.src{font-size:12px;color:var(--tx3);letter-spacing:.03em}
+.flag{color:var(--flag);margin-left:10px}
+.flag::before{content:"◇ "}
+.more{display:none;background:none;border:0;color:var(--c);font-size:13px;cursor:pointer;padding:0;margin-bottom:12px}
+
+.lede{color:var(--tx2);font-size:14.5px;margin-bottom:20px}
+.toc{list-style:none;max-height:52dvh;overflow:auto;padding-right:6px}
+.toc li+li{border-top:1px solid var(--line)}
+.toc button{width:100%;background:none;border:0;cursor:pointer;color:var(--tx2);text-align:left;
+ display:flex;align-items:baseline;gap:12px;padding:7px 2px;font-size:14px;transition:color .18s}
+.toc button:hover{color:var(--tx)}
+.tn{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--tx3);flex:none}
+.tt{flex:1}
+.tf{font-size:10.5px;color:var(--flag);flex:none;letter-spacing:.06em}
+
+.outro{align-items:center}
+.outro-in{max-width:620px;width:100%}
+.outro h2{font-size:clamp(22px,2.2vw,30px);font-weight:800;margin-bottom:22px}
+.checklist{list-style:none;margin-bottom:26px}
+.checklist li{border-top:1px solid var(--line);padding:12px 0}
+.checklist button{background:none;border:0;cursor:pointer;color:var(--tx);display:flex;gap:11px;
+ align-items:baseline;font-size:15px;font-weight:700;text-align:left;padding:0}
+.checklist button:hover span{text-decoration:underline}
+.checklist b{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--flag)}
+.checklist p{font-size:13px;color:var(--tx3);margin-top:5px;padding-left:23px}
+.note{font-size:13px;color:var(--tx3);margin-bottom:22px;line-height:1.8}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--tx);border-radius:10px;
+ padding:10px 20px;font-size:13.5px;cursor:pointer;transition:.2s}
+.btn:hover{border-color:var(--tx3)}
+:root[data-mode="light"] .btn{border-radius:0}
+
+.acts{position:absolute;right:26px;bottom:20px;display:flex;gap:7px;opacity:.24;transition:opacity .25s}
+.item:hover .acts,.acts:focus-within{opacity:1}
+.acts button{width:35px;height:35px;border-radius:10px;cursor:pointer;border:1px solid var(--line);
+ background:var(--panel);color:var(--tx2);display:grid;place-items:center;transition:.2s}
+.acts button:hover{color:var(--tx);border-color:var(--tx3)}
+.acts svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+:root[data-mode="light"] .acts button{border-radius:0}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,14px);z-index:60;background:var(--tx);
+ color:var(--bg);padding:9px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:900px){
+  .rail{display:none}
+  .item{padding:62px 18px 18px;align-items:flex-start}
+  .inner{grid-template-columns:1fr;gap:16px;align-content:start;height:100%}
+  .shot{justify-self:center}
+  .shot img{max-height:62dvh;border-radius:12px}
+  .cover .shot img{max-height:34dvh}
+  .eyebrow{margin-bottom:9px;gap:10px}
+  .rank{font-size:23px}
+  .title{font-size:19px;margin-bottom:8px}
+  .summary{font-size:14px;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .summary.open{-webkit-line-clamp:unset}
+  .why{display:none;margin-bottom:12px}
+  .why.open{display:block}
+  .more{display:inline-block}
+  .src{font-size:11.5px;padding-right:82px}
+  .flag{display:block;margin:4px 0 0}
+  .toc{max-height:none;flex:1}
+  .cover .inner{display:flex;flex-direction:column;min-height:0}
+  .cover .text{display:flex;flex-direction:column;min-height:0;flex:1}
+  .acts{right:16px;bottom:14px;opacity:.42}
+  .outro{padding-top:80px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+
+
+
+</style></head><body>
+<div class="bar">
+  <div class="brand">每日科技情报<i>2026.10.31</i></div><div class="sp"></div>
+  <div class="pos mono"><b id="pos">封面</b></div>
+  <a class="tbtn" href="../index.html" style="text-decoration:none">每日简报</a>
+  <button class="tbtn" id="mode">浅色版</button>
+</div>
+<div class="prog" id="prog"></div>
+<nav class="rail mono" id="rail" aria-label="按重要性排序的目录"><button data-go="0" aria-label="跳到封面">封面</button><button data-go="1" aria-label="跳到01">01</button><button data-go="2" aria-label="跳到02">02</button><button data-go="3" aria-label="跳到03">03</button><button data-go="4" aria-label="跳到04">04</button><button data-go="5" aria-label="跳到05">05</button><button data-go="6" aria-label="跳到06">06</button><button data-go="7" aria-label="跳到07">07</button><button data-go="8" aria-label="跳到08">08</button><button data-go="9" aria-label="跳到09">09</button><button data-go="10" aria-label="跳到结尾">结尾</button></nav>
+<main id="main">
+<section class="item cover t-cover" id="s0" data-i="0">
+  <div class="inner">
+    <figure class="shot"><img data-i="0" alt="封面" src="img/2026-10-31-reader/00_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="tag">2026.10.31 · 周六 · 过去 48 小时</span></div>
+      <h2 class="title">今日科技情报</h2>
+      <p class="lede">共 9 条，按重要性排序。点标题直接跳过去。</p>
+      <ol class="toc"><li><button data-go="1"><span class="tn">01</span><span class="tt">Cursor市Claude扩展 被植入SSH后门</span><span class='tf'>待核实</span></button></li><li><button data-go="2"><span class="tn">02</span><span class="tt">苹果Apple智能入华 接入阿里千问</span></button></li><li><button data-go="3"><span class="tn">03</span><span class="tt">robots.txt通用 AI训练偏好信号</span></button></li><li><button data-go="4"><span class="tn">04</span><span class="tt">谷歌卫星首次下行 轨道上的AI回复</span></button></li><li><button data-go="5"><span class="tn">05</span><span class="tt">币安63亿美元失窃 进入追回阶段</span><span class='tf'>待核实</span></button></li><li><button data-go="6"><span class="tn">06</span><span class="tt">英特尔单日跌近29% 纳指跌近3%</span></button></li><li><button data-go="7"><span class="tn">07</span><span class="tt">黑石下调Anthropic IPO后评级预期</span><span class='tf'>待核实</span></button></li><li><button data-go="8"><span class="tn">08</span><span class="tt">1.3B国产OXR 登顶文档解析三榜</span><span class='tf'>待核实</span></button></li><li><button data-go="9"><span class="tn">09</span><span class="tt">GitHub热榜 记忆层与智能体技能</span><span class='tf'>待核实</span></button></li></ol>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="0" aria-label="下载封面"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="0" aria-label="复制封面文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s1" data-i="1">
+  <div class="inner">
+    <figure class="shot"><img data-i="1" alt="第 01 条资讯卡" src="img/2026-10-31-reader/01_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">01</span><span class="tag">供应链攻击</span></div>
+      <h2 class="title">Cursor市Claude扩展 被植入SSH后门</h2>
+      <p class="summary">Cursor市场上被篡改的Claude Code扩展2.1.313上线约11小时，至多约5000用户；植入SSH密钥与反向隧道，因代码缺陷多数未完全持久化。</p>
+      <div class="why"><b>为什么重要</b><p>AI编程助手的扩展分发成了供应链入口，官方市场信誉被直接当成攻击面，开发者机器上的云密钥成了首选目标。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Ars / WIRED / THN 10/30<span class="flag">待核实 · Anthropic称非自家系统被攻破；攻击者如何拿到Cursor官方发布通道仍未说明；恶意代码有缺陷，多数机器未完全建立持久化。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="1" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="1" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s2" data-i="2">
+  <div class="inner">
+    <figure class="shot"><img data-i="2" alt="第 02 条资讯卡" src="img/2026-10-31-reader/02_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">02</span><span class="tag">国产落地</span></div>
+      <h2 class="title">苹果Apple智能入华 接入阿里千问</h2>
+      <p class="summary">苹果宣布中国区首批Apple智能：11月4日开发者测试，12月随iOS 27.3推出；Siri、写作工具与视觉智能接入阿里千问，不含全新Siri AI。</p>
+      <div class="why"><b>为什么重要</b><p>全球最大智能手机市场终于等到本地大模型入口，苹果在华AI能力的默认供应商变成了千问，而不是ChatGPT。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：苹果 / IT之家 / Verge 10/31</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="2" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="2" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s3" data-i="3">
+  <div class="inner">
+    <figure class="shot"><img data-i="3" alt="第 03 条资讯卡" src="img/2026-10-31-reader/03_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">03</span><span class="tag">数据偏好</span></div>
+      <h2 class="title">robots.txt通用 AI训练偏好信号</h2>
+      <p class="summary">OpenAI、谷歌、微软与Anthropic宣布将尊重robots.txt里一套通用AI训练偏好信号，站点可一次声明、多家遵守；OpenAI称数月内落地。</p>
+      <div class="why"><b>为什么重要</b><p>站点第一次可以用同一信号挡住多家基础模型爬虫，训练数据的默认权从“默认可抓”往“明示才用”挪了一格。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：OpenAI / Verge 10/30</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="3" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="3" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s4" data-i="4">
+  <div class="inner">
+    <figure class="shot"><img data-i="4" alt="第 04 条资讯卡" src="img/2026-10-31-reader/04_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">04</span><span class="tag">太空算力</span></div>
+      <h2 class="title">谷歌卫星首次下行 轨道上的AI回复</h2>
+      <p class="summary">谷歌Project Suncatcher原型星10/1发射后完成通电与早期机器学习测试，本周上行Gemma 4提示，在斯瓦尔巴过境时下行第一首太空俳句。</p>
+      <div class="why"><b>为什么重要</b><p>数据中心级TPU第一次在轨给出可用输出，太空算力从概念演示进入可复现的工程检查单。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Google 10/30</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="4" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="4" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s5" data-i="5">
+  <div class="inner">
+    <figure class="shot"><img data-i="5" alt="第 05 条资讯卡" src="img/2026-10-31-reader/05_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">05</span><span class="tag">加密安全</span></div>
+      <h2 class="title">币安63亿美元失窃 进入追回阶段</h2>
+      <p class="summary">多家媒体按63亿美元确认报道币安热钱包被盗；约20分钟完成转移，近30亿美元稳定币已被冻结，调查指向疑似朝鲜相关地址。</p>
+      <div class="why"><b>为什么重要</b><p>史上最大加密盗窃把交易所热钱包与稳定币发行人的冻结权同时推到台前，追回进度将重写行业应急剧本。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：CNBC / BBC 10/30<span class="flag">待核实 · 金额与朝鲜归因主要来自链上情报与媒体转述；追回与冻结数字仍在变动。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="5" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="5" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s6" data-i="6">
+  <div class="inner">
+    <figure class="shot"><img data-i="6" alt="第 06 条资讯卡" src="img/2026-10-31-reader/06_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">06</span><span class="tag">资本市场</span></div>
+      <h2 class="title">英特尔单日跌近29% 纳指跌近3%</h2>
+      <p class="summary">英特尔周五收跌28.58%，为1970年代以来最差单日，美国政府持股市值蒸发约120亿美元；纳指跌2.86%，AI开支恐慌与PC疲软同日加压。</p>
+      <div class="why"><b>为什么重要</b><p>市场不再只问AI有多火，开始逐家核对资本开支能不能换成收入，芯片与云股一起被按现金流重估。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：CNBC / BBC 10/30</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="6" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="6" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s7" data-i="7">
+  <div class="inner">
+    <figure class="shot"><img data-i="7" alt="第 07 条资讯卡" src="img/2026-10-31-reader/07_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">07</span><span class="tag">上市融资</span></div>
+      <h2 class="title">黑石下调Anthropic IPO后评级预期</h2>
+      <p class="summary">FT称Blackstone向投资者表示，预计Anthropic IPO后获双B档“高级垃圾债”评级，而非此前预期的投资级；双方均拒绝置评。</p>
+      <div class="why"><b>为什么重要</b><p>算力融资方自己改口，等于提醒市场：烧钱训练的实验室上市后，借债成本可能明显高于投资级叙事。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：FT / TechCrunch 10/30<span class="flag">待核实 · 为Blackstone对投资者的预期，非评级机构已出具评级。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="7" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="7" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-oss" id="s8" data-i="8">
+  <div class="inner">
+    <figure class="shot"><img data-i="8" alt="第 08 条资讯卡" src="img/2026-10-31-reader/08_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">08</span><span class="tag">开源解析</span></div>
+      <h2 class="title">1.3B国产OXR 登顶文档解析三榜</h2>
+      <p class="summary">SoMark开源OXR-1.0仅13亿参数，称在OmniDocBench、olmOCR-Bench与DocParsingBench夺第一；单卡解析100页约101秒，引入RSI自改进训练。</p>
+      <div class="why"><b>为什么重要</b><p>文档解析被当成Agent吃私域知识的入口，小模型加自改进正在压低本地RAG的前置成本。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：量子位 10/30<span class="flag">待核实 · 榜分数为团队自述与量子位转述，未逐项复核原始榜单页面。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="8" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="8" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-rank" id="s9" data-i="9">
+  <div class="inner">
+    <figure class="shot"><img data-i="9" alt="第 09 条资讯卡" src="img/2026-10-31-reader/09_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">09</span><span class="tag">开源热榜</span></div>
+      <h2 class="title">GitHub热榜 记忆层与智能体技能</h2>
+      <p class="summary">10/31日榜仍以智能体配套为主：设计词汇impeccable、学习助手DeepTutor、会话记忆claude-mem、自带电脑的OpenBot与OpenMausBot。</p>
+      <div class="why"><b>为什么重要</b><p>冲榜项目在补记忆、补技能、补运行环境，开发者继续把智能体当成要长期配置的同事。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：GitHub Trending 10/31<span class="flag">待核实 · 均非48小时内首发，仅为当日冲榜；星数为当日增量，impeccable、DeepTutor、superpowers等反复上榜。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="9" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="9" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item outro" id="s10" data-i="10">
+  <div class="outro-in">
+    <h2>发布前请确认这 5 条</h2>
+    <ul class="checklist"><li><button data-go="1"><b>01</b><span>Cursor市Claude扩展 被植入SSH后门</span></button><p>Anthropic称非自家系统被攻破；攻击者如何拿到Cursor官方发布通道仍未说明；恶意代码有缺陷，多数机器未完全建立持久化。</p></li><li><button data-go="5"><b>05</b><span>币安63亿美元失窃 进入追回阶段</span></button><p>金额与朝鲜归因主要来自链上情报与媒体转述；追回与冻结数字仍在变动。</p></li><li><button data-go="7"><b>07</b><span>黑石下调Anthropic IPO后评级预期</span></button><p>为Blackstone对投资者的预期，非评级机构已出具评级。</p></li><li><button data-go="8"><b>08</b><span>1.3B国产OXR 登顶文档解析三榜</span></button><p>榜分数为团队自述与量子位转述，未逐项复核原始榜单页面。</p></li><li><button data-go="9"><b>09</b><span>GitHub热榜 记忆层与智能体技能</span></button><p>均非48小时内首发，仅为当日冲榜；星数为当日增量，impeccable、DeepTutor、superpowers等反复上榜。</p></li></ul>
+    <p class="note">切换深浅两套图时，下载按钮会跟着当前这套走。黄标条目在新闻稿或官方口径出现前，请勿写成已交割或已定日期。上一期专区：<a href="./2026-10-30.html">2026-10-30</a>。</p>
+    <button class="btn" id="copyAll">复制全部文案</button>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+<script type="application/json" id="d">{"cards": [{"no": "00", "title": "封面 · 今日科技情报", "copy": "【今日科技情报】2026.10.31 · 过去 48 小时 9 条\n\n01 Cursor市Claude扩展 被植入SSH后门\n02 苹果Apple智能入华 接入阿里千问\n03 robots.txt通用 AI训练偏好信号\n04 谷歌卫星首次下行 轨道上的AI回复\n05 币安63亿美元失窃 进入追回阶段\n06 英特尔单日跌近29% 纳指跌近3%\n07 黑石下调Anthropic IPO后评级预期\n08 1.3B国产OXR 登顶文档解析三榜\n09 GitHub热榜 记忆层与智能体技能\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261031_00_深色.png", "fileLight": "科技情报_20261031_00_浅色.png", "dark": "img/2026-10-31-reader/00_dark.png", "light": "img/2026-10-31-reader/00_light.png"}, {"no": "01", "title": "Cursor市Claude扩展 被植入SSH后门", "copy": "【供应链攻击】Cursor市Claude扩展 被植入SSH后门\n\nCursor市场上被篡改的Claude Code扩展2.1.313上线约11小时，至多约5000用户；植入SSH密钥与反向隧道，因代码缺陷多数未完全持久化。\n\n◆ 为什么重要：AI编程助手的扩展分发成了供应链入口，官方市场信誉被直接当成攻击面，开发者机器上的云密钥成了首选目标。\n\n※ Anthropic称非自家系统被攻破；攻击者如何拿到Cursor官方发布通道仍未说明；恶意代码有缺陷，多数机器未完全建立持久化。\n\n来源：Ars / WIRED / THN 10/30\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261031_01_深色.png", "fileLight": "科技情报_20261031_01_浅色.png", "dark": "img/2026-10-31-reader/01_dark.png", "light": "img/2026-10-31-reader/01_light.png"}, {"no": "02", "title": "苹果Apple智能入华 接入阿里千问", "copy": "【国产落地】苹果Apple智能入华 接入阿里千问\n\n苹果宣布中国区首批Apple智能：11月4日开发者测试，12月随iOS 27.3推出；Siri、写作工具与视觉智能接入阿里千问，不含全新Siri AI。\n\n◆ 为什么重要：全球最大智能手机市场终于等到本地大模型入口，苹果在华AI能力的默认供应商变成了千问，而不是ChatGPT。\n\n来源：苹果 / IT之家 / Verge 10/31\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261031_02_深色.png", "fileLight": "科技情报_20261031_02_浅色.png", "dark": "img/2026-10-31-reader/02_dark.png", "light": "img/2026-10-31-reader/02_light.png"}, {"no": "03", "title": "robots.txt通用 AI训练偏好信号", "copy": "【数据偏好】robots.txt通用 AI训练偏好信号\n\nOpenAI、谷歌、微软与Anthropic宣布将尊重robots.txt里一套通用AI训练偏好信号，站点可一次声明、多家遵守；OpenAI称数月内落地。\n\n◆ 为什么重要：站点第一次可以用同一信号挡住多家基础模型爬虫，训练数据的默认权从“默认可抓”往“明示才用”挪了一格。\n\n来源：OpenAI / Verge 10/30\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261031_03_深色.png", "fileLight": "科技情报_20261031_03_浅色.png", "dark": "img/2026-10-31-reader/03_dark.png", "light": "img/2026-10-31-reader/03_light.png"}, {"no": "04", "title": "谷歌卫星首次下行 轨道上的AI回复", "copy": "【太空算力】谷歌卫星首次下行 轨道上的AI回复\n\n谷歌Project Suncatcher原型星10/1发射后完成通电与早期机器学习测试，本周上行Gemma 4提示，在斯瓦尔巴过境时下行第一首太空俳句。\n\n◆ 为什么重要：数据中心级TPU第一次在轨给出可用输出，太空算力从概念演示进入可复现的工程检查单。\n\n来源：Google 10/30\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261031_04_深色.png", "fileLight": "科技情报_20261031_04_浅色.png", "dark": "img/2026-10-31-reader/04_dark.png", "light": "img/2026-10-31-reader/04_light.png"}, {"no": "05", "title": "币安63亿美元失窃 进入追回阶段", "copy": "【加密安全】币安63亿美元失窃 进入追回阶段\n\n多家媒体按63亿美元确认报道币安热钱包被盗；约20分钟完成转移，近30亿美元稳定币已被冻结，调查指向疑似朝鲜相关地址。\n\n◆ 为什么重要：史上最大加密盗窃把交易所热钱包与稳定币发行人的冻结权同时推到台前，追回进度将重写行业应急剧本。\n\n※ 金额与朝鲜归因主要来自链上情报与媒体转述；追回与冻结数字仍在变动。\n\n来源：CNBC / BBC 10/30\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261031_05_深色.png", "fileLight": "科技情报_20261031_05_浅色.png", "dark": "img/2026-10-31-reader/05_dark.png", "light": "img/2026-10-31-reader/05_light.png"}, {"no": "06", "title": "英特尔单日跌近29% 纳指跌近3%", "copy": "【资本市场】英特尔单日跌近29% 纳指跌近3%\n\n英特尔周五收跌28.58%，为1970年代以来最差单日，美国政府持股市值蒸发约120亿美元；纳指跌2.86%，AI开支恐慌与PC疲软同日加压。\n\n◆ 为什么重要：市场不再只问AI有多火，开始逐家核对资本开支能不能换成收入，芯片与云股一起被按现金流重估。\n\n来源：CNBC / BBC 10/30\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261031_06_深色.png", "fileLight": "科技情报_20261031_06_浅色.png", "dark": "img/2026-10-31-reader/06_dark.png", "light": "img/2026-10-31-reader/06_light.png"}, {"no": "07", "title": "黑石下调Anthropic IPO后评级预期", "copy": "【上市融资】黑石下调Anthropic IPO后评级预期\n\nFT称Blackstone向投资者表示，预计Anthropic IPO后获双B档“高级垃圾债”评级，而非此前预期的投资级；双方均拒绝置评。\n\n◆ 为什么重要：算力融资方自己改口，等于提醒市场：烧钱训练的实验室上市后，借债成本可能明显高于投资级叙事。\n\n※ 为Blackstone对投资者的预期，非评级机构已出具评级。\n\n来源：FT / TechCrunch 10/30\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261031_07_深色.png", "fileLight": "科技情报_20261031_07_浅色.png", "dark": "img/2026-10-31-reader/07_dark.png", "light": "img/2026-10-31-reader/07_light.png"}, {"no": "08", "title": "1.3B国产OXR 登顶文档解析三榜", "copy": "【开源解析】1.3B国产OXR 登顶文档解析三榜\n\nSoMark开源OXR-1.0仅13亿参数，称在OmniDocBench、olmOCR-Bench与DocParsingBench夺第一；单卡解析100页约101秒，引入RSI自改进训练。\n\n◆ 为什么重要：文档解析被当成Agent吃私域知识的入口，小模型加自改进正在压低本地RAG的前置成本。\n\n※ 榜分数为团队自述与量子位转述，未逐项复核原始榜单页面。\n\n来源：量子位 10/30\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261031_08_深色.png", "fileLight": "科技情报_20261031_08_浅色.png", "dark": "img/2026-10-31-reader/08_dark.png", "light": "img/2026-10-31-reader/08_light.png"}, {"no": "09", "title": "GitHub热榜 记忆层与智能体技能", "copy": "【开源热榜】GitHub热榜 记忆层与智能体技能\n\n10/31日榜仍以智能体配套为主：设计词汇impeccable、学习助手DeepTutor、会话记忆claude-mem、自带电脑的OpenBot与OpenMausBot。\n\n◆ 为什么重要：冲榜项目在补记忆、补技能、补运行环境，开发者继续把智能体当成要长期配置的同事。\n\n※ 均非48小时内首发，仅为当日冲榜；星数为当日增量，impeccable、DeepTutor、superpowers等反复上榜。\n\n来源：GitHub Trending 10/31\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261031_09_深色.png", "fileLight": "科技情报_20261031_09_浅色.png", "dark": "img/2026-10-31-reader/09_dark.png", "light": "img/2026-10-31-reader/09_light.png"}], "allCopy": "【今日科技情报】2026.10.31 · 过去 48 小时 9 条\n\n01 Cursor市Claude扩展 被植入SSH后门\n02 苹果Apple智能入华 接入阿里千问\n03 robots.txt通用 AI训练偏好信号\n04 谷歌卫星首次下行 轨道上的AI回复\n05 币安63亿美元失窃 进入追回阶段\n06 英特尔单日跌近29% 纳指跌近3%\n07 黑石下调Anthropic IPO后评级预期\n08 1.3B国产OXR 登顶文档解析三榜\n09 GitHub热榜 记忆层与智能体技能\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【供应链攻击】Cursor市Claude扩展 被植入SSH后门\n\nCursor市场上被篡改的Claude Code扩展2.1.313上线约11小时，至多约5000用户；植入SSH密钥与反向隧道，因代码缺陷多数未完全持久化。\n\n◆ 为什么重要：AI编程助手的扩展分发成了供应链入口，官方市场信誉被直接当成攻击面，开发者机器上的云密钥成了首选目标。\n\n※ Anthropic称非自家系统被攻破；攻击者如何拿到Cursor官方发布通道仍未说明；恶意代码有缺陷，多数机器未完全建立持久化。\n\n来源：Ars / WIRED / THN 10/30\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【国产落地】苹果Apple智能入华 接入阿里千问\n\n苹果宣布中国区首批Apple智能：11月4日开发者测试，12月随iOS 27.3推出；Siri、写作工具与视觉智能接入阿里千问，不含全新Siri AI。\n\n◆ 为什么重要：全球最大智能手机市场终于等到本地大模型入口，苹果在华AI能力的默认供应商变成了千问，而不是ChatGPT。\n\n来源：苹果 / IT之家 / Verge 10/31\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【数据偏好】robots.txt通用 AI训练偏好信号\n\nOpenAI、谷歌、微软与Anthropic宣布将尊重robots.txt里一套通用AI训练偏好信号，站点可一次声明、多家遵守；OpenAI称数月内落地。\n\n◆ 为什么重要：站点第一次可以用同一信号挡住多家基础模型爬虫，训练数据的默认权从“默认可抓”往“明示才用”挪了一格。\n\n来源：OpenAI / Verge 10/30\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【太空算力】谷歌卫星首次下行 轨道上的AI回复\n\n谷歌Project Suncatcher原型星10/1发射后完成通电与早期机器学习测试，本周上行Gemma 4提示，在斯瓦尔巴过境时下行第一首太空俳句。\n\n◆ 为什么重要：数据中心级TPU第一次在轨给出可用输出，太空算力从概念演示进入可复现的工程检查单。\n\n来源：Google 10/30\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【加密安全】币安63亿美元失窃 进入追回阶段\n\n多家媒体按63亿美元确认报道币安热钱包被盗；约20分钟完成转移，近30亿美元稳定币已被冻结，调查指向疑似朝鲜相关地址。\n\n◆ 为什么重要：史上最大加密盗窃把交易所热钱包与稳定币发行人的冻结权同时推到台前，追回进度将重写行业应急剧本。\n\n※ 金额与朝鲜归因主要来自链上情报与媒体转述；追回与冻结数字仍在变动。\n\n来源：CNBC / BBC 10/30\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【资本市场】英特尔单日跌近29% 纳指跌近3%\n\n英特尔周五收跌28.58%，为1970年代以来最差单日，美国政府持股市值蒸发约120亿美元；纳指跌2.86%，AI开支恐慌与PC疲软同日加压。\n\n◆ 为什么重要：市场不再只问AI有多火，开始逐家核对资本开支能不能换成收入，芯片与云股一起被按现金流重估。\n\n来源：CNBC / BBC 10/30\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【上市融资】黑石下调Anthropic IPO后评级预期\n\nFT称Blackstone向投资者表示，预计Anthropic IPO后获双B档“高级垃圾债”评级，而非此前预期的投资级；双方均拒绝置评。\n\n◆ 为什么重要：算力融资方自己改口，等于提醒市场：烧钱训练的实验室上市后，借债成本可能明显高于投资级叙事。\n\n※ 为Blackstone对投资者的预期，非评级机构已出具评级。\n\n来源：FT / TechCrunch 10/30\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开源解析】1.3B国产OXR 登顶文档解析三榜\n\nSoMark开源OXR-1.0仅13亿参数，称在OmniDocBench、olmOCR-Bench与DocParsingBench夺第一；单卡解析100页约101秒，引入RSI自改进训练。\n\n◆ 为什么重要：文档解析被当成Agent吃私域知识的入口，小模型加自改进正在压低本地RAG的前置成本。\n\n※ 榜分数为团队自述与量子位转述，未逐项复核原始榜单页面。\n\n来源：量子位 10/30\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开源热榜】GitHub热榜 记忆层与智能体技能\n\n10/31日榜仍以智能体配套为主：设计词汇impeccable、学习助手DeepTutor、会话记忆claude-mem、自带电脑的OpenBot与OpenMausBot。\n\n◆ 为什么重要：冲榜项目在补记忆、补技能、补运行环境，开发者继续把智能体当成要长期配置的同事。\n\n※ 均非48小时内首发，仅为当日冲榜；星数为当日增量，impeccable、DeepTutor、superpowers等反复上榜。\n\n来源：GitHub Trending 10/31\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道"}</script>
+<script>
+const G=JSON.parse(document.getElementById("d").textContent);
+const main=document.getElementById("main"),rail=document.getElementById("rail");
+const secs=[...document.querySelectorAll(".item")];
+const imgs=[...document.querySelectorAll(".shot img")];
+const mode=()=>document.documentElement.dataset.mode;
+let loaded=new Set();
+function load(i){
+  for(let k=Math.max(0,i-2);k<=Math.min(imgs.length-1,i+2);k++){
+    const el=imgs[k];if(!el)continue;
+    const want=G.cards[+el.dataset.i][mode()];
+    if(el.src!==want){el.src=want;loaded.add(k);}
+  }
+}
+function repaint(){loaded.forEach(k=>{const el=imgs[k];el.src=G.cards[+el.dataset.i][mode()];});}
+load(0);
+document.getElementById("mode").onclick=e=>{
+  const r=document.documentElement;
+  r.dataset.mode=mode()==="dark"?"light":"dark";
+  e.currentTarget.textContent=mode()==="dark"?"浅色版":"深色版";
+  repaint();
+};
+const toast=document.getElementById("toast");let tt;
+const say=m=>{toast.textContent=m;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),1700)};
+const copy=t=>navigator.clipboard?.writeText(t).then(()=>say("已复制"),()=>say("复制失败，请手动选中"))??say("复制失败");
+document.addEventListener("click",ev=>{
+  const go=ev.target.closest("[data-go]");
+  if(go){document.getElementById("s"+go.dataset.go).scrollIntoView();return}
+  const a=ev.target.closest("[data-act]");
+  if(a){
+    const c=G.cards[+a.dataset.i],d=mode()==="dark";
+    if(a.dataset.act==="dl"){
+      const l=document.createElement("a");l.href=d?c.dark:c.light;
+      l.download=d?c.fileDark:c.fileLight;l.click();say("已下载 "+l.download);
+    }else copy(c.copy);
+    return;
+  }
+  if(ev.target.id==="copyAll"){copy(G.allCopy);return}
+  const m=ev.target.closest(".more");
+  if(m){
+    const b=m.closest(".text"),on=b.querySelector(".summary").classList.toggle("open");
+    b.querySelector(".why")?.classList.toggle("open",on);
+    m.textContent=on?"收起":"展开全文";m.setAttribute("aria-expanded",on);
+  }
+});
+const pos=document.getElementById("pos"),prog=document.getElementById("prog");
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting||en.intersectionRatio<.55)return;
+  const i=secs.indexOf(en.target);
+  load(i);
+  pos.textContent=i===0?"封面":(i>G.cards.length-1?"结尾":G.cards[i].no);
+  prog.style.width=(i/(secs.length-1)*100)+"%";
+  rail.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-current",String(j===i)));
+}),{root:main,threshold:.55});
+secs.forEach(s=>io.observe(s));
+addEventListener("keydown",e=>{
+  if(e.target.matches("input,textarea"))return;
+  const cur=secs.findIndex(s=>s.getBoundingClientRect().top>-window.innerHeight/2);
+  if(e.key==="ArrowDown"||e.key==="j"){e.preventDefault();secs[Math.min(secs.length-1,cur+1)]?.scrollIntoView()}
+  if(e.key==="ArrowUp"||e.key==="k"){e.preventDefault();secs[Math.max(0,cur-1)]?.scrollIntoView()}
+});
+
+</script>
+</body></html>
