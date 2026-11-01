@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="zh-CN" data-mode="dark"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>每日科技情报 · 2026.11.02 · 阅读版</title>
+<style>
+
+
+
+
+:root{
+  --bg:#05060f; --line:rgba(255,255,255,.11); --tx:#EEF2FF;
+  --tx2:rgba(238,242,255,.66); --tx3:rgba(238,242,255,.40);
+  --panel:rgba(255,255,255,.05); --sh:0 20px 54px rgba(0,0,0,.55);
+  --t-cover:#67E8F9; --t-ai:#A78BFA; --t-money:#F5C842; --t-chip:#FF8A3C;
+  --t-oss:#3DFF87; --t-alert:#FF5A4E; --t-rank:#7DA2FF;
+  --flag:#FFD166;
+  --deco:radial-gradient(900px 700px at 8% -8%,rgba(124,92,255,.26),transparent 62%),
+         radial-gradient(760px 620px at 96% 10%,rgba(34,211,238,.15),transparent 62%);
+}
+:root[data-mode="light"]{
+  --bg:#F7F4ED; --line:rgba(21,18,14,.18); --tx:#15120E;
+  --tx2:#4A443C; --tx3:#8A8176;
+  --panel:rgba(21,18,14,.045); --sh:0 14px 36px rgba(21,18,14,.15);
+  --t-cover:#1B3FAE; --t-ai:#5B2BE0; --t-money:#0B6B4F; --t-chip:#E8442A;
+  --t-oss:#00964A; --t-alert:#DC1E28; --t-rank:#1B3FAE;
+  --flag:#9A6B00;
+  --deco:none;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--tx);line-height:1.66;
+ font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+ -webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:var(--deco)}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px;border-radius:5px}
+
+.bar{position:fixed;top:0;left:0;right:0;height:54px;z-index:40;display:flex;align-items:center;gap:14px;
+ padding:0 22px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--line)}
+.brand{font-size:13px;font-weight:800;letter-spacing:.2em}
+.brand i{font-style:normal;color:var(--tx3);font-weight:500;letter-spacing:.06em;margin-left:10px}
+.bar .sp{flex:1}
+.pos{font-size:12px;color:var(--tx3);letter-spacing:.1em}
+.pos b{color:var(--tx);font-weight:700}
+.tbtn{border:1px solid var(--line);background:transparent;color:var(--tx2);border-radius:999px;
+ padding:6px 14px;font-size:12px;cursor:pointer;letter-spacing:.04em;transition:.2s}
+.tbtn:hover{color:var(--tx);border-color:var(--tx3)}
+.prog{position:fixed;top:54px;left:0;height:2px;width:0;background:var(--tx);opacity:.85;z-index:41;transition:width .25s}
+
+.rail{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:35;display:flex;flex-direction:column;gap:1px}
+.rail button{background:none;border:0;cursor:pointer;padding:3px 6px;font-size:10.5px;letter-spacing:.1em;
+ color:var(--tx3);display:flex;align-items:center;gap:7px;transition:color .2s}
+.rail button::after{content:"";width:12px;height:1px;background:currentColor;opacity:.45;transition:width .25s,opacity .2s}
+.rail button:hover{color:var(--tx2)}
+.rail button[aria-current="true"]{color:var(--tx);font-weight:700}
+.rail button[aria-current="true"]::after{width:26px;opacity:1}
+
+main{position:relative;z-index:1;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.item{height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;
+ justify-content:center;padding:54px 100px 22px 62px;position:relative}
+.t-cover{--c:var(--t-cover)} .t-ai{--c:var(--t-ai)} .t-money{--c:var(--t-money)}
+.t-chip{--c:var(--t-chip)} .t-oss{--c:var(--t-oss)} .t-alert{--c:var(--t-alert)}
+.t-rank{--c:var(--t-rank)} .outro{--c:var(--t-cover)}
+.inner{width:100%;max-width:1200px;display:grid;gap:54px;align-items:center;
+ grid-template-columns:minmax(0,1.04fr) minmax(0,1fr)}
+.shot{justify-self:end}
+.shot img{display:block;height:auto;max-height:calc(100dvh - 128px);max-width:100%;aspect-ratio:3/4;
+ border-radius:16px;box-shadow:var(--sh);background:var(--panel)}
+:root[data-mode="light"] .shot img{border-radius:0}
+
+.eyebrow{display:flex;align-items:baseline;gap:13px;margin-bottom:16px;flex-wrap:wrap}
+.rank{font:700 36px/1 ui-monospace,Menlo,monospace;color:var(--c)}
+.tag{font-size:11px;letter-spacing:.17em;font-weight:700;color:var(--c);
+ border:1px solid color-mix(in srgb,var(--c) 45%,transparent);padding:4px 11px;border-radius:999px}
+:root[data-mode="light"] .tag{border-radius:0}
+.title{font-size:clamp(23px,2.25vw,33px);line-height:1.34;font-weight:800;letter-spacing:-.01em;margin-bottom:15px}
+.summary{color:var(--tx2);font-size:15.5px;margin-bottom:19px}
+.why{border-left:2.5px solid var(--c);padding-left:15px;margin-bottom:20px}
+.why b{display:block;font-size:10.5px;letter-spacing:.18em;color:var(--c);margin-bottom:5px}
+.why p{margin:0;font-size:14.5px;color:var(--tx2)}
+.src{font-size:12px;color:var(--tx3);letter-spacing:.03em}
+.flag{color:var(--flag);margin-left:10px}
+.flag::before{content:"◇ "}
+.more{display:none;background:none;border:0;color:var(--c);font-size:13px;cursor:pointer;padding:0;margin-bottom:12px}
+
+.lede{color:var(--tx2);font-size:14.5px;margin-bottom:20px}
+.toc{list-style:none;max-height:52dvh;overflow:auto;padding-right:6px}
+.toc li+li{border-top:1px solid var(--line)}
+.toc button{width:100%;background:none;border:0;cursor:pointer;color:var(--tx2);text-align:left;
+ display:flex;align-items:baseline;gap:12px;padding:7px 2px;font-size:14px;transition:color .18s}
+.toc button:hover{color:var(--tx)}
+.tn{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--tx3);flex:none}
+.tt{flex:1}
+.tf{font-size:10.5px;color:var(--flag);flex:none;letter-spacing:.06em}
+
+.outro{align-items:center}
+.outro-in{max-width:620px;width:100%}
+.outro h2{font-size:clamp(22px,2.2vw,30px);font-weight:800;margin-bottom:22px}
+.checklist{list-style:none;margin-bottom:26px}
+.checklist li{border-top:1px solid var(--line);padding:12px 0}
+.checklist button{background:none;border:0;cursor:pointer;color:var(--tx);display:flex;gap:11px;
+ align-items:baseline;font-size:15px;font-weight:700;text-align:left;padding:0}
+.checklist button:hover span{text-decoration:underline}
+.checklist b{font:700 11px/1 ui-monospace,Menlo,monospace;color:var(--flag)}
+.checklist p{font-size:13px;color:var(--tx3);margin-top:5px;padding-left:23px}
+.note{font-size:13px;color:var(--tx3);margin-bottom:22px;line-height:1.8}
+.btn{border:1px solid var(--line);background:var(--panel);color:var(--tx);border-radius:10px;
+ padding:10px 20px;font-size:13.5px;cursor:pointer;transition:.2s}
+.btn:hover{border-color:var(--tx3)}
+:root[data-mode="light"] .btn{border-radius:0}
+
+.acts{position:absolute;right:26px;bottom:20px;display:flex;gap:7px;opacity:.24;transition:opacity .25s}
+.item:hover .acts,.acts:focus-within{opacity:1}
+.acts button{width:35px;height:35px;border-radius:10px;cursor:pointer;border:1px solid var(--line);
+ background:var(--panel);color:var(--tx2);display:grid;place-items:center;transition:.2s}
+.acts button:hover{color:var(--tx);border-color:var(--tx3)}
+.acts svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+:root[data-mode="light"] .acts button{border-radius:0}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,14px);z-index:60;background:var(--tx);
+ color:var(--bg);padding:9px 20px;border-radius:999px;font-size:13px;opacity:0;pointer-events:none;transition:.25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (max-width:900px){
+  .rail{display:none}
+  .item{padding:62px 18px 18px;align-items:flex-start}
+  .inner{grid-template-columns:1fr;gap:16px;align-content:start;height:100%}
+  .shot{justify-self:center}
+  .shot img{max-height:62dvh;border-radius:12px}
+  .cover .shot img{max-height:34dvh}
+  .eyebrow{margin-bottom:9px;gap:10px}
+  .rank{font-size:23px}
+  .title{font-size:19px;margin-bottom:8px}
+  .summary{font-size:14px;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .summary.open{-webkit-line-clamp:unset}
+  .why{display:none;margin-bottom:12px}
+  .why.open{display:block}
+  .more{display:inline-block}
+  .src{font-size:11.5px;padding-right:82px}
+  .flag{display:block;margin:4px 0 0}
+  .toc{max-height:none;flex:1}
+  .cover .inner{display:flex;flex-direction:column;min-height:0}
+  .cover .text{display:flex;flex-direction:column;min-height:0;flex:1}
+  .acts{right:16px;bottom:14px;opacity:.42}
+  .outro{padding-top:80px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+
+
+
+</style></head><body>
+<div class="bar">
+  <div class="brand">每日科技情报<i>2026.11.02</i></div><div class="sp"></div>
+  <div class="pos mono"><b id="pos">封面</b></div>
+  <a class="tbtn" href="../index.html" style="text-decoration:none">每日简报</a>
+  <button class="tbtn" id="mode">浅色版</button>
+</div>
+<div class="prog" id="prog"></div>
+<nav class="rail mono" id="rail" aria-label="按重要性排序的目录"><button data-go="0" aria-label="跳到封面">封面</button><button data-go="1" aria-label="跳到01">01</button><button data-go="2" aria-label="跳到02">02</button><button data-go="3" aria-label="跳到03">03</button><button data-go="4" aria-label="跳到04">04</button><button data-go="5" aria-label="跳到05">05</button><button data-go="6" aria-label="跳到06">06</button><button data-go="7" aria-label="跳到07">07</button><button data-go="8" aria-label="跳到08">08</button><button data-go="9" aria-label="跳到09">09</button><button data-go="10" aria-label="跳到10">10</button><button data-go="11" aria-label="跳到11">11</button><button data-go="12" aria-label="跳到结尾">结尾</button></nav>
+<main id="main">
+<section class="item cover t-cover" id="s0" data-i="0">
+  <div class="inner">
+    <figure class="shot"><img data-i="0" alt="封面" src="img/2026-11-02-reader/00_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="tag">2026.11.02 · 周一 · 过去 48 小时</span></div>
+      <h2 class="title">今日科技情报</h2>
+      <p class="lede">共 11 条，按重要性排序。点标题直接跳过去。</p>
+      <ol class="toc"><li><button data-go="1"><span class="tn">01</span><span class="tt">ChatGPT与Codex 12月起共用一份额度</span></button></li><li><button data-go="2"><span class="tn">02</span><span class="tt">Claude Code禁止 复刻现有游戏</span><span class='tf'>待核实</span></button></li><li><button data-go="3"><span class="tn">03</span><span class="tt">沙特阿美入股 HUMAIN 49%</span></button></li><li><button data-go="4"><span class="tn">04</span><span class="tt">AI智能体 给活鼠做脑部注射</span><span class='tf'>待核实</span></button></li><li><button data-go="5"><span class="tn">05</span><span class="tt">AI代码审查揪出 OverlayFS多处漏洞</span></button></li><li><button data-go="6"><span class="tn">06</span><span class="tt">四款旧Claude 补上文本水印</span></button></li><li><button data-go="7"><span class="tn">07</span><span class="tt">Kimi K2系列 年底前全部下线</span></button></li><li><button data-go="8"><span class="tn">08</span><span class="tt">我国AI推理数据量 首次超过训练</span></button></li><li><button data-go="9"><span class="tn">09</span><span class="tt">新云公司负债高企 AI泡沫担忧升温</span></button></li><li><button data-go="10"><span class="tn">10</span><span class="tt">LXD与MicroCloud 满分漏洞可冒充客户端</span><span class='tf'>待核实</span></button></li><li><button data-go="11"><span class="tn">11</span><span class="tt">GitHub热榜 编程界面、语音与游戏工作室</span><span class='tf'>待核实</span></button></li></ol>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="0" aria-label="下载封面"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="0" aria-label="复制封面文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-ai" id="s1" data-i="1">
+  <div class="inner">
+    <figure class="shot"><img data-i="1" alt="第 01 条资讯卡" src="img/2026-11-02-reader/01_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">01</span><span class="tag">订阅额度</span></div>
+      <h2 class="title">ChatGPT与Codex 12月起共用一份额度</h2>
+      <p class="summary">OpenAI帮助中心11/01更新：12月起Plus、Pro、Business在ChatGPT与Codex间共用按token计量的额度，Instant对话不计入；用完可等重置、升级或买积分。</p>
+      <div class="why"><b>为什么重要</b><p>聊天、写代码和智能体任务从此抢同一个池子，选更强的模型就更快见底，订阅的实际容量要看token数。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：OpenAI帮助中心 / Bleeping 11/01</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="1" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="1" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s2" data-i="2">
+  <div class="inner">
+    <figure class="shot"><img data-i="2" alt="第 02 条资讯卡" src="img/2026-11-02-reader/02_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">02</span><span class="tag">用途限制</span></div>
+      <h2 class="title">Claude Code禁止 复刻现有游戏</h2>
+      <p class="summary">Anthropic确认在Opus 5.5版Claude Code提示词中加了两句：可做原创和类型游戏，不得复刻具体现有游戏。开发者称误伤正常开发；另有用户自述因“训练竞争对手”被拦。</p>
+      <div class="why"><b>为什么重要</b><p>模型厂商开始在产品层按用途划红线，同一个编程工具能做什么，会随厂商的版权和竞争考量而变。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：GameDeveloper / Mashable 10/31<span class="flag">待核实 · 规则约10/27上线、10/30美东首报，非严格48小时内首发；“训练竞争对手”被拦仅为单一用户自述，Anthropic未回应。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="2" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="2" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s3" data-i="3">
+  <div class="inner">
+    <figure class="shot"><img data-i="3" alt="第 03 条资讯卡" src="img/2026-11-02-reader/03_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">03</span><span class="tag">算力资本</span></div>
+      <h2 class="title">沙特阿美入股 HUMAIN 49%</h2>
+      <p class="summary">沙特阿美通过子公司取得国家AI公司HUMAIN 49%股权，PIF保留51%；阿美2026年注入约99亿里亚尔（约26亿美元）现金并转入AI、算力和数字资产。</p>
+      <div class="why"><b>为什么重要</b><p>石油巨头把能源收入直接转成算力资产，中东算力从依赖海外云厂转向主权基金与国企自持运营。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：PIF / Aramco / GamesBeat 11/01</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="3" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="3" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s4" data-i="4">
+  <div class="inner">
+    <figure class="shot"><img data-i="4" alt="第 04 条资讯卡" src="img/2026-11-02-reader/04_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">04</span><span class="tag">AI实验</span></div>
+      <h2 class="title">AI智能体 给活鼠做脑部注射</h2>
+      <p class="summary">Exin Therapeutics让智能体从19种基因疗法中选药、定脑区坐标并操控手术台注射；Opus 5.5拒绝下针，换Sonnet 5完成，坐标故障由不知情的Opus 5修复。</p>
+      <div class="why"><b>为什么重要</b><p>智能体从写实验方案走到直接操作活体动物，不同模型的伦理判断不一，换模型绕开拒绝暴露了安全规程空白。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：WIRED 10/31<span class="flag">待核实 · 实验最早由公司CEO于10/28在X发布，非48小时内首发；结果未经同行评审，疗效待观察。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="4" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="4" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-oss" id="s5" data-i="5">
+  <div class="inner">
+    <figure class="shot"><img data-i="5" alt="第 05 条资讯卡" src="img/2026-11-02-reader/05_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">05</span><span class="tag">内核</span></div>
+      <h2 class="title">AI代码审查揪出 OverlayFS多处漏洞</h2>
+      <p class="summary">Linux 7.4-rc1发布，合并窗口近2万次提交创纪录；OverlayFS十余个补丁修复Chris Mason的AI审查发现的缺陷，含非特权可触发的信息泄露与释放后使用。</p>
+      <div class="why"><b>为什么重要</b><p>OverlayFS是容器镜像分层的基础，AI审查开始在内核里稳定产出可合并的安全修复，稳定版回移值得跟。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Phoronix 11/01</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="5" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="5" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-chip" id="s6" data-i="6">
+  <div class="inner">
+    <figure class="shot"><img data-i="6" alt="第 06 条资讯卡" src="img/2026-11-02-reader/06_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">06</span><span class="tag">合规水印</span></div>
+      <h2 class="title">四款旧Claude 补上文本水印</h2>
+      <p class="summary">Anthropic通知给Mythos 5、Opus 4.7、Opus 4.6、Sonnet 4.6加水印，应对欧盟AI法12月期限；但Opus 4.6与Sonnet 4.6仅在采样参数为默认时生效。</p>
+      <div class="why"><b>为什么重要</b><p>存量模型被监管期限倒逼补标记，而老模型上改一个参数就能避开，水印的合规效力打了折扣。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：The Decoder / Anthropic 10/31</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="6" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="6" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-rank" id="s7" data-i="7">
+  <div class="inner">
+    <figure class="shot"><img data-i="7" alt="第 07 条资讯卡" src="img/2026-11-02-reader/07_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">07</span><span class="tag">模型退役</span></div>
+      <h2 class="title">Kimi K2系列 年底前全部下线</h2>
+      <p class="summary">Kimi开放平台公告：K2系列10/31起不再向新注册用户开放，老用户暂不受影响，12月底前全部下线；官方推荐迁移到1M上下文的旗舰K3.1 Pro。</p>
+      <div class="why"><b>为什么重要</b><p>约两个月的迁移窗口，依赖K2价格和输出风格的应用需提前做回归测试与成本核算。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Kimi开放平台 10/31</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="7" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="7" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s8" data-i="8">
+  <div class="inner">
+    <figure class="shot"><img data-i="8" alt="第 08 条资讯卡" src="img/2026-11-02-reader/08_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">08</span><span class="tag">产业数据</span></div>
+      <h2 class="title">我国AI推理数据量 首次超过训练</h2>
+      <p class="summary">赛迪研究院发布报告称，我国AI推理数据量首次超过训练数据量；截至2026年6月日均词元调用超175万亿，较2024年初增长1000多倍。</p>
+      <div class="why"><b>为什么重要</b><p>算力需求重心从集中训练转向分散推理，推理芯片、边缘部署和词元单价成为下一轮竞争焦点。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：赛迪研究院 / 央视 / IT之家 11/01</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="8" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="8" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-money" id="s9" data-i="9">
+  <div class="inner">
+    <figure class="shot"><img data-i="9" alt="第 09 条资讯卡" src="img/2026-11-02-reader/09_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">09</span><span class="tag">AI基建</span></div>
+      <h2 class="title">新云公司负债高企 AI泡沫担忧升温</h2>
+      <p class="summary">BBC报道，CoreWeave负债约351亿美元、股价一个月跌约四分之一，Nebius、IREN等跌幅相近；Gartner预计2030年八成新云公司将不再独立运营。</p>
+      <div class="why"><b>为什么重要</b><p>新云是AI基础设施链条里杠杆最高的一环，其融资成本可作为AI投资周期的先行指标。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：BBC 11/01</div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="9" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="9" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-alert" id="s10" data-i="10">
+  <div class="inner">
+    <figure class="shot"><img data-i="10" alt="第 10 条资讯卡" src="img/2026-11-02-reader/10_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">10</span><span class="tag">云安全</span></div>
+      <h2 class="title">LXD与MicroCloud 满分漏洞可冒充客户端</h2>
+      <p class="summary">Canonical修复CVSS 10漏洞：服务端校验整条证书链而非叶证书，攻击者拿到受信客户端公钥证书即可冒充；若冒充特权账号可获宿主机root。</p>
+      <div class="why"><b>为什么重要</b><p>私有云和AI算力集群常用LXD管理虚拟机，开放网络API的集群需立即升级或限制访问。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：Canonical / THN 11/01<span class="flag">待核实 · THN 11/01报道，Canonical公告具体发布时间未核实，CISA评估日期为10/30，可能早于48小时窗口。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="10" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="10" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item t-rank" id="s11" data-i="11">
+  <div class="inner">
+    <figure class="shot"><img data-i="11" alt="第 11 条资讯卡" src="img/2026-11-02-reader/11_dark.png"></figure>
+    <div class="text">
+      <div class="eyebrow"><span class="rank">11</span><span class="tag">开源热榜</span></div>
+      <h2 class="title">GitHub热榜 编程界面、语音与游戏工作室</h2>
+      <p class="summary">11/02日榜：编程智能体界面t3code单日涨3100星居首，记忆插件claude-mem、本地语音听写hex、Claude Code游戏工作室模板与AI无头浏览器lightpanda紧随。</p>
+      <div class="why"><b>为什么重要</b><p>冲榜项目集中在智能体外壳、本地语音输入与面向AI的浏览器，开发者在补齐智能体的周边基建。</p></div>
+      <button class="more" aria-expanded="false">展开全文</button>
+      <div class="src">来源：GitHub Trending 11/02<span class="flag">待核实 · 均非48小时内首发，仅为当日冲榜；星数为当日增量，t3code、claude-mem连续多日上榜。</span></div>
+    </div>
+  </div>
+  <div class="acts"><button data-act="dl" data-i="11" aria-label="下载这张图"><svg viewBox="0 0 24 24"><path d="M12 3.5v11M7.5 10.5l4.5 4.5 4.5-4.5M4.5 20h15"/></svg></button><button data-act="cp" data-i="11" aria-label="复制发布文案"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/><path d="M5 15.5V5.5A2.5 2.5 0 0 1 7.5 3H17"/></svg></button></div>
+</section><section class="item outro" id="s12" data-i="12">
+  <div class="outro-in">
+    <h2>发布前请确认这 4 条</h2>
+    <ul class="checklist"><li><button data-go="2"><b>02</b><span>Claude Code禁止 复刻现有游戏</span></button><p>规则约10/27上线、10/30美东首报，非严格48小时内首发；“训练竞争对手”被拦仅为单一用户自述，Anthropic未回应。</p></li><li><button data-go="4"><b>04</b><span>AI智能体 给活鼠做脑部注射</span></button><p>实验最早由公司CEO于10/28在X发布，非48小时内首发；结果未经同行评审，疗效待观察。</p></li><li><button data-go="10"><b>10</b><span>LXD与MicroCloud 满分漏洞可冒充客户端</span></button><p>THN 11/01报道，Canonical公告具体发布时间未核实，CISA评估日期为10/30，可能早于48小时窗口。</p></li><li><button data-go="11"><b>11</b><span>GitHub热榜 编程界面、语音与游戏工作室</span></button><p>均非48小时内首发，仅为当日冲榜；星数为当日增量，t3code、claude-mem连续多日上榜。</p></li></ul>
+    <p class="note">切换深浅两套图时，下载按钮会跟着当前这套走。黄标条目为非 48 小时内首发或仅有单方口径，转述时请注明出处与时间。上一期专区：<a href="./2026-11-01.html">2026-11-01</a>。</p>
+    <button class="btn" id="copyAll">复制全部文案</button>
+  </div>
+</section>
+</main>
+<div class="toast" id="toast"></div>
+<script type="application/json" id="d">{"cards": [{"no": "00", "title": "封面 · 今日科技情报", "copy": "【今日科技情报】2026.11.02 · 过去 48 小时 11 条\n\n01 ChatGPT与Codex 12月起共用一份额度\n02 Claude Code禁止 复刻现有游戏\n03 沙特阿美入股 HUMAIN 49%\n04 AI智能体 给活鼠做脑部注射\n05 AI代码审查揪出 OverlayFS多处漏洞\n06 四款旧Claude 补上文本水印\n07 Kimi K2系列 年底前全部下线\n08 我国AI推理数据量 首次超过训练\n09 新云公司负债高企 AI泡沫担忧升温\n10 LXD与MicroCloud 满分漏洞可冒充客户端\n11 GitHub热榜 编程界面、语音与游戏工作室\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261102_00_深色.png", "fileLight": "科技情报_20261102_00_浅色.png", "dark": "img/2026-11-02-reader/00_dark.png", "light": "img/2026-11-02-reader/00_light.png"}, {"no": "01", "title": "ChatGPT与Codex 12月起共用一份额度", "copy": "【订阅额度】ChatGPT与Codex 12月起共用一份额度\n\nOpenAI帮助中心11/01更新：12月起Plus、Pro、Business在ChatGPT与Codex间共用按token计量的额度，Instant对话不计入；用完可等重置、升级或买积分。\n\n◆ 为什么重要：聊天、写代码和智能体任务从此抢同一个池子，选更强的模型就更快见底，订阅的实际容量要看token数。\n\n来源：OpenAI帮助中心 / Bleeping 11/01\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261102_01_深色.png", "fileLight": "科技情报_20261102_01_浅色.png", "dark": "img/2026-11-02-reader/01_dark.png", "light": "img/2026-11-02-reader/01_light.png"}, {"no": "02", "title": "Claude Code禁止 复刻现有游戏", "copy": "【用途限制】Claude Code禁止 复刻现有游戏\n\nAnthropic确认在Opus 5.5版Claude Code提示词中加了两句：可做原创和类型游戏，不得复刻具体现有游戏。开发者称误伤正常开发；另有用户自述因“训练竞争对手”被拦。\n\n◆ 为什么重要：模型厂商开始在产品层按用途划红线，同一个编程工具能做什么，会随厂商的版权和竞争考量而变。\n\n※ 规则约10/27上线、10/30美东首报，非严格48小时内首发；“训练竞争对手”被拦仅为单一用户自述，Anthropic未回应。\n\n来源：GameDeveloper / Mashable 10/31\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261102_02_深色.png", "fileLight": "科技情报_20261102_02_浅色.png", "dark": "img/2026-11-02-reader/02_dark.png", "light": "img/2026-11-02-reader/02_light.png"}, {"no": "03", "title": "沙特阿美入股 HUMAIN 49%", "copy": "【算力资本】沙特阿美入股 HUMAIN 49%\n\n沙特阿美通过子公司取得国家AI公司HUMAIN 49%股权，PIF保留51%；阿美2026年注入约99亿里亚尔（约26亿美元）现金并转入AI、算力和数字资产。\n\n◆ 为什么重要：石油巨头把能源收入直接转成算力资产，中东算力从依赖海外云厂转向主权基金与国企自持运营。\n\n来源：PIF / Aramco / GamesBeat 11/01\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261102_03_深色.png", "fileLight": "科技情报_20261102_03_浅色.png", "dark": "img/2026-11-02-reader/03_dark.png", "light": "img/2026-11-02-reader/03_light.png"}, {"no": "04", "title": "AI智能体 给活鼠做脑部注射", "copy": "【AI实验】AI智能体 给活鼠做脑部注射\n\nExin Therapeutics让智能体从19种基因疗法中选药、定脑区坐标并操控手术台注射；Opus 5.5拒绝下针，换Sonnet 5完成，坐标故障由不知情的Opus 5修复。\n\n◆ 为什么重要：智能体从写实验方案走到直接操作活体动物，不同模型的伦理判断不一，换模型绕开拒绝暴露了安全规程空白。\n\n※ 实验最早由公司CEO于10/28在X发布，非48小时内首发；结果未经同行评审，疗效待观察。\n\n来源：WIRED 10/31\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261102_04_深色.png", "fileLight": "科技情报_20261102_04_浅色.png", "dark": "img/2026-11-02-reader/04_dark.png", "light": "img/2026-11-02-reader/04_light.png"}, {"no": "05", "title": "AI代码审查揪出 OverlayFS多处漏洞", "copy": "【内核】AI代码审查揪出 OverlayFS多处漏洞\n\nLinux 7.4-rc1发布，合并窗口近2万次提交创纪录；OverlayFS十余个补丁修复Chris Mason的AI审查发现的缺陷，含非特权可触发的信息泄露与释放后使用。\n\n◆ 为什么重要：OverlayFS是容器镜像分层的基础，AI审查开始在内核里稳定产出可合并的安全修复，稳定版回移值得跟。\n\n来源：Phoronix 11/01\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261102_05_深色.png", "fileLight": "科技情报_20261102_05_浅色.png", "dark": "img/2026-11-02-reader/05_dark.png", "light": "img/2026-11-02-reader/05_light.png"}, {"no": "06", "title": "四款旧Claude 补上文本水印", "copy": "【合规水印】四款旧Claude 补上文本水印\n\nAnthropic通知给Mythos 5、Opus 4.7、Opus 4.6、Sonnet 4.6加水印，应对欧盟AI法12月期限；但Opus 4.6与Sonnet 4.6仅在采样参数为默认时生效。\n\n◆ 为什么重要：存量模型被监管期限倒逼补标记，而老模型上改一个参数就能避开，水印的合规效力打了折扣。\n\n来源：The Decoder / Anthropic 10/31\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261102_06_深色.png", "fileLight": "科技情报_20261102_06_浅色.png", "dark": "img/2026-11-02-reader/06_dark.png", "light": "img/2026-11-02-reader/06_light.png"}, {"no": "07", "title": "Kimi K2系列 年底前全部下线", "copy": "【模型退役】Kimi K2系列 年底前全部下线\n\nKimi开放平台公告：K2系列10/31起不再向新注册用户开放，老用户暂不受影响，12月底前全部下线；官方推荐迁移到1M上下文的旗舰K3.1 Pro。\n\n◆ 为什么重要：约两个月的迁移窗口，依赖K2价格和输出风格的应用需提前做回归测试与成本核算。\n\n来源：Kimi开放平台 10/31\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261102_07_深色.png", "fileLight": "科技情报_20261102_07_浅色.png", "dark": "img/2026-11-02-reader/07_dark.png", "light": "img/2026-11-02-reader/07_light.png"}, {"no": "08", "title": "我国AI推理数据量 首次超过训练", "copy": "【产业数据】我国AI推理数据量 首次超过训练\n\n赛迪研究院发布报告称，我国AI推理数据量首次超过训练数据量；截至2026年6月日均词元调用超175万亿，较2024年初增长1000多倍。\n\n◆ 为什么重要：算力需求重心从集中训练转向分散推理，推理芯片、边缘部署和词元单价成为下一轮竞争焦点。\n\n来源：赛迪研究院 / 央视 / IT之家 11/01\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261102_08_深色.png", "fileLight": "科技情报_20261102_08_浅色.png", "dark": "img/2026-11-02-reader/08_dark.png", "light": "img/2026-11-02-reader/08_light.png"}, {"no": "09", "title": "新云公司负债高企 AI泡沫担忧升温", "copy": "【AI基建】新云公司负债高企 AI泡沫担忧升温\n\nBBC报道，CoreWeave负债约351亿美元、股价一个月跌约四分之一，Nebius、IREN等跌幅相近；Gartner预计2030年八成新云公司将不再独立运营。\n\n◆ 为什么重要：新云是AI基础设施链条里杠杆最高的一环，其融资成本可作为AI投资周期的先行指标。\n\n来源：BBC 11/01\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261102_09_深色.png", "fileLight": "科技情报_20261102_09_浅色.png", "dark": "img/2026-11-02-reader/09_dark.png", "light": "img/2026-11-02-reader/09_light.png"}, {"no": "10", "title": "LXD与MicroCloud 满分漏洞可冒充客户端", "copy": "【云安全】LXD与MicroCloud 满分漏洞可冒充客户端\n\nCanonical修复CVSS 10漏洞：服务端校验整条证书链而非叶证书，攻击者拿到受信客户端公钥证书即可冒充；若冒充特权账号可获宿主机root。\n\n◆ 为什么重要：私有云和AI算力集群常用LXD管理虚拟机，开放网络API的集群需立即升级或限制访问。\n\n※ THN 11/01报道，Canonical公告具体发布时间未核实，CISA评估日期为10/30，可能早于48小时窗口。\n\n来源：Canonical / THN 11/01\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261102_10_深色.png", "fileLight": "科技情报_20261102_10_浅色.png", "dark": "img/2026-11-02-reader/10_dark.png", "light": "img/2026-11-02-reader/10_light.png"}, {"no": "11", "title": "GitHub热榜 编程界面、语音与游戏工作室", "copy": "【开源热榜】GitHub热榜 编程界面、语音与游戏工作室\n\n11/02日榜：编程智能体界面t3code单日涨3100星居首，记忆插件claude-mem、本地语音听写hex、Claude Code游戏工作室模板与AI无头浏览器lightpanda紧随。\n\n◆ 为什么重要：冲榜项目集中在智能体外壳、本地语音输入与面向AI的浏览器，开发者在补齐智能体的周边基建。\n\n※ 均非48小时内首发，仅为当日冲榜；星数为当日增量，t3code、claude-mem连续多日上榜。\n\n来源：GitHub Trending 11/02\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道", "fileDark": "科技情报_20261102_11_深色.png", "fileLight": "科技情报_20261102_11_浅色.png", "dark": "img/2026-11-02-reader/11_dark.png", "light": "img/2026-11-02-reader/11_light.png"}], "allCopy": "【今日科技情报】2026.11.02 · 过去 48 小时 11 条\n\n01 ChatGPT与Codex 12月起共用一份额度\n02 Claude Code禁止 复刻现有游戏\n03 沙特阿美入股 HUMAIN 49%\n04 AI智能体 给活鼠做脑部注射\n05 AI代码审查揪出 OverlayFS多处漏洞\n06 四款旧Claude 补上文本水印\n07 Kimi K2系列 年底前全部下线\n08 我国AI推理数据量 首次超过训练\n09 新云公司负债高企 AI泡沫担忧升温\n10 LXD与MicroCloud 满分漏洞可冒充客户端\n11 GitHub热榜 编程界面、语音与游戏工作室\n\n下滑看详细 →\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【订阅额度】ChatGPT与Codex 12月起共用一份额度\n\nOpenAI帮助中心11/01更新：12月起Plus、Pro、Business在ChatGPT与Codex间共用按token计量的额度，Instant对话不计入；用完可等重置、升级或买积分。\n\n◆ 为什么重要：聊天、写代码和智能体任务从此抢同一个池子，选更强的模型就更快见底，订阅的实际容量要看token数。\n\n来源：OpenAI帮助中心 / Bleeping 11/01\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【用途限制】Claude Code禁止 复刻现有游戏\n\nAnthropic确认在Opus 5.5版Claude Code提示词中加了两句：可做原创和类型游戏，不得复刻具体现有游戏。开发者称误伤正常开发；另有用户自述因“训练竞争对手”被拦。\n\n◆ 为什么重要：模型厂商开始在产品层按用途划红线，同一个编程工具能做什么，会随厂商的版权和竞争考量而变。\n\n※ 规则约10/27上线、10/30美东首报，非严格48小时内首发；“训练竞争对手”被拦仅为单一用户自述，Anthropic未回应。\n\n来源：GameDeveloper / Mashable 10/31\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【算力资本】沙特阿美入股 HUMAIN 49%\n\n沙特阿美通过子公司取得国家AI公司HUMAIN 49%股权，PIF保留51%；阿美2026年注入约99亿里亚尔（约26亿美元）现金并转入AI、算力和数字资产。\n\n◆ 为什么重要：石油巨头把能源收入直接转成算力资产，中东算力从依赖海外云厂转向主权基金与国企自持运营。\n\n来源：PIF / Aramco / GamesBeat 11/01\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI实验】AI智能体 给活鼠做脑部注射\n\nExin Therapeutics让智能体从19种基因疗法中选药、定脑区坐标并操控手术台注射；Opus 5.5拒绝下针，换Sonnet 5完成，坐标故障由不知情的Opus 5修复。\n\n◆ 为什么重要：智能体从写实验方案走到直接操作活体动物，不同模型的伦理判断不一，换模型绕开拒绝暴露了安全规程空白。\n\n※ 实验最早由公司CEO于10/28在X发布，非48小时内首发；结果未经同行评审，疗效待观察。\n\n来源：WIRED 10/31\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【内核】AI代码审查揪出 OverlayFS多处漏洞\n\nLinux 7.4-rc1发布，合并窗口近2万次提交创纪录；OverlayFS十余个补丁修复Chris Mason的AI审查发现的缺陷，含非特权可触发的信息泄露与释放后使用。\n\n◆ 为什么重要：OverlayFS是容器镜像分层的基础，AI审查开始在内核里稳定产出可合并的安全修复，稳定版回移值得跟。\n\n来源：Phoronix 11/01\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【合规水印】四款旧Claude 补上文本水印\n\nAnthropic通知给Mythos 5、Opus 4.7、Opus 4.6、Sonnet 4.6加水印，应对欧盟AI法12月期限；但Opus 4.6与Sonnet 4.6仅在采样参数为默认时生效。\n\n◆ 为什么重要：存量模型被监管期限倒逼补标记，而老模型上改一个参数就能避开，水印的合规效力打了折扣。\n\n来源：The Decoder / Anthropic 10/31\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【模型退役】Kimi K2系列 年底前全部下线\n\nKimi开放平台公告：K2系列10/31起不再向新注册用户开放，老用户暂不受影响，12月底前全部下线；官方推荐迁移到1M上下文的旗舰K3.1 Pro。\n\n◆ 为什么重要：约两个月的迁移窗口，依赖K2价格和输出风格的应用需提前做回归测试与成本核算。\n\n来源：Kimi开放平台 10/31\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【产业数据】我国AI推理数据量 首次超过训练\n\n赛迪研究院发布报告称，我国AI推理数据量首次超过训练数据量；截至2026年6月日均词元调用超175万亿，较2024年初增长1000多倍。\n\n◆ 为什么重要：算力需求重心从集中训练转向分散推理，推理芯片、边缘部署和词元单价成为下一轮竞争焦点。\n\n来源：赛迪研究院 / 央视 / IT之家 11/01\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【AI基建】新云公司负债高企 AI泡沫担忧升温\n\nBBC报道，CoreWeave负债约351亿美元、股价一个月跌约四分之一，Nebius、IREN等跌幅相近；Gartner预计2030年八成新云公司将不再独立运营。\n\n◆ 为什么重要：新云是AI基础设施链条里杠杆最高的一环，其融资成本可作为AI投资周期的先行指标。\n\n来源：BBC 11/01\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【云安全】LXD与MicroCloud 满分漏洞可冒充客户端\n\nCanonical修复CVSS 10漏洞：服务端校验整条证书链而非叶证书，攻击者拿到受信客户端公钥证书即可冒充；若冒充特权账号可获宿主机root。\n\n◆ 为什么重要：私有云和AI算力集群常用LXD管理虚拟机，开放网络API的集群需立即升级或限制访问。\n\n※ THN 11/01报道，Canonical公告具体发布时间未核实，CISA评估日期为10/30，可能早于48小时窗口。\n\n来源：Canonical / THN 11/01\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道\n\n——————————————————\n\n【开源热榜】GitHub热榜 编程界面、语音与游戏工作室\n\n11/02日榜：编程智能体界面t3code单日涨3100星居首，记忆插件claude-mem、本地语音听写hex、Claude Code游戏工作室模板与AI无头浏览器lightpanda紧随。\n\n◆ 为什么重要：冲榜项目集中在智能体外壳、本地语音输入与面向AI的浏览器，开发者在补齐智能体的周边基建。\n\n※ 均非48小时内首发，仅为当日冲榜；星数为当日增量，t3code、claude-mem连续多日上榜。\n\n来源：GitHub Trending 11/02\n\n#科技资讯 #AI #人工智能 #每日科技 #科技早知道"}</script>
+<script>
+const G=JSON.parse(document.getElementById("d").textContent);
+const main=document.getElementById("main"),rail=document.getElementById("rail");
+const secs=[...document.querySelectorAll(".item")];
+const imgs=[...document.querySelectorAll(".shot img")];
+const mode=()=>document.documentElement.dataset.mode;
+let loaded=new Set();
+function load(i){
+  for(let k=Math.max(0,i-2);k<=Math.min(imgs.length-1,i+2);k++){
+    const el=imgs[k];if(!el)continue;
+    const want=G.cards[+el.dataset.i][mode()];
+    if(el.src!==want){el.src=want;loaded.add(k);}
+  }
+}
+function repaint(){loaded.forEach(k=>{const el=imgs[k];el.src=G.cards[+el.dataset.i][mode()];});}
+load(0);
+document.getElementById("mode").onclick=e=>{
+  const r=document.documentElement;
+  r.dataset.mode=mode()==="dark"?"light":"dark";
+  e.currentTarget.textContent=mode()==="dark"?"浅色版":"深色版";
+  repaint();
+};
+const toast=document.getElementById("toast");let tt;
+const say=m=>{toast.textContent=m;toast.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>toast.classList.remove("on"),1700)};
+const copy=t=>navigator.clipboard?.writeText(t).then(()=>say("已复制"),()=>say("复制失败，请手动选中"))??say("复制失败");
+document.addEventListener("click",ev=>{
+  const go=ev.target.closest("[data-go]");
+  if(go){document.getElementById("s"+go.dataset.go).scrollIntoView();return}
+  const a=ev.target.closest("[data-act]");
+  if(a){
+    const c=G.cards[+a.dataset.i],d=mode()==="dark";
+    if(a.dataset.act==="dl"){
+      const l=document.createElement("a");l.href=d?c.dark:c.light;
+      l.download=d?c.fileDark:c.fileLight;l.click();say("已下载 "+l.download);
+    }else copy(c.copy);
+    return;
+  }
+  if(ev.target.id==="copyAll"){copy(G.allCopy);return}
+  const m=ev.target.closest(".more");
+  if(m){
+    const b=m.closest(".text"),on=b.querySelector(".summary").classList.toggle("open");
+    b.querySelector(".why")?.classList.toggle("open",on);
+    m.textContent=on?"收起":"展开全文";m.setAttribute("aria-expanded",on);
+  }
+});
+const pos=document.getElementById("pos"),prog=document.getElementById("prog");
+const io=new IntersectionObserver(es=>es.forEach(en=>{
+  if(!en.isIntersecting||en.intersectionRatio<.55)return;
+  const i=secs.indexOf(en.target);
+  load(i);
+  pos.textContent=i===0?"封面":(i>G.cards.length-1?"结尾":G.cards[i].no);
+  prog.style.width=(i/(secs.length-1)*100)+"%";
+  rail.querySelectorAll("button").forEach((b,j)=>b.setAttribute("aria-current",String(j===i)));
+}),{root:main,threshold:.55});
+secs.forEach(s=>io.observe(s));
+addEventListener("keydown",e=>{
+  if(e.target.matches("input,textarea"))return;
+  const cur=secs.findIndex(s=>s.getBoundingClientRect().top>-window.innerHeight/2);
+  if(e.key==="ArrowDown"||e.key==="j"){e.preventDefault();secs[Math.min(secs.length-1,cur+1)]?.scrollIntoView()}
+  if(e.key==="ArrowUp"||e.key==="k"){e.preventDefault();secs[Math.max(0,cur-1)]?.scrollIntoView()}
+});
+
+</script>
+</body></html>
